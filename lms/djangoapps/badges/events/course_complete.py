@@ -11,6 +11,11 @@ from django.utils.translation import ugettext_lazy as _
 from badges.models import BadgeAssertion, BadgeClass, CourseCompleteImageConfiguration
 from badges.utils import requires_badges_enabled, site_prefix
 from xmodule.modulestore.django import modulestore
+# -------------------
+from openedx.core.djangoapps.signals.signals import COURSE_GRADE_CHANGED, COURSE_GRADE_NOW_PASSED
+from django.dispatch import receiver
+from django.conf import settings
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -115,3 +120,48 @@ def course_badge_check(user, course_key):
         return
     evidence = evidence_url(user.id, course_key)
     badge_class.award(user, evidence_url=evidence)
+
+
+# def course_passed_badge_description(course, mode):
+#     """
+#     Returns a description for the earned badge.
+#     """
+#     if course.end:
+#         return _(u'Passed the course "{course_name}" ({course_mode}, {start_date} - {end_date})').format(
+#             start_date=course.start.date(),
+#             end_date=course.end.date(),
+#             course_name=course.display_name,
+#             course_mode=mode,
+#         )
+#     else:
+#         return _(u'Passed the course "{course_name}" ({course_mode})').format(
+#             course_name=course.display_name,
+#             course_mode=mode,
+#         )
+
+# @requires_badges_enabled
+# def course_passed_badge_check(user, course_key):
+#     """
+#     Takes a GeneratedCertificate instance, and checks to see if a badge exists for this course, creating
+#     it if not, should conditions be right.
+#     """
+#     LOGGER.info("---------------------------Course Passed Badge generation statrted -----------------")
+
+#     if not modulestore().get_course(course_key).issue_badges:
+#         LOGGER.info("Course is not configured to issue badges.")
+#         return
+#     # certs_enabled =certs_api.cert_generation_enabled(course_key)
+#     if certs_enabled :
+#         LOGGER.info('Certificates are enabled so course progress badge is not created`')
+#         return
+#     badge_class = get_completion_badge(course_key, user)
+#     if not badge_class:
+#         LOGGER.info("We're not configured to make a badge for this course mode.")
+#         # We're not configured to make a badge for this course mode.
+#         return
+#     if BadgeAssertion.objects.filter(user=user, badge_class=badge_class):
+#         LOGGER.info("Completion badge already exists for this user on this course.")
+#         # Badge already exists. Skip.
+#         return
+#     evidence = evidence_url(user.id, course_key)
+#     badge_class.award(user, evidence_url=evidence)

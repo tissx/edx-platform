@@ -338,7 +338,7 @@ FEATURES = {
     'ENABLE_SPECIAL_EXAMS': False,
 
     # Enable OpenBadge support. See the BADGR_* settings later in this file.
-    'ENABLE_OPENBADGES': False,
+    'ENABLE_OPENBADGES': True,
 
     # Enable LTI Provider feature.
     'ENABLE_LTI_PROVIDER': False,
@@ -2521,10 +2521,10 @@ CERT_NAME_LONG = "Certificate of Achievement"
 BADGING_BACKEND = 'badges.backends.badgr.BadgrBackend'
 
 # Be sure to set up images for course modes using the BadgeImageConfiguration model in the certificates app.
-BADGR_API_TOKEN = None
+BADGR_API_TOKEN = "06c8a983116b0ac65f15cdba9299d47a35ec7354"
 # Do not add the trailing slash here.
-BADGR_BASE_URL = "http://localhost:8005"
-BADGR_ISSUER_SLUG = "example-issuer"
+BADGR_BASE_URL = "https://badges-apitest.tissx.tiss.edu"
+BADGR_ISSUER_SLUG = "Vcx9bhdpSwSzFLGJ-W46Zg"
 # Number of seconds to wait on the badging server when contacting it before giving up.
 BADGR_TIMEOUT = 10
 

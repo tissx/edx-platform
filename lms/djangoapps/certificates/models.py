@@ -68,6 +68,14 @@ from lms.djangoapps.instructor_task.models import InstructorTask
 from openedx.core.djangoapps.signals.signals import COURSE_CERT_AWARDED
 from openedx.core.djangoapps.xmodule_django.models import CourseKeyField, NoneToEmptyManager
 from util.milestones_helpers import fulfill_course_milestone, is_prerequisite_courses_enabled
+# -----------------------------------------
+from openedx.core.djangoapps.signals.signals import COURSE_GRADE_CHANGED, COURSE_GRADE_NOW_PASSED
+from grades.signals.signals import SUBSECTION_SCORE_CHANGED
+# -------------------------------------
+from django.db.models.signals import post_save,post_delete
+from courseware.models import StudentModule
+# from .api import cert_generation_enabled
+# certs_enabled=False
 
 LOGGER = logging.getLogger(__name__)
 
@@ -1091,3 +1099,66 @@ def create_course_group_badge(sender, user, course_key, status, **kwargs):  # py
     Standard signal hook to create badges when a user has completed a prespecified set of courses.
     """
     course_group_check(user, course_key)
+
+# @receiver(COURSE_GRADE_NOW_PASSED, dispatch_uid="new_passing_learner1")# pylint: disable=unused-argument
+# def create_course_passed_badge(user, course_key, **kwargs):
+#     """
+#     Standard signal hook to create course badges when a when a user obtained a passing grade.
+#     """
+#     LOGGER.info('-----------COURSE_GRADE_NOW_PASSED triggered create_course_passed_badge reciever-------------')
+#     # course_passed_badge_check(user, course_key)
+#     # course_badge_check(user, course_key)
+
+# @receiver(SUBSECTION_SCORE_CHANGED)# pylint: disable=unused-argument
+# def subsection_grade_change_hook(user, course_id, **kwargs):
+#     """
+#     Standard signal hook to create course badges when a when a user obtained a passing grade.
+#     """
+#     LOGGER.info('-----------subsection_grade_change_hook called due to SUBSECTION_SCORE_CHANGED signal triggered-------------')
+#     certs_enabled =CertificateGenerationConfiguration.current().enabled and CertificateGenerationCourseSetting.is_enabled_for_course(course_key)
+#     if certs_enabled :
+#         LOGGER.info('Certificates are enabled so course progress badge is not created`')
+#         return
+#     from courseware.courses import get_course_by_id
+#     from courseware.views.views import is_course_passed
+#     course = get_course_by_id(course_key, depth=2)
+#     passed = is_course_passed(course, student=user)
+#     if passed:
+#         # course_passed_badge_check(user, course_key)
+#         LOGGER.info("---------------------------Course Passed Badge generation statrted -----------------")
+#         course_badge_check(user, course_key)
+#     else:
+#         LOGGER.info('User Doesnot passed the course')
+#         return
+
+@receiver(post_save, sender=StudentModule)
+@receiver(post_delete, sender=StudentModule)
+def create_course_passed_badge(sender, instance, **kwargs):
+    LOGGER.info('-----------create_course_passed_badge function  called due to post_save signal triggered on StudentModule-------------')
+    student_id=instance.student_id
+    student=instance.student
+    course_key=instance.course_id
+    module_type=instance.module_type
+    module_type=module_type.lower()
+    grade=instance.grade
+    LOGGER.info('instance meta are:  student[{}],course_key [{}],module_type[{}],grade[{}]'.format(student_id,course_key,module_type,grade))
+    if module_type=='problem':
+        course_certs_enabled = CertificateGenerationCourseSetting.is_enabled_for_course(course_key)
+        if course_certs_enabled :
+            LOGGER.info('Certificates are enabled for the course [%s] so course progress badge is not created`',course_key)
+            return
+        from courseware.courses import get_course_by_id
+        from opaque_keys.edx.keys import CourseKey
+        from courseware.views.views import is_course_passed
+        course = get_course_by_id(course_key, depth=2)
+        LOGGER.info("---------CALLING is_course_passed---------------")
+        passed = is_course_passed(course, student=student)
+        if passed:
+            # course_passed_badge_check(user, course_key)
+            LOGGER.info("---------------------------Course Passed Badge generation statrted -----------------")
+            course_badge_check(student, course_key)
+        else:
+            LOGGER.info('User Doesnot passed the course')
+            return
+    else:
+        return
