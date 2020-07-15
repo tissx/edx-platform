@@ -2245,6 +2245,7 @@ INSTALLED_APPS = (
     'mx_problem_response',
     'mx_archive_courses',
     'pushnotification',
+    'mx_badge',
 )
 
 ######################### CSRF #########################################
