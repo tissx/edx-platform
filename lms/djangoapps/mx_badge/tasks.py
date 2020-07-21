@@ -33,14 +33,16 @@ def is_course_passed_task(student_id,course_id):
             return
 
 @task()
-def override_assessment_score(student_item_id,submission_uuid):
+def course_badge_check_task(student_id,course_id):
     '''
-     if  override_assessment_score for the particular course (course-v1:Tissx+CS101+2020_T4 in dev & in prod)
+     call by COURSE_GRADE_NOW_PASSED  signal to generate course complete badge on course_passed.
     '''
-    LOGGER.info(" started override_openassessment_score task")
+    LOGGER.info(" In course_badge_check_task")
     try:
-        pass
-    except:
-        pass
+        student=User.objects.get(id=student_id)
+        course_key = CourseKey.from_string(course_id)
+    except Exception as e:
+        LOGGER.error('Exception in course_badge_check_task [%s]',e)
     else:
-        pass
+        LOGGER.info(" Call by COURSE_GRADE_NOW_PASSED  signal to generate course complete badge for student[%s] in course_id[%s]",student.username,course_id)
+        course_badge_check(student, course_key)

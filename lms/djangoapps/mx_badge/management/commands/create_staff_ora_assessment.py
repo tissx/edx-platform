@@ -100,9 +100,8 @@ class Command(BaseCommand):
                             "Content of the Plan": "Includes in-depth information and exceptional supporting details including almost all the points as mentioned in the assignment.  Explores all facets of the assignment.",
                             "Pedagogy as mentioned in the plan": "The plan includes in-depth information and sufficient scope of blending different pedagogies in the online session for ensuring maximum student-teacher participation and active engagement."
                     },
-                'overall_feedback': "grade overrided by management script",
+                'overall_feedback': "System generated grades.",
                 'assess_type':"regrade",
-                'overall_feedback':"grade overrided by management script",
                 }
         ass_qs=get_incomplete_submissions(course_id=course_id)
         if not ass_qs:

@@ -68,10 +68,7 @@ from lms.djangoapps.instructor_task.models import InstructorTask
 from openedx.core.djangoapps.signals.signals import COURSE_CERT_AWARDED
 from openedx.core.djangoapps.xmodule_django.models import CourseKeyField, NoneToEmptyManager
 from util.milestones_helpers import fulfill_course_milestone, is_prerequisite_courses_enabled
-# ---------------------------------
-from django.db.models.signals import post_save,post_delete
-from courseware.models import StudentModule
-from mx_badge.signals import is_course_passed_task
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -1095,20 +1092,3 @@ def create_course_group_badge(sender, user, course_key, status, **kwargs):  # py
     Standard signal hook to create badges when a user has completed a prespecified set of courses.
     """
     course_group_check(user, course_key)
-
-
-
-@receiver(post_save, sender=StudentModule)
-@receiver(post_delete, sender=StudentModule)
-def create_course_passed_badge(sender, instance, **kwargs):
-    from certificates.models import CertificateGenerationCourseSetting
-    LOGGER.info('-----------create_course_passed_badge function  called due to post_save signal triggered on StudentModule-------------')
-    course_key=instance.course_id
-    course_certs_enabled = CertificateGenerationCourseSetting.is_enabled_for_course(course_key)
-    if course_certs_enabled :
-        LOGGER.info('self-generated certificates/badges is enabled  for the course [%s] ',course_key)
-        return
-    student_id=instance.student_id
-    grade=instance.grade
-    LOGGER.info('Created  is_course_passed_task for student [%s] and course [%s] with grade[%s]',student_id,course_key,grade)
-    is_course_passed_task.delay(student_id,str(course_key))

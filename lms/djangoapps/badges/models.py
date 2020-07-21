@@ -19,6 +19,9 @@ from badges.utils import deserialize_count_specs
 from openedx.core.djangoapps.xmodule_django.models import CourseKeyField
 from xmodule.modulestore.django import modulestore
 
+import logging
+LOGGER = logging.getLogger(__name__)
+
 
 def validate_badge_image(image):
     """
@@ -84,7 +87,9 @@ class BadgeClass(models.Model):
         if not course_id:
             course_id = CourseKeyField.Empty
         try:
-            return cls.objects.get(slug=slug, issuing_component=issuing_component, course_id=course_id)
+            badge_class=cls.objects.get(slug=slug, issuing_component=issuing_component, course_id=course_id)
+            LOGGER.info('Found Badge Class  [%s] with image[%s]',badge_class.id,badge_class.image)
+            return badge_class
         except cls.DoesNotExist:
             if not create:
                 return None
@@ -100,6 +105,7 @@ class BadgeClass(models.Model):
         badge_class.image.save(image_file_handle.name, image_file_handle)
         badge_class.full_clean()
         badge_class.save()
+        LOGGER.info('Created Badge Class  [%s] with image[%s]',badge_class.id,badge_class.image)
         return badge_class
 
     @lazy
