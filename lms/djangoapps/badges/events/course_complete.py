@@ -16,7 +16,6 @@ from openedx.core.djangoapps.signals.signals import COURSE_GRADE_CHANGED, COURSE
 from django.dispatch import receiver
 from django.conf import settings
 
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -118,26 +117,12 @@ def course_badge_check(user, course_key):
         LOGGER.info("Completion badge already exists for this user on this course.")
         # Badge already exists. Skip.
         return
-    evidence = evidence_url(user.id, course_key)
+    from certificates.api  import cert_generation_enabled
+    evidence = evidence_url(user.id, course_key) if cert_generation_enabled(course_key) else None
     badge_class.award(user, evidence_url=evidence)
 
 
-# def course_passed_badge_description(course, mode):
-#     """
-#     Returns a description for the earned badge.
-#     """
-#     if course.end:
-#         return _(u'Passed the course "{course_name}" ({course_mode}, {start_date} - {end_date})').format(
-#             start_date=course.start.date(),
-#             end_date=course.end.date(),
-#             course_name=course.display_name,
-#             course_mode=mode,
-#         )
-#     else:
-#         return _(u'Passed the course "{course_name}" ({course_mode})').format(
-#             course_name=course.display_name,
-#             course_mode=mode,
-#         )
+
 
 # @requires_badges_enabled
 # def course_passed_badge_check(user, course_key):

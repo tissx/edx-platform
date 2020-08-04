@@ -2522,10 +2522,10 @@ CERT_NAME_LONG = "Certificate of Achievement"
 BADGING_BACKEND = 'badges.backends.badgr.BadgrBackend'
 
 # Be sure to set up images for course modes using the BadgeImageConfiguration model in the certificates app.
-BADGR_API_TOKEN = "06c8a983116b0ac65f15cdba9299d47a35ec7354"
+BADGR_API_TOKEN = None
 # Do not add the trailing slash here.
-BADGR_BASE_URL = "https://badges-apitest.tissx.tiss.edu"
-BADGR_ISSUER_SLUG = "Vcx9bhdpSwSzFLGJ-W46Zg"
+BADGR_BASE_URL = "http://localhost:8005"
+BADGR_ISSUER_SLUG = "example-issuer"
 # Number of seconds to wait on the badging server when contacting it before giving up.
 BADGR_TIMEOUT = 10
 

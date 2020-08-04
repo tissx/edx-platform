@@ -53,9 +53,11 @@ def create_course_passed_badge(sender, user, course_key, **kwargs):
     """
     Standard signal hook to create course badges when a when  COURSE_GRADE_NOW_PASSED signal triggered(when a user obtained a passing grade).
     """
-    from certificates.models import CertificateGenerationCourseSetting
+    # from certificates.models import CertificateGenerationCourseSetting
+    from certificates import api as certs_api
+
     LOGGER.info('----------COURSE_GRADE_NOW_PASSED signal  triggered--------')
-    course_certs_enabled = CertificateGenerationCourseSetting.is_enabled_for_course(course_key)
+    course_certs_enabled =  certs_api.cert_generation_enabled(course_key) #CertificateGenerationCourseSetting.is_enabled_for_course(course_key)
     if course_certs_enabled :
         LOGGER.info('self-generated certificates/badges is enabled  for the course [%s] ',course_key)
         return
