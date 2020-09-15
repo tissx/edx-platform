@@ -99,49 +99,18 @@ def get_completion_badge(course_id, user):
         image_file_handle=CourseCompleteImageConfiguration.image_for_mode(mode)
     )
 
-
-@requires_badges_enabled
-def course_badge_check(user, course_key):
-    """
-    Takes a GeneratedCertificate instance, and checks to see if a badge exists for this course, creating
-    it if not, should conditions be right.
-    """
-    if not modulestore().get_course(course_key).issue_badges:
-        LOGGER.info("Course is not configured to issue badges.")
-        return
-    badge_class = get_completion_badge(course_key, user)
-    if not badge_class:
-        # We're not configured to make a badge for this course mode.
-        return
-    if BadgeAssertion.objects.filter(user=user, badge_class=badge_class):
-        LOGGER.info("Completion badge already exists for this user on this course.")
-        # Badge already exists. Skip.
-        return
-    from certificates.api  import cert_generation_enabled
-    evidence = evidence_url(user.id, course_key) if cert_generation_enabled(course_key) else None
-    badge_class.award(user, evidence_url=evidence)
-
-
-
-
+#  Commented by manprax & overrirded in the mx_utility
 # @requires_badges_enabled
-# def course_passed_badge_check(user, course_key):
+# def course_badge_check(user, course_key):
 #     """
 #     Takes a GeneratedCertificate instance, and checks to see if a badge exists for this course, creating
 #     it if not, should conditions be right.
 #     """
-#     LOGGER.info("---------------------------Course Passed Badge generation statrted -----------------")
-
 #     if not modulestore().get_course(course_key).issue_badges:
 #         LOGGER.info("Course is not configured to issue badges.")
 #         return
-#     # certs_enabled =certs_api.cert_generation_enabled(course_key)
-#     if certs_enabled :
-#         LOGGER.info('Certificates are enabled so course progress badge is not created`')
-#         return
 #     badge_class = get_completion_badge(course_key, user)
 #     if not badge_class:
-#         LOGGER.info("We're not configured to make a badge for this course mode.")
 #         # We're not configured to make a badge for this course mode.
 #         return
 #     if BadgeAssertion.objects.filter(user=user, badge_class=badge_class):

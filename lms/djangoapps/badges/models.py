@@ -129,6 +129,13 @@ class BadgeClass(models.Model):
         """
         return self.backend.award(self, user, evidence_url=evidence_url)
 
+    def revoke(self, assertion):
+        """
+        Contacts the backend to have a badge assertion created for this badge class for this user.
+        """
+        return self.backend.revoke(self,assertion)
+
+
     def save(self, **kwargs):
         """
         Slugs must always be lowercase.

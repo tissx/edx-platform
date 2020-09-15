@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     """
     This will do:
-        * get incomplete peer ORA submissions
+        * get incomplete peer ORA submissions of the course course-v1:TISSx-COOL+COOLTOL01+2020_COOL_TOL_EN_01
         * create staff assessment for these submissions to overirde/give the grade.
     """
 

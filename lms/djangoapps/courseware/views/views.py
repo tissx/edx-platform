@@ -1325,7 +1325,9 @@ def is_course_passed(course, grade_summary=None, student=None, request=None):
         returns bool value
     """
     nonzero_cutoffs = [cutoff for cutoff in course.grade_cutoffs.values() if cutoff > 0]
-    success_cutoff = min(nonzero_cutoffs) if nonzero_cutoffs else None
+    # success_cutoff = min(nonzero_cutoffs) if nonzero_cutoffs else None 
+    # added by manprax to compare user garde  with the minimum_grade_credit to check is_passed
+    success_cutoff = course.minimum_grade_credit if course.minimum_grade_credit else None 
 
     if grade_summary is None:
         grade_summary = CourseGradeFactory().create(student, course).summary

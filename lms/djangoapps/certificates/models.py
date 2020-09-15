@@ -1069,13 +1069,13 @@ class CertificateTemplateAsset(TimeStampedModel):
         app_label = "certificates"
 
 
-@receiver(COURSE_CERT_AWARDED, sender=GeneratedCertificate)
-# pylint: disable=unused-argument
-def create_course_badge(sender, user, course_key, status, **kwargs):
-    """
-    Standard signal hook to create course badges when a certificate has been generated.
-    """
-    course_badge_check(user, course_key)
+# @receiver(COURSE_CERT_AWARDED, sender=GeneratedCertificate)
+# # pylint: disable=unused-argument
+# def create_course_badge(sender, user, course_key, status, **kwargs):
+#     """
+#     Standard signal hook to create course badges when a certificate has been generated.
+#     """
+#     course_badge_check(user, course_key)
 
 
 @receiver(COURSE_CERT_AWARDED, sender=GeneratedCertificate)

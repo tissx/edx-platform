@@ -211,7 +211,8 @@ class CourseGrade(CourseGradeBase):
         grade_cutoffs = self.course_data.course.grade_cutoffs
         self.percent = self._compute_percent(self.grader_result)
         self.letter_grade = self._compute_letter_grade(grade_cutoffs, self.percent)
-        self.passed = self._compute_passed(grade_cutoffs, self.percent)
+        # self.passed = self._compute_passed(grade_cutoffs, self.percent)
+        self.passed=self._compute_passed(self.course_data,self.percent)
 
     @lazy
     def attempted(self):
@@ -258,12 +259,23 @@ class CourseGrade(CourseGradeBase):
 
         return letter_grade
 
+    # @staticmethod
+    # def _compute_passed(grade_cutoffs, percent):
+    #     """
+    #     Computes and returns whether the given percent value
+    #     is a passing grade according to the given grade cutoffs.
+    #     """
+    #     nonzero_cutoffs = [cutoff for cutoff in grade_cutoffs.values() if cutoff > 0]
+    #     success_cutoff = min(nonzero_cutoffs) if nonzero_cutoffs else None 
+    #     return success_cutoff and percent >= success_cutoff
     @staticmethod
-    def _compute_passed(grade_cutoffs, percent):
+    def _compute_passed(course_data, percent):
         """
         Computes and returns whether the given percent value
         is a passing grade according to the given grade cutoffs.
         """
-        nonzero_cutoffs = [cutoff for cutoff in grade_cutoffs.values() if cutoff > 0]
-        success_cutoff = min(nonzero_cutoffs) if nonzero_cutoffs else None
+        nonzero_cutoffs = [cutoff for cutoff in course_data.course.grade_cutoffs.values() if cutoff > 0]
+        # success_cutoff = min(nonzero_cutoffs) if nonzero_cutoffs else None
+        # change by manprax to compare with custom passing_grade
+        success_cutoff =course_data.course.minimum_grade_credit if course_data.course.minimum_grade_credit else None 
         return success_cutoff and percent >= success_cutoff

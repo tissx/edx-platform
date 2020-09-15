@@ -179,3 +179,35 @@ class BadgrBackend(BadgeBackend):
         """
         self._ensure_badge_created(badge_class)
         return self._create_assertion(badge_class, user, evidence_url)
+
+    # added by manprax  
+    def _assertion_revoke_url(self, badgeslug,slug):
+        """
+        URL for generating a new assertion.
+        """
+
+        return "{}/assertions/{}".format(self._badge_url(badgeslug),slug)    
+
+    def revoke(self, badge_class, assertion):
+        """
+        Revoke the given assertion from badgr & delete assertion from lms
+        """
+        data = {
+            "revocation_reason": "Server Action "
+        }
+        response = requests.delete(
+            self._assertion_revoke_url(self._slugify(badge_class),assertion.data['slug']), headers=self._get_headers(), data=data,
+            timeout=settings.BADGR_TIMEOUT
+        )
+        LOGGER.info(
+                u"Response when contact the Badgr-Server to revoke old badge. Request sent to %r with headers %r.\n"
+                u"and data values %r\n"
+                u"Response status was %s.\n%s",
+                response.request.url, response.request.headers,
+                data,
+                response.status_code, response.content
+            )
+        if response.status_code in  (200,400,404):
+            assertion.delete()
+        else:
+            self._log_if_raised(response, data)

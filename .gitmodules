@@ -13,3 +13,7 @@
 [submodule "lms/djangoapps/pushnotification"]
 	path = lms/djangoapps/pushnotification
 	url = https://gitlab.com/satorg/mx_discussion_notification.git
+[submodule "lms/djangoapps/mx_utility"]
+	path = lms/djangoapps/mx_utility
+	url = https://gitlab.com/satorg/mx_utility.git
+

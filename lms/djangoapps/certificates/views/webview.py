@@ -46,6 +46,13 @@ from util.views import handle_500
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
 
+# added by manprax
+from mx_utility.certficate_context import(
+ _update_user_grade_contextV1,
+_update_user_grade_contextV2,
+_update_course_credit_context
+)
+
 log = logging.getLogger(__name__)
 
 
@@ -97,7 +104,13 @@ def _update_certificate_context(context, user_certificate, platform_name):
     )
 
     # Translators:  The format of the date includes the full name of the month
-    context['certificate_date_issued'] = _('{month} {day}, {year}').format(
+    # context['certificate_date_issued'] = _('{month} {day}, {year}').format(
+    #     month=user_certificate.modified_date.strftime("%B"),
+    #     day=user_certificate.modified_date.day,
+    #     year=user_certificate.modified_date.year
+    # )
+    # changes by manprax
+    context['certificate_date_issued'] = _(' {day} {month} {year}').format(
         month=user_certificate.modified_date.strftime("%B"),
         day=user_certificate.modified_date.day,
         year=user_certificate.modified_date.year
@@ -485,7 +498,6 @@ def render_cert_by_uuid(request, certificate_uuid):
     except GeneratedCertificate.DoesNotExist:
         raise Http404
 
-
 @handle_500(
     template_path="certificates/server-error.html",
     test_func=lambda request: request.GET.get('preview', None)
@@ -558,6 +570,11 @@ def render_html_view(request, user_id, course_id):
 
     # Append/Override the existing view context values with any mode-specific ConfigurationModel values
     context.update(configuration.get(user_certificate.mode, {}))
+
+    # Append Tissx grade related data
+    _update_user_grade_contextV2(context, course, user, user_certificate,preview_mode)
+
+    _update_course_credit_context(context, course_key)
 
     # Append organization info
     _update_organization_context(context, course)
