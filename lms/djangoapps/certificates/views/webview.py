@@ -50,7 +50,8 @@ from xmodule.modulestore.exceptions import ItemNotFoundError
 from mx_utility.certficate_context import(
  _update_user_grade_contextV1,
 _update_user_grade_contextV2,
-_update_course_credit_context
+_update_course_credit_context,
+_update_context_with_course_dates
 )
 
 log = logging.getLogger(__name__)
@@ -571,10 +572,12 @@ def render_html_view(request, user_id, course_id):
     # Append/Override the existing view context values with any mode-specific ConfigurationModel values
     context.update(configuration.get(user_certificate.mode, {}))
 
-    # Append Tissx grade related data
+    # Append context data according Tissx  new certificate design
     _update_user_grade_contextV2(context, course, user, user_certificate,preview_mode)
 
     _update_course_credit_context(context, course_key)
+    _update_context_with_course_dates(context,course)
+    # --------------------------------------------
 
     # Append organization info
     _update_organization_context(context, course)

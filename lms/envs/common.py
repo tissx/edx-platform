@@ -314,7 +314,7 @@ FEATURES = {
     'CERTIFICATES_HTML_VIEW': False,
 
     # Batch-Generated Certificates from Instructor Dashboard
-    'CERTIFICATES_INSTRUCTOR_GENERATION': False,
+    'CERTIFICATES_INSTRUCTOR_GENERATION': True,
 
     # Course discovery feature
     'ENABLE_COURSE_DISCOVERY': True,
