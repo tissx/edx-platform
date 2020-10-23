@@ -34,6 +34,8 @@ from certificates.models import (
     CertificateWhitelist,
     GeneratedCertificate
 )
+# added by manprax
+from mx_utility.models import CertificateBlacklist
 from class_dashboard.dashboard_data import get_array_section_has_problem, get_section_display_name
 from course_modes.models import CourseMode, CourseModesArchive
 from courseware.access import has_access
@@ -210,6 +212,7 @@ def instructor_dashboard_2(request, course_id):
         'generate_certificate_exceptions',
         kwargs={'course_id': unicode(course_key), 'generate_for': ''}
     )
+    
     generate_bulk_certificate_exceptions_url = reverse(  # pylint: disable=invalid-name
         'generate_bulk_certificate_exceptions',
         kwargs={'course_id': unicode(course_key)}
@@ -218,14 +221,26 @@ def instructor_dashboard_2(request, course_id):
         'certificate_exception_view',
         kwargs={'course_id': unicode(course_key)}
     )
-
     certificate_invalidation_view_url = reverse(  # pylint: disable=invalid-name
         'certificate_invalidation_view',
         kwargs={'course_id': unicode(course_key)}
     )
 
     certificate_invalidations = CertificateInvalidation.get_certificate_invalidations(course_key)
-
+    # added by manprax to add certificate Blacklist urls
+    certificate_black_list = CertificateBlacklist.get_certificate_black_list(course_key)
+    generate_nonblacklists_certificate_url=reverse(  # pylint: disable=invalid-name
+        'generate_nonblacklists_certificate',
+        kwargs={'course_id': unicode(course_key), 'generate_for': ''}
+    )
+    generate_bulk_certificate_blacklists_url = reverse(  # pylint: disable=invalid-name
+        'generate_bulk_certificate_blacklists',
+        kwargs={'course_id': unicode(course_key)}
+    )
+    certificate_blacklist_view_url = reverse(
+        'certificate_blacklist_view',
+        kwargs={'course_id': unicode(course_key)}
+    )
     context = {
         'course': course,
         'studio_url': get_studio_url(course, 'course'),
@@ -238,6 +253,10 @@ def instructor_dashboard_2(request, course_id):
         'generate_bulk_certificate_exceptions_url': generate_bulk_certificate_exceptions_url,
         'certificate_exception_view_url': certificate_exception_view_url,
         'certificate_invalidation_view_url': certificate_invalidation_view_url,
+        'certificate_black_list':certificate_black_list,
+        'generate_nonblacklists_certificate_url':generate_nonblacklists_certificate_url,
+        'generate_bulk_certificate_blacklists_url':generate_bulk_certificate_blacklists_url,
+        'certificate_blacklist_view_url':certificate_blacklist_view_url,
     }
 
     return render_to_response('instructor/instructor_dashboard_2/instructor_dashboard_2.html', context)

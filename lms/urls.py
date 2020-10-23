@@ -120,6 +120,11 @@ urlpatterns = (
     url(r'^automatic_email', include('automatic_email.urls')),
     url(r'^api/pushnotification/',
             include('pushnotification.urls', namespace='mx_pushnotification_api')),
+    url(
+        r'^courses/{}/mx_instructor/api/'.format(
+            settings.COURSE_ID_PATTERN,
+        ),
+        include('lms.djangoapps.mx_utility.views.api_urls')),
 
 )
 

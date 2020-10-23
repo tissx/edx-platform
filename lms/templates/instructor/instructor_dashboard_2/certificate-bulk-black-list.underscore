@@ -1,0 +1,18 @@
+<h3 class="hd hd-3"><%- gettext("Bulk Blacklists") %></h3>
+<div class="white-list-csv">
+    <p class="under-heading">
+     <%- gettext("Upload a comma separated values (.csv) file that contains the usernames or email addresses of learners who have been given blacklists. Include the username or email address in the first comma separated field. You can include an optional note describing the reason for the blacklist in the second comma separated field.") %>
+    </p>
+    <form id="bulk_black_list_exception_form" enctype="multipart/form-data">
+        <div class="customBrowseBtn">
+            <label for="browseBtn-bulk-blacklist-csv"><%- gettext("Upload a CSV file") %></label>
+            <span class="browse-file enhanced-input-file" id="bulk-blacklist-upload"></span>
+            <div class="file-browse btn btn-primary" aria-hidden="true">
+                <span class="browse"><%- gettext("Browse") %></span>
+                <input class="file_field" id="browseBtn-bulk-blacklist-csv" name="black_students_list" type="file" accept=".csv"/>
+            </div>
+        </div>
+        <button type="submit" id="upload_blacklist_csv_button" class="btn-blue upload-blacklist-csv-button"><%- gettext("Add to blacklist List") %></button>
+    </form>
+    <div class="bulk-blacklist-results hidden"></div>
+</div>
