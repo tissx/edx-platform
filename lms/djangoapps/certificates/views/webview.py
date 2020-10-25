@@ -51,8 +51,10 @@ from mx_utility.certficate_context import(
  _update_user_grade_contextV1,
 _update_user_grade_contextV2,
 _update_course_credit_context,
-_update_context_with_course_dates
+_update_context_with_course_dates,
+_update_context_with_programmeV2
 )
+
 
 log = logging.getLogger(__name__)
 
@@ -577,6 +579,7 @@ def render_html_view(request, user_id, course_id):
 
     _update_course_credit_context(context, course_key)
     _update_context_with_course_dates(context,course)
+    _update_context_with_programmeV2(context,course_key)
     # --------------------------------------------
 
     # Append organization info

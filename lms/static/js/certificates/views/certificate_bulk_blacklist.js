@@ -124,6 +124,14 @@
                                 user_already_white_listed
                             );
                         }
+                        if (row_errors.user_already_black_listed.length) {
+                            var user_already_black_listed = row_errors.user_already_black_listed;
+                            generate_div(
+                                MESSAGE_GROUP.user_already_black_listed,
+                                get_text(user_already_black_listed.length, MESSAGE_GROUP.user_already_black_listed),
+                                user_already_black_listed
+                            );
+                        }
                         if (row_errors.user_not_enrolled.length) {
                             var user_not_enrolled = row_errors.user_not_enrolled;
                             generate_div(
