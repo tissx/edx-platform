@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from gating import api as gating_api
 from lms.djangoapps.grades.signals.signals import SUBSECTION_SCORE_CHANGED
 from openedx.core.djangoapps.signals.signals import COURSE_GRADE_CHANGED
+import logging
+log = logging.getLogger(__name__)
 
 
 @receiver(SUBSECTION_SCORE_CHANGED)
@@ -21,6 +23,8 @@ def evaluate_subsection_gated_milestones(**kwargs):
         None
     """
     subsection_grade = kwargs['subsection_grade']
+    earned_percentage =(float(subsection_grade.graded_total.earned) / float(subsection_grade.graded_total.possible) if subsection_grade.graded_total.possible else 0.0)*100.0
+    log.info('SUBSECTION_SCORE_CHANGED========> {}'.format(earned_percentage))
     gating_api.evaluate_prerequisite(kwargs['course'], subsection_grade, kwargs.get('user'))
 
 
