@@ -504,7 +504,7 @@ class CourseFields(object):
             "Issue Open Badges badges for this course. Badges are generated when certificates are created."
         ),
         scope=Scope.settings,
-        default=True
+        default=False
     )
     ## Course level Certificate Name overrides.
     cert_name_short = String(

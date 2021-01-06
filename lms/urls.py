@@ -112,7 +112,7 @@ urlpatterns = (
 
     url(r'^dashboard/', include('learner_dashboard.urls')),
     url(r'^api/experiments/', include('experiments.urls', namespace='api_experiments')),
-    # archived courses link
+     # archived courses link for template
     url(r'^archives/?$', 'branding.views.courses', name="archive_courses"),
     # advanced instructor
     url(r'^advanced_instructor', include('mx_problem_response.urls')),
