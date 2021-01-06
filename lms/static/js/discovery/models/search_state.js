@@ -63,9 +63,13 @@
                 var data = {
                     search_string: this.searchTerm,
                     page_size: this.pageSize,
-                    page_index: pageIndex
+                    page_index: pageIndex,
+                    return_archives:false
                 };
                 _.extend(data, this.terms);
+                if (window.location.href.includes("archives")) {
+                    data['return_archives']=true
+                }
                 return data;
             },
 

@@ -114,6 +114,7 @@ urlpatterns = (
     url(r'^api/experiments/', include('experiments.urls', namespace='api_experiments')),
      # archived courses link for template
     url(r'^archives/?$', 'branding.views.courses', name="archive_courses"),
+    url(r'^mx_archives/', include('mx_archive_courses.urls')),
     # advanced instructor
     url(r'^advanced_instructor', include('mx_problem_response.urls')),
     # automatic email for the subscrive widget api
