@@ -112,15 +112,22 @@ urlpatterns = (
 
     url(r'^dashboard/', include('learner_dashboard.urls')),
     url(r'^api/experiments/', include('experiments.urls', namespace='api_experiments')),
-     # archived courses link for template
+
+    # MANPRAX submodules BASE URLS
+
+    # 1. archived courses link for template
     url(r'^archives/?$', 'branding.views.courses', name="archive_courses"),
     url(r'^mx_archives/', include('mx_archive_courses.urls')),
-    # advanced instructor
+
+    #2. advanced instructor
     url(r'^advanced_instructor', include('mx_problem_response.urls')),
-    # automatic email for the subscrive widget api
+    # 3. automatic email for the subscrive widget api
     url(r'^automatic_email', include('automatic_email.urls')),
+    #4. Discussion mobile Pushnotification 
     url(r'^api/pushnotification/',
             include('pushnotification.urls', namespace='mx_pushnotification_api')),
+    # 5. mx_utility app 
+    url( r'^mx_utility/api/',include('lms.djangoapps.mx_utility.views.api_urls')),
     url(
         r'^courses/{}/mx_instructor/api/'.format(
             settings.COURSE_ID_PATTERN,
