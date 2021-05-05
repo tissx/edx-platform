@@ -1010,7 +1010,7 @@ ICP_LICENSE = ENV_TOKENS.get('ICP_LICENSE', None)
 ############## Settings for CourseGraph ############################
 COURSEGRAPH_JOB_QUEUE = ENV_TOKENS.get('COURSEGRAPH_JOB_QUEUE', LOW_PRIORITY_QUEUE)
 # changed by manprax
-COURSE_DISCOVERY_FILTERS = ["language",  "levels", "categories", "programs"]
+COURSE_DISCOVERY_FILTERS = ["modes","org","language",  "levels", "categories", "programs"]
 
 ############## Settings for MX_PROBLEM_RESPONSE APP ############################
 MX_PROBLEM_RESPONSES_TOKEN_CREDENTIALS = AUTH_TOKENS.get('MX_PROBLEM_RESPONSES_TOKEN_CREDENTIALS', {})
