@@ -139,6 +139,7 @@ class BadgrBackend(BadgeBackend):
         data = {
             'email': user.email,
             'evidence': evidence_url,
+            'create_notification':True
         }
         response = requests.post(
             self._assertion_url(self._slugify(badge_class)), headers=self._get_headers(), data=data,
@@ -166,7 +167,13 @@ class BadgrBackend(BadgeBackend):
         Verify a badge has been created for this badge class, and create it if not.
         """
         slug = self._slugify(badge_class)
+        LOGGER.info(
+                u"-------------------Outside BadgrBackend.badges check----------------------- "
+            ) 
         if slug in BadgrBackend.badges:
+            LOGGER.info(
+                u"-----------------------Inside BadgrBackend.badges check------------------ "
+            )
             return
         response = requests.get(self._badge_url(slug), headers=self._get_headers(), timeout=settings.BADGR_TIMEOUT)
         if response.status_code != 200:
@@ -177,6 +184,8 @@ class BadgrBackend(BadgeBackend):
         """
         Make sure the badge class has been created on the backend, and then award the badge class to the user.
         """
+        LOGGER.info(
+                u"-----------------------Inside AWARD function------------------ ")
         self._ensure_badge_created(badge_class)
         return self._create_assertion(badge_class, user, evidence_url)
 
