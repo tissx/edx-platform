@@ -1014,3 +1014,5 @@ COURSE_DISCOVERY_FILTERS = ["modes","org","language",  "levels", "categories", "
 
 ############## Settings for MX_PROBLEM_RESPONSE APP ############################
 MX_PROBLEM_RESPONSES_TOKEN_CREDENTIALS = AUTH_TOKENS.get('MX_PROBLEM_RESPONSES_TOKEN_CREDENTIALS', {})
+
+FORUM_MONGO = AUTH_TOKENS.get('FORUM_MONGO')
