@@ -2247,6 +2247,7 @@ INSTALLED_APPS = (
     'pushnotification',
     'mx_badge',
     'mx_utility',
+    'rangefilter'
 )
 
 ######################### CSRF #########################################
