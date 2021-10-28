@@ -47,7 +47,7 @@ from lms.djangoapps.lms_xblock.mixin import LmsBlockMixin
 # The display name of the platform to be used in templates/emails/etc.
 PLATFORM_NAME = "Your Platform Name Here"
 CC_MERCHANT_NAME = PLATFORM_NAME
-
+PLATFORM_NEW_NAME = "Your new platform name here"
 PLATFORM_FACEBOOK_ACCOUNT = "http://www.facebook.com/YourPlatformFacebookAccount"
 PLATFORM_TWITTER_ACCOUNT = "@YourPlatformTwitterAccount"
 
