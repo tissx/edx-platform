@@ -91,6 +91,13 @@ setup(
             "user_authn = openedx.core.djangoapps.user_authn.apps:UserAuthnConfig",
             "program_enrollments = lms.djangoapps.program_enrollments.apps:ProgramEnrollmentsConfig",
             "courseware_api = openedx.core.djangoapps.courseware_api.apps:CoursewareAPIConfig",
+            "mx_programs = cms.djangoapps.mx_programs",
+            "automatic_email = lms.djangoapps.automatic_email",
+            "mx_archive_courses = lms.djangoapps.mx_archive_courses",
+            "mx_problem_response = lms.djangoapps.mx_problem_response",
+            "pushnotification = lms.djangoapps.pushnotification",
+            "mx_utility = lms.djangoapps.mx_utility",
+            "comment_client = openedx.core.djangoapps.django_comment_common.comment_client"
         ],
         "cms.djangoapp": [
             "announcements = openedx.features.announcements.apps:AnnouncementsConfig",
@@ -110,6 +117,7 @@ setup(
             "password_policy = openedx.core.djangoapps.password_policy.apps:PasswordPolicyConfig",
             "user_authn = openedx.core.djangoapps.user_authn.apps:UserAuthnConfig",
             "instructor = lms.djangoapps.instructor.apps:InstructorConfig",
+            "mx_programs = cms.djangoapps.mx_programs",
         ],
         'openedx.learning_context': [
             'lib = openedx.core.djangoapps.content_libraries.library_context:LibraryContextImpl',

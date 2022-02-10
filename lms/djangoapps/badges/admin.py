@@ -9,6 +9,6 @@ from django.contrib import admin
 from lms.djangoapps.badges.models import BadgeClass, CourseCompleteImageConfiguration, CourseEventBadgesConfiguration
 
 admin.site.register(CourseCompleteImageConfiguration)
-admin.site.register(BadgeClass)
+#admin.site.register(BadgeClass)
 # Use the standard Configuration Model Admin handler for this model.
 admin.site.register(CourseEventBadgesConfiguration, ConfigurationModelAdmin)

@@ -261,19 +261,19 @@ FEATURES = {
     'LICENSING': False,
 
     # Enable the courseware search functionality
-    'ENABLE_COURSEWARE_INDEX': False,
+    'ENABLE_COURSEWARE_INDEX': True,
 
     # Enable content libraries (modulestore) search functionality
-    'ENABLE_LIBRARY_INDEX': False,
+    'ENABLE_LIBRARY_INDEX': True,
 
     # Enable content libraries (blockstore) indexing
-    'ENABLE_CONTENT_LIBRARY_INDEX': False,
+    'ENABLE_CONTENT_LIBRARY_INDEX': True,
 
     # Enable course reruns, which will always use the split modulestore
     'ALLOW_COURSE_RERUNS': True,
 
     # Certificates Web/HTML Views
-    'CERTIFICATES_HTML_VIEW': False,
+    'CERTIFICATES_HTML_VIEW': True,
 
     # Teams feature
     'ENABLE_TEAMS': True,
@@ -624,7 +624,11 @@ ELASTIC_SEARCH_CONFIG = [
 # These are standard regexes for pulling out info like course_ids, usage_ids, etc.
 # They are used so that URLs with deprecated-format strings still work.
 from lms.envs.common import (
-    COURSE_KEY_PATTERN, COURSE_KEY_REGEX, COURSE_ID_PATTERN, USAGE_KEY_PATTERN, ASSET_KEY_PATTERN
+    COURSE_KEY_PATTERN, COURSE_KEY_REGEX, COURSE_ID_PATTERN, USAGE_KEY_PATTERN, ASSET_KEY_PATTERN,
+    #The following setting is included as it is used to check whether to
+    # display credit eligibility table on the CMS or not.
+    ENABLE_CREDIT_ELIGIBILITY,
+
 )
 
 ######################### CSRF #########################################
@@ -1257,6 +1261,7 @@ CELERY_DEFAULT_EXCHANGE = f'edx.{QUEUE_VARIANT}core'
 
 HIGH_PRIORITY_QUEUE = f'edx.{QUEUE_VARIANT}core.high'
 DEFAULT_PRIORITY_QUEUE = f'edx.{QUEUE_VARIANT}core.default'
+LOW_PRIORITY_QUEUE = f'edx.{QUEUE_VARIANT}core.low'
 
 CELERY_DEFAULT_QUEUE = DEFAULT_PRIORITY_QUEUE
 CELERY_DEFAULT_ROUTING_KEY = DEFAULT_PRIORITY_QUEUE
@@ -1332,6 +1337,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_results',
     'method_override',
+    'django_extensions',
 
     # Common Initialization
     'openedx.core.djangoapps.common_initialization.apps.CommonInitializationConfig',
@@ -1536,6 +1542,9 @@ INSTALLED_APPS = [
     'openedx.core.djangoapps.content.learning_sequences.apps.LearningSequencesConfig',
 
     'ratelimitbackend',
+    'cms.djangoapps.mx_programs',
+    
+    
 ]
 
 
@@ -1827,7 +1836,7 @@ FILES_AND_UPLOAD_TYPE_FILTERS = {
 }
 
 # Default to no Search Engine
-SEARCH_ENGINE = None
+SEARCH_ENGINE = "search.elastic.ElasticSearchEngine"
 ELASTIC_FIELD_MAPPINGS = {
     "start_date": {
         "type": "date"
@@ -2019,7 +2028,7 @@ MOBILE_STORE_URLS = {}
 ############################# Persistent Grades ####################################
 
 # Queue to use for updating persistent grades
-RECALCULATE_GRADES_ROUTING_KEY = DEFAULT_PRIORITY_QUEUE
+RECALCULATE_GRADES_ROUTING_KEY = LOW_PRIORITY_QUEUE
 
 # Queue to use for updating grades due to grading policy change
 POLICY_CHANGE_GRADES_ROUTING_KEY = 'edx.lms.core.default'
@@ -2344,3 +2353,6 @@ LOGO_URL_PNG = None
 LOGO_TRADEMARK_URL = None
 FAVICON_URL = None
 DEFAULT_EMAIL_LOGO_URL = 'https://edx-cdn.org/v3/default/logo.png'
+
+COURSE_KEY_PATTERN = r'(?P<course_key_string>[^/+]+(/|\+)[^/+]+(/|\+)[^/?]+)'
+COURSE_ID_PATTERN = COURSE_KEY_PATTERN.replace('course_key_string', 'course_id')

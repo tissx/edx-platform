@@ -460,7 +460,7 @@ FEATURES = {
     'ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF': False,
 
     # Dashboard search feature
-    'ENABLE_DASHBOARD_SEARCH': False,
+    'ENABLE_DASHBOARD_SEARCH': True,
 
     # log all information from cybersource callbacks
     'LOG_POSTPAY_CALLBACKS': True,
@@ -478,7 +478,7 @@ FEATURES = {
     'LICENSING': False,
 
     # Certificates Web/HTML Views
-    'CERTIFICATES_HTML_VIEW': False,
+    'CERTIFICATES_HTML_VIEW': True,
 
     # .. toggle_name: ENABLE_COURSE_DISCOVERY
     # .. toggle_implementation: DjangoSetting
@@ -491,7 +491,7 @@ FEATURES = {
     # .. toggle_target_removal_date: None
     # .. toggle_warnings: The COURSE_DISCOVERY_MEANINGS setting should be properly defined.
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/7845
-    'ENABLE_COURSE_DISCOVERY': False,
+    'ENABLE_COURSE_DISCOVERY': True,
 
     # .. toggle_name: FEATURES['ENABLE_COURSE_FILENAME_CCX_SUFFIX']
     # .. toggle_implementation: DjangoSetting
@@ -505,8 +505,8 @@ FEATURES = {
     'ENABLE_COURSE_FILENAME_CCX_SUFFIX': False,
 
     # Setting for overriding default filtering facets for Course discovery
-    # COURSE_DISCOVERY_FILTERS = ["org", "language", "modes"]
-
+    'COURSE_DISCOVERY_FILTERS' : ["modes","org","language", "levels", "categories", "programs"],
+    
     # Software secure fake page feature flag
     'ENABLE_SOFTWARE_SECURE_FAKE': False,
 
@@ -2403,7 +2403,7 @@ BLOCK_STRUCTURES_SETTINGS = dict(
 
 # Suffix used to construct 'from' email address for bulk emails.
 # A course-specific identifier is prepended.
-BULK_EMAIL_DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+BULK_EMAIL_DEFAULT_FROM_EMAIL = 'alok.kumar@gmail.com'
 
 # Parameters for breaking down course enrollment into subtasks.
 BULK_EMAIL_EMAILS_PER_TASK = 500
@@ -2489,6 +2489,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django_celery_results',
+    'django_extensions',
 
     # Common Initialization
     'openedx.core.djangoapps.common_initialization.apps.CommonInitializationConfig',
@@ -2776,6 +2777,14 @@ INSTALLED_APPS = [
     'openedx.core.djangoapps.content.learning_sequences.apps.LearningSequencesConfig',
 
     'ratelimitbackend',
+    'rangefilter',
+    'cms.djangoapps.mx_programs',
+    'lms.djangoapps.automatic_email',
+    'lms.djangoapps.mx_archive_courses',
+    'lms.djangoapps.mx_problem_response',
+    'lms.djangoapps.pushnotification',
+    'lms.djangoapps.mx_utility',
+    
 ]
 
 ######################### CSRF #########################################
@@ -4201,3 +4210,129 @@ LOGO_URL_PNG = None
 LOGO_TRADEMARK_URL = None
 FAVICON_URL = None
 DEFAULT_EMAIL_LOGO_URL = 'https://edx-cdn.org/v3/default/logo.png'
+
+PLATFORM_NEW_NAME = "Your new platform name here"
+
+notes_js = sorted(rooted_glob(PROJECT_ROOT / 'static', 'coffee/src/notes/**/*.js'))
+
+proctoring_js = (
+    [
+        'proctoring/js/models/proctored_exam_allowance_model.js',
+        'proctoring/js/models/proctored_exam_attempt_model.js',
+        'proctoring/js/models/proctored_exam_model.js'
+    ] +
+    [
+        'proctoring/js/collections/proctored_exam_allowance_collection.js',
+        'proctoring/js/collections/proctored_exam_attempt_collection.js',
+        'proctoring/js/collections/proctored_exam_collection.js'
+    ] +
+    [
+        'proctoring/js/views/Backbone.ModalDialog.js',
+        'proctoring/js/views/proctored_exam_add_allowance_view.js',
+        'proctoring/js/views/proctored_exam_allowance_view.js',
+        'proctoring/js/views/proctored_exam_attempt_view.js',
+        'proctoring/js/views/proctored_exam_view.js'
+    ] +
+    [
+        'proctoring/js/proctored_app.js'
+    ]
+)
+
+
+PIPELINE_JS = {
+    'base_application': {
+        'source_filenames': base_application_js,
+        'output_filename': 'js/lms-base-application.js',
+    },
+    'application': {
+        'source_filenames': (
+            common_js + xblock_runtime_js + base_application_js + lms_application_js +
+            [
+                'js/sticky_filter.js',
+                'js/query-params.js',
+                'common/js/vendor/moment-with-locales.js',
+                'common/js/vendor/moment-timezone-with-data.js',
+            ]
+        ),
+        'output_filename': 'js/lms-application.js',
+    },
+    'proctoring': {
+        'source_filenames': proctoring_js,
+        'output_filename': 'js/lms-proctoring.js',
+    },
+    'courseware': {
+        'source_filenames': courseware_js,
+        'output_filename': 'js/lms-courseware.js',
+    },
+    'base_vendor': {
+        'source_filenames': base_vendor_js,
+        'output_filename': 'js/lms-base-vendor.js',
+    },
+    'main_vendor': {
+        'source_filenames': main_vendor_js,
+        'output_filename': 'js/lms-main_vendor.js',
+    },
+    'lms_bootstrap': {
+        'source_filenames': [
+            'common/js/vendor/tether.js',
+            'common/js/vendor/bootstrap.js',
+        ],
+        'output_filename': 'js/lms-bootstrap.js',
+    },
+    'module-descriptor-js': {
+        'source_filenames': rooted_glob(COMMON_ROOT / 'static/', 'xmodule/descriptors/js/*.js'),
+        'output_filename': 'js/lms-module-descriptors.js',
+    },
+    'module-js': {
+        'source_filenames': rooted_glob(COMMON_ROOT / 'static', 'xmodule/modules/js/*.js'),
+        'output_filename': 'js/lms-modules.js',
+    },
+    'discussion': {
+        'source_filenames': discussion_js,
+        'output_filename': 'js/discussion.js',
+    },
+    'discussion_vendor': {
+        'source_filenames': discussion_vendor_js,
+        'output_filename': 'js/discussion_vendor.js',
+    },
+    'notes': {
+        'source_filenames': notes_js,
+        'output_filename': 'js/notes.js',
+    },
+    'instructor_dash': {
+        'source_filenames': instructor_dash_js,
+        'output_filename': 'js/instructor_dash.js',
+    },
+    'dashboard': {
+        'source_filenames': dashboard_js,
+        'output_filename': 'js/dashboard.js'
+    },
+    'verify_student': {
+        'source_filenames': verify_student_js,
+        'output_filename': 'js/verify_student.js'
+    },
+    'reverify': {
+        'source_filenames': reverify_js,
+        'output_filename': 'js/reverify.js'
+    },
+    'incourse_reverify': {
+        'source_filenames': incourse_reverify_js,
+        'output_filename': 'js/incourse_reverify.js'
+    },
+    'ccx': {
+        'source_filenames': ccx_js,
+        'output_filename': 'js/ccx.js'
+    },
+    'footer_edx': {
+        'source_filenames': ['js/footer-edx.js'],
+        'output_filename': 'js/footer-edx.js'
+    },
+    'certificates_wv': {
+        'source_filenames': certificates_web_view_js,
+        'output_filename': 'js/certificates/web_view.js'
+    },
+    'credit_wv': {
+        'source_filenames': credit_web_view_js,
+        'output_filename': 'js/credit/web_view.js'
+    }
+}

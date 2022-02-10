@@ -19,6 +19,8 @@ from openedx.core.lib.courses import course_image_url
 from xmodule.annotator_mixin import html_to_text
 from xmodule.library_tools import normalize_key_for_search
 from xmodule.modulestore import ModuleStoreEnum
+from cms.djangoapps.mx_programs.views import getProgramsFromCourse
+
 
 # REINDEX_AGE is the default amount of time that we look back for changes
 # that might have happened. If we are provided with a time at which the
@@ -588,7 +590,9 @@ class CourseAboutSearchIndexer(object):
             'id': course_id,
             'course': course_id,
             'content': {},
+            'programs':list(map(str,getProgramsFromCourse(course.id))),
             'image_url': course_image_url(course),
+            'catalog_visibility':course.catalog_visibility
         }
 
         # load data for all of the 'about' modules for this course into a dictionary

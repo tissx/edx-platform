@@ -21,6 +21,7 @@ from .production import *  # pylint: disable=wildcard-import, unused-wildcard-im
 del DEFAULT_FILE_STORAGE
 MEDIA_ROOT = "/edx/var/edxapp/uploads"
 ORA2_FILEUPLOAD_BACKEND = 'django'
+MEDIA_URL = '/media/'
 
 
 DEBUG = True
@@ -162,13 +163,13 @@ FEATURES['LICENSING'] = True
 
 
 ########################## Courseware Search #######################
-FEATURES['ENABLE_COURSEWARE_SEARCH'] = False
+FEATURES['ENABLE_COURSEWARE_SEARCH'] = True
 FEATURES['ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF'] = True
 SEARCH_ENGINE = 'search.elastic.ElasticSearchEngine'
 
 
 ########################## Dashboard Search #######################
-FEATURES['ENABLE_DASHBOARD_SEARCH'] = False
+FEATURES['ENABLE_DASHBOARD_SEARCH'] = True
 
 
 ########################## Certificates Web/HTML View #######################
@@ -177,23 +178,23 @@ FEATURES['CERTIFICATES_HTML_VIEW'] = True
 
 ########################## Course Discovery #######################
 LANGUAGE_MAP = {'terms': {lang: display for lang, display in ALL_LANGUAGES}, 'name': 'Language'}
-COURSE_DISCOVERY_MEANINGS = {
-    'org': {
-        'name': 'Organization',
-    },
-    'modes': {
-        'name': 'Course Type',
-        'terms': {
-            'honor': 'Honor',
-            'verified': 'Verified',
-        },
-    },
-    'language': LANGUAGE_MAP,
-}
+# COURSE_DISCOVERY_MEANINGS = {
+#     'org': {
+#         'name': 'Organization',
+#     },
+#     'modes': {
+#         'name': 'Course Type',
+#         'terms': {
+#             'honor': 'Honor',
+#             'verified': 'Verified',
+#         },
+#     },
+#     'language': LANGUAGE_MAP,
+# }
 
-FEATURES['ENABLE_COURSE_DISCOVERY'] = False
+FEATURES['ENABLE_COURSE_DISCOVERY'] = True
 # Setting for overriding default filtering facets for Course discovery
-# COURSE_DISCOVERY_FILTERS = ["org", "language", "modes"]
+COURSE_DISCOVERY_FILTERS = ["modes","org","programs","language" ]
 FEATURES['COURSES_ARE_BROWSEABLE'] = True
 HOMEPAGE_COURSE_MAX = 9
 
@@ -429,3 +430,6 @@ if os.path.isfile(join(dirname(abspath(__file__)), 'private.py')):
 # Uncomment the lines below if you'd like to see SQL statements in your devstack LMS log.
 # LOGGING['handlers']['console']['level'] = 'DEBUG'
 # LOGGING['loggers']['django.db.backends'] = {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False}
+
+
+FORUM_MONGO = AUTH_TOKENS['FORUM_MONGO']

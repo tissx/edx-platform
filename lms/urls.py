@@ -53,6 +53,7 @@ from openedx.core.djangoapps.verified_track_content import views as verified_tra
 from openedx.features.enterprise_support.api import enterprise_enabled
 from common.djangoapps.student import views as student_views
 from common.djangoapps.util import views as util_views
+from lms.djangoapps.branding.views import *
 
 RESET_COURSE_DEADLINES_NAME = 'reset_course_deadlines'
 RENDER_XBLOCK_NAME = 'render_xblock'
@@ -198,6 +199,14 @@ urlpatterns = [
     ),
     url(r'^api/discounts/', include(('openedx.features.discounts.urls', 'openedx.features.discounts'),
                                     namespace='api_discounts')),
+
+    url(r'^automatic_email', include('lms.djangoapps.automatic_email.urls')),
+    url(r'^archives/?$', courses, name="archive_courses"),
+    url(r'^mx_archives/', include('lms.djangoapps.mx_archive_courses.urls')),
+    url(r'^advanced_instructor', include('lms.djangoapps.mx_problem_response.urls')),
+    url(r'^api/pushnotification/',include(('lms.djangoapps.pushnotification.urls','mx_pushnotification_api'), namespace='mx_pushnotification_api')),
+    url( r'^mx_utility/api/',include('lms.djangoapps.mx_utility.views.api_urls')),
+    url(r'^courses/{}/mx_instructor/api/'.format(settings.COURSE_ID_PATTERN,),include('lms.djangoapps.mx_utility.views.api_urls')),
 ]
 
 if settings.FEATURES.get('ENABLE_MOBILE_REST_API'):

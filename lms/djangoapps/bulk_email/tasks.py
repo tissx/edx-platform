@@ -99,7 +99,7 @@ BULK_EMAIL_FAILURE_ERRORS = (
 )
 
 
-def _get_course_email_context(course):
+def get_course_email_context(course):
     """
     Returns context arguments to apply to all emails, independent of recipient.
     """
@@ -294,7 +294,7 @@ def send_course_email(entry_id, email_id, to_list, global_email_context, subtask
     try:
         course_title = global_email_context['course_title']
         start_time = time.time()
-        new_subtask_status, send_exception = _send_course_email(
+        new_subtask_status, send_exception = send_course_email(
             entry_id,
             email_id,
             to_list,
@@ -302,7 +302,7 @@ def send_course_email(entry_id, email_id, to_list, global_email_context, subtask
             subtask_status,
         )
         log.info(
-            u"BulkEmail ==> _send_course_email completed in : %s for task : %s with recipient count: %s",
+            u"BulkEmail ==> send_course_email completed in : %s for task : %s with recipient count: %s",
             time.time() - start_time,
             subtask_status.task_id,
             len(to_list)
@@ -426,7 +426,7 @@ def _get_source_address(course_id, course_title, course_language, truncate=True)
     return from_addr
 
 
-def _send_course_email(entry_id, email_id, to_list, global_email_context, subtask_status):
+def send_course_email(entry_id, email_id, to_list, global_email_context, subtask_status):
     """
     Performs the email sending task.
 
@@ -537,8 +537,8 @@ def _send_course_email(entry_id, email_id, to_list, global_email_context, subtas
             email_context['name'] = current_recipient['profile__name']
             email_context['user_id'] = current_recipient['pk']
             email_context['course_id'] = course_email.course_id
-            email_context['unsubscribe_link'] = get_unsubscribed_link(current_recipient['username'],
-                                                                      text_type(course_email.course_id))
+            # email_context['unsubscribe_link'] = get_unsubscribed_link(current_recipient['username'],
+            #                                                           text_type(course_email.course_id))
 
             # Construct message content using templates and context:
             plaintext_msg = course_email_template.render_plaintext(course_email.text_message, email_context)

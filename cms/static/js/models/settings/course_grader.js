@@ -22,6 +22,7 @@ define(['backbone', 'underscore', 'gettext'], function(Backbone, _, gettext) {
         },
         validate: function(attrs) {
             var errors = {};
+            debugger;
             if (_.has(attrs, 'type')) {
                 if (_.isEmpty(attrs.type)) {
                     errors.type = gettext('The assignment type must have a name.');

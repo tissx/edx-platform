@@ -147,7 +147,7 @@ define(['js/views/validation',
 
     // A does not have a drag bar (cannot change its upper limit)
     // Need to insert new bars in right place.
-            GRADES: ['A', 'B', 'C', 'D'],	// defaults for new grade designators
+            GRADES: ["O", "A+", "A-", "B+", "B-", "C+", "C-", "D", "E"],	// defaults for new grade designators
             descendingCutoffs: [],  // array of { designation : , cutoff : }
             gradeBarWidth: null, // cache of value since it won't change (more certain)
 
@@ -291,7 +291,7 @@ define(['js/views/validation',
             addNewGrade: function(e) {
                 e.preventDefault();
                 var gradeLength = this.descendingCutoffs.length; // cutoffs doesn't include fail/f so this is only the passing grades
-                if (gradeLength > 3) {
+                if (gradeLength > 8) {
             // TODO shouldn't we disable the button
                     return;
                 }

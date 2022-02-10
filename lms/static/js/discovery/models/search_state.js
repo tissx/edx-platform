@@ -66,6 +66,7 @@
                     page_index: pageIndex
                 };
                 _.extend(data, this.terms);
+                
                 return data;
             },
 
