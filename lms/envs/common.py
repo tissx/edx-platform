@@ -531,7 +531,7 @@ FEATURES = {
     'ENABLE_SPECIAL_EXAMS': False,
 
     # Enable OpenBadge support. See the BADGR_* settings later in this file.
-    'ENABLE_OPENBADGES': False,
+    'ENABLE_OPENBADGES': True,
 
     # Enable LTI Provider feature.
     'ENABLE_LTI_PROVIDER': False,
@@ -2783,7 +2783,7 @@ INSTALLED_APPS = [
     'lms.djangoapps.mx_archive_courses',
     'lms.djangoapps.mx_problem_response',
     'lms.djangoapps.pushnotification',
-    'lms.djangoapps.mx_utility',
+    'lms.djangoapps.mx_utility.apps.MxUtilityConfig',
     
 ]
 
@@ -4336,3 +4336,11 @@ PIPELINE_JS = {
         'output_filename': 'js/credit/web_view.js'
     }
 }
+
+BADGR_USERNAME = "alok.kumar@manprax.com"
+BADGR_PASSWORD = "Alok@1996"
+BADGR_TOKENS_CACHE_KEY = ""
+BADGR_BASE_URL = "https://api.test.badgr.com"
+BADGR_ISSUER_SLUG = "3UURZKK9Sim5ZwCQxG-8yg"
+BADGR_ENABLE_NOTIFICATIONS = True
+BADGR_TIMEOUT = 18360
