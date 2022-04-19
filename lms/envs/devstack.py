@@ -375,8 +375,8 @@ MKTG_URLS = {
     'SCHOOLS': '/schools-partners',
     'SITE_MAP': '/sitemap',
     'TRADEMARKS': '/trademarks',
-    'TOS': '/edx-terms-service',
-    'TOS_AND_HONOR': '/edx-terms-service',
+    'TOS': '/tos',
+    'HONOR': '/honor',
     'WHAT_IS_VERIFIED_CERT': '/verified-certificate',
 }
 
