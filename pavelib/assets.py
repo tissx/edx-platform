@@ -533,7 +533,7 @@ def _compile_sass(system, theme, debug, force, timing_info):
         css_dir = dirs['css_destination_dir']
         sass_source_dir = dirs['sass_source_dir']
         lookup_paths = dirs['lookup_paths']
-
+        
         if not sass_source_dir.isdir():
             print("\033[91m Sass dir '{dir}' does not exists, skipping sass compilation for '{theme}' \033[00m".format(
                 dir=sass_dirs, theme=theme or system,

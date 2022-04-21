@@ -1542,7 +1542,7 @@ INSTALLED_APPS = [
     'openedx.core.djangoapps.content.learning_sequences.apps.LearningSequencesConfig',
 
     'ratelimitbackend',
-    'cms.djangoapps.mx_programs',
+    'cms.djangoapps.mx_programs.apps.MxProgramsConfig',
     
     
 ]
