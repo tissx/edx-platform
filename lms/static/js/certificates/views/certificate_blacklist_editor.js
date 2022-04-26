@@ -18,7 +18,6 @@
                 events: {
                     'click #add-blacklist': 'addException'
                 },
-
                 render: function() {
                     var template = this.loadTemplate('certificate-black-list-editor');
                     this.$el.html(template());
