@@ -23268,3 +23268,6 @@ msgstr ""
 #: edx_proctoring_proctortrack/backends/proctortrack_rest.py
 msgid "Click on the \"Start Proctored Exam\" button below to continue."
 msgstr ""
+
+msgid "$"
+msgstr "INR"
