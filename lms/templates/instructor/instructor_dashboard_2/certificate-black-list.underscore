@@ -1,0 +1,37 @@
+<h3 class="hd hd-3"><%- gettext("Generate  Certificates for Nonblacklist") %></h3>
+<fieldset class="under-heading">
+    <legend>Certificate non blacklists group selection</legend>
+    <label>
+        <input type='radio' name='generate-nonblacklist-certificates-radio' checked="checked" value='new'>
+        <%- gettext('All non-blacklist passed learrners who do not yet have a certificate') %>
+    </label><br />
+</fieldset>
+<button id="generate-nonblacklist-certificates" class="btn-blue" type="button"><%- gettext('Generate Non Blacklist Certificates') %></button>
+<br/>
+<% if (certificates.length === 0) { %>
+    <p><%- gettext("No results") %></p>
+<% } else { %>
+    <table>
+        <thead>
+            <th class='user-name'><%- gettext("Name") %></th>
+            <th class='user-email'><%- gettext("User Email") %></th>
+            <th class='date'><%- gettext("Blacklisted ") %></th>
+            <th class='notes'><%- gettext("Notes") %></th>
+            <th class='action'><%- gettext("Action") %></th>
+        </thead>
+        <tbody>
+        <% for (var i = 0; i < certificates.length; i++) {
+            var cert = certificates[i];
+        %>
+        <tr>
+            <td><%- cert.get("user_name") %></td>
+            <td><%- cert.get("user_email") %></td>
+            <td><%- cert.get("created") %></td>
+            <td><%- cert.get("notes") %></td>
+            <td><button class='delete-blacklist' data-user_id='<%- cert.get("user_id") %>'><%- gettext("Remove from List") %></button></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <div class='message hidden'></div>
+<% } %>

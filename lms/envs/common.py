@@ -62,6 +62,7 @@ from lms.djangoapps.lms_xblock.mixin import LmsBlockMixin
 PLATFORM_NAME = _('Your Platform Name Here')
 PLATFORM_DESCRIPTION = _('Your Platform Description Here')
 CC_MERCHANT_NAME = PLATFORM_NAME
+PLATFORM_NEW_NAME = ('Your Platform Name Here')
 
 PLATFORM_FACEBOOK_ACCOUNT = "http://www.facebook.com/YourPlatformFacebookAccount"
 PLATFORM_TWITTER_ACCOUNT = "@YourPlatformTwitterAccount"
@@ -3191,6 +3192,16 @@ INSTALLED_APPS = [
 
     # Content Library LTI 1.3 Support.
     'pylti1p3.contrib.django.lti1p3_tool_config',
+    
+    #changed by manprax
+    'rangefilter',
+    'cms.djangoapps.mx_programs',
+    'lms.djangoapps.automatic_email',
+    'lms.djangoapps.mx_archive_courses',
+    'lms.djangoapps.mx_problem_response',
+    'lms.djangoapps.mx_utility',
+    'lms.djangoapps.pushnotification',
+
 ]
 
 ######################### CSRF #########################################
