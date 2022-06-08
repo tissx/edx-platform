@@ -1,0 +1,4 @@
+[submodule "lms/djangoapps/mx_archive_courses"]
+	path = lms/djangoapps/mx_archive_courses
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/mx_archive_courses.git
+	branch = maple_release
