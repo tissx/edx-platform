@@ -78,7 +78,7 @@ def plugin_settings(settings):
         #   In case of self-paced courses, the certificate generation button is hidden if certificate
         #   generation is not explicitly enabled globally or for the specific course.
         # .. toggle_use_cases: opt_in
-        'CERTIFICATES_INSTRUCTOR_GENERATION': False,
+        'CERTIFICATES_INSTRUCTOR_GENERATION': True,
 
         # .. toggle_name: FEATURES['BATCH_ENROLLMENT_NOTIFY_USERS_DEFAULT']
         # .. toggle_implementation: DjangoSetting
