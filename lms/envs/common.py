@@ -571,7 +571,7 @@ FEATURES = {
     # .. toggle_warnings: In order to get this working, your courses data should be indexed in Elasticsearch. You will
     #   see the search widget on the courseware page only if the DISABLE_COURSE_OUTLINE_PAGE_FLAG is set.
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/6506
-    'ENABLE_COURSEWARE_SEARCH': False,
+    'ENABLE_COURSEWARE_SEARCH': True,
 
     # .. toggle_name: FEATURES['ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF']
     # .. toggle_implementation: DjangoSetting
@@ -584,7 +584,7 @@ FEATURES = {
     #   ENABLE_COURSEWARE_SEARCH is enabled then the search widget will be visible to all learners and this flag's
     #   value does not matter in that case. This flag is enabled in devstack by default.
     # .. toggle_tickets: https://openedx.atlassian.net/browse/TNL-6931
-    'ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF': False,
+    'ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF': True,
 
     # Dashboard search feature
     # .. toggle_name: FEATURES['ENABLE_DASHBOARD_SEARCH']
@@ -596,7 +596,7 @@ FEATURES = {
     # .. toggle_creation_date: 2015-01-29
     # .. toggle_warnings: In order to get this working, your courses data should be indexed in Elasticsearch.
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/6506
-    'ENABLE_DASHBOARD_SEARCH': False,
+    'ENABLE_DASHBOARD_SEARCH': True,
 
     # log all information from cybersource callbacks
     'LOG_POSTPAY_CALLBACKS': True,
