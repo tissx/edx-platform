@@ -98,7 +98,7 @@ BULK_EMAIL_FAILURE_ERRORS = (
 )
 
 
-def get_course_email_context(course):
+def _get_course_email_context(course):
     """
     Returns context arguments to apply to all emails, independent of recipient.
     """
@@ -179,7 +179,7 @@ def perform_delegate_email_batches(entry_id, course_id, task_input, action_name)
 
     # Get arguments that will be passed to every subtask.
     targets = email_obj.targets.all()
-    global_email_context = get_course_email_context(course)
+    global_email_context = _get_course_email_context(course)
 
     recipient_qsets = [
         target.get_users(course_id, user_id)
@@ -272,7 +272,6 @@ def send_course_email(entry_id, email_id, to_list, global_email_context, subtask
     Emails are sent multi-part, in both plain text and html.  Updates InstructorTask object
     with status information (sends, failures, skips) and updates number of subtasks completed.
     """
-    
     subtask_status = SubtaskStatus.from_dict(subtask_status_dict)
     current_task_id = subtask_status.task_id
     num_to_send = len(to_list)
@@ -537,7 +536,6 @@ def _send_course_email(entry_id, email_id, to_list, global_email_context, subtas
                 )
                 subtask_status.increment(failed=1)
                 continue
-
             email_context['email'] = email
             email_context['name'] = current_recipient['profile__name']
             email_context['user_id'] = current_recipient['pk']

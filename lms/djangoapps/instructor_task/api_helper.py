@@ -48,6 +48,10 @@ class QueueConnectionError(Exception):
         super().__init__(message)
 
 
+def reserve_task(course_id, task_type, task_key, task_input, requester):
+    return _reserve_task(course_id, task_type, task_key, task_input, requester)
+
+
 def _task_is_running(course_id, task_type, task_key):
     """Checks if a particular task is already running"""
     running_tasks = InstructorTask.objects.filter(
@@ -59,7 +63,7 @@ def _task_is_running(course_id, task_type, task_key):
     return len(running_tasks) > 0
 
 
-def reserve_task(course_id, task_type, task_key, task_input, requester):
+def _reserve_task(course_id, task_type, task_key, task_input, requester):
     """
     Creates a database entry to indicate that a task is in progress.
 
@@ -438,7 +442,7 @@ def submit_task(request, task_type, task_class, course_key, task_input, task_key
     """
     with outer_atomic():
         # check to see if task is already running, and reserve it otherwise:
-        instructor_task = reserve_task(course_key, task_type, task_key, task_input, request.user)
+        instructor_task = _reserve_task(course_key, task_type, task_key, task_input, request.user)
 
     # make sure all data has been committed before handing off task to celery.
 
