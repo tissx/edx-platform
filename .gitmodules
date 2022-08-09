@@ -1,0 +1,24 @@
+[submodule "lms/djangoapps/mx_archive_courses"]
+	path = lms/djangoapps/mx_archive_courses
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/mx_archive_courses.git
+	branch = nutmeg_release
+[submodule "lms/djangoapps/automatic_email"]
+	path = lms/djangoapps/automatic_email
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/edx_automatic_email.git
+	branch = nutmeg_release
+[submodule "lms/djangoapps/mx_problem_response"]
+	path = lms/djangoapps/mx_problem_response
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/mx_problem_response.git
+	branch = nutmeg_release
+[submodule "lms/djangoapps/mx_utility"]
+	path = lms/djangoapps/mx_utility
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/mx_utility.git
+	branch = nutmeg_release
+[submodule "lms/djangoapps/pushnotification"]
+	path = lms/djangoapps/pushnotification
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/mx_discussion_notification.git
+	branch = nutmeg_release
+[submodule "cms/djangoapps/mx_programs"]
+	path = cms/djangoapps/mx_programs
+	url = https://alokkumar245:glpat-wM72AeJN8dzf71jKsHPQ@gitlab.com/satorg/mx_programs.git
+	branch = nutmeg_release
