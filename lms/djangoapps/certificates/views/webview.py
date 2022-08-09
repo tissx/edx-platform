@@ -34,7 +34,10 @@ from lms.djangoapps.certificates.api import (
     get_active_web_certificate,
     get_certificate_footer_context,
     get_certificate_header_context,
-    get_certificate_template
+    get_certificate_template,
+    get_certificate_template,
+    get_certificate_url,
+    has_html_certificates_enabled,
 )
 from lms.djangoapps.certificates.models import (
     CertificateGenerationCourseSetting,
@@ -56,6 +59,14 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.lib.courses import course_image_url
 from openedx.core.lib.courses import get_course_by_id
 from xmodule.data import CertificatesDisplayBehaviors  # lint-amnesty, pylint: disable=wrong-import-order
+
+from lms.djangoapps.mx_utility.certficate_context import(
+ _update_user_grade_contextV1,
+_update_user_grade_contextV2,
+_update_course_credit_context,
+_update_context_with_course_dates,
+_update_context_with_programmeV2
+)
 
 log = logging.getLogger(__name__)
 _ = translation.gettext
@@ -123,7 +134,13 @@ def _update_certificate_context(context, course, course_overview, user_certifica
     else:
         date = display_date_for_certificate(course, user_certificate)
     # Translators:  The format of the date includes the full name of the month
-    context['certificate_date_issued'] = strftime_localized(date, settings.CERTIFICATE_DATE_FORMAT)
+    # context['certificate_date_issued'] = strftime_localized(date, settings.CERTIFICATE_DATE_FORMAT)
+
+    context['certificate_date_issued'] = _(' {day} {month} {year}').format(
+        month=user_certificate.modified_date.strftime("%B"),
+        day=user_certificate.modified_date.day,
+        year=user_certificate.modified_date.year
+    )
 
     # Translators:  This text represents the verification of the certificate
     context['document_meta_description'] = _('This is a valid {platform_name} certificate for {user_name}, '
@@ -160,6 +177,8 @@ def _update_certificate_context(context, course, course_overview, user_certifica
                                                 "certificates, which are awarded for course activities "
                                                 "that {platform_name} students complete.").format(
         platform_name=platform_name,
+        tos_url=context.get('company_tos_url'),
+        verified_cert_url=context.get('company_verified_certificate_url')
     )
 
 
@@ -610,6 +629,15 @@ def render_html_view(request, course_id, certificate=None):
 
         # Append/Override the existing view context values with any mode-specific ConfigurationModel values
         context.update(configuration.get(user_certificate.mode, {}))
+
+
+        # Append context data according Tissx  new certificate design
+        _update_user_grade_contextV2(context, course, user, user_certificate,preview_mode)
+
+        _update_course_credit_context(context, course_key)
+        _update_context_with_course_dates(context,course)
+        _update_context_with_programmeV2(context,course_key)
+        # -------------------------------------------
 
         # Append organization info
         _update_organization_context(context, course)

@@ -56,6 +56,7 @@ urlpatterns = oauth2_urlpatterns + [
     path('transcripts/choose', contentstore_views.choose_transcripts, name='choose_transcripts'),
     path('transcripts/replace', contentstore_views.replace_transcripts, name='replace_transcripts'),
     path('transcripts/rename', contentstore_views.rename_transcripts, name='rename_transcripts'),
+    re_path(r'^mx_programs/', include('cms.djangoapps.mx_programs.urls')),
     re_path(r'^preview/xblock/(?P<usage_key_string>.*?)/handler/(?P<handler>[^/]*)(?:/(?P<suffix>.*))?$',
             contentstore_views.preview_handler, name='preview_handler'),
     re_path(r'^xblock/(?P<usage_key_string>.*?)/handler/(?P<handler>[^/]*)(?:/(?P<suffix>.*))?$',

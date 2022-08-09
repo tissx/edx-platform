@@ -60,6 +60,7 @@ from lms.djangoapps.lms_xblock.mixin import LmsBlockMixin
 # .. setting_description: The display name of the platform to be used in
 #     templates/emails/etc.
 PLATFORM_NAME = _('Your Platform Name Here')
+PLATFORM_NEW_NAME = ('Your Platform Name Here')
 PLATFORM_DESCRIPTION = _('Your Platform Description Here')
 CC_MERCHANT_NAME = PLATFORM_NAME
 
@@ -570,7 +571,7 @@ FEATURES = {
     # .. toggle_warnings: In order to get this working, your courses data should be indexed in Elasticsearch. You will
     #   see the search widget on the courseware page only if the DISABLE_COURSE_OUTLINE_PAGE_FLAG is set.
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/6506
-    'ENABLE_COURSEWARE_SEARCH': False,
+    'ENABLE_COURSEWARE_SEARCH': True,
 
     # .. toggle_name: FEATURES['ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF']
     # .. toggle_implementation: DjangoSetting
@@ -583,7 +584,7 @@ FEATURES = {
     #   ENABLE_COURSEWARE_SEARCH is enabled then the search widget will be visible to all learners and this flag's
     #   value does not matter in that case. This flag is enabled in devstack by default.
     # .. toggle_tickets: https://openedx.atlassian.net/browse/TNL-6931
-    'ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF': False,
+    'ENABLE_COURSEWARE_SEARCH_FOR_COURSE_STAFF': True,
 
     # Dashboard search feature
     # .. toggle_name: FEATURES['ENABLE_DASHBOARD_SEARCH']
@@ -595,7 +596,7 @@ FEATURES = {
     # .. toggle_creation_date: 2015-01-29
     # .. toggle_warnings: In order to get this working, your courses data should be indexed in Elasticsearch.
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/6506
-    'ENABLE_DASHBOARD_SEARCH': False,
+    'ENABLE_DASHBOARD_SEARCH': True,
 
     # log all information from cybersource callbacks
     'LOG_POSTPAY_CALLBACKS': True,
@@ -621,7 +622,7 @@ FEATURES = {
     # .. toggle_creation_date: 2015-03-13
     # .. toggle_target_removal_date: None
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/7113
-    'CERTIFICATES_HTML_VIEW': False,
+    'CERTIFICATES_HTML_VIEW': True,
 
     # .. toggle_name: FEATURES['CUSTOM_CERTIFICATE_TEMPLATES_ENABLED']
     # .. toggle_implementation: DjangoSetting
@@ -645,7 +646,7 @@ FEATURES = {
     # .. toggle_target_removal_date: None
     # .. toggle_warnings: The COURSE_DISCOVERY_MEANINGS setting should be properly defined.
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/7845
-    'ENABLE_COURSE_DISCOVERY': False,
+    'ENABLE_COURSE_DISCOVERY': True,
 
     # .. toggle_name: FEATURES['ENABLE_COURSE_FILENAME_CCX_SUFFIX']
     # .. toggle_implementation: DjangoSetting
@@ -2919,6 +2920,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_results',
 
+    #Added by MX
+    'django_extensions',
+
     # Common Initialization
     'openedx.core.djangoapps.common_initialization.apps.CommonInitializationConfig',
 
@@ -3228,6 +3232,15 @@ INSTALLED_APPS = [
 
     # Blockstore
     'blockstore.apps.bundles',
+
+    # MX added apps
+    'rangefilter',
+    'cms.djangoapps.mx_programs',
+    'lms.djangoapps.automatic_email',
+    'lms.djangoapps.mx_archive_courses',
+    'lms.djangoapps.mx_problem_response',
+    'lms.djangoapps.mx_utility',
+    'lms.djangoapps.pushnotification',
 ]
 
 ######################### CSRF #########################################
@@ -3298,7 +3311,6 @@ MKTG_URL_LINK_MAP = {
     'ROOT': 'root',
     'TOS': 'tos',
     'HONOR': 'honor',  # If your site does not have an honor code, simply delete this line.
-    'TOS_AND_HONOR': 'edx-terms-service',
     'PRIVACY': 'privacy',
     'PRESS': 'press',
     'BLOG': 'blog',

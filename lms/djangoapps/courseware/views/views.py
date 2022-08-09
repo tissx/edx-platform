@@ -1589,9 +1589,13 @@ def is_course_passed(student, course, course_grade=None):
     Returns:
         returns bool value
     """
+    nonzero_cutoffs = [cutoff for cutoff in course.grade_cutoffs.values() if cutoff > 0]
+    # success_cutoff = min(nonzero_cutoffs) if nonzero_cutoffs else None 
+    # added by manprax to compare user garde  with the minimum_grade_credit to check is_passed
+    success_cutoff = course.minimum_grade_credit if course.minimum_grade_credit else None 
     if course_grade is None:
-        course_grade = CourseGradeFactory().read(student, course)
-    return course_grade.passed
+        course_grade = CourseGradeFactory().update(student, course).summary
+    return course_grade['percent'] if success_cutoff and course_grade['percent'] >= success_cutoff else False
 
 
 # Grades can potentially be written - if so, let grading manage the transaction.
