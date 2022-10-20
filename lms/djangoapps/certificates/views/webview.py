@@ -54,7 +54,7 @@ _update_course_credit_context,
 _update_context_with_course_dates,
 _update_context_with_programmeV2
 )
-
+from student.models import CourseEnrollment
 
 log = logging.getLogger(__name__)
 
@@ -570,7 +570,7 @@ def render_html_view(request, user_id, course_id):
         return render_to_response(invalid_template_path, context)
 
     context['certificate_data'] = active_configuration
-
+    context['enrollment_id'] = CourseEnrollment.objects.get(user=user_id,course_id=CourseKey.from_string(course_id)).id
     # Append/Override the existing view context values with any mode-specific ConfigurationModel values
     context.update(configuration.get(user_certificate.mode, {}))
 
