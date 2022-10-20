@@ -126,12 +126,11 @@
                                 defaultValue: '',
                                 type: 'select',
                                 options: [
-                                {value: '', name: '--'},
                                 {value: 'm', name: 'Male'},
                                 {value: 'f', name: 'Female'},
                                 {value: 'o', name: 'Other'}
                                 ],
-                                required: false,
+                                required: true,
                                 instructions: 'Select your gender.',
                                 restrictions: {}
                             },
@@ -319,6 +318,8 @@
                     expect(view.validate).toHaveBeenCalledWith($('#register-name')[0]);
                     expect(view.validate).toHaveBeenCalledWith($('#register-username')[0]);
                     expect(view.validate).toHaveBeenCalledWith($('#register-password')[0]);
+		    expect(view.validate).toHaveBeenCalledWith($('#register-gender')[0]);
+		    
 
                 // Verify that no submission errors are visible
                     expect(view.$formFeedback.find('.' + view.formErrorsJsHook).length).toEqual(0);
