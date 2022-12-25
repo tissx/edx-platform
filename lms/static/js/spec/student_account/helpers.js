@@ -98,7 +98,7 @@ define(['underscore'], function(_) {
         name: 'Student',
         email: 'student@edx.org',
         level_of_education: null,
-        gender: null,
+        gender: 'm',
         year_of_birth: '3',    // Note: test birth year range is a string from 0-3
         requires_parental_consent: false,
         country: '1',

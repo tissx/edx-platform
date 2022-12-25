@@ -68,6 +68,7 @@ _update_context_with_course_dates,
 _update_context_with_programmeV2
 )
 
+from common.djangoapps.student.models import CourseEnrollment
 log = logging.getLogger(__name__)
 _ = translation.gettext
 
@@ -627,6 +628,8 @@ def render_html_view(request, course_id, certificate=None):
 
         context['certificate_data'] = active_configuration
 
+        #MX_added code
+        context['enrollment_id'] = CourseEnrollment.objects.get(user=user_id,course_id=CourseKey.from_string(course_id)).id
         # Append/Override the existing view context values with any mode-specific ConfigurationModel values
         context.update(configuration.get(user_certificate.mode, {}))
 
