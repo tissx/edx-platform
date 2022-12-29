@@ -622,9 +622,10 @@ def render_html_view(request, course_id, certificate=None):
         _update_context_with_basic_info(context, course_id, platform_name, configuration)
 
         context['certificate_data'] = active_configuration
-
+        context['enrollment_id']= ''
         #MX_added code
-        context['enrollment_id'] = CourseEnrollment.objects.get(user=user_id,course_id=CourseKey.from_string(course_id)).id
+        if not preview_mode:
+            context['enrollment_id'] = CourseEnrollment.objects.get(user=user_id,course_id=CourseKey.from_string(course_id)).id
         # Append/Override the existing view context values with any mode-specific ConfigurationModel values
         context.update(configuration.get(user_certificate.mode, {}))
 
