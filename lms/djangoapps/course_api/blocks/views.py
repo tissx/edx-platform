@@ -212,14 +212,15 @@ class BlocksView(DeveloperErrorViewMixin, ListAPIView):
             request - Django request object
             usage_key_string - The usage key for a block.
         """
-
         # validate request parameters
         requested_params = request.query_params.copy()
+        update_embed_url= requested_params.get('student_view_data',[])+',embedurl'
+        requested_params.update({'student_view_data': update_embed_url})
         requested_params.update({'usage_key': usage_key_string})
         params = BlockListGetForm(requested_params, initial={'requesting_user': request.user})
         if not params.is_valid():
             raise ValidationError(params.errors)
-
+        
         try:
             response = Response(
                 get_blocks(
@@ -296,7 +297,6 @@ class BlocksInCourseView(BlocksView):
         Arguments:
             request - Django request object
         """
-
         # convert the requested course_key to the course's root block's usage_key
         course_key_string = request.query_params.get('course_id', None)
         if not course_key_string:
