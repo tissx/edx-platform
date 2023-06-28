@@ -968,6 +968,13 @@ def course_about(request, course_id):
 
         registration_price, course_price = get_course_prices(course)  # lint-amnesty, pylint: disable=unused-variable
 
+        #MX added remove Price label if course is present in particular programs
+        from cms.djangoapps.mx_programs.models import ProgramsCourse
+        program_course = ProgramsCourse.objects.filter(program__fullname__in= settings.PROGRAM_COURSE_PRICE_LABEL_REMOVED,course_id= course_id)
+
+        if program_course:
+            course_price = None
+
         # Used to provide context to message to student if enrollment not allowed
         can_enroll = bool(request.user.has_perm(ENROLL_IN_COURSE, course))
         invitation_only = is_courses_default_invite_only_enabled() or course.invitation_only
