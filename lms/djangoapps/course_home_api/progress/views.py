@@ -217,6 +217,7 @@ class ProgressTabView(RetrieveAPIView):
 
         descriptor = modulestore().get_course(course_key)
         grading_policy = descriptor.grading_policy
+        grading_policy['GRADE_CUTOFFS']['Pass']= descriptor.minimum_grade_credit
         verification_status = IDVerificationService.user_status(student)
         verification_link = None
         if verification_status['status'] is None or verification_status['status'] == 'expired':
