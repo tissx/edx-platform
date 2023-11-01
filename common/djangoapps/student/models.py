@@ -73,7 +73,7 @@ from common.djangoapps.student.email_helpers import (
     generate_proctoring_requirements_email_context,
     should_send_proctoring_requirements_email
 )
-from common.djangoapps.student.signals import ENROLL_STATUS_CHANGE, ENROLLMENT_TRACK_UPDATED, UNENROLL_DONE
+from common.djangoapps.student.signals import ENROLL_STATUS_CHANGE, ENROLLMENT_TRACK_UPDATED, UNENROLL_DONE,ENROLLMENT_UPDATED_SESSION
 from common.djangoapps.track import contexts, segment
 from common.djangoapps.util.model_utils import emit_field_changed_events, get_changed_fields_dict
 from common.djangoapps.util.query import use_read_replica_if_available
@@ -1582,7 +1582,7 @@ class CourseEnrollment(models.Model):
                 )
 
     @classmethod
-    def enroll(cls, user, course_key, mode=None, check_access=False, can_upgrade=False, enterprise_uuid=None):
+    def enroll(cls, user, course_key, mode=None, check_access=False, can_upgrade=False, enterprise_uuid=None,request=None):
         """
         Enroll a user in a course. This saves immediately.
 
@@ -1691,7 +1691,11 @@ class CourseEnrollment(models.Model):
                 creation_date=enrollment.created,
             )
         )
-
+        ENROLLMENT_UPDATED_SESSION.send_robust(
+            sender=None,
+            request=request,
+            enrollment=enrollment,
+        )
         return enrollment
 
     @classmethod

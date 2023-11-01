@@ -19,3 +19,6 @@ ENROLL_STATUS_CHANGE = Signal()
 
 # providing_args=["course_enrollment"]
 REFUND_ORDER = Signal()
+
+#MX_added signal to send the session_id
+ENROLLMENT_UPDATED_SESSION = Signal()
