@@ -7,12 +7,12 @@
     {% if reset_url %}
         href={{reset_url}}
     {% elif course_cta_url %}
-        href="{% with_link_tracking course_cta_url %}"
+        href="{{course_cta_url}}"
     {% else %}
         {%if course_ids|length > 1 %}
-            href="{% with_link_tracking dashboard_url %}"
+            href="{{dashboard_url}}"
         {% else %}
-            href="{% with_link_tracking course_url %}"
+            href="{{course_url}}"
         {% endif %}
     {% endif %}
     style="
