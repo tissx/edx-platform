@@ -104,6 +104,10 @@ setup(
             "program_enrollments = lms.djangoapps.program_enrollments.apps:ProgramEnrollmentsConfig",
             "courseware_api = openedx.core.djangoapps.courseware_api.apps:CoursewareAPIConfig",
             "course_apps = openedx.core.djangoapps.course_apps.apps:CourseAppsConfig",
+            # Manprax
+            # "mx_landing_page = lms.djangoapps.mx_landing_page.apps:MxLandingPageConfig",
+            "_unitboard = openedx.features._unitboard.apps:UnitboardConfig",
+
         ],
         "cms.djangoapp": [
             "announcements = openedx.features.announcements.apps:AnnouncementsConfig",

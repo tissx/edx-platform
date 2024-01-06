@@ -1,0 +1,23 @@
+@value variables: "./../../../global.css";
+@value eden-red, eden-dark-blue, cadet-blue from variables;
+
+.primary,
+.secondary {
+    color: #fff !important;
+}
+
+.primary {
+    background: eden-red !important;
+}
+
+.secondary {
+    background: eden-dark-blue !important;
+}
+
+.primary-color {
+    color: cadet-blue !important;
+}
+
+.secondary-color {
+    color: eden-red !important;
+}

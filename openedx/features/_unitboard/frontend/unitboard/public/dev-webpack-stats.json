@@ -1,0 +1,20 @@
+{
+  "status": "done",
+  "publicPath": "/",
+  "chunks": {
+    "main": [
+      {
+        "name": "static/unitboard/js/bundle.js",
+        "publicPath": "/static/unitboard/js/bundle.js",
+        "path": "/edx/app/edxapp/edx-platform/openedx/features/_unitboard/frontend/unitboard/build/static/unitboard/js/bundle.js"
+      },
+      {
+        "name": "static/unitboard/js/bundle.js.map",
+        "publicPath": "/static/unitboard/js/bundle.js.map",
+        "path": "/edx/app/edxapp/edx-platform/openedx/features/_unitboard/frontend/unitboard/build/static/unitboard/js/bundle.js.map"
+      }
+    ],
+    "runtime-main": [],
+    "vendor": []
+  }
+}

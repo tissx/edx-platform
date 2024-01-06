@@ -214,6 +214,7 @@ urlpatterns = [
     re_path( r'^mx_utility/api/',include('lms.djangoapps.mx_utility.views.api_urls')),
     re_path(r'^courses/{}/mx_instructor/api/'.format(settings.COURSE_ID_PATTERN,),include('lms.djangoapps.mx_utility.views.api_urls')),
 
+
     path('403', handler403),
     path('404', handler404),
     path('429', handler429),

@@ -1,0 +1,32 @@
+@value variables: "./../../global.css";
+@value eden-red from variables;
+
+.unit-item-width {
+    width: 100%;
+}
+
+.btn {
+    background: eden-red !important;
+    min-width: 120px !important;
+    color: #fff !important;
+    letter-spacing: 1px !important;
+    font-size: 14px !important;
+    text-shadow: none !important;
+    padding: 10px !important;
+    text-decoration: none !important;
+    margin-right: 20px !important;
+}
+
+.progress-and-button {
+    display: flex;
+    align-items: center;
+    color: var(--font-color1);
+}
+
+@media screen and (min-width: 992px) {
+    .bottom-holder {
+        position: absolute;
+        left: 40px;
+        bottom: 35px;
+    }
+}

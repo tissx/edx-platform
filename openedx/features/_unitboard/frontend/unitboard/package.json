@@ -1,0 +1,73 @@
+{
+  "name": "unitboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "classnames": "^2.3.1",
+    "connected-react-router": "^6.8.0",
+    "history": "^4.10.1",
+    "js-cookie": "^2.2.1",
+    "mdb-react-ui-kit": "^4.2.0",
+    "notistack": "^1.0.2",
+    "ramda": "^0.27.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.0",
+    "react-foundation": "^0.9.7",
+    "react-icons": "^4.4.0",
+    "react-iframe": "^1.8.0",
+    "react-player": "^2.9.0",
+    "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "redux": "^4.0.5",
+    "redux-api-middleware": "^3.2.1",
+    "web-vitals": "^1.0.1",
+    "yarn": "^1.22.17"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "watch": "cra-build-watch --verbose --disable-chunks --build-path=build/static/unitboard"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "build-url": "^6.0.1",
+    "cra-build-watch": "^3.4.0",
+    "react-app-rewired": "^2.1.6",
+    "webpack-bundle-tracker": "^0.2.1",
+    "plugin-proposal-private-property-in-object": "7.21.0-placeholder-for-preset-env.2"
+    
+  },
+  "proxy": "http://localhost:18000"
+}
