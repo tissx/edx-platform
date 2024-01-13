@@ -22,9 +22,26 @@ const LandingPageContainer = () => {
 
   const [schoollist, setschoollist] = useState([]);
   const [centerlist, setcenterlist] = useState([]);
+  const [courseprogramlist, setcourseprogramlist] = useState([]);
 
   useEffect(() => {
     
+
+//start Fetch course, program and degree from discovery
+fetch('http://discovery.local.overhang.io:8381/api/v1/lms-course-program-list')
+.then((res) => {
+  return res.json();
+})
+.then((data) => {
+//   console.log("course program list",data);
+  setcourseprogramlist(data);
+});
+//End Fetch course, program and degree from discovery
+
+    // console.log("courseProgramData", courseprogramlist.courses)
+   
+
+
   //start Fetch school from discovery
     fetch('http://discovery.local.overhang.io:8381/api/v1/lms-school-list')
       .then((res) => {
@@ -49,32 +66,15 @@ const LandingPageContainer = () => {
 
   }, []);
 
-  // const courseProgramData = useSelector(state => state.courseProgramDegree);
-
-// console.log("courseProgramDatacourseProgramData", courseProgramData)
-  //   const courseProgramData= {
-  //     "courses": [
-  //         {
-  //             "course_name": "MX Course 001",
-  //             "short_description": "null",
-  //             "course_image": "http://local.overhang.io:8000/asset-v1:Manprax+mx_course_001+2023_001+type@asset+block@images_course_image.jpg",
-  //             "course_id": "course-v1:Manprax+mx_course_001+2023_001"
-  //         },
-  //         {
-  //             "course_name": "MX Course 002",
-  //             "short_description": "null",
-  //             "course_image": "http://local.overhang.io:8000/asset-v1:Manprax+mx_course_002+2023_002+type@asset+block@images_course_image.jpg",
-  //             "course_id": "course-v1:Manprax+mx_course_002+2023_002"
-  //         }
-  //     ]
-  // }
+ 
 
     return (
         <>
         <BannerSectionContainer/>
         {/* {!R.isEmpty(courseProgramData) && courseProgramData.length !== 0 && <CourseandProgram courseProgramData={courseProgramData}/>} */}
+        {!R.isEmpty(courseprogramlist) && courseprogramlist.length !== 0 && <CourseandProgram courseProgramData={courseprogramlist}/>}
 
-        <CourseandProgram/>
+        {/* <CourseandProgram/> */}
         {!R.isEmpty(schoollist) && schoollist.length !== 0 && <SchoolsList schoolListData={schoollist} />}
         {!R.isEmpty(centerlist) && centerlist.length !== 0 && <CentersList centerListData={centerlist} />}
 

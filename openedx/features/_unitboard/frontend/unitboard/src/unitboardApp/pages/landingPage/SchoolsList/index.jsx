@@ -32,8 +32,8 @@ var school_listing= schoollist['schoolListData']['results']
                         
                             <p className="title p-3">{school.title}</p>
                             <div className="d-flex p-3 bor-1">
-                                <a><button type="button" href="#" className="btn btn-sm btn-schoolviewmore orgclr">Read more</button></a>
-                                <a className="ml-auto"><small><img src="../static/tissx-theme/images/landing_page/images/icon-1.png" className="img"/></small></a>
+                                <a href={school.school_detail}><button type="button" className="btn btn-sm btn-schoolviewmore orgclr">Read more</button></a>
+                                <a href={school.school_detail} className="ml-auto"><small><img src="../static/tissx-theme/images/landing_page/images/icon-1.png" className="img"/></small></a>
                             </div> 
                         </div>
                     </div>

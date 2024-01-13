@@ -1,0 +1,9 @@
+
+
+.MuiAccordion-root.Mui-expanded {
+    margin: 0 0 !important;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+    margin: 12px 0 !important;
+}

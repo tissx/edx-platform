@@ -1,73 +1,59 @@
 import React, { Fragment, useEffect } from "react";
-// import UnitboardSearch from "./unitboardSearch";
-// import Centered from "./components/Centered";
-// import { useSelector, useDispatch } from "react-redux";
-// import { unitDataFetching } from "./unitItem/data/actions";
 
-// import { BrowserRouter as Router } from "react-router-dom";
-// import { Switch, Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import * as R from "ramda";
+
+import { BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, Routes } from "react-router-dom";
 
 import LandingPageContainer from "./pages/landingPage";
+import ProgramDetailContainer from "./pages/programDetail";
+import ProgramDegreelistingContainer from "./pages/programandDegreelisting";
+import SchoolCenterlistingContainer from "./pages/schoolandCenterlisting";
+import CenterDeatilContainer from "./pages/centerDetail";
+import SchoolDeatilContainer from "./pages/schoolDetail";
 
 import "./unitboardApp.css"
 export const UnitboardApp = () => {
-    console.log("state.");
-    // const unitItems = useSelector(state => state.unitItems);
-    // const searchResults = useSelector((state) => state.unitboardSearch);
-    // const gradedAssessmentListDetailTable = useSelector((state) => state.recived_assessment_graded_detail);
-    // const assessmentSubmissionMarkerListDetail = useSelector((state) => state.recived_assessment_pending_marker_detail);
-    // const assessmentadminListDetail = useSelector((state) => state.assessment_admin_details);
-    
-
-
-    // alert(assessmentSubmissionMarkerListDetail)
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(unitDataFetching());
-    // }, []);
-
-   
+    const { my_discovery_url } = useSelector(state => state.initialContext);
+ 
 
     return (
 
-        <LandingPageContainer/>
+        <Router>
+            <Switch>
+                <Route exact path="/unitboard">
+                <LandingPageContainer/>
        
-        // <Router>
-        //     <Switch>
-        //         <Route exact path="/unitboard">
+                </Route>
+                <Route exact path="/unitboard/program-detail-slug/:slug">
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <ProgramDetailContainer my_discovery_url={my_discovery_url} />}
 
-        // <Fragment>
-        //     <Centered>
-        //         {/* <AssessmentSubmissionMarkerdash /> */}
-        //         {/* {!R.isEmpty(assessmentSubmissionMarkerListDetail) && <AssessmentSubmissionMarkerList assessmentSubmissionMarkerListDetail={assessmentSubmissionMarkerListDetail}/> } */}
+                </Route>
 
-        //         <AssessmentSubmissionMarker2List />
-               
-        //         <div  className="section-heading">Enrolled Units</div>
-        //         <UnitboardSearch />
-        //         {!R.isEmpty(searchResults) && <UnitboardSearchResults searchResults={searchResults} />}
-        //         {!R.isEmpty(unitItems) && R.isEmpty(searchResults) && <UnitsList unitItems={unitItems} />}
-        //     </Centered>
-        //     <Notistack />
-        //     <ModalWindow />
-        // </Fragment>
-        // </Route>
-        //         <Route exact path="/unitboard/assessment-moderator-dashboard"><AssessmentSubmissionModeratorList/>
-        //         {!R.isEmpty(gradedAssessmentListDetailTable) && <AssessmentSubmissionModeratorDetailList gradedAssessmentListDetail={gradedAssessmentListDetailTable}/> }
-        //         </Route>
+                <Route exact path="/unitboard/program-degree-listing">
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <ProgramDegreelistingContainer my_discovery_url={my_discovery_url} />}
+                </Route>
 
-        //         <Route exact path="/unitboard/marker-dashboard"><AssessmentSubmissionMarkerdash/>
-        //         {!R.isEmpty(assessmentSubmissionMarkerListDetail) && <AssessmentSubmissionMarkerList assessmentSubmissionMarkerListDetail={assessmentSubmissionMarkerListDetail}/> }
-               
-        //         </Route>
+                <Route exact path="/unitboard/school-center-listing">
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolCenterlistingContainer my_discovery_url={my_discovery_url} />}
+                </Route>
 
-        //         <Route exact path="/unitboard/assessment-admin-dashboard"><AssessmentAdmindash/>
-        //         {!R.isEmpty(assessmentadminListDetail) && <AssessmentAdminSubmissionList assessmentadminListDetail={assessmentadminListDetail}/> }
-        //         </Route>
+                <Route exact path="/unitboard/center-detail">
+                    <CenterDeatilContainer/>
+                    {/* {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolCenterlistingContainer my_discovery_url={my_discovery_url} />} */}
+                </Route>
+
+                <Route exact path="/unitboard/school-detail/:slug">
+                    {/* <SchoolDeatilContainer/> */}
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolDeatilContainer my_discovery_url={my_discovery_url} />}
+                </Route>
               
-        // </Switch>
-        // </Router>
+
+
+                
+        </Switch>
+        </Router>
     );
 }
 

@@ -1,0 +1,21 @@
+
+.heading {
+    color: #000000;
+    font-weight: bold !important;
+    padding: 3px 3px;
+}
+
+.accordion {
+    border: 1px solid #dee2e6;
+}
+
+.accordionsummary[aria-expanded="true"] {
+    background: #e7f1ff;
+    border-bottom: 1px solid #dee2e6;
+    min-height: 0px !important;
+
+}
+
+.accordioncontent {
+    color: #212529;
+}

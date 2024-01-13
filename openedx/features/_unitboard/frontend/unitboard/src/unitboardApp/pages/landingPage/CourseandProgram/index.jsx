@@ -3,32 +3,36 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import $ from 'jquery';
+import {$, jQuery} from 'jquery';
 import * as R from "ramda";
 
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 // const CourseandProgramContainer = (props) => {
-const CourseandProgramContainer = () => {
-    const [courseprogramlist, setcourseprogramlist] = useState([]);
-
-    
-    useEffect(() => {
-      
-    //start Fetch course, program and degree from discovery
-    fetch('http://discovery.local.overhang.io:8381/api/v1/lms-course-program-list')
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-    //   console.log("course program list",data);
-      setcourseprogramlist(data);
-    });
-    //End Fetch course, program and degree from discovery
-  
-    }, []);
-
-// if(!R.isEmpty(courseprogramlist) &&  courseprogramlist.length !== 0){
-    // console.log("courseProgramData", courseprogramlist.courses)
+const CourseandProgramContainer = ({courseProgramData}) => {
+    console.log("course Program Data", courseProgramData)
+const option = {
+    rtl:false,
+    loop:true,
+    margin:10,
+    nav:true,
+    autoplay:true,
+autoplayTimeout:5000,
+autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+}
 
 
     return (
@@ -52,33 +56,39 @@ const CourseandProgramContainer = () => {
                     {/* start Course tab data */}
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div className="row" id="iconright1">  
-                        <div className="owl-carousel owl-theme">
+                        {/* <div className="owl-carousel owl-theme"> */}
                                 {/* start Dynamic Course */}
 
-                    {!R.isEmpty(courseprogramlist) && courseprogramlist.length !== 0 && courseprogramlist.courses.map((courses_list) => (
+                                <OwlCarousel className='owl-theme' {...option}>
+
+                                {courseProgramData.courses.map((course_list) => (
 
                                 <div className="item">
                                     <div className="item">
                                         <div className="service-item body-light tissxoff">
                                             <div className="img-sec">
-                                                <img className="img-fluid" src="../static/tissx-theme/images/landing_page/images/course_01.png" alt=""/>
+                                                <img className="img-fluid" src= {course_list.course_image} alt=""/>
                                             </div>
                                             <div className="service-text">
-                                                <p className="p-2">{courses_list.course_name}</p>
-                                                <p className="px-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                <p className="p-2">{course_list.course_name}</p>
+                                                <p className="px-2">{course_list.short_description}</p>
                                                 <div className="py-4 border-top">
-                                                    <a className="readmorebtn orgclr"><span></span></a>
-                                                    <a className="iconbg"></a>
+                                                    <a href={course_list.course_detail}  className="readmorebtn orgclr"><span></span></a>
+                                                    <a href={course_list.course_detail}  className="iconbg"></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
+                                
+                                ))}  
 
-                    ))} 
+                                </OwlCarousel>
                                 {/* END Dynamic Course */}
+
+                        {/* </div> */}
                         </div>
-                        </div>
+
                 </div>
                     {/* END Course tab data */}
 
@@ -86,58 +96,73 @@ const CourseandProgramContainer = () => {
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
                     <div className="row" id="iconright1">  
-                        <div className="owl-carousel owl-theme">
-                            {/* start Dynamic Program */}
+                      {/* start Dynamic Program */}
+
+                      <OwlCarousel className='owl-theme' {...option}>
+
+                        {courseProgramData.programs.map((programs_list) => (
+
+                        <div className="item">
                             <div className="item">
-                                <div className="item">
-                                    <div className="service-item body-light tissxoff">
-                                        <div className="img-sec">
-                                            <img className="img-fluid" src="../static/tissx-theme/images/landing_page/images/course_01.png" alt=""/>
-                                        </div>
-                                        <div className="service-text">
-                                            <p className="p-2">TISS Program</p>
-                                            <p className="px-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            <div className="py-4 border-top">
-                                                <a className="readmorebtn orgclr"><span></span></a>
-                                                <a className="iconbg"></a>
-                                            </div>
+                                <div className="service-item body-light tissxoff">
+                                    <div className="img-sec">
+                                        <img className="img-fluid" src={programs_list.program_image} alt=""/>
+                                    </div>
+                                    <div className="service-text">
+                                        <p className="p-2">{programs_list.program_name}</p>
+                                        <p className="px-2">{programs_list.short_description}</p>
+                                        <div className="py-4 border-top">
+                                            <a href={programs_list.program_detail} className="readmorebtn orgclr"><span></span></a>
+                                            <a href={programs_list.program_detail} className="iconbg"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* END Dynamic Program */}
-                        </div>
+                        </div> 
+
+                        ))}  
+
+                        </OwlCarousel>
+                        {/* END Dynamic Program */}
                     </div>
                 </div>
-                    {/* END Course tab data */}
+                    {/* END Program tab data */}
 
 
                     {/* start Degree tab data */}
 
                 <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
-                <div className="row" id="iconright1">  
-                        <div className="owl-carousel owl-theme">
-                            {/* start Dynamic Degree */}
+                    <div className="row" id="iconright1">  
+                     {/* start Dynamic Degree */}
+
+                      <OwlCarousel className='owl-theme' {...option}>
+
+                        {courseProgramData.degrees.map((degree_list) => (
+
+                        <div className="item">
                             <div className="item">
-                                <div className="item">
-                                    <div className="service-item body-light tissxoff">
-                                        <div className="img-sec">
-                                            <img className="img-fluid" src="../static/tissx-theme/images/landing_page/images/course_01.png" alt=""/>
-                                        </div>
-                                        <div className="service-text">
-                                            <p className="p-2">TISS Degree</p>
-                                            <p className="px-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            <div className="py-4 border-top">
-                                                <a className="readmorebtn orgclr"><span></span></a>
-                                                <a className="iconbg"></a>
-                                            </div>
+                                <div className="service-item body-light tissxoff">
+                                    <div className="img-sec">
+                                        <img className="img-fluid" src={degree_list.degree_image} alt=""/>
+                                    </div>
+                                    <div className="service-text">
+                                        <p className="p-2">{degree_list.degree_name}</p>
+                                        <p className="px-2">{degree_list.short_description}</p>
+                                        <div className="py-4 border-top">
+                                            <a href={degree_list.degree_detail} className="readmorebtn orgclr"><span></span></a>
+                                            <a href={degree_list.degree_detail} className="iconbg"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* END Dynamic Degree */}
-                        </div>
+                        </div> 
+
+                        ))}  
+
+                        </OwlCarousel>
+                        {/* END Dynamic Degree */}
+
                     </div>
 
                 </div>
