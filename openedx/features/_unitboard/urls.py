@@ -2,10 +2,11 @@
 Unitboard urls.
 """
 from django.conf.urls import include, url
-from openedx.features._unitboard.views import UnitboardView
+from openedx.features._unitboard.views import UnitboardView, search_view
 from rest_framework.routers import DefaultRouter
 from openedx.features._unitboard.api import LandingPageViewSet
 
+from openedx.features._unitboard import views
 
 urlpatterns = [
     url(
@@ -36,7 +37,9 @@ urlpatterns = [
     ),
 
     url(
-    r'^center-detail',
+    r'^center-detail/{}'.format(
+        r'(?P<slug>[0-9a-z-]+)',
+    ),
     UnitboardView.as_view(),
     name='center-detail'
     ),
@@ -48,6 +51,14 @@ urlpatterns = [
     UnitboardView.as_view(),
     name='school-detail'
     ),
+
+    url(
+    r'^search',
+    views.search_view,
+    name='search'
+    ),
+    
+    
     
     
 ]

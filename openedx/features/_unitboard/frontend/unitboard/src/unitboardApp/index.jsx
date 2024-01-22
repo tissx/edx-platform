@@ -39,9 +39,9 @@ export const UnitboardApp = () => {
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolCenterlistingContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
-                <Route exact path="/unitboard/center-detail">
-                    <CenterDeatilContainer/>
-                    {/* {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolCenterlistingContainer my_discovery_url={my_discovery_url} />} */}
+                <Route exact path="/unitboard/center-detail/:slug">
+                    {/* <CenterDeatilContainer/> */}
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <CenterDeatilContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
                 <Route exact path="/unitboard/school-detail/:slug">

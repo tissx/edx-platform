@@ -10,9 +10,8 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-// const CourseandProgramContainer = (props) => {
 const CourseandProgramContainer = ({courseProgramData}) => {
-    console.log("course Program Data", courseProgramData)
+    // console.log("course Program Data", courseProgramData)
 const option = {
     rtl:false,
     loop:true,
@@ -38,7 +37,7 @@ autoplayHoverPause:true,
     return (
         
         <section className="bgreen-light pt-5">
-        <div className="container">
+        <div className="container listing-container">
         <h1 className="theading-title">TISSx Offerings</h1>
             <div className="tabstextdark">
             <ul className="nav nav-tabs border-5" id="myTab" role="tablist">
@@ -73,7 +72,7 @@ autoplayHoverPause:true,
                                                 <p className="p-2">{course_list.course_name}</p>
                                                 <p className="px-2">{course_list.short_description}</p>
                                                 <div className="py-4 border-top">
-                                                    <a href={course_list.course_detail}  className="readmorebtn orgclr"><span></span></a>
+                                                    <a href={course_list.course_detail}  className="readmorebtn orgclr btn-read-more"><span></span></a>
                                                     <a href={course_list.course_detail}  className="iconbg"></a>
                                                 </div>
                                             </div>
@@ -112,7 +111,7 @@ autoplayHoverPause:true,
                                         <p className="p-2">{programs_list.program_name}</p>
                                         <p className="px-2">{programs_list.short_description}</p>
                                         <div className="py-4 border-top">
-                                            <a href={programs_list.program_detail} className="readmorebtn orgclr"><span></span></a>
+                                            <a href={programs_list.program_detail} className="readmorebtn orgclr btn-read-more"><span></span></a>
                                             <a href={programs_list.program_detail} className="iconbg"></a>
                                         </div>
                                     </div>
@@ -150,7 +149,7 @@ autoplayHoverPause:true,
                                         <p className="p-2">{degree_list.degree_name}</p>
                                         <p className="px-2">{degree_list.short_description}</p>
                                         <div className="py-4 border-top">
-                                            <a href={degree_list.degree_detail} className="readmorebtn orgclr"><span></span></a>
+                                            <a href={degree_list.degree_detail} className="readmorebtn orgclr btn-read-more"><span></span></a>
                                             <a href={degree_list.degree_detail} className="iconbg"></a>
                                         </div>
                                     </div>

@@ -41,7 +41,8 @@ var program_detail_url = `${my_discovery_url}/api/v1/get-program-from-slug/?prog
         <>
         {/* <ProgramInfo/> */}
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramInfo programinfo={programdetail.program_info} />}
-        {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramCourses programcourses={programdetail.program_course} />}
+        
+        {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramCourses programinfo={programdetail.program_info} programcourses={programdetail.program_course} />}
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramFaculty programfaculty={programdetail.instructor} />}
         
         {/* <ProgramCourses/> */}

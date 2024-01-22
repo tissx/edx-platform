@@ -12,7 +12,7 @@ const BannerSectionContainer = () => {
   
     return (
         <section className="bgreen-home">
-        <div className="container">
+        <div className="container listing-container">
             <div className="row">
                 <div className="col-md-7 col-sm-12 degree-listing f-cell">
                     <h1 className="theading-title-white">Online Education</h1>

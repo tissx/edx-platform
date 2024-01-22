@@ -14,7 +14,7 @@ var center_listing= centerlist['centerListData']['results']
     return (
 
         <section className="learn-school">
-            <div className="container">
+            <div className="container listing-container">
                 <h1 className="theading-title">Centers</h1>
                 <div className="row" id="iconright">
 
@@ -31,8 +31,8 @@ var center_listing= centerlist['centerListData']['results']
                                 <p className="text-school">{center.title}
                                 </p>
                                 <div className="d-flex p-3 bor-1">
-                                    <a><button type="button" href="#" className="btn btn-sm btn-centerviewmore orgclr">Read more</button></a>
-                                    <a className="ml-auto"><small><img src="../static/tissx-theme/images/landing_page/images/icon-1.png" className="img"/></small></a>
+                                    <a href={center.center_detail}><button type="button" className="btn btn-sm btn-centerviewmore orgclr">Read more</button></a>
+                                    <a href={center.center_detail} className="ml-auto"><small><img src="../static/tissx-theme/images/landing_page/images/icon-1.png" className="img"/></small></a>
                                 </div>  
                             </div>
                         </div>

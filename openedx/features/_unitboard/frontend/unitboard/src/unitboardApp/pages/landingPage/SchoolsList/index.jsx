@@ -12,7 +12,7 @@ var school_listing= schoollist['schoolListData']['results']
     return (
 
         <section className="learn-school">
-            <div className="container">
+            <div className="container listing-container">
                 <div className="py-5">
                     <h1 className="theading-title">Learn from schools and centers</h1>
                     <p className="para">Welcome to TISS, a multi-campus, integrated, community engaged public university of India. As students you are now part of India’s foremost social science university founded in 1936 by Sir Dorabjee Tata Trust to create human service professionals for addressing.</p>

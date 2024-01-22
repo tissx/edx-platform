@@ -4,6 +4,8 @@ Django views for Dashboard.
 from django.contrib.auth.views import redirect_to_login
 from django.views.generic import TemplateView
 from django.urls import reverse
+from common.djangoapps.edxmako.shortcuts import render_to_response, render_to_string
+
 
 discovery_URL = "http://discovery.local.overhang.io:8381"
 
@@ -34,3 +36,28 @@ class UnitboardView(TemplateView):
         context['context_data'] = context_data
         # context['api_urls'] = api_urls
         return context
+
+
+
+
+def search_view(request):  # lint-amnesty, pylint: disable=too-many-statements
+    """
+    Provides the LMS Search view
+    """
+    
+    subject = request.GET.get('subject', None)
+    # import pdb; pdb.set_trace()
+    if subject:
+        learning_type = "courses"
+
+    context = {
+        "dashboard": "dashboard",
+       
+    }
+
+ 
+
+    response = render_to_response('search.html', context)
+    
+
+    return response

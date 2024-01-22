@@ -10,6 +10,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 
 const ProgramCoursesContainer = (program_course) => {
+    // console.log("program course", program_course)
     const option = {
         rtl:false,
         loop:true,
@@ -38,7 +39,7 @@ const ProgramCoursesContainer = (program_course) => {
             <div className="container">
                 <div className="py-3">
                     <h1 className="theading-title">Objectives</h1>
-                    <p className="para">Welcome to TISS, a multi-campus, integrated, community engaged public university of India. As students you are now part of India’s foremost social science university founded in 1936 by Sir Dorabjee Tata Trust to create human service professionals for addressing.</p>
+                    <p className="para">{program_course.programinfo['program_description']['objectives']}</p>
                 </div>
                 <h1 className="py-5 prg-course-title"><b>Programme Courses</b></h1>
                 <div className="row" id="iconright1">  
