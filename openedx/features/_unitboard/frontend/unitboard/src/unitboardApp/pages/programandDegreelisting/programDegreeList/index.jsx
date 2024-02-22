@@ -38,7 +38,7 @@ console.log("program listing", programlist)
                             <p className="title p-3">{program['program_name']}</p>
                             <div className="d-flex p-3 bor-1">
                                 <a href={program['program_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                <a ahref={program['program_detail']}><small><img src="img/icon-1.png" className="img"/></small></a>
+                                <a ahref={program['program_detail']}><small><img className="img moreicon"/></small></a>
                             </div> 
                         </div>
                     </div>

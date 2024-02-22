@@ -12,6 +12,7 @@ import ProgramDegreelistingContainer from "./pages/programandDegreelisting";
 import SchoolCenterlistingContainer from "./pages/schoolandCenterlisting";
 import CenterDeatilContainer from "./pages/centerDetail";
 import SchoolDeatilContainer from "./pages/schoolDetail";
+import SearchPageContainer from "./pages/searchPage";
 
 import "./unitboardApp.css"
 export const UnitboardApp = () => {
@@ -47,6 +48,10 @@ export const UnitboardApp = () => {
                 <Route exact path="/unitboard/school-detail/:slug">
                     {/* <SchoolDeatilContainer/> */}
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolDeatilContainer my_discovery_url={my_discovery_url} />}
+                </Route>
+
+                <Route exact path="/unitboard/search">
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SearchPageContainer my_discovery_url={my_discovery_url} />}
                 </Route>
               
 

@@ -15,7 +15,7 @@ const CenterProgramListContainer = ({programList}) => {
 
         <section>
         <div className="container-fluid learn-school py-5">
-            <div className="container">
+            <div className="container listing-container">
                 <div>
                     <h1 className="text-align-left"><b>{program_list['program_type']}</b></h1>
                 </div>
@@ -31,7 +31,7 @@ const CenterProgramListContainer = ({programList}) => {
                                 </p>
                                 <div className="d-flex py-3 px-4 bor-1">
                                     <a href={program['program_detail']} ><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                    <a href={program['program_detail']} className="ml-auto"><small><img src="img/icon-1.png" className="img"/></small></a>
+                                    <a href={program['program_detail']} className="ml-auto"><small><img className="img moreicon"/></small></a>
                                 </div> 
                             </div>
                         </div>
