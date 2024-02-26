@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
-import * as R from "ramda";
+// import * as R from "ramda";
 
 // import { useNavigate, Link, useParams } from "react-router-dom";
 const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Querytxt}) => {
@@ -14,6 +14,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
   const [selectedSubject, setselectedSubject] = useState(FiterDetail.selected_subject['subject_uuid']);
   const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program['program_group_slug']);
   const [selectedLearningType, setselectedLearningType] = useState(FiterDetail.select_learning_type);
+  const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language);
   const [centerList, setcenterList] = useState([]);
   const [FormQuerytxt, setFormQuerytxt] = useState(Querytxt);
   const [selectSchool, setselectSchool] = useState([]);
@@ -28,8 +29,9 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     let program_group = document.getElementById('program_group').value
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
+    let language = document.getElementById('language').value
 
-    getSearchData(subject, program_group, learning_type, query, school, center)
+    getSearchData(subject, program_group, learning_type, query, school, center, language)
 
   }; 
   
@@ -55,8 +57,9 @@ const handleKeypress = e => {
     let query = document.getElementById('query').value
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
+    let language = document.getElementById('language').value
 
-    getSearchData(val, program_group, learning_type, query, school, center)
+    getSearchData(val, program_group, learning_type, query, school, center, language)
   }; 
 
   const onProgramChange = (e) => {
@@ -69,8 +72,9 @@ const handleKeypress = e => {
     let query = document.getElementById('query').value
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
+    let language = document.getElementById('language').value
 
-    getSearchData(subject, val, learning_type, query, school, center)
+    getSearchData(subject, val, learning_type, query, school, center, language)
   }; 
 
   const onLearningTypeChange = (e) => {
@@ -83,8 +87,9 @@ const handleKeypress = e => {
     let query = document.getElementById('query').value
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
+    let language = document.getElementById('language').value
 
-    getSearchData(subject, program_group, val, query, school, center)
+    getSearchData(subject, program_group, val, query, school, center, language)
   }; 
 
   const onSchoolChange = (e) => {
@@ -111,7 +116,9 @@ const handleKeypress = e => {
     let query = document.getElementById('query').value
     let center = ""
     //  alert(subject)
-    getSearchData(subject, program_group, learning_type, query, val, center)
+    let language = document.getElementById('language').value
+
+    getSearchData(subject, program_group, learning_type, query, val, center, language)
     
   }; 
 
@@ -123,33 +130,51 @@ const handleKeypress = e => {
     let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
     let school = document.getElementById('school').value
-    getSearchData(subject, program_group, learning_type, query, school, val)
+    let language = document.getElementById('language').value
+
+    getSearchData(subject, program_group, learning_type, query, school, val, language)
     
   };
+  
+
+  const onLanguageChange = (e) => {
+    let language = e.target.value;
+    setselectedLanguage(language)
+    let subject = document.getElementById('subject').value
+    let learning_type = document.getElementById('learning_type').value
+    let program_group = document.getElementById('program_group').value
+    let query = document.getElementById('query').value
+    let school = document.getElementById('school').value
+    let center = document.getElementById('center').value
+    getSearchData(subject, program_group, learning_type, query, school, center, language)
+    
+  };
+
+
   
   return(
   <>
     
     <section className="search-bgimg" id="prg-page">
       <div className="container listing-container">
-              <div className="row">
-                  <div className="col-md-7 col-sm-12 f-cell">
-                      <h2 className="text-white"><b>Search Our Catalog</b></h2>
-                      <form id="formDATA"> 
-                          <input type="search" id="query" name="q" 
-                          value={FormQuerytxt}
-                          onChange={(e) =>setFormQuerytxt(e.target.value)}
-                          onKeyDown={(e) =>handleKeypress(e)}
-                          placeholder="What do you want to Learn?"/>
-                          <button className="searchBtn" type="button"
-                          onClick={(e) => onSearchform(e)}
-                          >Search</button>
-                      </form>
-                  </div>
-                  <div className="offset-md-5">
-                      
-                  </div>
-              </div>
+        <div className="row">
+            <div className="col-md-7 col-sm-12 f-cell">
+                <h2 className="text-white"><b>Search Our Catalog</b></h2>
+                <form id="formDATA"> 
+                    <input type="search" id="query" name="q" 
+                    value={FormQuerytxt}
+                    onChange={(e) =>setFormQuerytxt(e.target.value)}
+                    onKeyDown={(e) =>handleKeypress(e)}
+                    placeholder="What do you want to Learn?"/>
+                    <button className="searchBtn" type="button"
+                    onClick={(e) => onSearchform(e)}
+                    >Search</button>
+                </form>
+            </div>
+            <div className="offset-md-5">
+                
+            </div>
+        </div>
       </div>
   </section>
     
@@ -196,6 +221,7 @@ const handleKeypress = e => {
                       <option className="ColorLight" value="independent-center">Independent center</option>
                     </select>
                 </div>
+                
                 <div className="custom-select mx-3">
                 
                     <select className={Boolean(centerList.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} data-bs-toggle="dropdown"
@@ -205,6 +231,18 @@ const handleKeypress = e => {
                       <option className="ColorLight" value="">Center</option>
                       {centerList.map((center) => (
                         <option value={center['center_slug']} >{center['center_name']}</option>
+                      ))}
+                    </select>
+                </div>
+
+                <div className="custom-select mx-3">
+                    <select className="dropdown-toggle SelectOne" id="language" data-bs-toggle="dropdown"
+                    value={selectedLanguage}
+                    onChange={(e) => onLanguageChange(e)}
+                    >
+                      <option className="ColorLight" value="all">Language</option>
+                      {FiterDetail.language_list.map((language) => (
+                        <option value={language['0']} >{language['1']}</option>
                       ))}
                     </select>
                 </div>

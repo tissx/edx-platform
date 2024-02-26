@@ -58,7 +58,7 @@ const SearchResultsDegreesContainer = ({DegreeResults, Querytxt, getDegreePagina
                            
                             <p className="title p-3">{degree['title']}</p>
                             <div className="d-flex p-3 bor-1">
-                                <a href={'../program-detail-slug/' + degree['uuid']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                                <a href={'../program-detail/' + degree['uuid']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
                                 <a><small><img className="img moreicon" /></small></a>
                             </div> 
                         </div>

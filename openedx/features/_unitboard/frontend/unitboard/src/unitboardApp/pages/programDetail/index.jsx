@@ -11,10 +11,14 @@ import ProgramCourses from './ProgramCourses';
 import ProgramFaculty from './ProgramFaculty';
 import HowToApply from '../common/HowToApply';
 import ProgramFAQ from './ProgramFAQ';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '../common/loader';
 
 const ProgramDetailContainer = ({my_discovery_url}) => {
 
   const [programdetail, setprogramdetail] = useState([]);
+  const [programLoader, setprogramLoader] = useState();
+
   const { slug } = useParams();
 
 
@@ -31,6 +35,7 @@ var program_detail_url = `${my_discovery_url}/api/v1/get-program-from-slug/?prog
   .then((data) => {
     // console.log("program course detail",data);
   setprogramdetail(data);
+  setprogramLoader(true)
   });
 //End Fetch program detail from discovery
 
@@ -39,22 +44,18 @@ var program_detail_url = `${my_discovery_url}/api/v1/get-program-from-slug/?prog
 
     return (
         <>
-        {/* <ProgramInfo/> */}
+        {!(programLoader) && <Loader/>}
+
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramInfo programinfo={programdetail.program_info} />}
         
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramCourses programinfo={programdetail.program_info} programcourses={programdetail.program_course} />}
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramFaculty programfaculty={programdetail.instructor} />}
+        {!R.isEmpty(programdetail) && programdetail.length !== 0 && <HowToApply />}
         
-        {/* <ProgramCourses/> */}
-        {/* <ProgramFaculty/> */}
-        <HowToApply/>
+        {/* <HowToApply/> */}
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramFAQ programfaq={programdetail.faq} />}
         
-        
-        {/* <ProgramFAQ/> */}
-        {/* <CourseandProgram/> */}
-        {/* {!R.isEmpty(schoollist) && schoollist.length !== 0 && <SchoolsList schoolListData={schoollist} />} */}
-
+    
        </>
     );
 };

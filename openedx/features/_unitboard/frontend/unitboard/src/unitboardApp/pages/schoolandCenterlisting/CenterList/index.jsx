@@ -28,7 +28,8 @@ const CenterListContainer = ({centerlist}) => {
                             <p className="text-school">{center['center_name']}
                             </p>
                             <div className="d-flex p-3 bor-1">
-                                <a hef= {center['center_detail']}><button type="button" href="#" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                                <a href={center['center_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                                
                                 <a href={center['center_detail']}><small><img className="img moreicon"/></small></a>
                             </div>  
                         </div>

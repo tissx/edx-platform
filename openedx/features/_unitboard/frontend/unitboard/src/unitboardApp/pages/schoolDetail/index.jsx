@@ -11,11 +11,15 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import SchoolDetailBannerContainer from './SchoolDetailBanner';
 import SchoolsCenterList from './SchoolsCenterList';
 import SchoolFaculty from './SchoolFaculty';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '../common/loader';
 
 const SchoolDeatilContainer = ({my_discovery_url}) => {
     
   const [schooldetail, setschooldetail] = useState([]);
   const [schoolfacultydetail, setschoolfacultydetail] = useState([]);
+  const [schoolLoader, setschoolLoader] = useState();
+
   const { slug } = useParams();
 
   useEffect(() => {
@@ -31,6 +35,7 @@ const SchoolDeatilContainer = ({my_discovery_url}) => {
     .then((data) => {
         // console.log("school detail",data);
         setschooldetail(data);
+        setschoolLoader(true)
     });
     //End Fetch school detail from discovery
 
@@ -51,9 +56,11 @@ const SchoolDeatilContainer = ({my_discovery_url}) => {
   
     return (
         <>
+        {!(schoolLoader) && <Loader/>}
+
         {!R.isEmpty(schooldetail) && schooldetail.length !== 0 && <SchoolDetailBannerContainer SchoolInfo={schooldetail.school_info} />} 
         {!R.isEmpty(schooldetail) && schooldetail.length !== 0 && <SchoolsCenterList SchoolInfo={schooldetail.school_info} CenterList={schooldetail.centers} />} 
-        {!R.isEmpty(schoolfacultydetail) && schoolfacultydetail.length !== 0 && <SchoolFaculty SchoolFacultyInfo={schoolfacultydetail}  />} 
+        {(schoolLoader) && !R.isEmpty(schoolfacultydetail) && schoolfacultydetail.length !== 0 && <SchoolFaculty SchoolFacultyInfo={schoolfacultydetail}  />} 
 
        </>
     );

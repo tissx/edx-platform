@@ -4,17 +4,19 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import * as R from "ramda";
 import CenterDetailBanner from './CenterDetailBanner';
 import CenterProgramList from './CenterProgramList';
 import CenterFaculty from './CenterFaculty';
 import { useNavigate, Link, useParams } from "react-router-dom";
 import CenterCoursesList from './CenterCoursesList';
+import Loader from '../common/loader'; 
+
 const CenterDeatilContainer = ({my_discovery_url}) => {
 
   const [centerdetail, setcenterdetail] = useState([]);
   const [programdetail, setprogramdetail] = useState([]);
+  const [centerLoader, setcenterLoader] = useState();
   const { slug } = useParams();
 
   useEffect(() => {
@@ -29,6 +31,7 @@ const CenterDeatilContainer = ({my_discovery_url}) => {
     .then((data) => {
         // console.log("center detail",data);
         setcenterdetail(data);
+        setcenterLoader(true)
     });
     //End Fetch center detail from discovery
 
@@ -49,15 +52,13 @@ const CenterDeatilContainer = ({my_discovery_url}) => {
   
     return (
         <>
-        
+        {!(centerLoader) && <Loader/>}
         {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterDetailBanner centerInfo={centerdetail.center_info} />} 
         {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterCoursesList centerInfo={centerdetail.center_info} centerCourses={centerdetail.courses} />} 
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <CenterProgramList programList={programdetail} />} 
-        {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />} 
+        {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />} 
         
-        
-        {/* <CenterProgramList/> */}
-        {/* <CenterFaculty/> */}
+    
        </>
     );
 };

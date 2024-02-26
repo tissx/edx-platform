@@ -3,9 +3,6 @@
  */
 
 import React, { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import ClearIcon from '@material-ui/icons/Clear';
-// import classNames from 'classnames';
 
 
 const BannerSectionContainer = () => {
@@ -13,7 +10,7 @@ const BannerSectionContainer = () => {
 const handleFormsubmit = (e) => {
 
     let query = document.getElementById('query').value
-    window.location.href = 'search/?learning_type=course&query=' + query
+    window.location.href = '/search-detail/?learning_type=course&query=' + query
 }
 
 //IT triggers by pressing the enter key
@@ -45,7 +42,7 @@ const handleKeypress = e => {
                         onClick={(e) => handleFormsubmit(e)}
                         ><i className="fa fa-search"></i> <span>Search</span></button>
                       </form><br/><br/> <br/>
-                    <p className="txt-explore">Explore All Courses</p>
+                    <p className="txt-explore"><a href="/search-detail/?learning_type=course">Explore All Courses</a></p>
                 </div>
                 
                 <div className="col-md-5 col-sm-12 s-cell">

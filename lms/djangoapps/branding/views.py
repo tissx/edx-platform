@@ -23,6 +23,7 @@ from common.djangoapps.util.cache import cache_if_anonymous
 from common.djangoapps.util.json_request import JsonResponse
 from openedx.core.djangoapps.lang_pref.api import released_languages
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+from django.urls import reverse
 
 log = logging.getLogger(__name__)
 
@@ -34,6 +35,10 @@ def index(request):
     """
     Redirects to main page -- info page if user authenticated, or marketing if not
     """
+    # # Manprax
+    # if not request.user:
+    # return redirect(reverse('unitboard:dashboard'))
+
     if request.user.is_authenticated:
         # Only redirect to dashboard if user has
         # courses in their dashboard. Otherwise UX is a bit cryptic.

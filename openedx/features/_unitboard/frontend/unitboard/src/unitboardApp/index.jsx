@@ -23,11 +23,16 @@ export const UnitboardApp = () => {
 
         <Router>
             <Switch>
+
+                <Route exact path="/">
+                {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <LandingPageContainer my_discovery_url={my_discovery_url} />}
+                </Route>
+
                 <Route exact path="/unitboard">
-                <LandingPageContainer/>
+                {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <LandingPageContainer my_discovery_url={my_discovery_url} />}
        
                 </Route>
-                <Route exact path="/unitboard/program-detail-slug/:slug">
+                <Route exact path="/program-detail/:slug">
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <ProgramDetailContainer my_discovery_url={my_discovery_url} />}
 
                 </Route>
@@ -36,21 +41,19 @@ export const UnitboardApp = () => {
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <ProgramDegreelistingContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
-                <Route exact path="/unitboard/school-center-listing">
+                <Route exact path="/school-center-listing">
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolCenterlistingContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
-                <Route exact path="/unitboard/center-detail/:slug">
-                    {/* <CenterDeatilContainer/> */}
+                <Route exact path="/center-detail/:slug">
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <CenterDeatilContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
-                <Route exact path="/unitboard/school-detail/:slug">
-                    {/* <SchoolDeatilContainer/> */}
+                <Route exact path="/school-detail/:slug">
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SchoolDeatilContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
-                <Route exact path="/unitboard/search">
+                <Route exact path="/search-detail">
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <SearchPageContainer my_discovery_url={my_discovery_url} />}
                 </Route>
               
