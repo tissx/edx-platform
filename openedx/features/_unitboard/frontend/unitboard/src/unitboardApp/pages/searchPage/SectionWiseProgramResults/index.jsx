@@ -1,17 +1,23 @@
 
 /**
- * Search Results for Courses Page
+ * Search Results for section wise Progra, Page
  */
-import Pagination from '@material-ui/lab/Pagination';
 
 
-const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPaginationData}) => {
+const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetail}) => {
 
-
-  function handleProgPageChange(event, value) {
-    getProgramPaginationData(value)
-  }
-// End Pagination 
+    function handleShowMore() {
+        let subject = document.getElementById('subject').value
+        let learning_type = "program"
+        let query = document.getElementById('query').value
+        let program_group = document.getElementById('program_group').value
+        let school = document.getElementById('school').value
+        let center = document.getElementById('center').value
+        let language = document.getElementById('language').value
+    
+        showMoreDetail(subject, program_group, learning_type, query, school, center, language)
+    
+    }
   
   return(
     
@@ -23,21 +29,9 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
                 <h1 className="theading-title py-4 search-result-title">{(Querytxt)? '"'+ Querytxt + '" Programs' : 'Programs'}</h1>
             </div>
             <div className="col-md-6 py-4">
-                {/* <nav className="pagination-container">
-                    <button className="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
-                      &lt;
-                    </button>
-                
-                    <div id="pagination-numbers">
-                
-                    </div>
-                
-                    <button className="pagination-button" id="next-button" aria-label="Next page" title="Next page">
-                      &gt;
-                    </button>
-                  </nav> */}
-          <Pagination className="result-pagination"  count={ProgramResults['num_pages']} onChange={handleProgPageChange} variant="outlined" shape="rounded" />
-          
+               
+               <p className="show-result-count" onClick={handleShowMore}>Show ({ProgramResults.count})</p>
+
             </div>
             <main>
                 <ul id="paginated-list" data-current-page="1" aria-live="polite">
@@ -73,7 +67,7 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
 };
 
 
-SearchResultsProgramsContainer.propTypes = {}
+SectionResultsProgramContainer.propTypes = {}
 
-export default SearchResultsProgramsContainer
+export default SectionResultsProgramContainer
 

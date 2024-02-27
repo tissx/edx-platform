@@ -1,22 +1,28 @@
 
+
 /**
- * Search Results for Courses Page
+ * Search Results for Section wise Courses Page
  */
 
-import Pagination from '@material-ui/lab/Pagination';
 
+const SectionResultsCoursesContainer = ({CourseResults, Querytxt, showMoreDetail}) => {
 
-const SearchResultsCoursesContainer = ({CourseResults, Querytxt, getCoursePaginationData}) => {
+function handleShowMore() {
+    let subject = document.getElementById('subject').value
+    let learning_type = "course"
+    let query = document.getElementById('query').value
+    let program_group = document.getElementById('program_group').value
+    let school = document.getElementById('school').value
+    let center = document.getElementById('center').value
+    let language = document.getElementById('language').value
 
+    showMoreDetail(subject, program_group, learning_type, query, school, center, language)
 
-function handleCoursePageChange(event, value) {
-  getCoursePaginationData(value)
 }
 
 
   return(
     
-
     <section>
     <div className="container listing-container">
         <div className="row">
@@ -24,15 +30,13 @@ function handleCoursePageChange(event, value) {
                 <h1 className="theading-title py-4 search-result-title">{(Querytxt)?  '"'+ Querytxt + '" Courses' : 'Courses'}</h1>
             </div>
             <div className="col-md-6 py-4">
-               
+               <p className="show-result-count" onClick={handleShowMore}>Show ({CourseResults.count})</p>
 
-          <Pagination className="result-pagination"  count={CourseResults['num_pages']} onChange={handleCoursePageChange} variant="outlined" shape="rounded" />
             </div>
             <main>
                 <ul id="paginated-list" data-current-page="1" aria-live="polite">
                   
                   {CourseResults.results.map((course) => (
-
                   
                   <li>
                     <div className="course-box">
@@ -43,6 +47,8 @@ function handleCoursePageChange(event, value) {
                            
                             <p className="title p-3">{course['title']}</p>
                             <div className="d-flex p-3 bor-1">
+
+
                                 <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
                                 <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><small><img className="img moreicon" /></small></a>
                             </div> 
@@ -62,7 +68,7 @@ function handleCoursePageChange(event, value) {
 };
 
 
-SearchResultsCoursesContainer.propTypes = {}
+SectionResultsCoursesContainer.propTypes = {}
 
-export default SearchResultsCoursesContainer
+export default SectionResultsCoursesContainer
 

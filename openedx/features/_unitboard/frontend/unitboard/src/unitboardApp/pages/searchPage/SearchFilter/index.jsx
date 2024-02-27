@@ -6,33 +6,55 @@
 import React, { useState, useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import * as R from "ramda";
-
 // import { useNavigate, Link, useParams } from "react-router-dom";
-const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Querytxt}) => {
+import $ from 'jquery';
+
+
+const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Querytxt, mxLearningType, onFormSearch}) => {
 
 
   const [selectedSubject, setselectedSubject] = useState(FiterDetail.selected_subject['subject_uuid']);
   const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program['program_group_slug']);
-  const [selectedLearningType, setselectedLearningType] = useState(FiterDetail.select_learning_type);
+  const [selectedLearningType, setselectedLearningType] = useState(mxLearningType);
+  // const [selectedLearningType, setselectedLearningType] =   useState(FiterDetail.select_learning_type);
+  // const [selectedLearningType, setselectedLearningType] =   useState();
+
   const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language);
   const [centerList, setcenterList] = useState([]);
   const [FormQuerytxt, setFormQuerytxt] = useState(Querytxt);
   const [selectSchool, setselectSchool] = useState([]);
 
   
+  if(mxLearningType != selectedLearningType){
+    setselectedLearningType(mxLearningType)
+  }
+
+  
+  function UpdateURL(query_param, query_value) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(query_param, query_value);
+    // url.searchParams.delete('param2');
+    window.history.replaceState(null, null, url);
+  }
+
   const onSearchform = (e) => {
     e.preventDefault();
 
     let subject = document.getElementById('subject').value
-    let learning_type = document.getElementById('learning_type').value
+    let learning_type = "all"
     let query = document.getElementById('query').value
     let program_group = document.getElementById('program_group').value
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
     let language = document.getElementById('language').value
+    let size = 4
+    getSearchData(subject, program_group, learning_type, query, school, center, language, size)
 
-    getSearchData(subject, program_group, learning_type, query, school, center, language)
+    onFormSearch()
+    setselectedLearningType('all')
+    
 
+    UpdateURL('query', query)
   }; 
   
  
@@ -52,6 +74,7 @@ const handleKeypress = e => {
     let val = e.target.value;
     e.preventDefault();
     setselectedSubject(val)
+    // let sub_slug = e.target.attr('sub_slug')
     let learning_type = document.getElementById('learning_type').value
     let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
@@ -60,6 +83,16 @@ const handleKeypress = e => {
     let language = document.getElementById('language').value
 
     getSearchData(val, program_group, learning_type, query, school, center, language)
+
+    var sub_slug =  $("#subject option:selected").attr("sub-slug");
+
+    // const url = new URL(window.location.href);
+    // url.searchParams.set('subject', sub_slug);
+    // // url.searchParams.delete('param2');
+    // window.history.replaceState(null, null, url);
+    UpdateURL('subject', sub_slug)
+
+
   }; 
 
   const onProgramChange = (e) => {
@@ -75,6 +108,11 @@ const handleKeypress = e => {
     let language = document.getElementById('language').value
 
     getSearchData(subject, val, learning_type, query, school, center, language)
+    
+    // Update Url 
+    UpdateURL('program_degree_group', val)
+
+  
   }; 
 
   const onLearningTypeChange = (e) => {
@@ -120,6 +158,8 @@ const handleKeypress = e => {
 
     getSearchData(subject, program_group, learning_type, query, val, center, language)
     
+    // UpdateURL('school', val)
+
   }; 
 
   const onCenterChange = (e) => {
@@ -133,6 +173,7 @@ const handleKeypress = e => {
     let language = document.getElementById('language').value
 
     getSearchData(subject, program_group, learning_type, query, school, val, language)
+    // UpdateURL('center', val)
     
   };
   
@@ -147,6 +188,8 @@ const handleKeypress = e => {
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
     getSearchData(subject, program_group, learning_type, query, school, center, language)
+   
+    // UpdateURL('language', language)
     
   };
 
@@ -184,8 +227,9 @@ const handleKeypress = e => {
             <h1 className="theading-title">Filter</h1> 
           <div className="row">
             
+            {/* First row for filter dropdown start */}
             <div className="firstROW d-flex pb-2">
-                <div className="custom-select">
+                <div className="custom-select search-filter-box1 ">
 
                     {/* <select className="dropdown-toggle SelectOne {selectedSubject}" id="subject" data-bs-toggle="dropdown" */}
                     <select className={Boolean(selectedSubject)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="subject" data-bs-toggle="dropdown"
@@ -194,11 +238,11 @@ const handleKeypress = e => {
                     >
                       <option className="ColorLight" value="">Subject</option>
                       {FiterDetail.subject_list.map((subjects) => (
-                        <option value={subjects['subject_uuid']} >{subjects['subject_name']}</option>
+                        <option sub-slug={subjects['subject_slug']} value={subjects['subject_uuid']} >{subjects['subject_name']}</option>
                       ))}
                     </select>
                 </div>
-                <div className="custom-select mx-3">
+                <div className="custom-select search-filter-box ">
                     <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program_group" data-bs-toggle="dropdown"
                     value={selectedProgram}
                     onChange={(e) => onProgramChange(e)}
@@ -209,7 +253,7 @@ const handleKeypress = e => {
                       ))}
                     </select>
                 </div>
-                <div className="custom-select mx-3">
+                <div className="custom-select search-filter-box ">
                     <select className={Boolean(selectSchool.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  data-bs-toggle="dropdown"
                     id="school"
                     onChange={(e) => onSchoolChange(e)}
@@ -222,7 +266,7 @@ const handleKeypress = e => {
                     </select>
                 </div>
                 
-                <div className="custom-select mx-3">
+                <div className="custom-select search-filter-box ">
                 
                     <select className={Boolean(centerList.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} data-bs-toggle="dropdown"
                     id="center"
@@ -235,7 +279,14 @@ const handleKeypress = e => {
                     </select>
                 </div>
 
-                <div className="custom-select mx-3">
+            </div>
+            {/* First row for filter dropdown End */}
+
+            {/* 2nd row for filter dropdown Start */}
+            <div className="firstROW d-flex p-2">
+              
+
+                <div className="custom-select search-filter-box1">
                     <select className="dropdown-toggle SelectOne" id="language" data-bs-toggle="dropdown"
                     value={selectedLanguage}
                     onChange={(e) => onLanguageChange(e)}
@@ -247,7 +298,7 @@ const handleKeypress = e => {
                     </select>
                 </div>
 
-                <div className="custom-select mx-3">
+                <div className="custom-select search-filter-box ">
                     <select className={Boolean(selectedLearningType)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="learning_type" data-bs-toggle="dropdown"
                     value={selectedLearningType}
                     onChange={(e) => onLearningTypeChange(e)}
@@ -260,6 +311,8 @@ const handleKeypress = e => {
                     </select>
                 </div>
             </div>
+            {/* 2nd row for filter dropdown Start */}
+
 
           
           </div>

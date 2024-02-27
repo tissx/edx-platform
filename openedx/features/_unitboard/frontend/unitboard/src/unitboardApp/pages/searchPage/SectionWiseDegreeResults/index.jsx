@@ -1,25 +1,26 @@
 
 /**
- * Search Results for Degree Page
+ * Search Results for Section wise Degree Page
  */
 
-import Pagination from '@material-ui/lab/Pagination';
 
-const SearchResultsDegreesContainer = ({DegreeResults, Querytxt, getDegreePaginationData}) => {
+const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}) => {
 
-
-    // console.log("Degree Search Results",DegreeResults )
-    // For Pagination
-
-    function handleDegreePageChange(event, value) {
-      getDegreePaginationData(value)
+    function handleShowMore() {
+        let subject = document.getElementById('subject').value
+        let learning_type = "degree"
+        let query = document.getElementById('query').value
+        let program_group = document.getElementById('program_group').value
+        let school = document.getElementById('school').value
+        let center = document.getElementById('center').value
+        let language = document.getElementById('language').value
+    
+        showMoreDetail(subject, program_group, learning_type, query, school, center, language)
+    
     }
 
-// End Pagination 
-  
   return(
     
-
     <section>
     <div className="container listing-container">
         <div className="row">
@@ -27,21 +28,8 @@ const SearchResultsDegreesContainer = ({DegreeResults, Querytxt, getDegreePagina
                 <h1 className="theading-title py-4 search-result-title"> {(Querytxt)?  '"'+ Querytxt + '" Degrees' : 'Degrees'}</h1>
             </div>
             <div className="col-md-6 py-4">
-                {/* <nav className="pagination-container">
-                    <button className="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
-                      &lt;
-                    </button>
-                
-                    <div id="pagination-numbers">
-                
-                    </div>
-                
-                    <button className="pagination-button" id="next-button" aria-label="Next page" title="Next page">
-                      &gt;
-                    </button>
-                  </nav> */}
-          <Pagination className="result-pagination"  count={DegreeResults['num_pages']} onChange={handleDegreePageChange} variant="outlined" shape="rounded" />
-
+            <p className="show-result-count" onClick={handleShowMore}>Show ({DegreeResults.count})</p>
+              
             </div>
             <main>
                 <ul id="paginated-list" data-current-page="1" aria-live="polite">
@@ -77,7 +65,7 @@ const SearchResultsDegreesContainer = ({DegreeResults, Querytxt, getDegreePagina
 };
 
 
-SearchResultsDegreesContainer.propTypes = {}
+SectionResultsDegreeContainer.propTypes = {}
 
-export default SearchResultsDegreesContainer
+export default SectionResultsDegreeContainer
 

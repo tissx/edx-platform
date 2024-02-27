@@ -17,11 +17,11 @@ urlpatterns = [
 
 
     url(
-    r'^program-detail-slug/{}'.format(
+    r'^program-detail/{}'.format(
         r'(?P<program_uuid>[0-9a-f-]+)',
     ),
     UnitboardView.as_view(),
-    name='program-detail-slug'
+    name='program-detail'
     ),
 
     url(

@@ -5,9 +5,10 @@ from django.contrib.auth.views import redirect_to_login
 from django.views.generic import TemplateView
 from django.urls import reverse
 from common.djangoapps.edxmako.shortcuts import render_to_response, render_to_string
-
+from django.conf import Settings
 
 discovery_URL = "http://discovery.local.overhang.io:8381"
+# discovery_URL = Settings.LMS_DISCOVERY_URL
 
 class UnitboardView(TemplateView):
     template_name = "_unitboard/unitboard.html"
