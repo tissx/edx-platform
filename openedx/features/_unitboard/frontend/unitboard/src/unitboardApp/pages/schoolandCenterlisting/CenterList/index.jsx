@@ -19,10 +19,10 @@ const CenterListContainer = ({centerlist}) => {
                 {centerlist.map((center) => (
 
                 
-                <div className="course-box1">
-                    <div className="service-item body-light tissxoff">
+                <div className="course-box1 mx-box2">
+                    <div className="service-item mx-inner2 body-light tissxoff">
                         <div className="img-sec">
-                            <img className="img-fluid" src={center['center_image']} alt=""/>
+                            <img className="img-fluid mx-img2" src={center['center_image']} alt=""/>
                         </div>
                         
                         <div className="service-text position-relativ">

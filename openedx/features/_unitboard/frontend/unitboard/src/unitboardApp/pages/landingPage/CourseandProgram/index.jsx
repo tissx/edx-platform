@@ -67,6 +67,13 @@ autoplayHoverPause:true,
                                         <div className="service-item body-light tissxoff">
                                             <div className="img-sec">
                                                 <img className="img-fluid" src= {course_list.course_image} alt=""/>
+
+                                                {/* <img className="img-fluid" 
+                                                onError={(e) => {
+                                                    e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/No_sign.svg/2048px-No_sign.svg.png' // some replacement image
+                                                 }}
+                                                src= {course_list.course_image} alt=""/> */}
+                                            
                                             </div>
                                             <div className="service-text">
                                                 <p className="p-2">{course_list.course_name}</p>

@@ -19,7 +19,7 @@ const SchoolListContainer = ({schoollist}) => {
                         {schoollist.map((school)=>(
 
                         
-                        <div className="course-box1">
+                        <div className="course-box1 mx-box2">
                             <div className="service-item body-light tissxoff">
                                 <div className="img-sec">
                                     <img className="img-fluid" src={school['school_image']} alt=""/>

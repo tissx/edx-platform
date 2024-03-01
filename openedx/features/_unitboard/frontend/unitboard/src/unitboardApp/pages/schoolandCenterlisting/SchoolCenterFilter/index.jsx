@@ -16,11 +16,11 @@ const SchoolCenterFilterContainer = ({programtypelist}) => {
           <div className="container listing-container">
               <h1 className="theading-title">Filter</h1> 
                 
-            <div className="row">
+            <div className="row school-center-filter">
 
               {programtypelist.map((data) => (
 
-              <div className="dropdown course-box1">
+              <div className="dropdown mx-course-box1">
                   <button className="dropbtn dropdown-toggle btn-filter" data-bs-toggle="dropdown">{data['program_type']}
                       <span className="pad-left"><i className="fa fa-chevron-down pl-3"></i></span></button>
                   <div className="dropdown-content">

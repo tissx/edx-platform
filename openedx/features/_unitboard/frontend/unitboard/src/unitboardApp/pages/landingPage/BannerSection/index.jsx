@@ -27,13 +27,14 @@ const handleKeypress = e => {
         <section className="bgreen-home">
         <div className="container listing-container">
             <div className="row">
-                <div className="col-md-7 col-sm-12 degree-listing f-cell">
+                <div className="col-md-7 col-sm-12 f-cell">
                     <h1 className="theading-title-white">Online Education</h1>
-                    <p className="pb-20 text-white">Courses | Programmes | Degrees</p>
+                    <p className="pb-10 text-white">Courses | Programmes | Degrees</p>
                     <form className="example">
                         <input type="text" placeholder="| Search from 1200+ Courses"
                         id="query"
                         name="search2"
+                        className="search-input"
                         required
                         onKeyDown={(e) => handleKeypress(e) }
                         
