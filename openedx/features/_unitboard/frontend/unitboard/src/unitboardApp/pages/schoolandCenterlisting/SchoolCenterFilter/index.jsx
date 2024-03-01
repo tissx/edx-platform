@@ -21,7 +21,7 @@ const SchoolCenterFilterContainer = ({programtypelist}) => {
               {programtypelist.map((data) => (
 
               <div className="dropdown course-box1">
-                  <button className="dropbtn">{data['program_type']}
+                  <button className="dropbtn dropdown-toggle btn-filter" data-bs-toggle="dropdown">{data['program_type']}
                       <span className="pad-left"><i className="fa fa-chevron-down pl-3"></i></span></button>
                   <div className="dropdown-content">
 

@@ -12,13 +12,14 @@ const CenterListContainer = ({centerlist}) => {
         
         <section className="learn-school">
         <div className="container listing-container">
-            <h1 className="theading-title">Centers</h1>
+            <h1 className="text-align-left"><b>Centers</b></h1>
+
             <div className="row" id="iconright">
 
                 {centerlist.map((center) => (
 
                 
-                <div className="course-box">
+                <div className="course-box1">
                     <div className="service-item body-light tissxoff">
                         <div className="img-sec">
                             <img className="img-fluid" src={center['center_image']} alt=""/>

@@ -13,7 +13,7 @@ const SchoolCenterBannerContainer = () => {
        <section className="degree-listing-bgimg" id="prg-page">
        <div className="container">
                <div className="row">
-                   <div className="col-md-7 col-sm-12 degree-listing">
+                   <div className="col-md-7 col-sm-12">
                        <h1 className="theading-title-white">Our Schools</h1>
                        <p className="pb-20 text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod </p>
                     

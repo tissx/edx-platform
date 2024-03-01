@@ -14,8 +14,8 @@ const HowToApplyContainer = () => {
             
         <div className="container-fluid learn-school greencard-2">
             <div className="container">
-            <h1 className="theading-title-white text-center py-5">How To Apply?</h1>
-            <p className="text-white text-center py-3">Welcome to TISS, a multi-campus, integrated, community engaged public university of India. As students you are now part of India’s foremost social science university founded in 1936 by Sir Dorabjee Tata Trust to create human service professionals for addressing.</p>
+            <h1 className="theading-title-white text-center py-2">How To Apply?</h1>
+            <p className="text-white text-center py-2">Welcome to TISS, a multi-campus, integrated, community engaged public university of India. As students you are now part of India’s foremost social science university founded in 1936 by Sir Dorabjee Tata Trust to create human service professionals for addressing.</p>
             <div className="row justify-content-center">
                 <div className="col-md-4 col-sm-4 col-lg-4">
                 <div className="service-box text-white overflow-hidden h-100">

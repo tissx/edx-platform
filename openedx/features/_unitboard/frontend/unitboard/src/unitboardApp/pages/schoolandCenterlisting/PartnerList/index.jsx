@@ -59,9 +59,9 @@ const PartnerListContainer = ({partnerlist}) => {
 
     return (
  
-        <section className="bg-light py-5 my-5" id="partner">
+        <section className="bg-light my-5" id="partner">
             <div className="container listing-container">
-                <h1 className="theading-title py-4">Partners</h1>
+                <h1 className="theading-title">Partners</h1>
                 <div className="row">
                     {/* <section className="customer-logos slider"> */}
                     <div className="row" id="iconright1">  

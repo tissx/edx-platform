@@ -43,9 +43,9 @@ const ProgramFAQContainer = (programfaq) => {
 // console.log("programfaq", programfaq)
     return (
         <>
-        <section className="py-5">
+        <section>
         <div className="container">
-            <h1 className="theading-title py-3">FAQs</h1>
+            <h1 className="theading-title pb-3 faq-title">FAQs</h1>
            
 
             <div className={classes.root}>

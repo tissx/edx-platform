@@ -177,8 +177,17 @@ const SearchPageContainer = ({my_discovery_url}) => {
     const subject = query.get('subject')
     const program_degree_group = query.get('program_degree_group')
     const learning_type = query.get('learning_type')
+    const school = query.get('school')
+    const center = query.get('center')
+    var language = query.get('language')
     var query_search = query.get('query')
 
+
+
+
+    if(!(language)) {
+      language = ""
+    }
 
     if(!(query_search)) {
       query_search = ""
@@ -189,7 +198,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
     }
 
 
-    var get_search_filter_url = `${my_discovery_url}/api/v1/lms-discovery-search-filter/?subject=${subject}&program_degree_group=${program_degree_group}&learning_type=${learning_type}`
+    var get_search_filter_url = `${my_discovery_url}/api/v1/lms-discovery-search-filter/?subject=${subject}&program_degree_group=${program_degree_group}&learning_type=${learning_type}&school=${school}&center=${center}&center=${center}`
 
     //start Fetch filter detail from discovery
     fetch(get_search_filter_url)
@@ -206,8 +215,8 @@ const SearchPageContainer = ({my_discovery_url}) => {
         var q_subject = ""
         var q_prg_group = ""
         var q_learningtype = "all"
-        var school = ""
-        var center = ""
+        var q_school = ""
+        var q_center = ""
         var selected_language = data.selected_language
 
         if((data.selected_subject['subject_uuid'])) {
@@ -219,12 +228,19 @@ const SearchPageContainer = ({my_discovery_url}) => {
           q_prg_group = data.selected_program['program_group_slug']
         }
         
+        
         if(data.select_learning_type && data.select_learning_type !=="null") {
           q_learningtype = data.select_learning_type
-        // alert(q_learningtype)
-
         }
-        getSearchResult(q_subject, q_prg_group, q_learningtype, query_search, school, center, selected_language, size)
+        if(data.selected_school && data.selected_school !=="null") {
+          q_school = data.selected_school
+        }
+
+        if(data.selected_centter && data.selected_centter !=="null") {
+          q_center = data.select_learning_type
+        }
+
+        getSearchResult(q_subject, q_prg_group, q_learningtype, query_search, q_school, q_center, selected_language, size)
 
     });
     //End Fetch filter detail from discovery

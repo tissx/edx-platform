@@ -13,9 +13,9 @@ const ProgramFacultyContainer = (programfaculty) => {
     return (
     
                 
-        <section className="learn-school bg-light py-5">
+        <section className="learn-school bg-light">
             <div className="container">
-            <h1 className="theading-title py-5">Programme Faculty</h1>
+            <h1 className="theading-title pb-3">Programme Faculty</h1>
             <div className="row justify-content-center">
 
             {programfaculty.programfaculty.map((faculty) => (

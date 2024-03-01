@@ -35,14 +35,14 @@ const ProgramCoursesContainer = (program_course) => {
     return (
         <>
                     
-        <div className="learn-school mb-3">
+        <div className="learn-school">
             <div className="container">
-                <div className="py-3">
+                <div>
                     <h1 className="theading-title">Objectives</h1>
                     <p className="para">{program_course.programinfo['program_description']['objectives']}</p>
                 </div>
-                <h1 className="py-5 prg-course-title"><b>Programme Courses</b></h1>
-                <div className="row" id="iconright1">  
+                <h1 className="prg-course-title"><b>Programme Courses</b></h1>
+                <div className="row py-3" id="iconright1">  
                     {/* <div className="owl-carousel owl-theme">
                             
                         <div className="item">
@@ -78,7 +78,7 @@ const ProgramCoursesContainer = (program_course) => {
                                     </div>
                                     <div className="service-text position-relativ p-2">
                                         <p>{course_list['course_name']} </p>
-                                        <p className="px-2">{course_list['course_description']} </p>
+                                        <p className="px-2 box-short-descp">{course_list['course_description']} </p>
                                         <div className="py-4 border-top">
                                             <a href={course_list['course_link']}  className="readmorebtn orgclr"><span></span></a>
                                             <a href={course_list['course_link']}  className="iconbg"></a>

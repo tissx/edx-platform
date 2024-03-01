@@ -31,7 +31,7 @@ const ProgramInfoContainer = (programinfo) => {
             </div>
         </section>
 
-        <section className="bgreen-light py-5">
+        <section className="bgreen-light py-3">
         <div className="container listing-container">
             <div className="row">
                 <div className="col-md-8 col-sm-12">

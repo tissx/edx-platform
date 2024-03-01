@@ -15,8 +15,8 @@ var center_listing= centerlist['centerListData']['results']
 
         <section className="learn-school">
             <div className="container listing-container">
-                <h1 className="theading-title">Centers</h1>
-                <div className="row" id="iconright">
+                <h1 className="school-title">Centers</h1>
+                <div className="row mx-box" id="iconright">
 
                     {/* start Dynamic center  */}
                     {center_listing.map((center) => (

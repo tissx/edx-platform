@@ -11,7 +11,7 @@ const SchoolListContainer = ({schoollist}) => {
     return (
         
  
-            <section className="py-5">
+            <section>
                 <div className="container">
                     <div className="row" id="iconright">
                         <h1 className="text-align-left"><b>Schools</b></h1>
@@ -19,7 +19,7 @@ const SchoolListContainer = ({schoollist}) => {
                         {schoollist.map((school)=>(
 
                         
-                        <div className="course-box">
+                        <div className="course-box1">
                             <div className="service-item body-light tissxoff">
                                 <div className="img-sec">
                                     <img className="img-fluid" src={school['school_image']} alt=""/>

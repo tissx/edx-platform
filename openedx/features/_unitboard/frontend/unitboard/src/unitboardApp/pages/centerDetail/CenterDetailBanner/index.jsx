@@ -12,12 +12,12 @@ const CenterDetailBannerContainer = ({centerInfo}) => {
     return (
         
         <section className="position-relative" id="prg-page1">
-            <img src={centerInfo['banner_image']} className="img-fluid img-hide"/>
+            <img src={centerInfo['banner_image']} className="img-fluid bg-center-school"/>
             <div className="overlay-cap">
             <div className="container">
                     <div className="row">
                         <div className="col-md-4 col-lg-4 col-sm-12">
-                            <div className="box-left">
+                            <div className="box-left mobile-hide">
                                 <div className="card-1">
                                     <img src={centerInfo['center_image']} className="img-fluid"/>
                                 </div>

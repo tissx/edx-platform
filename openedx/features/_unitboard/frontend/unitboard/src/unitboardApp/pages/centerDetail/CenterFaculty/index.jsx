@@ -11,9 +11,9 @@ const CenterFacultyContainer = ({centerFaculty}) => {
   
     return (
       
-        <section className="py-5">
+        <section>
             <div className="container listing-container">
-                <h1 className="theading-title pb-5">Programme Faculty</h1>
+                <h1 className="theading-title">Programme Faculty</h1>
                 <div className="row justify-content-center">
 
                     {centerFaculty.map((faculty) => (

@@ -11,38 +11,24 @@ const CenterCoursesListContainer = ({centerInfo, centerCourses}) => {
   
     return (
         <>
-        {/* // start Filter For Mobile */}
-        {/* <section className="bglight py-5" id="hidedesktop">
-            <div className="container">
-                <h1 className="theading-title">Filter</h1> 
-            <div className="row">
-                <div className="mb-1">
-                    <button className="collapsible">Open Collapsible</button>
-                    <div className="content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section> */}
-        {/* // End Filter For Mobile */}
-
-
-        {/* start short description and Courses Listing  */}
         
-        <div className="container-fluid">
-                <div className="row px-3" id="cbox-left">
-                    <div className="col-md-12 col-sm-12 pb-5 bg-light">
-                        <h1 className="theading-title py-3">Center Offerings</h1> 
+        <section className="bg-light">
+        <div className="container">
+                <div className="row" id="cbox-left">
+                    <div className="col-md-12 col-sm-12 bg-light">
+                        <h1 className="theading-title">Center Offerings</h1> 
                         <p className="para">{centerInfo['short_description']}</p>
                         <h1 className="text-align-left"><b>Courses</b></h1>
-                        <div className="row" id="iconright">
+                        <div className="row mx-box" id="iconright">
                        
                        {centerCourses.map((course)=> (
 
-                        <div className="course-box1">
+                        <div className="course-box">
                             <div className="service-item body-light overflow-hidden">
-                                <img className="img-fluid" src={course['course_image']} alt=""/>
+                                <div className="img-sec1">
+                                <img className="img-fluid mx-box-img" src={course['course_image']} alt=""/>
+                                </div>
+                                
                                 <p className="text-school p-3">{course['course_name']}</p>
                                 <div className="d-flex py-3 px-4 bor-1">
                                     <a href={course['course_link']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
@@ -94,6 +80,8 @@ const CenterCoursesListContainer = ({centerInfo, centerCourses}) => {
 
                 </div>
         </div>
+
+        </section>
 
 
 

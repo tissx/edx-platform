@@ -14,18 +14,18 @@ const CenterProgramListContainer = ({programList}) => {
     {programList.map((program_list) => (
 
         <section>
-        <div className="container-fluid learn-school py-5">
+        <div className="container-fluid learn-school py-2">
             <div className="container listing-container">
                 <div>
                     <h1 className="text-align-left"><b>{program_list['program_type']}</b></h1>
                 </div>
-                <div className="row certificateprg" id="iconright">
+                <div className="row certificateprg mx-box" id="iconright">
 
                     {program_list.program.map((program) => (
 
                     <div className="course-box">
                         <div className="service-item body-light overflow-hidden">
-                            <img className="img-fluid set-img" src={program['program_image']} alt=""/>
+                            <img className="img-fluid set-img mx-box-img" src={program['program_image']} alt=""/>
                             <div className="service-text position-relativ">
                                 <p className="text-school">{program['program_name']}
                                 </p>

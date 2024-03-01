@@ -20,9 +20,11 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
   // const [selectedLearningType, setselectedLearningType] =   useState();
 
   const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language);
-  const [centerList, setcenterList] = useState([]);
+  const [centerList, setcenterList] = useState(FiterDetail.center_list);
   const [FormQuerytxt, setFormQuerytxt] = useState(Querytxt);
-  const [selectSchool, setselectSchool] = useState([]);
+  const [selectSchool, setselectSchool] = useState(FiterDetail.selected_school);
+
+  const [selectedCenter, setselectedCenter] = useState(FiterDetail.selected_center);
 
   
   if(mxLearningType != selectedLearningType){
@@ -34,6 +36,12 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     const url = new URL(window.location.href);
     url.searchParams.set(query_param, query_value);
     // url.searchParams.delete('param2');
+    window.history.replaceState(null, null, url);
+  }
+
+  function DeleteURL(query_param) {
+    const url = new URL(window.location.href);
+    url.searchParams.delete(query_param);
     window.history.replaceState(null, null, url);
   }
 
@@ -133,6 +141,8 @@ const handleKeypress = e => {
   const onSchoolChange = (e) => {
     let val = e.target.value;
     setselectSchool(val)
+    setcenterList([])
+    setselectedCenter()
     //start Fetch Center List from discovery
     var get_center_from_school_url = `${my_discovery_url}/api/v1/lms-search/get-center-from-school/?school=${val}`
 
@@ -155,16 +165,19 @@ const handleKeypress = e => {
     let center = ""
     //  alert(subject)
     let language = document.getElementById('language').value
+    UpdateURL('school', val)
+    UpdateURL('center', center)
 
     getSearchData(subject, program_group, learning_type, query, val, center, language)
     
-    // UpdateURL('school', val)
+    
+    // DeleteURL('center')
 
   }; 
 
   const onCenterChange = (e) => {
     let val = e.target.value;
-
+    setselectedCenter(val)
     let subject = document.getElementById('subject').value
     let learning_type = document.getElementById('learning_type').value
     let program_group = document.getElementById('program_group').value
@@ -173,7 +186,7 @@ const handleKeypress = e => {
     let language = document.getElementById('language').value
 
     getSearchData(subject, program_group, learning_type, query, school, val, language)
-    // UpdateURL('center', val)
+    UpdateURL('center', val)
     
   };
   
@@ -189,7 +202,7 @@ const handleKeypress = e => {
     let center = document.getElementById('center').value
     getSearchData(subject, program_group, learning_type, query, school, center, language)
    
-    // UpdateURL('language', language)
+    UpdateURL('language', language)
     
   };
 
@@ -225,11 +238,11 @@ const handleKeypress = e => {
     <section className="bglight p-2" id="firstSection">
         <div className="container listing-container">
             <h1 className="theading-title">Filter</h1> 
-          <div className="row">
+          <div className="row row-cols-6 pb-3">
             
             {/* First row for filter dropdown start */}
-            <div className="firstROW d-flex pb-2">
-                <div className="custom-select search-filter-box1 ">
+            {/* <div className="firstROW d-flex pb-2"> */}
+                <div className="custom-select">
 
                     {/* <select className="dropdown-toggle SelectOne {selectedSubject}" id="subject" data-bs-toggle="dropdown" */}
                     <select className={Boolean(selectedSubject)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="subject" data-bs-toggle="dropdown"
@@ -242,7 +255,7 @@ const handleKeypress = e => {
                       ))}
                     </select>
                 </div>
-                <div className="custom-select search-filter-box ">
+                <div className="custom-select">
                     <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program_group" data-bs-toggle="dropdown"
                     value={selectedProgram}
                     onChange={(e) => onProgramChange(e)}
@@ -253,9 +266,10 @@ const handleKeypress = e => {
                       ))}
                     </select>
                 </div>
-                <div className="custom-select search-filter-box ">
+                <div className="custom-select ">
                     <select className={Boolean(selectSchool.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  data-bs-toggle="dropdown"
                     id="school"
+                    value={selectSchool}
                     onChange={(e) => onSchoolChange(e)}
                     >
                       <option className="ColorLight" value="">School</option>
@@ -266,10 +280,11 @@ const handleKeypress = e => {
                     </select>
                 </div>
                 
-                <div className="custom-select search-filter-box ">
+                <div className="custom-select ">
                 
                     <select className={Boolean(centerList.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} data-bs-toggle="dropdown"
                     id="center"
+                    value={selectedCenter}
                     onChange={(e) => onCenterChange(e)}
                     >
                       <option className="ColorLight" value="">Center</option>
@@ -279,14 +294,14 @@ const handleKeypress = e => {
                     </select>
                 </div>
 
-            </div>
+            {/* </div>
             {/* First row for filter dropdown End */}
 
             {/* 2nd row for filter dropdown Start */}
-            <div className="firstROW d-flex p-2">
+            {/* <div className="firstROW d-flex pb-3 py-2"> */} 
               
 
-                <div className="custom-select search-filter-box1">
+                <div className="custom-select">
                     <select className="dropdown-toggle SelectOne" id="language" data-bs-toggle="dropdown"
                     value={selectedLanguage}
                     onChange={(e) => onLanguageChange(e)}
@@ -298,7 +313,7 @@ const handleKeypress = e => {
                     </select>
                 </div>
 
-                <div className="custom-select search-filter-box ">
+                <div className="custom-select ">
                     <select className={Boolean(selectedLearningType)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="learning_type" data-bs-toggle="dropdown"
                     value={selectedLearningType}
                     onChange={(e) => onLearningTypeChange(e)}
@@ -310,7 +325,7 @@ const handleKeypress = e => {
                         <option value="program-degree">Program & Degree</option>
                     </select>
                 </div>
-            </div>
+            {/* </div> */}
             {/* 2nd row for filter dropdown Start */}
 
 
