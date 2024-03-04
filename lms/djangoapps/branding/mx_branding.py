@@ -2,14 +2,18 @@
 from urllib.parse import urljoin
 import requests
 import logging
+from django.conf import settings
+
 log = logging.getLogger(__name__)
 
-COURSE_CATALOG_API_URL= "http://discovery.local.overhang.io:8381/api/v1/"
+# COURSE_CATALOG_API_URL= "http://discovery.local.overhang.io:8381/api/v1/"
+
+COURSE_CATALOG_API_URL = getattr(settings, 'LMS_DISCOVERY_URL', "")
 
 def get_header_from_discovery():
 
     # import pdb; pdb.set_trace()
-    url = urljoin(COURSE_CATALOG_API_URL, 'lms-header')
+    url = urljoin(COURSE_CATALOG_API_URL, '/api/v1/lms-header')
     # import time
     # time.sleep(2)
     try:

@@ -7,8 +7,10 @@ from django.conf import settings
 import logging
 log = logging.getLogger("")
 
-COURSE_CATALOG_API_URL= "http://discovery.local.overhang.io:8381/api/v1/"
+# COURSE_CATALOG_API_URL= "http://discovery.local.overhang.io:8381/api/v1/"
 
+
+COURSE_CATALOG_API_URL = getattr(settings, 'LMS_DISCOVERY_URL', "")
 
 class LandingPageViewSet(viewsets.GenericViewSet):
     """
