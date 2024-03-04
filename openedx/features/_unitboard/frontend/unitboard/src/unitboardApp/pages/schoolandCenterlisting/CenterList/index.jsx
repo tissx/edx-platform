@@ -22,7 +22,12 @@ const CenterListContainer = ({centerlist}) => {
                 <div className="course-box1 mx-box2">
                     <div className="service-item mx-inner2 body-light tissxoff">
                         <div className="img-sec">
-                            <img className="img-fluid mx-img2" src={center['center_image']} alt=""/>
+                            <img className="img-fluid mx-img2" 
+                            src={center['center_image']} 
+                            onError={(e) => {
+                                e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                             }}
+                            alt=""/>
                         </div>
                         
                         <div className="service-text position-relativ">

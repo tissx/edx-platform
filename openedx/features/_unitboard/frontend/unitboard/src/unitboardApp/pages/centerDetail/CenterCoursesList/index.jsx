@@ -26,7 +26,12 @@ const CenterCoursesListContainer = ({centerInfo, centerCourses}) => {
                         <div className="course-box">
                             <div className="service-item body-light overflow-hidden">
                                 <div className="img-sec1">
-                                <img className="img-fluid mx-box-img" src={course['course_image']} alt=""/>
+                                <img className="img-fluid mx-box-img"
+                                 src={course['course_image']}
+                                 onError={(e) => {
+                                    e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                 }}
+                                 alt=""/>
                                 </div>
                                 
                                 <p className="text-school p-3">{course['course_name']}</p>

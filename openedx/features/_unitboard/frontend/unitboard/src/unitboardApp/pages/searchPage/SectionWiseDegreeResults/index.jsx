@@ -41,7 +41,12 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                     <div className="course-box">
                         <div className="service-item body-light tissxoff">
                             <div className="img-sec">
-                                <img className="img-fluid" src={degree['banner_image']} alt="" />
+                                <img className="img-fluid" 
+                                src={degree['banner_image']}
+                                onError={(e) => {
+                                  e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                               }}
+                                alt="" />
                             </div>
                            
                             <p className="title p-3">{degree['title']}</p>

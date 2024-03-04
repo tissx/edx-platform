@@ -24,7 +24,11 @@ var center_listing= centerlist['centerListData']['results']
                     <div className="course-box">
                         <div className="service-item body-light tissxoff">
                             <div className="img-sec">
-                                <img className="img-fluid" src={center.image} alt=""/>
+                                <img className="img-fluid" src={center.image}
+                                onError={(e) => {
+                                    e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                 }}
+                                alt=""/>
                             </div>
                             
                             <div className="service-text position-relativ">

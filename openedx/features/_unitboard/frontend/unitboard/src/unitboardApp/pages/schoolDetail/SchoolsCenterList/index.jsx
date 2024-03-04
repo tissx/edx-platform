@@ -25,7 +25,12 @@ const SchoolsCenterListContainer = ({SchoolInfo, CenterList}) => {
                             {CenterList.map((center) => (
                             <div className="course-box">
                                 <div className="service-item body-light overflow-hidden">
-                                    <img className="img-fluid mx-box-img" src={center['center_image']} alt=""/>
+                                    <img className="img-fluid mx-box-img" 
+                                    src={center['center_image']} 
+                                    onError={(e) => {
+                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                     }}
+                                    alt=""/>
                                     <p className="text-school p-3">{center['center_name']}</p>
                                     <div className="d-flex py-3 px-4 bor-1">
                                         <a href={center['center_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>

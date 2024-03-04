@@ -74,7 +74,12 @@ const ProgramCoursesContainer = (program_course) => {
                             <div className="item">
                                 <div className="service-item body-light tissxoff">
                                     <div className="img-sec">
-                                    <img className="img-fluid" src={course_list['course_image']}  alt=""/>
+                                    <img className="img-fluid" 
+                                    src={course_list['course_image']}
+                                    onError={(e) => {
+                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                     }}
+                                    alt=""/>
                                     </div>
                                     <div className="service-text position-relativ p-2">
                                         <p>{course_list['course_name']} </p>

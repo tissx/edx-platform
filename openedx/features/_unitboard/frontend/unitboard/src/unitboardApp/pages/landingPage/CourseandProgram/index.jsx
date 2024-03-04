@@ -3,9 +3,6 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import {$, jQuery} from 'jquery';
-import * as R from "ramda";
-
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -66,24 +63,19 @@ autoplayHoverPause:true,
                                     <div className="item">
                                         <div className="service-item body-light tissxoff">
                                             <div className="img-sec">
-                                                <img className="img-fluid" src= {course_list.course_image} alt=""/>
 
-                                                {/* <img className="img-fluid" 
+                                                <img className="img-fluid" 
                                                 onError={(e) => {
-                                                    e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/No_sign.svg/2048px-No_sign.svg.png' // some replacement image
+                                                    e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                                  }}
-                                                src= {course_list.course_image} alt=""/> */}
+                                                src= {course_list.course_image} alt=""/>
                                             
                                             </div>
                                             <div className="service-text">
                                                 <p className="p-2">{course_list.course_name}</p>
-                                                {/* <div className="wrappercl"> */}
 
-                                                {/* <div className="short-descp"> */}
                                                 <p className="px-2 box-short-descp">{course_list.short_description}</p>
 
-                                                {/* </div> */}
-                                                {/* </div> */}
 
                                                 <div className="py-4 border-top">
                                                     <a href={course_list.course_detail}  className="readmorebtn orgclr btn-read-more"><span></span></a>
@@ -119,7 +111,11 @@ autoplayHoverPause:true,
                             <div className="item">
                                 <div className="service-item body-light tissxoff">
                                     <div className="img-sec">
-                                        <img className="img-fluid" src={programs_list.program_image} alt=""/>
+                                        <img className="img-fluid" 
+                                        onError={(e) => {
+                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                         }}
+                                        src={programs_list.program_image} alt=""/>
                                     </div>
                                     <div className="service-text">
                                         <p className="p-2">{programs_list.program_name}</p>
@@ -157,7 +153,11 @@ autoplayHoverPause:true,
                             <div className="item">
                                 <div className="service-item body-light tissxoff">
                                     <div className="img-sec">
-                                        <img className="img-fluid" src={degree_list.degree_image} alt=""/>
+                                        <img className="img-fluid" 
+                                        onError={(e) => {
+                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                         }}
+                                        src={degree_list.degree_image} alt=""/>
                                     </div>
                                     <div className="service-text">
                                         <p className="p-2">{degree_list.degree_name}</p>

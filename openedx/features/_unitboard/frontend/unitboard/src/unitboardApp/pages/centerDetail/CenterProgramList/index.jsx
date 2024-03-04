@@ -25,7 +25,12 @@ const CenterProgramListContainer = ({programList}) => {
 
                     <div className="course-box">
                         <div className="service-item body-light overflow-hidden">
-                            <img className="img-fluid set-img mx-box-img" src={program['program_image']} alt=""/>
+                            <img className="img-fluid set-img mx-box-img" 
+                            src={program['program_image']} 
+                            onError={(e) => {
+                                e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                             }}
+                            alt=""/>
                             <div className="service-text position-relativ">
                                 <p className="text-school">{program['program_name']}
                                 </p>
