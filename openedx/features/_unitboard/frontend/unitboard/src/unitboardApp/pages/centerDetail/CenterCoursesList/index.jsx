@@ -19,32 +19,42 @@ const CenterCoursesListContainer = ({centerInfo, centerCourses}) => {
                         <h1 className="theading-title">Center Offerings</h1> 
                         <p className="para">{centerInfo['short_description']}</p>
                         <h1 className="text-align-left"><b>Courses</b></h1>
-                        <div className="row mx-box" id="iconright">
+                        <div className="row mx-box center-courses" id="iconright">
                        
-                       {centerCourses.map((course)=> (
+                        {centerCourses.map((course)=> (
 
-                        <div className="course-box">
-                            <div className="service-item body-light overflow-hidden">
-                                <div className="img-sec1">
-                                <img className="img-fluid mx-box-img"
-                                 src={course['course_image']}
-                                 onError={(e) => {
-                                    e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                 }}
-                                 alt=""/>
-                                </div>
-                                
-                                <p className="text-school p-3">{course['course_name']}</p>
-                                <div className="d-flex py-3 px-4 bor-1">
-                                    <a href={course['course_link']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                    <a href={course['course_link']}><small><img className="img moreicon"/></small></a>
+                            <div className="course-box">
+                                <div className="service-item body-light overflow-hidden">
+                                    <div className="img-sec1">
+                                    <img className="img-fluid mx-box-img"
+                                    src={course['course_image']}
+                                    onError={(e) => {
+                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                    }}
+                                    alt=""/>
+                                    </div>
+                                    
+                                    <p className="text-school p-3">{course['course_name']}</p>
+                                    <div className="d-flex py-3 px-4 bor-1">
+                                        <a href={course['course_link']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                                        <a href={course['course_link']}><small><img className="img moreicon"/></small></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         ))}
+
+                        {/* Start No result Found  */}
+                    
+                        {centerCourses.length== 0 && (
+                        <div className="no-result-found">
+                            <div className="no-result-found-msg">Courses are not available.</div>
+                        </div>
+                        )}
+                    {/* End No result Found  */}
                         
-                    </div>
+                        </div>
+
                     </div>
 
                     {/* End short description and Courses Listing  */}

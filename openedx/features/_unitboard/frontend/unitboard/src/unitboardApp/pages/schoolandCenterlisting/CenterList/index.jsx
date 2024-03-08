@@ -14,7 +14,7 @@ const CenterListContainer = ({centerlist}) => {
         <div className="container listing-container">
             <h1 className="text-align-left"><b>Centers</b></h1>
 
-            <div className="row" id="iconright">
+            <div className="row listing-school-center" id="iconright">
 
                 {centerlist.map((center) => (
 
@@ -43,6 +43,15 @@ const CenterListContainer = ({centerlist}) => {
                 </div>
 
                 ))}
+
+                {/* Start No result Found  */}
+                    
+                {centerlist.length== 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Centers are not available.</div>
+                    </div>
+                )}
+                    {/* End No result Found  */}
               
 
             </div>

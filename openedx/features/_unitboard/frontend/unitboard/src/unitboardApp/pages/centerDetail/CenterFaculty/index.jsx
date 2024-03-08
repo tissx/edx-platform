@@ -14,7 +14,7 @@ const CenterFacultyContainer = ({centerFaculty}) => {
         <section>
             <div className="container listing-container">
                 <h1 className="theading-title">Programme Faculty</h1>
-                <div className="row justify-content-center">
+                <div className="row center-faculty">
 
                     {centerFaculty.map((faculty) => (
                         
@@ -30,6 +30,14 @@ const CenterFacultyContainer = ({centerFaculty}) => {
 
                     ))}
 
+                {/* Start No result Found  */}
+                    
+                {centerFaculty.length== 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Faculty is not available.</div>
+                    </div>
+                )}
+                {/* End No result Found  */}
                     
                 </div>
             </div>

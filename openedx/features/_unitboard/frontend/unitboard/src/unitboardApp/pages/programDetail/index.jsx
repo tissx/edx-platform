@@ -49,11 +49,11 @@ var program_detail_url = `${my_discovery_url}/api/v1/get-program-from-slug/?prog
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramInfo programinfo={programdetail.program_info} />}
         
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <ProgramCourses programinfo={programdetail.program_info} programcourses={programdetail.program_course} />}
-        {!R.isEmpty(programdetail) && programdetail.length !== 0 && programdetail.instructor.length !== 0 && <ProgramFaculty programfaculty={programdetail.instructor} />}
+        {!R.isEmpty(programdetail) && programdetail.length !== 0  && <ProgramFaculty programfaculty={programdetail.instructor} />}
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <HowToApply />}
         
         {/* <HowToApply/> */}
-        {!R.isEmpty(programdetail) && programdetail.length !== 0 && programdetail.faq.length !== 0  && <ProgramFAQ programfaq={programdetail.faq} />}
+        {!R.isEmpty(programdetail) && <ProgramFAQ programfaq={programdetail.faq} />}
         
     
        </>

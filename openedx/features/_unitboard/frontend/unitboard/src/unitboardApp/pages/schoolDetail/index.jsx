@@ -60,7 +60,7 @@ const SchoolDeatilContainer = ({my_discovery_url}) => {
 
         {!R.isEmpty(schooldetail) && schooldetail.length !== 0 && <SchoolDetailBannerContainer SchoolInfo={schooldetail.school_info} />} 
         {!R.isEmpty(schooldetail) && schooldetail.length !== 0 && <SchoolsCenterList SchoolInfo={schooldetail.school_info} CenterList={schooldetail.centers} />} 
-        {(schoolLoader) && !R.isEmpty(schoolfacultydetail) && schoolfacultydetail.length !== 0 && <SchoolFaculty SchoolFacultyInfo={schoolfacultydetail}  />} 
+        {(schoolLoader) && !R.isEmpty(schoolfacultydetail)  && <SchoolFaculty SchoolFacultyInfo={schoolfacultydetail}  />} 
 
        </>
     );

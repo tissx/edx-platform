@@ -66,20 +66,30 @@ const PartnerListContainer = ({partnerlist}) => {
                     {/* <section className="customer-logos slider"> */}
                     <div className="row" id="iconright1">  
 
-                    <OwlCarousel className='owl-theme' {...option}>
+                        <OwlCarousel className='owl-theme' {...option}>
 
-                        {partnerlist.map((partner) => (
-                       
-                        <div className="slide shadow-sm border-1">
-                            <img src={partner['image']} className="img-fluid"/>
-                            <small>{partner['name']}</small>
-                        </div>
+                            {partnerlist.results.map((partner) => (
+                        
+                            <div className="slide shadow-sm border-1">
+                                <img src={partner['image']} className="img-fluid"/>
+                                <small>{partner['name']}</small>
+                            </div>
 
-                         ))}
+                            ))}
 
-                                
-                        </OwlCarousel>
-                </div>
+                            </OwlCarousel>
+
+
+                    {/* Start No result Found  */}
+                    
+                    {partnerlist.count== 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Partners are not available.</div>
+                    </div>
+                    )}
+                    {/* End No result Found  */}
+
+                    </div>
                     {/* </section> */}
 
                 </div>

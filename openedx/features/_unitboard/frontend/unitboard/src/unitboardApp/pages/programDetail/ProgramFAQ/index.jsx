@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const ProgramFAQContainer = (programfaq) => {
+const ProgramFAQContainer = ({programfaq}) => {
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -40,17 +40,16 @@ const ProgramFAQContainer = (programfaq) => {
       setExpanded(isExpanded ? panel : false);
     };
 
-// console.log("programfaq", programfaq)
     return (
         <>
         <section>
-        <div className="container">
+        <div className="container program-faq">
             <h1 className="theading-title pb-3 faq-title">FAQs</h1>
            
 
             <div className={classes.root}>
       
-            {programfaq.programfaq.map((faq) => (
+            {programfaq.map((faq) => (
       
               <Accordion  className={styles.accordion} expanded={expanded === faq['id']} onChange={handleChange(faq['id'])}>
                 <AccordionSummary 
@@ -69,6 +68,16 @@ const ProgramFAQContainer = (programfaq) => {
               </Accordion>
 
              ))} 
+
+
+             {/* Start No result Found  */}
+                    
+             {programfaq.length== 0 && (
+                <div className="no-result-found">
+                    <div className="no-result-found-msg">FAQs are not available.</div>
+                </div>
+              )}
+              {/* End No result Found  */}
     
             </div>
 

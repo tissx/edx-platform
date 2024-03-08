@@ -56,7 +56,7 @@ const CenterDeatilContainer = ({my_discovery_url}) => {
         {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterDetailBanner centerInfo={centerdetail.center_info} />} 
         {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterCoursesList centerInfo={centerdetail.center_info} centerCourses={centerdetail.courses} />} 
         {!R.isEmpty(programdetail) && programdetail.length !== 0 && <CenterProgramList programList={programdetail} />} 
-        {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && centerdetail.faculty.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />} 
+        {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />} 
         
     
        </>

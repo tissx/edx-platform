@@ -6,9 +6,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const SchoolsListContainer = (schoollist) => {
+const SchoolsListContainer = ({schoolListData}) => {
   
-var school_listing= schoollist['schoolListData']['results']
+// var school_listing= schoolListData['results']
     return (
 
         <section className="learn-school">
@@ -22,7 +22,7 @@ var school_listing= schoollist['schoolListData']['results']
 
                     {/* start Dynamic schools */}
 
-                    {school_listing.map((school) => (
+                    {schoolListData.results.map((school) => (
       
                     <div className="course-box">
                         <div className="service-item body-light tissxoff">
@@ -43,6 +43,15 @@ var school_listing= schoollist['schoolListData']['results']
                     </div>
                     ))} 
                     {/* End Dynamic schools */}
+
+                    {/* Start No result Found  */}
+                    
+                    {schoolListData.count == 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Schools are not available.</div>
+                    </div>
+                    )}
+                    {/* End No result Found  */}
 
             
                 </div>

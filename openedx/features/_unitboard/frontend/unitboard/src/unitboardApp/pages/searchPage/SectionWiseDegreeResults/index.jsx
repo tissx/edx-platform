@@ -28,7 +28,7 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                 <h1 className="theading-title py-4 search-result-title"> {(Querytxt)?  '"'+ Querytxt + '" Degrees' : 'Degrees'}</h1>
             </div>
             <div className="col-md-6 py-4">
-            <p className="show-result-count" onClick={handleShowMore}>Show ({DegreeResults.count})</p>
+            <p className="show-result-count" onClick={handleShowMore}>Show all ({DegreeResults.count})</p>
               
             </div>
             <main>

@@ -3,7 +3,6 @@
  * School Faculty for School Detail Page
  */
 
-import React, { useState, useEffect } from 'react';
 
 const SchoolFacultyContainer = ({SchoolFacultyInfo}) => {
 
@@ -12,9 +11,9 @@ const SchoolFacultyContainer = ({SchoolFacultyInfo}) => {
         <section>
             <div className="container listing-container">
                 <h1 className="theading-title">Programme Faculty</h1>
-                <div className="row justify-content-center">
+                <div className="row school-faculty">
 
-                    {SchoolFacultyInfo.map((faculty) => (
+                    {SchoolFacultyInfo.instructor.map((faculty) => (
                    
                     <div className="col-md-4 col-sm-4 col-lg-4 p-3">
                         <div className="card service-box-1 overflow-hidden h-100">
@@ -27,6 +26,15 @@ const SchoolFacultyContainer = ({SchoolFacultyInfo}) => {
                     </div>
 
                     ))}
+
+                    {/* Start No result Found  */}
+                    
+                    {SchoolFacultyInfo.instructor.length== 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Faculty is not available.</div>
+                    </div>
+                    )}
+                    {/* End No result Found  */}
 
                 </div>
             </div>

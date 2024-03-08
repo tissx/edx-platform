@@ -177,28 +177,33 @@ const SearchPageContainer = ({my_discovery_url}) => {
     const subject = query.get('subject')
     const program_degree_group = query.get('program_degree_group')
     const learning_type = query.get('learning_type')
-    const school = query.get('school')
-    const center = query.get('center')
-    var language = query.get('language')
-    var query_search = query.get('query')
+    const school = query.get('school') || ""
+    const center = query.get('center') || ""
+    var language = query.get('language') || ""
+    var query_search = query.get('query') || ""
 
 
 
 
-    if(!(language)) {
-      language = ""
+    // if(!(language)) {
+    //   language = ""
+    // }
+
+    // if(!(query_search)) {
+    //   query_search = ""
+    // }
+    // else {
+    //   setshowSectionResults(true)
+    //   size = 4
+    // }
+
+    if(query_search) {
+        setshowSectionResults(true)
+        size = 4
     }
 
-    if(!(query_search)) {
-      query_search = ""
-    }
-    else {
-      setshowSectionResults(true)
-      size = 4
-    }
 
-
-    var get_search_filter_url = `${my_discovery_url}/api/v1/lms-discovery-search-filter/?subject=${subject}&program_degree_group=${program_degree_group}&learning_type=${learning_type}&school=${school}&center=${center}&center=${center}`
+    var get_search_filter_url = `${my_discovery_url}/api/v1/lms-discovery-search-filter/?subject=${subject}&program_degree_group=${program_degree_group}&learning_type=${learning_type}&school=${school}&center=${center}&language=${language}`
 
     //start Fetch filter detail from discovery
     fetch(get_search_filter_url)

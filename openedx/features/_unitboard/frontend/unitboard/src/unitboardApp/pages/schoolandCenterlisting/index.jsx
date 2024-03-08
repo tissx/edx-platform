@@ -61,7 +61,7 @@ fetch(partner_list_url)
         {!R.isEmpty(schoolcenterlist) && schoolcenterlist.length !== 0 && <SchoolList schoollist={schoolcenterlist.schools} />} 
         {!R.isEmpty(schoolcenterlist) && schoolcenterlist.length !== 0 && <CenterList centerlist={schoolcenterlist.centers} />} 
         
-        {listingLoader && !R.isEmpty(partnerlist) && partnerlist.length !== 0 && <PartnerList partnerlist={partnerlist.results} />} 
+        {listingLoader && !R.isEmpty(partnerlist) && partnerlist.length !== 0 && <PartnerList partnerlist={partnerlist} />} 
        
        </>
     );

@@ -30,7 +30,7 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
             </div>
             <div className="col-md-6 py-4">
                
-               <p className="show-result-count" onClick={handleShowMore}>Show ({ProgramResults.count})</p>
+               <p className="show-result-count" onClick={handleShowMore}>Show all ({ProgramResults.count})</p>
 
             </div>
             <main>

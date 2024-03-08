@@ -7,13 +7,11 @@ import React, { useState, useEffect } from 'react';
 
 const SchoolListContainer = ({schoollist}) => {
 
-
     return (
-        
  
             <section>
                 <div className="container">
-                    <div className="row" id="iconright">
+                    <div className="row listing-school-center" id="iconright">
                         <h1 className="text-align-left"><b>Schools</b></h1>
 
                         {schoollist.map((school)=>(
@@ -38,6 +36,15 @@ const SchoolListContainer = ({schoollist}) => {
                         </div>
                         ))}
                     
+
+                    {/* Start No result Found  */}
+                    
+                    {schoollist.length== 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Schools are not available.</div>
+                    </div>
+                    )}
+                    {/* End No result Found  */}
 
                     </div>
                 </div>

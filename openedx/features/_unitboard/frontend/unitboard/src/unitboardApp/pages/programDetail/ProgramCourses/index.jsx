@@ -35,7 +35,7 @@ const ProgramCoursesContainer = (program_course) => {
     return (
         <>
                     
-        <div className="learn-school">
+        <div className="learn-school program-course">
             <div className="container">
                 <div>
                     <h1 className="theading-title">Objectives</h1>
@@ -43,31 +43,9 @@ const ProgramCoursesContainer = (program_course) => {
                 </div>
                 <h1 className="prg-course-title"><b>Programme Courses</b></h1>
                 <div className="row py-3" id="iconright1">  
-                    {/* <div className="owl-carousel owl-theme">
-                            
-                        <div className="item">
-                            <div className="item">
-                                <div className="service-item body-light tissxoff">
-                                    <div className="img-sec">
-                                    <img className="img-fluid" src="img/Tissx-offering.png" alt=""/>
-                                    </div>
-                                    <div className="service-text position-relativ p-2">
-                                        <p>Eklavya India </p>
-                                        <p className="px-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <div className="py-4 border-top">
-                                            <a className="readmorebtn orgclr"><span></span></a>
-                                            <a className="iconbg"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                     
-                    </div> */}
 
                     <OwlCarousel className='owl-theme' {...option}>
                     
-
                     {program_course.programcourses.map((course_list) => (
 
                         <div className="item">
@@ -97,6 +75,14 @@ const ProgramCoursesContainer = (program_course) => {
 
                     </OwlCarousel>
 
+                {/* Start No result Found  */}
+                    
+                {program_course.programcourses.length== 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Courses are not available.</div>
+                    </div>
+                )}
+                {/* End No result Found  */}
 
                 </div>
             </div>

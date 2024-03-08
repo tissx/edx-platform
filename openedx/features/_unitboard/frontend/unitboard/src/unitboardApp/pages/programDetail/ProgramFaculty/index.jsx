@@ -2,23 +2,19 @@
  * Program Faculty Page
  */
 
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as R from "ramda";
 
-
-const ProgramFacultyContainer = (programfaculty) => {
+const ProgramFacultyContainer = ({programfaculty}) => {
  
 
     return (
     
                 
-        <section className="learn-school bg-light">
+        <section className="learn-school program-faculty bg-light">
             <div className="container">
             <h1 className="theading-title pb-3">Programme Faculty</h1>
-            <div className="row justify-content-center">
+            <div className="row">
 
-            {programfaculty.programfaculty.map((faculty) => (
+            {programfaculty.map((faculty) => (
 
                 <div className="col-md-4 col-sm-4 col-lg-4 mb-2">
                     <div className="card service-box overflow-hidden h-100">
@@ -31,6 +27,15 @@ const ProgramFacultyContainer = (programfaculty) => {
                 </div>
                
             ))}
+
+            {/* Start No result Found  */}
+                    
+            {programfaculty.length== 0 && (
+                <div className="no-result-found">
+                    <div className="no-result-found-msg">Program Faculty are not available.</div>
+                </div>
+            )}
+            {/* End No result Found  */}
 
 
             </div>

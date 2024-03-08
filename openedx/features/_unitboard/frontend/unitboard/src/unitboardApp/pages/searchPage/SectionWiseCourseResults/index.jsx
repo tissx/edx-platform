@@ -25,12 +25,12 @@ function handleShowMore() {
     
     <section>
     <div className="container listing-container">
-        <div className="row">
+        <div className="row course-section-search">
             <div className="col-md-6">
                 <h1 className="theading-title py-4 search-result-title">{(Querytxt)?  '"'+ Querytxt + '" Courses' : 'Courses'}</h1>
             </div>
             <div className="col-md-6 py-4">
-               <p className="show-result-count" onClick={handleShowMore}>Show ({CourseResults.count})</p>
+               <p className="show-result-count" onClick={handleShowMore}>Show all({CourseResults.count})</p>
 
             </div>
             <main>
@@ -62,7 +62,17 @@ function handleShowMore() {
                   </li>
 
                 ))}
+
+                {/* start no search results found  */}
+                {CourseResults.count == 0 && (
+                  <div className="no-search-result">
+                        No search results found...
+                  </div>
+                )}
+                {/* start no search results found  */}
+
                 </ul>
+                
               </main>
         </div>
     </div>

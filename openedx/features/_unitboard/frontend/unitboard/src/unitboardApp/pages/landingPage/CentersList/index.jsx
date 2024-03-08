@@ -8,8 +8,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import classNames from 'classnames';
 
 
-const CentersListContainer = (centerlist) => {
-var center_listing= centerlist['centerListData']['results']
+const CentersListContainer = ({centerListData}) => {
+// var center_listing= centerlist['centerListData']['results']
   
     return (
 
@@ -19,7 +19,7 @@ var center_listing= centerlist['centerListData']['results']
                 <div className="row mx-box" id="iconright">
 
                     {/* start Dynamic center  */}
-                    {center_listing.map((center) => (
+                    {centerListData.results.map((center) => (
 
                     <div className="course-box">
                         <div className="service-item body-light tissxoff">
@@ -44,6 +44,16 @@ var center_listing= centerlist['centerListData']['results']
                     ))} 
 
                     {/* End Dynamic center  */}
+
+
+                    {/* Start No result Found  */}
+                    
+                    {centerListData.count == 0 && (
+                    <div className="no-result-found">
+                        <div className="no-result-found-msg">Centers are not available.</div>
+                    </div>
+                    )}
+                    {/* End No result Found  */}
 
                     
                 </div>

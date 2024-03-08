@@ -20,7 +20,7 @@ const SchoolsCenterListContainer = ({SchoolInfo, CenterList}) => {
                             <h1 className="theading-title">School Offerings</h1> 
                             <p className="para">{SchoolInfo['short_description']}</p>
                             <h1 className="text-align-left"><b>Centers</b></h1>
-                            <div className="row mx-box" id="iconright">
+                            <div className="row mx-box center-at-school" id="iconright">
 
                             {CenterList.map((center) => (
                             <div className="course-box">
@@ -40,7 +40,20 @@ const SchoolsCenterListContainer = ({SchoolInfo, CenterList}) => {
                             </div>
                             ))}
                             
+
+                        {/* Start No result Found  */}
+                    
+                        {CenterList.length== 0 && (
+                        <div className="no-result-found">
+                            <div className="no-result-found-msg">Centers are not available.</div>
                         </div>
+                        )}
+                        {/* End No result Found  */}
+                        
+                        </div>
+
+
+                        
                         </div>
 
                         {/* End short description and Center Listing  */}
