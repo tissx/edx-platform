@@ -72,7 +72,7 @@ autoplayHoverPause:true,
                                             
                                             </div>
                                             <div className="service-text">
-                                                <p className="p-2">{course_list.course_name}</p>
+                                                <p className="">{course_list.course_name}</p>
 
                                                 <p className="px-2 box-short-descp">{course_list.short_description}</p>
 
@@ -118,7 +118,7 @@ autoplayHoverPause:true,
                                         src={programs_list.program_image} alt=""/>
                                     </div>
                                     <div className="service-text">
-                                        <p className="p-2">{programs_list.program_name}</p>
+                                        <p className="">{programs_list.program_name}</p>
                                         <p className="px-2 box-short-descp">{programs_list.short_description}</p>
                                         <div className="py-4 border-top">
                                             <a href={programs_list.program_detail} className="readmorebtn orgclr btn-read-more"><span></span></a>
@@ -160,7 +160,7 @@ autoplayHoverPause:true,
                                         src={degree_list.degree_image} alt=""/>
                                     </div>
                                     <div className="service-text">
-                                        <p className="p-2">{degree_list.degree_name}</p>
+                                        <p className="">{degree_list.degree_name}</p>
                                         <p className="px-2 box-short-descp">{degree_list.short_description}</p>
                                         <div className="py-4 border-top">
                                             <a href={degree_list.degree_detail} className="readmorebtn orgclr btn-read-more"><span></span></a>

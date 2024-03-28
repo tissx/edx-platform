@@ -28,7 +28,8 @@ const SchoolsListContainer = ({schoolListData}) => {
                         <div className="service-item body-light tissxoff">
                             <div className="img-sec">
                                 <img className="img-fluid" 
-                                src={school.image}
+                                // src={school.image}
+                                src={school.image?school.image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
                                 onError={(e) => {
                                     e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                  }} alt=""/>

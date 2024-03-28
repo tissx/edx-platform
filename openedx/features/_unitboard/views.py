@@ -7,7 +7,6 @@ from django.urls import reverse
 from common.djangoapps.edxmako.shortcuts import render_to_response, render_to_string
 from django.conf import settings
 
-# discovery_URL = "http://discovery.local.overhang.io:8381"
 
 discovery_URL = getattr(settings, 'LMS_DISCOVERY_URL', "")
 
@@ -27,10 +26,8 @@ class UnitboardView(TemplateView):
             'my_discovery_url': discovery_URL
         }
 
-
         context = super().get_context_data(**kwargs)
         context['context_data'] = context_data
-        # context['api_urls'] = api_urls
         return context
 
 

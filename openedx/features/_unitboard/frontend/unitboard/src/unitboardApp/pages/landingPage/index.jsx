@@ -18,7 +18,6 @@ const LandingPageContainer = ({my_discovery_url}) => {
   const [schoollist, setschoollist] = useState([]);
   const [centerlist, setcenterlist] = useState([]);
   const [courseprogramlist, setcourseprogramlist] = useState([]);
-
   const [ProgCourseLoader, setProgCourseLoader] = useState();
   const [SchoolLoader, setSchoolLoader] = useState();
   const [CenterLoader, setCenterLoader] = useState();
@@ -35,9 +34,6 @@ fetch(`${my_discovery_url}/api/v1/lms-course-program-list`)
   setProgCourseLoader(true)
 });
 //End Fetch course, program and degree from discovery
-
-    // console.log("courseProgramData", courseprogramlist.courses)
-   
 
 
   //start Fetch school from discovery

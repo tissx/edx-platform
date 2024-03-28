@@ -24,18 +24,6 @@ class LandingPageViewSet(viewsets.GenericViewSet):
 
         GET /unitboard/api/lms-landing-page/course-program-list/
         """
-       
-        # url = urljoin(COURSE_CATALOG_API_URL, 'lms-course-program-list')
-        # try:
-        #         res = requests.get(url)
-        # except Exception as exc:
-        #         log.error('Discovery LMS API connection failure: {}'.format(exc))
-        #         return {}
-        # else:
-        #     if res.status_code != 200:
-        #         log.error('Discovery LMS failure: {}'.format(res.content))
-        #         return {}
-
 
         param = {
                 "courses": [
@@ -53,28 +41,5 @@ class LandingPageViewSet(viewsets.GenericViewSet):
                     }
                 ]
             }
-            # return Response(res.json())
         return Response(param)
-
-
-    # @action(methods=['get'], detail=False, url_path='school-list')
-    # def course_program_list(self, request, **kwargs):
-    #     """
-    #     Course Program Degrees Listing
-
-    #     GET /unitboard/api/lms-landing-page/school-list/
-    #     """
-       
-    #     url = urljoin(COURSE_CATALOG_API_URL, 'lms-school-list')
-    #     try:
-    #             res = requests.get(url)
-    #     except Exception as exc:
-    #             log.error('Discovery LMS API connection failure: {}'.format(exc))
-    #             return {}
-    #     else:
-    #         if res.status_code != 200:
-    #             log.error('Discovery LMS failure: {}'.format(res.content))
-    #             return {}
-
-    #         return Response(res.json())
 
