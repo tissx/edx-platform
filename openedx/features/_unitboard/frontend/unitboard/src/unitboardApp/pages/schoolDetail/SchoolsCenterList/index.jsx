@@ -19,24 +19,41 @@ const SchoolsCenterListContainer = ({SchoolInfo, CenterList}) => {
                         <div className="col-md-12 col-sm-12 bg-light">
                             <h1 className="theading-title">School Offerings</h1> 
                             <p className="para">{SchoolInfo['short_description']}</p>
-                            <h1 className="text-align-left"><b>Centers</b></h1>
-                            <div className="row mx-box center-at-school" id="iconright">
+                            <h1 className="text-align-left"><b>Centres</b></h1>
+                            {/* <div className="row mx-box center-at-school" id="iconright"> */}
+                            <div className="row mx-box p_tb" id="iconright">
 
                             {CenterList.map((center) => (
+                            // <div className="course-box">
+                            //     <div className="service-item body-light overflow-hidden">
+                            //         <img className="img-fluid mx-box-img" 
+                            //         src={center['center_image']} 
+                            //         onError={(e) => {
+                            //             e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                            //          }}
+                            //         alt=""/>
+                            //         <p className="text-school p-3">{center['center_name']}</p>
+                            //         <div className="d-flex py-3 px-4 bor-1">
+                            //             <a href={center['center_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                            //             <a href={center['center_detail']}><small><img  className="img moreicon"/></small></a>
+                            //         </div>
+                            //     </div>
+                            // </div>
+
                             <div className="course-box">
-                                <div className="service-item body-light overflow-hidden">
-                                    <img className="img-fluid mx-box-img" 
-                                    src={center['center_image']} 
-                                    onError={(e) => {
-                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                     }}
-                                    alt=""/>
-                                    <p className="text-school p-3">{center['center_name']}</p>
-                                    <div className="d-flex py-3 px-4 bor-1">
-                                        <a href={center['center_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                        <a href={center['center_detail']}><small><img  className="img moreicon"/></small></a>
+                                <a className="mx-link" href={center['center_detail']}>
+                                    <div className="service-item body-light tissxoff">
+                                        <div className="img_area">
+                                            <img className="img-fluid sch_card" 
+                                            src={center['center_image']} 
+                                            onError={(e) => {
+                                                e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                            }}
+                                            alt=""/>
+                                        </div>
+                                        <p className="title p-3">{center['center_name']}</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             ))}
                             
@@ -45,7 +62,7 @@ const SchoolsCenterListContainer = ({SchoolInfo, CenterList}) => {
                     
                         {CenterList.length== 0 && (
                         <div className="no-result-found">
-                            <div className="no-result-found-msg">Centers are not available.</div>
+                            <div className="no-result-found-msg">Centres are not available.</div>
                         </div>
                         )}
                         {/* End No result Found  */}

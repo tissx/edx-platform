@@ -4,6 +4,7 @@
  * Search Results for Section wise Courses Page
  */
 
+import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
 
 const SectionResultsCoursesContainer = ({CourseResults, Querytxt, showMoreDetail}) => {
 
@@ -30,7 +31,7 @@ function handleShowMore() {
                 <h1 className="theading-title py-4 search-result-title">{(Querytxt)?  '"'+ Querytxt + '" Courses' : 'Courses'}</h1>
             </div>
             <div className="col-md-6 py-4">
-               <p className="show-result-count" onClick={handleShowMore}>Show all({CourseResults.count})</p>
+               <p className="show-result-count" onClick={handleShowMore}>Show ({CourseResults.count}) <RightArrowIcon/></p>
 
             </div>
             <main>

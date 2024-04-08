@@ -60,7 +60,7 @@ autoplayHoverPause:true,
                                 {courseProgramData.courses.map((course_list) => (
 
                                 <div className="item">
-                                    <div className="item">
+                                    <div className="item mx-home-course">
                                         <div className="service-item body-light tissxoff">
                                             <div className="img-sec">
 
@@ -88,7 +88,20 @@ autoplayHoverPause:true,
                                 
                                 ))}  
 
+                                {/*start show view all courses card  */}
+
+                                <a href="/search-detail/?learning_type=course">
+                                    <div class="course-view-all">
+                                        <div class="text-mid"><h6>View all Courses</h6></div>
+                                
+                                    </div>
+                                </a>
+
+                                {/*End show view all courses card  */}
+
                                 </OwlCarousel>
+
+
                                 {/* END Dynamic Course */}
 
                         {/* </div> */}
@@ -107,14 +120,15 @@ autoplayHoverPause:true,
 
                         {courseProgramData.programs.map((programs_list) => (
 
+                
                         <div className="item">
-                            <div className="item">
+                            {/* <div className="item mx-home-course">
                                 <div className="service-item body-light tissxoff">
                                     <div className="img-sec">
                                         <img className="img-fluid" 
                                         onError={(e) => {
                                             e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                         }}
+                                        }}
                                         src={programs_list.program_image} alt=""/>
                                     </div>
                                     <div className="service-text">
@@ -126,10 +140,51 @@ autoplayHoverPause:true,
                                         </div>
                                     </div>
                                 </div>
+                            </div> */}
+
+
+                        <div className="item mx-home-program">
+                        
+                            <div className="program_data service-item body-light tissxoff">
+                            <a className="mx-prog-link" href={programs_list.program_detail}>
+                                <div className="img-Area">
+                                    <img className="img-fluid program_img_data"
+                                    
+                                    onError={(e) => {
+                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                    }}
+                                    src={programs_list.program_image} alt=""/>
+                                </div>
+                                <div className="content_box">
+                                    <div className="heading_text">
+                                        <h6>{programs_list.program_name}</h6>
+                                        <p>{programs_list.short_description}</p>
+                                    </div>
+                                <div className="prf_certificate">    
+                                    <a className="mx-prog-link" href={programs_list.program_detail}><span>{programs_list.program_type}</span></a>
+                                    <p className="py-1">{programs_list.total_course} Courses</p>
+                                </div>
+                                </div>
+                            </a>
                             </div>
-                        </div> 
+
+
+
+                            </div> 
+                        </div>
 
                         ))}  
+
+                        {/*start show view all program card  */}
+
+                        <a href="/search-detail/?learning_type=program">
+                            <div class="program-view-all">
+                                <div class="text-mid"><h6>View all Programs</h6></div>
+                        
+                            </div>
+                        </a>
+
+                        {/*End show view all program card  */}
 
                         </OwlCarousel>
                         {/* END Dynamic Program */}
@@ -150,7 +205,7 @@ autoplayHoverPause:true,
                         {courseProgramData.degrees.map((degree_list) => (
 
                         <div className="item">
-                            <div className="item">
+                            {/* <div className="item">
                                 <div className="service-item body-light tissxoff">
                                     <div className="img-sec">
                                         <img className="img-fluid" 
@@ -168,10 +223,49 @@ autoplayHoverPause:true,
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> 
+                            </div> */}
+
+                        <div className="item mx-home-program">
+                            
+                            <div className="program_data service-item body-light tissxoff">
+                                <a className="mx-prog-link" href={degree_list.degree_detail}>
+                                    <div className="img-Area">
+                                        <img className="img-fluid program_img_data"
+                                        
+                                        onError={(e) => {
+                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                        }}
+                                        src={degree_list.degree_image} alt=""/>
+                                    </div>
+                                    <div className="content_box">
+                                        <div className="heading_text">
+                                            <h6>{degree_list.degree_name}</h6>
+                                            <p>{degree_list.short_description}</p>
+                                        </div>
+                                    <div className="prf_certificate">    
+                                        <a className="mx-prog-link" href={degree_list.degree_detail}><span>{degree_list.degree_type}</span></a>
+                                        <p className="py-1">{degree_list.total_course} Courses</p>
+                                    </div>
+                                    </div>
+                                </a>
+                                </div>
+
+
+                            </div> 
+                        </div>
 
                         ))}  
+
+                        {/*start show view all degree card  */}
+
+                        <a href="/search-detail/?learning_type=degree">
+                            <div class="program-view-all">
+                                <div class="text-mid"><h6>View all Degrees</h6></div>
+                        
+                            </div>
+                        </a>
+
+                        {/*End show view all degree card  */}
 
                         </OwlCarousel>
                         {/* END Dynamic Degree */}

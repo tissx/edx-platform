@@ -11,29 +11,50 @@ const SchoolListContainer = ({schoollist}) => {
  
             <section>
                 <div className="container">
-                    <div className="row listing-school-center" id="iconright">
+                    <div className="row listing-school-center mx-box p_tb" id="iconright">
                         <h1 className="text-align-left"><b>Schools</b></h1>
 
                         {schoollist.map((school)=>(
 
-                        
-                        <div className="course-box1 mx-box2">
+                        // <div className="course-box1 mx-box2">
+                        //     <div className="service-item body-light tissxoff">
+                        //         <div className="img-sec">
+                        //             <img className="img-fluid" 
+                        //             src={school['school_image']} 
+                        //             onError={(e) => {
+                        //                 e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                        //              }}
+                        //             alt=""/>
+                        //         </div>
+                        //         <p className="title p-3">{school['school_name']}</p>
+                        //         <div className="d-flex p-3 bor-1">
+                        //             <a href={school['school_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                        //             <a href={school['school_detail']}><small><img className="img moreicon"/></small></a>
+                        //         </div> 
+                        //     </div>
+                        // </div>
+
+                        <div className="course-box">
+                        <a className="mx-link" href={school['school_detail']}>
                             <div className="service-item body-light tissxoff">
-                                <div className="img-sec">
-                                    <img className="img-fluid" 
+                                <div className="img_area">
+                                    <img className="img-fluid sch_card" 
                                     src={school['school_image']} 
                                     onError={(e) => {
                                         e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                     }}
+                                        }}
                                     alt=""/>
                                 </div>
+                            
                                 <p className="title p-3">{school['school_name']}</p>
-                                <div className="d-flex p-3 bor-1">
-                                    <a href={school['school_detail']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                    <a href={school['school_detail']}><small><img className="img moreicon"/></small></a>
-                                </div> 
+                              
                             </div>
-                        </div>
+                        </a>
+                    </div>
+
+
+
+
                         ))}
                     
 

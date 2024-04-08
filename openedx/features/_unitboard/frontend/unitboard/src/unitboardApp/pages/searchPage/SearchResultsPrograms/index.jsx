@@ -45,28 +45,61 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
                   {ProgramResults.results.map((program) => (
 
                   
-                  <li>
-                    <div className="course-box">
-                        <div className="service-item body-light tissxoff">
-                            <div className="img-sec">
-                                <img className="img-fluid" 
-                                src={program['banner_image']}
-                                onError={(e) => {
-                                  e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                               }}
-                                alt="" />
-                            </div>
+                  // <li>
+                  //   <div className="course-box">
+                  //       <div className="service-item body-light tissxoff">
+                  //           <div className="img-sec">
+                  //               <img className="img-fluid" 
+                  //               src={program['banner_image']}
+                  //               onError={(e) => {
+                  //                 e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                  //              }}
+                  //               alt="" />
+                  //           </div>
                            
-                            <p className="title p-3">{program['title']}</p>
-                            <div className="d-flex p-3 bor-1">
-                                <a href={'../program-detail/' + program['uuid']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                <a><small><img className="img moreicon" /></small></a>
-                            </div> 
+                  //           <p className="title p-3">{program['title']}</p>
+                  //           <div className="d-flex p-3 bor-1">
+                  //               <a href={'../program-detail/' + program['uuid']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                  //               <a><small><img className="img moreicon" /></small></a>
+                  //           </div> 
+                  //       </div>
+                  //   </div>
+                  // </li>
+
+                        <div className="program_data service-item body-light tissxoff mx-search-results">
+                          <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}>
+                              <div className="img-Area">
+                                  <img className="img-fluid program_img_data"
+                                  
+                                  onError={(e) => {
+                                      e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                  }}
+                                  src={program['banner_image']} alt=""/>
+                              </div>
+                              <div className="content_box">
+                                  <div className="heading_text">
+                                      <h6>{program['title']}</h6>
+                                      <p>{program.mx_program_descrp}</p>
+                                      
+                                  </div>
+                              <div className="prf_certificate">    
+                                  <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}><span>{program.type}</span></a>
+                                  <p className="py-1">{program.mx_no_of_courses} Courses</p>
+                              </div>
+                              </div>
+                          </a>
                         </div>
-                    </div>
-                  </li>
 
                 ))}
+
+
+                  {/* start no search results found  */}
+                  {ProgramResults.count == 0 && (
+                    <div className="no-search-result">
+                          No search results found...
+                    </div>
+                  )}
+                {/* start no search results found  */}
                 </ul>
               </main>
         </div>

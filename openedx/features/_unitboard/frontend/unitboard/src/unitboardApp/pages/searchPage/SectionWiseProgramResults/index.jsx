@@ -3,6 +3,7 @@
  * Search Results for section wise Progra, Page
  */
 
+import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
 
 const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetail}) => {
 
@@ -30,7 +31,7 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
             </div>
             <div className="col-md-6 py-4">
                
-               <p className="show-result-count" onClick={handleShowMore}>Show all ({ProgramResults.count})</p>
+               <p className="show-result-count" onClick={handleShowMore}>Show ({ProgramResults.count}) <RightArrowIcon/></p>
 
             </div>
             <main>
@@ -40,7 +41,7 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
 
                   
                   <li>
-                    <div className="course-box">
+                    {/* <div className="course-box">
                         <div className="service-item body-light tissxoff">
                             <div className="img-sec">
                                 <img className="img-fluid" 
@@ -58,10 +59,45 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
                                 <a><small><img className="img moreicon" /></small></a>
                             </div> 
                         </div>
-                    </div>
+                    </div> */}
+
+
+                        <div className="program_data service-item body-light tissxoff mx-search-results">
+                          <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}>
+                              <div className="img-Area">
+                                  <img className="img-fluid program_img_data"
+                                  
+                                  onError={(e) => {
+                                      e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                  }}
+                                  src={program['banner_image']} alt=""/>
+                              </div>
+                              <div className="content_box">
+                                  <div className="heading_text">
+                                      <h6>{program['title']}</h6>
+                                      <p>{program.mx_program_descrp}</p>
+                                      
+                                  </div>
+                              <div className="prf_certificate">    
+                                  <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}><span>{program.type}</span></a>
+                                  <p className="py-1">{program.mx_no_of_courses} Courses</p>
+                              </div>
+                              </div>
+                          </a>
+                        </div>
+
+
                   </li>
 
                 ))}
+
+                {/* start no search results found  */}
+                {ProgramResults.count == 0 && (
+                  <div className="no-search-result">
+                        No search results found...
+                  </div>
+                )}
+                {/* start no search results found  */}
                 </ul>
               </main>
         </div>

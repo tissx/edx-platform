@@ -60,7 +60,7 @@ const ProgramCoursesContainer = (program_course) => {
                                     alt=""/>
                                     </div>
                                     <div className="service-text position-relativ p-2">
-                                        <p>{course_list['course_name']} </p>
+                                        <p className="program-course-title">{course_list['course_name']} </p>
                                         <p className="px-2 box-short-descp">{course_list['course_description']} </p>
                                         <div className="py-4 border-top">
                                             <a href={course_list['course_link']}  className="readmorebtn orgclr"><span></span></a>
