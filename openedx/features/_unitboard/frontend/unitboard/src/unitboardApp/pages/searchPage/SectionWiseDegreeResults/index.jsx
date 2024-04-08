@@ -58,6 +58,7 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                   //       </div>
                   //   </div>
                   // </li>
+                    <li>
 
                         <div className="program_data service-item body-light tissxoff mx-search-results">
                           <a className="mx-prog-link" href={'../program-detail/' + degree['uuid']}>
@@ -82,6 +83,7 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                               </div>
                           </a>
                         </div>
+                    </li>
 
                 ))}
 

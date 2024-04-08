@@ -65,7 +65,7 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
                   //       </div>
                   //   </div>
                   // </li>
-
+                    <li>
                         <div className="program_data service-item body-light tissxoff mx-search-results">
                           <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}>
                               <div className="img-Area">
@@ -89,6 +89,8 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
                               </div>
                           </a>
                         </div>
+                   </li>
+
 
                 ))}
 
