@@ -46,7 +46,7 @@ function handleCoursePageChange(event, value) {
                                 alt="" />
                             </div>
                            
-                            <p className="title p-3">{course['title']}</p>
+                            <p className="title course-title">{course['title']}</p>
                             <div className="d-flex p-3 bor-1">
                                 <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
                                 <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><small><img className="img moreicon" /></small></a>

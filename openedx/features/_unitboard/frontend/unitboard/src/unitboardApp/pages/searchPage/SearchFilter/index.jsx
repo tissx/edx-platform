@@ -494,7 +494,7 @@ const handleKeypress = e => {
       <div className="container listing-container">
         <div className="row">
             <div className="col-md-7 col-sm-12 f-cell">
-                <h2 className="text-white"><b>Search Our Catalog</b></h2>
+                <h2 className="text-white search-label"><b>Search Our Catalog</b></h2>
                 <form id="formDATA"> 
                     <input type="search" id="query" name="q" 
                     value={FormQuerytxt}

@@ -51,7 +51,7 @@ function handleShowMore() {
                                 alt="" />
                             </div>
                            
-                            <p className="title p-3">{course['title']}</p>
+                            <p className="title course-title">{course['title']}</p>
                             <div className="d-flex p-3 bor-1">
 
 
