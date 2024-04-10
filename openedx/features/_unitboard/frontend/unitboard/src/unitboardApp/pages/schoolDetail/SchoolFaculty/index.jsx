@@ -10,7 +10,7 @@ const SchoolFacultyContainer = ({SchoolFacultyInfo}) => {
       
         <section>
             <div className="container listing-container">
-                <h1 className="theading-title">Programme Faculty</h1>
+                <h1 className="theading-title">Programs Faculty</h1>
                 <div className="row school-faculty">
 
                     {SchoolFacultyInfo.instructor.map((faculty) => (

@@ -35,7 +35,7 @@ const ProgramInfoContainer = (programinfo) => {
         <div className="container listing-container">
             <div className="row">
                 <div className="col-md-8 col-sm-12">
-                    <h1 className="theading-title">About Programme</h1>
+                    <h1 className="theading-title">About Programs</h1>
                     <p className="para">
                     {programinfo.programinfo['program_description']['about']}
                     </p>

@@ -45,22 +45,24 @@ const CenterCoursesListContainer = ({centerInfo, centerCourses}) => {
                             <div className="mx-center-course">
 
                                 <div className="service-item body-light tissxoff">
-                                    <div className="img-sec">
-                                    <img className="img-fluid" 
-                                    src={course['course_image']}
-                                     onError={(e) => {
-                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                    }}
-                                    alt=""/>
-                                    </div>
-                                    <div className="service-text position-relativ p-2">
-                                        <p className="program-course-title">{course['course_name']} </p>
-                                        <p className="px-2 box-short-descp">{course['course_description']} </p>
-                                        <div className="py-4 border-top">
-                                            <a href={course['course_link']}  className="readmorebtn orgclr center-course-link"><span></span></a>
-                                            <a href={course['course_link']}  className="iconbg"></a>
+                                    <a className="center-course-box-link" href={course['course_link']}>
+                                        <div className="img-sec">
+                                        <img className="img-fluid" 
+                                        src={course['course_image']}
+                                        onError={(e) => {
+                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                        }}
+                                        alt=""/>
                                         </div>
-                                    </div>
+                                        <div className="service-text position-relativ p-2">
+                                            <p className="program-course-title">{course['course_name']} </p>
+                                            <p className="px-2 box-short-descp">{course['course_description']} </p>
+                                            <div className="py-4 border-top">
+                                                <a href={course['course_link']}  className="readmorebtn orgclr center-course-link"><span></span></a>
+                                                <a href={course['course_link']}  className="iconbg"></a>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
 

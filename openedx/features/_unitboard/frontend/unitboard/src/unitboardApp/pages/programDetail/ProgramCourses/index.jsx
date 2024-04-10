@@ -10,7 +10,6 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 
 const ProgramCoursesContainer = (program_course) => {
-    // console.log("program course", program_course)
     const option = {
         rtl:false,
         loop:true,
@@ -31,7 +30,11 @@ const ProgramCoursesContainer = (program_course) => {
             }
         }
     }
-        
+    
+    const RedirectToPage = (redirect_url) => {
+        window.location.href = redirect_url
+    }
+
     return (
         <>
                     
@@ -41,7 +44,7 @@ const ProgramCoursesContainer = (program_course) => {
                     <h1 className="theading-title">Objectives</h1>
                     <p className="para">{program_course.programinfo['program_description']['objectives']}</p>
                 </div>
-                <h1 className="prg-course-title"><b>Programme Courses</b></h1>
+                <h1 className="prg-course-title"><b>Programs Courses</b></h1>
                 <div className="row py-3" id="iconright1">  
 
                     <OwlCarousel className='owl-theme' {...option}>
@@ -50,7 +53,9 @@ const ProgramCoursesContainer = (program_course) => {
 
                         <div className="item">
                             <div className="item">
-                                <div className="service-item body-light tissxoff">
+                                <div className="service-item body-light tissxoff redirect2course"
+                                onClick={() => RedirectToPage(course_list['course_link'])}
+                                >
                                     <div className="img-sec">
                                     <img className="img-fluid" 
                                     src={course_list['course_image']}

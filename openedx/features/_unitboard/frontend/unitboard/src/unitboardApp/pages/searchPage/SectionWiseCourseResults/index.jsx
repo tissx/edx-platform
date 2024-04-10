@@ -42,22 +42,25 @@ function handleShowMore() {
                   <li>
                     <div className="course-box">
                         <div className="service-item body-light tissxoff">
-                            <div className="img-sec">
-                                <img className="img-fluid" 
-                                src={course['card_image_url']} 
-                                onError={(e) => {
-                                  e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                               }}
-                                alt="" />
-                            </div>
-                           
-                            <p className="title course-title">{course['title']}</p>
-                            <div className="d-flex p-3 bor-1">
+                          <a className="search-course-box-link" href={'../courses/' +course['course_runs'][0]['key'] + '/about'}>
+
+                              <div className="img-sec">
+                                  <img className="img-fluid" 
+                                  src={course['card_image_url']} 
+                                  onError={(e) => {
+                                    e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                }}
+                                  alt="" />
+                              </div>
+                            
+                              <p className="title course-title">{course['title']}</p>
+                              <div className="d-flex p-3 bor-1">
 
 
-                                <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><small><img className="img moreicon" /></small></a>
-                            </div> 
+                                  <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
+                                  <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><small><img className="img moreicon" /></small></a>
+                              </div> 
+                          </a>
                         </div>
                     </div>
                   </li>

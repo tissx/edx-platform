@@ -30,6 +30,9 @@ autoplayHoverPause:true,
     }
 }
 
+    const RedirectToPage = (redirect_url) => {
+        window.location.href = redirect_url
+    }
 
     return (
         
@@ -61,7 +64,9 @@ autoplayHoverPause:true,
 
                                 <div className="item">
                                     <div className="item mx-home-course">
-                                        <div className="service-item body-light tissxoff">
+                                        <div className="service-item body-light tissxoff redirect2course"
+                                        onClick={() => RedirectToPage(course_list.course_detail)}
+                                        >
                                             <div className="img-sec">
 
                                                 <img className="img-fluid" 
