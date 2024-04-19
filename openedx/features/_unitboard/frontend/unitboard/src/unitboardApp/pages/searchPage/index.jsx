@@ -39,14 +39,10 @@ const SearchPageContainer = ({my_discovery_url}) => {
   const [showSectionResults, setshowSectionResults] = useState();
 
   const [mxLearningType, setmxLearningType] = useState('all');
-  // const [mxLearningType2, setmxLearningType2] = useState('all');
 
   var size = 0
 
-  // function UpdateLearningType(updatetype) {
-  //   setmxLearningType2(updatetype);
-
-  // }
+ 
   
   
   const getSearchResult = (subject, program_degree_group, learningType, query, school, center, language, size) => {
@@ -184,19 +180,6 @@ const SearchPageContainer = ({my_discovery_url}) => {
 
 
 
-
-    // if(!(language)) {
-    //   language = ""
-    // }
-
-    // if(!(query_search)) {
-    //   query_search = ""
-    // }
-    // else {
-    //   setshowSectionResults(true)
-    //   size = 4
-    // }
-
     if(query_search) {
         setshowSectionResults(true)
         size = 4
@@ -308,7 +291,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
 
   // When User click on show more detail 
 
-    function showMoreDetail(subject, program_group, learning_type, query="", school, center, language) {
+    function showMoreDetail(subject, program_group, learning_type, learning_type_text, query="", school, center, language) {
  
       setCourseResults('')
       setProgramResults('')
@@ -318,7 +301,33 @@ const SearchPageContainer = ({my_discovery_url}) => {
       size = 0
       getSearchResult(subject, program_group, learning_type, query, school, center, language, size)
       setshowSectionResults(false)
-   
+
+      // show selected filter as text for learning type 
+
+      if(learning_type && learning_type!== undefined) {
+
+        // Remove if we are already showing selected text as Learning type 
+        if($("#show_learningtype_as_text").length > 0) {
+          document.getElementById("show_learningtype_as_text").remove();
+        }
+
+        // Show learning type as selected text 
+        var show_text = '<div class="dropdown fi-border selected-filter-text" id="show_learningtype_as_text">'
+                          +'<button class="dropbtn">'+learning_type_text
+                          +'<span id="clearSelection" selected-filter-name="learning_type" selected-filter-abbr="show_learningtype_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                          +'</div>';
+      
+        $("#selected-filter").append(show_text);
+        var show_clear_btn = '<div class="clear-all-filter" id="clear-all-filter">clear all</div>';
+        $("#show-clear-btn").html(show_clear_btn);
+
+        // Update URL 
+        const url = new URL(window.location.href);
+        url.searchParams.set("learning_type", learning_type);
+        window.history.replaceState(null, null, url);
+
+      }
+
       }
 
 
@@ -326,7 +335,6 @@ const SearchPageContainer = ({my_discovery_url}) => {
       {
       setshowSectionResults(true)
       setresultLoader()
-
 
       }
 

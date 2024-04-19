@@ -12,12 +12,14 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 const ProgramCoursesContainer = (program_course) => {
     const option = {
         rtl:false,
-        loop:true,
+        loop:false,
         margin:10,
         nav:true,
         autoplay:true,
-    autoplayTimeout:5000,
-    autoplayHoverPause:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
+        slideBy:4,
+
         responsive:{
             0:{
                 items:1
@@ -52,7 +54,7 @@ const ProgramCoursesContainer = (program_course) => {
                     {program_course.programcourses.map((course_list) => (
 
                         <div className="item">
-                            <div className="item">
+                            <div className="ite mx-prg-detail-course">
                                 <div className="service-item body-light tissxoff redirect2course"
                                 onClick={() => RedirectToPage(course_list['course_link'])}
                                 >
@@ -64,13 +66,20 @@ const ProgramCoursesContainer = (program_course) => {
                                      }}
                                     alt=""/>
                                     </div>
-                                    <div className="service-text position-relativ p-2">
+                                    <div className="service-text position-relativ">
                                         <p className="program-course-title">{course_list['course_name']} </p>
-                                        <p className="px-2 box-short-descp">{course_list['course_description']} </p>
+
+                                        <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
+
+                                        <div className="course_btn">
+                                            <span className="more_learn">Courses</span>
+                                        </div>
+
+                                        {/* <p className="px-2 box-short-descp">{course_list['course_description']} </p>
                                         <div className="py-4 border-top">
                                             <a href={course_list['course_link']}  className="readmorebtn orgclr"><span></span></a>
                                             <a href={course_list['course_link']}  className="iconbg"></a>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

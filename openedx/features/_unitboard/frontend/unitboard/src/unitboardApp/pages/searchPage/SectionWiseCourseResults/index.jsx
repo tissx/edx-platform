@@ -5,19 +5,21 @@
  */
 
 import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
+import dateFormat from 'dateformat'
 
 const SectionResultsCoursesContainer = ({CourseResults, Querytxt, showMoreDetail}) => {
 
 function handleShowMore() {
     let subject = document.getElementById('subject').value
     let learning_type = "course"
+    let learning_type_text = "Courses"
     let query = document.getElementById('query').value
     let program_group = document.getElementById('program_group').value
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
     let language = document.getElementById('language').value
 
-    showMoreDetail(subject, program_group, learning_type, query, school, center, language)
+    showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, language)
 
 }
 
@@ -54,12 +56,18 @@ function handleShowMore() {
                               </div>
                             
                               <p className="title course-title">{course['title']}</p>
-                              <div className="d-flex p-3 bor-1">
+                              <p className="box-short-descp">Starts: {dateFormat( course['course_runs'][0]['start'], "mmmm dd, yyyy")}</p>
+                              
+                              <div className="course_btn">
+                                  <span className="more_learn">Courses</span>
+                              </div>
+                              
+                              {/* <div className="d-flex p-3 bor-1">
 
 
                                   <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
                                   <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><small><img className="img moreicon" /></small></a>
-                              </div> 
+                              </div>  */}
                           </a>
                         </div>
                     </div>

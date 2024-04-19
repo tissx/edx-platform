@@ -57,7 +57,7 @@ fetch(partner_list_url)
         <SchoolCenterBanner/>
         {!(listingLoader) && <CircularProgress className="mx-loader"/>}
 
-        {!R.isEmpty(schoolcenterlist) && schoolcenterlist.length !== 0 && <SchoolCenterFilter programtypelist={schoolcenterlist.programtype} />} 
+        {/* {!R.isEmpty(schoolcenterlist) && schoolcenterlist.length !== 0 && <SchoolCenterFilter programtypelist={schoolcenterlist.programtype} />}  */}
         {!R.isEmpty(schoolcenterlist) && schoolcenterlist.length !== 0 && <SchoolList schoollist={schoolcenterlist.schools} />} 
         {!R.isEmpty(schoolcenterlist) && schoolcenterlist.length !== 0 && <CenterList centerlist={schoolcenterlist.centers} />} 
         

@@ -16,7 +16,7 @@ const CentersListContainer = ({centerListData}) => {
         <section className="learn-school">
             <div className="container listing-container">
                 {/* <h1 className="school-title">Centers</h1> */}
-                <div class="border-bottom"><h1 className="school-title">Centres</h1></div>
+                <div class="border-bottom"><h1 className="school-title">Independent Centres</h1></div>
 
 
                 <div className="row mx-box p_tb" id="iconright">

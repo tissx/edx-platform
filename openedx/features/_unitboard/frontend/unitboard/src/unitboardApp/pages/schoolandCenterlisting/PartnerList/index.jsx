@@ -25,13 +25,13 @@ const PartnerListContainer = ({partnerlist}) => {
 
     const option = {
         rtl:false,
-        loop:true,
+        loop:false,
         margin:10,
         nav:false,
         dots:false,
         autoplay:true,
-    autoplayTimeout:5000,
-    autoplayHoverPause:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
         responsive:{
             0:{
                 items:1

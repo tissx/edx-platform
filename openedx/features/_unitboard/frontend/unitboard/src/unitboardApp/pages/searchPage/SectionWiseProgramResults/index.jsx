@@ -10,13 +10,14 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
     function handleShowMore() {
         let subject = document.getElementById('subject').value
         let learning_type = "program"
+        let learning_type_text = "Programs"
         let query = document.getElementById('query').value
         let program_group = document.getElementById('program_group').value
         let school = document.getElementById('school').value
         let center = document.getElementById('center').value
         let language = document.getElementById('language').value
     
-        showMoreDetail(subject, program_group, learning_type, query, school, center, language)
+        showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, language)
     
     }
   

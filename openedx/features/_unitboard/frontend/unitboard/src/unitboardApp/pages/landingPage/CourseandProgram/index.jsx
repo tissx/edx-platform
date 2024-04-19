@@ -8,15 +8,15 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const CourseandProgramContainer = ({courseProgramData}) => {
-    // console.log("course Program Data", courseProgramData)
 const option = {
     rtl:false,
-    loop:true,
+    loop:false,
     margin:10,
     nav:true,
     autoplay:true,
-autoplayTimeout:5000,
-autoplayHoverPause:true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    slideBy:4,
     responsive:{
         0:{
             items:1
@@ -79,13 +79,18 @@ autoplayHoverPause:true,
                                             <div className="service-text">
                                                 <p className="">{course_list.course_name}</p>
 
-                                                <p className="px-2 box-short-descp">{course_list.short_description}</p>
+                                                {/* <p className="px-2 box-short-descp">{course_list.short_description}</p> */}
+                                                <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
+
+                                                <div className="course_btn">
+                                                    <span className="more_learn">Courses</span>
+                                                </div>
 
 
-                                                <div className="py-4 border-top">
+                                                {/* <div className="py-4 border-top">
                                                     <a href={course_list.course_detail}  className="readmorebtn orgclr btn-read-more"><span></span></a>
                                                     <a href={course_list.course_detail}  className="iconbg"></a>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     </div>

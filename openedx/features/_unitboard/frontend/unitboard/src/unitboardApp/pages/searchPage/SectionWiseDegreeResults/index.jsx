@@ -10,13 +10,14 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
     function handleShowMore() {
         let subject = document.getElementById('subject').value
         let learning_type = "degree"
+        let learning_type_text = "Degrees"
         let query = document.getElementById('query').value
         let program_group = document.getElementById('program_group').value
         let school = document.getElementById('school').value
         let center = document.getElementById('center').value
         let language = document.getElementById('language').value
     
-        showMoreDetail(subject, program_group, learning_type, query, school, center, language)
+        showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, language)
     
     }
 

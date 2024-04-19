@@ -29,7 +29,7 @@ const handleKeypress = e => {
             <div className="row">
                 <div className="col-md-7 col-sm-12 f-cell">
                     <h1 className="theading-title-white">Online Education</h1>
-                    <p className="pb-10 text-white">Courses | Programmes | Degrees</p>
+                    <p className="pb-10 text-white home-sub-titile"><a href="/search-detail/?learning_type=course">Courses</a> | <a href="/search-detail/?learning_type=program">Programs</a> | <a href="/search-detail/?learning_type=degree">Degrees</a></p>
                     <form className="example">
                         <input type="text" placeholder="| Search from 1200+ Courses"
                         id="query"

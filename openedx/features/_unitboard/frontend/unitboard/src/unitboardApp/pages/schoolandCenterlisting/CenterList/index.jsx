@@ -12,7 +12,7 @@ const CenterListContainer = ({centerlist}) => {
         
         <section className="learn-school">
         <div className="container listing-container">
-            <h1 className="text-align-left"><b>Centres</b></h1>
+            <h1 className="text-align-left"><b>Independent Centres</b></h1>
 
             <div className="row listing-school-center mx-box p_tb" id="iconright">
 

@@ -49,8 +49,6 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
   // Start On Page Load 
   useEffect(() => {
-
-
     showSelectedFilterTextonPageLoad()
   }, []);
 
@@ -70,24 +68,39 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
     onFormSearch()
     setselectedLearningType('all')
-    
-
     UpdateURL('query', query)
     UpdateURL('learning_type', 'all')
+
+    // Remove selected learning type text 
+    if($("#show_learningtype_as_text").length > 0) {
+      document.getElementById("show_learningtype_as_text").remove();
+    }
+    // If clear all btn is showing then remove the clear all btn
+    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
+      document.getElementById("clear-all-filter").remove();
+     }
 
   }; 
   
  
-//IT triggers by pressing the enter key
-const handleKeypress = e => {
-  if (e.keyCode === 13) {
-  e.preventDefault();
+  //IT triggers by pressing the enter key
+  const handleKeypress = e => {
+    if (e.keyCode === 13) {
+    e.preventDefault();
+    onSearchform(e);
+    }
+  };
 
-  onSearchform(e);
 
-  }
-};
+  const onDropdownChange = e => {
 
+     // show section wise result if user has remove all dropdown filter one by one and search any text in search box
+      let query = document.getElementById('query').value
+
+     if(query && query!== undefined && $("#selected-filter").html()=='') {
+      onFormSearch()
+    }
+  };
 
 
   const onSubjectChange = (e) => {
@@ -106,10 +119,10 @@ const handleKeypress = e => {
     var sub_slug =  $("#subject option:selected").attr("sub-slug");
     var sub_name =  $("#subject option:selected").attr("sub-name");
 
-    
     UpdateURL('subject', sub_slug)
-
     showSelectedFilterText('subject', sub_name, 'show_subject_as_text')
+
+    onDropdownChange()
 
   }; 
 
@@ -131,11 +144,9 @@ const handleKeypress = e => {
     UpdateURL('program_degree_group', val)
     
     var prg_grp_name =  $("#program_group option:selected").attr("prg-grp-name");
-
     showSelectedFilterText('program_degree_group', prg_grp_name, 'show_program_as_text')
+    onDropdownChange()
 
-
-  
   }; 
 
   const onLearningTypeChange = (e) => {
@@ -157,6 +168,8 @@ const handleKeypress = e => {
     let learning_type_name =  $("#learning_type option:selected").attr("learning-type-name");
 
    showSelectedFilterText('learning_type', learning_type_name, 'show_learningtype_as_text')
+   onDropdownChange()
+
 
   }; 
 
@@ -193,8 +206,8 @@ const handleKeypress = e => {
 
     let school_name =  $("#school option:selected").attr("school-name");
 
-    
     showSelectedFilterText('school', school_name, 'show_school_as_text')
+    onDropdownChange()
 
 
   }; 
@@ -216,9 +229,9 @@ const handleKeypress = e => {
     UpdateURL('center', val)
     
     let center_name =  $("#center option:selected").attr("center-name");
-
     
     showSelectedFilterText('center', center_name, 'show_center_as_text')
+    onDropdownChange()
 
   };
   
@@ -235,10 +248,9 @@ const handleKeypress = e => {
     getSearchData(subject, program_group, learning_type, query, school, center, language)
    
     UpdateURL('language', language)
-    
     var language_name =  $("#language option:selected").attr("language-name");
     showSelectedFilterText('language', language_name, 'show_language_as_text')
-
+    onDropdownChange()
     
   };
 
@@ -432,6 +444,12 @@ const handleKeypress = e => {
     let language = document.getElementById('language').value
     getSearchData(subject, program_group, learning_type, query, school, center, language)
 
+    // show section wise result if user has clear all filter one by one and search any text in search box
+    if(query && query!== undefined && $("#selected-filter").html()=='') {
+      onFormSearch()
+    }
+
+
     });
    // End clear selected text and filter 
 
@@ -480,7 +498,12 @@ const handleKeypress = e => {
       let language = ""
 
       getSearchData(subject, program_group, learning_type, query, school, center, language)
-  
+      
+      // show section wise result if user has search any text in search box
+      if(query && query!== undefined) {
+        onFormSearch()
+      }
+
     });
 
     // end  Clear All
@@ -501,7 +524,7 @@ const handleKeypress = e => {
                     onChange={(e) =>setFormQuerytxt(e.target.value)}
                     onKeyDown={(e) =>handleKeypress(e)}
                     placeholder="What do you want to Learn?"/>
-                    <button className="searchBtn" type="button"
+                    <button className="searchBtn mxsearchbtn" type="button"
                     onClick={(e) => onSearchform(e)}
                     >Search</button>
                 </form>
@@ -528,7 +551,7 @@ const handleKeypress = e => {
                     value={selectedSubject}
                     onChange={(e) => onSubjectChange(e)}
                     >
-                      <option className="ColorLight" value="">Subject</option>
+                      <option className="ColorLight" sub-slug="" value="">Subject</option>
                       {FiterDetail.subject_list.map((subjects) => (
                         <option sub-slug={subjects['subject_slug']} sub-name={subjects['subject_name']} value={subjects['subject_uuid']} >{subjects['subject_name']}</option>
                       ))}

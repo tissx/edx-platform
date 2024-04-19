@@ -10,9 +10,9 @@ import LandingPageContainer from "./pages/landingPage";
 import ProgramDetailContainer from "./pages/programDetail";
 import ProgramDegreelistingContainer from "./pages/programandDegreelisting";
 import SchoolCenterlistingContainer from "./pages/schoolandCenterlisting";
-import CenterDeatilContainer from "./pages/centerDetail";
 import SchoolDeatilContainer from "./pages/schoolDetail";
 import SearchPageContainer from "./pages/searchPage";
+import CenterDeatilContainer from "./pages/centerDetail/CenterDetail";
 
 import "./unitboardApp.css"
 export const UnitboardApp = () => {
