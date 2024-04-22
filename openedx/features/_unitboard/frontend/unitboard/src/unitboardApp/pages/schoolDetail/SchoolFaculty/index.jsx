@@ -15,12 +15,12 @@ const SchoolFacultyContainer = ({SchoolFacultyInfo}) => {
 
                     {SchoolFacultyInfo.instructor.map((faculty) => (
                    
-                    <div className="col-md-4 col-sm-4 col-lg-4 p-3">
-                        <div className="card service-box-1 overflow-hidden h-100">
-                            <div className="pad-card text-center"><img src={faculty['image']} className="img-fluid"/></div>
+                    <div className="col-md-4 col-sm-4 col-lg-4 mb-2">
+                        <div className="card service-box center-faculty-card">
+                            <div className="text-center"><img src={faculty['image']} className="img-fluid"/></div>
                             <div className="card-title">
-                                <h5 className="text-center"><b>{faculty['name']}</b></h5>
-                                <p className="text-center para">{faculty['description']}</p>
+                                <h5 className="text-center faculty-name"><b>{faculty['name']}</b></h5>
+                                <p className="text-center para px-2">{faculty['description']}</p>
                             </div>
                         </div>
                     </div>

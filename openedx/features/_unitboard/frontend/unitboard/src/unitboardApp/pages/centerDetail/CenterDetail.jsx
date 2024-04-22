@@ -5,11 +5,10 @@
 
 import React, { useState, useEffect } from 'react';
 import * as R from "ramda";
-import CenterDetailBanner from './CenterDetailBanner';
-import CenterProgramList from './CenterProgramList';
-import CenterFaculty from './CenterFaculty';
 import { useNavigate, Link, useParams } from "react-router-dom";
-import CenterCoursesList from './CenterCoursesList';
+import SearchResultsCourses from './SearchResults/SearchResultsCourses';
+import SearchResultsPrograms from './SearchResults/SearchResultsPrograms';
+import SearchResultsFaculty from './SearchResults/SearchResultsFaculty';
 import Loader from '../common/loader'; 
 import CenterFilter from './centerFilter/centerFilter';
 
@@ -24,14 +23,32 @@ const CenterDetailContainer = ({my_discovery_url}) => {
   const [fiterDetail, setfiterDetail] = useState([]);
 
   const [filterLoader, setfilterLoader] = useState();
+  const [resultLoader, setresultLoader] = useState();
 
+  const [CourseResults, setCourseResults] = useState([]);
+  const [ProgramResults, setProgramResults] = useState([]);
+  const [FacultyResults, setFacultyResults] = useState([]);
 
 
   const { slug } = useParams();
 
+
+
+
+
   useEffect(() => {
+
+    const query = new URLSearchParams(window.location.search);
+
+    const program = query.get('program') || ""
+    var language = query.get('language') || ""
+    const organization = query.get('organization') || ""
+    const mode = query.get('mode') || ""
+
+
+
     var center_detail_url = `${my_discovery_url}/api/v1/get-center-from-slug/?slug=${slug}`
-    var program_program_type_url = `${my_discovery_url}/api/v1/get-program-and-type-from-center/?slug=${slug}`
+    // var program_program_type_url = `${my_discovery_url}/api/v1/get-program-and-type-from-center/?slug=${slug}`
 
     //start Fetch center detail from discovery
     fetch(center_detail_url)
@@ -48,7 +65,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
 
 
-    var get_search_filter_url = `${my_discovery_url}/api/v1/center-detail/search-filter/?center=${slug}`
+    var get_search_filter_url = `${my_discovery_url}/api/v1/center-detail/search-filter/?center=${slug}&program=${program}&language=${language}&organization=${organization}&mode=${mode}`
 
     //start Fetch filter detail from discovery
     fetch(get_search_filter_url)
@@ -58,69 +75,118 @@ const CenterDetailContainer = ({my_discovery_url}) => {
     .then((data) => {
         setfiterDetail(data);
         setfilterLoader(true)
-        // setresultLoader()
-        console.log("center filter data", data)
+        setresultLoader()
+        // console.log("center filter data", data)
 
 
-        // var q_subject = ""
-        // var q_prg_group = ""
-        // var q_learningtype = "all"
-        // var q_school = ""
-        // var q_center = ""
-        // var selected_language = data.selected_language
+        var q_program = ""
+        var q_language= ""
+        var q_organization = ""
+        var q_mode = ""
+        var q_center = slug
 
-        // if((data.selected_subject['subject_uuid'])) {
-        //   q_subject = data.selected_subject['subject_uuid']
-        // }
+        if((data.selected_program["program_uuid"])) {
+          q_program = data.selected_program["program_uuid"]
+        }
 
 
-        // if((data.selected_program['program_group_slug'])) {
-        //   q_prg_group = data.selected_program['program_group_slug']
-        // }
+        if((data.selected_organization['organization_key_lower'])) {
+          q_organization = data.selected_organization['organization_key_lower']
+        }
+
+        if((data.selected_language["language_slug"])) {
+          q_language = data.selected_language["language_slug"]
+        }
+
+        if((data.selected_mode['mode_slug'])) {
+          q_mode = data.selected_mode['mode_slug']
+        }
         
         
-        // if(data.select_learning_type && data.select_learning_type !=="null") {
-        //   q_learningtype = data.select_learning_type
-        // }
-        // if(data.selected_school && data.selected_school !=="null") {
-        //   q_school = data.selected_school
-        // }
-
-        // if(data.selected_centter && data.selected_centter !=="null") {
-        //   q_center = data.select_learning_type
-        // }
-
-        // getSearchResult(q_subject, q_prg_group, q_learningtype, query_search, q_school, q_center, selected_language, size)
+        // Fetch results based on selected filter 
+        getSearchResult(q_center, q_program, q_language, q_organization, q_mode)
 
     });
       // End Fetch filter detail from discovery
 
 
-
-    //  //start Fetch Program and program type for Center from discovery
-    //  fetch(program_program_type_url)
-    //  .then((res) => {
-    //      return res.json();
-    //  })
-    //  .then((data) => {
-    //     //  console.log("get program detail",data);
-    //     setprogramdetail(data);
-    //  });
-    // //  //End Fetch Program and program type for Center from discovery
-
-
   }, []);
+
+
+
+  // Start fetch search results 
+  const getSearchResult = (center, program, language, organization, mode) => {
+
+    // start Fetch results for courses 
+    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_center=${center}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&mode=${mode}`
+    // var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&mode=${mode}`
+    fetch(course_api_url)
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        setCourseResults(data);
+        setresultLoader(true)
+
+    });
+    // End Fetch results for courses 
+
+
+    // start Fetch results for program 
+    var program_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=program&program_center=${center}&program_uuid=${program}&program_language=${language}&mx_program_organization=${organization}&mode=${mode}`
+    fetch(program_api_url)
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+      setProgramResults(data);
+        setresultLoader(true)
+
+    });
+    // End Fetch results for program 
+
+
+    // start Fetch results for Faculty 
+    var faculty_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-people/?center=${center}&mx_program=${program}&mx_instructor_lang=${language}&mx_instructor_org=${organization}&mode=${mode}`
+    fetch(faculty_api_url)
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+      setFacultyResults(data);
+      setresultLoader(true)
+
+    });
+    // End Fetch results for program 
+
+
+  };
+  // End fetch search results 
+
+  // Start Show search results onChange Dropdown 
+  function getSearchData(program, language, organization, mode) {
+ 
+    setCourseResults('')
+    setProgramResults('')
+    // setDegreeResults('')
+    setresultLoader()
   
+    getSearchResult(slug, program, language, organization, mode)
+    }
+
+  // End Show search results onChange Dropdown 
+
+
     return (
         <>
         {!(centerLoader) && !(filterLoader) && <Loader/>}
-        {/* {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterDetailBanner centerInfo={centerdetail.center_info} />}  */}
-        {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && !R.isEmpty(fiterDetail) && fiterDetail.length !== 0 && <CenterFilter centerInfo={centerdetail.center_info}  FiterDetail={fiterDetail} />} 
+        {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && !R.isEmpty(fiterDetail) && fiterDetail.length !== 0 && <CenterFilter centerInfo={centerdetail.center_info}  FiterDetail={fiterDetail} getSearchData={getSearchData} />} 
 
+        {!R.isEmpty(CourseResults) && CourseResults.length !== 0 &&<SearchResultsCourses CourseResults={CourseResults} />}
         
-        {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterCoursesList centerInfo={centerdetail.center_info} centerCourses={centerdetail.courses} />} 
-        {!R.isEmpty(programdetail) && programdetail.length !== 0 && <CenterProgramList programList={programdetail} />} 
-        {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />} 
+        {!R.isEmpty(ProgramResults) && ProgramResults.length !== 0 && <SearchResultsPrograms ProgramResults={ProgramResults} />} 
+        {!R.isEmpty(FacultyResults) && FacultyResults.length !== 0 && <SearchResultsFaculty FacultyResults={FacultyResults} />} 
+        {/* {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />}  */}
         
     
        </>

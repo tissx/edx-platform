@@ -4,16 +4,22 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import $ from 'jquery';
+import * as R from "ramda";
 
 
-const CenterFilterContainer = ({centerInfo, FiterDetail}) => {
+const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
 
-    // const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program['program_group_slug']);
-    const [selectedProgram, setselectedProgram] = useState();
-    // const [selectedSubject, setselectedSubject] = useState(FiterDetail.selected_subject['subject_uuid']);
-    const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language);
-    const [selectedOrg, setselectedOrg] = useState();
+    const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program["program_uuid"]);
+    const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language["language_slug"]);
+    const [selectedOrg, setselectedOrg] = useState(FiterDetail.selected_organization['organization_key_lower']);
+    const [selectedMode, setselectedMode] = useState(FiterDetail.selected_mode['mode_slug']);
 
+    
+      // Start On Page Load 
+    useEffect(() => {
+        showSelectedFilterTextonPageLoad()
+    }, []);
     
     function UpdateURL(query_param, query_value) {
         const url = new URL(window.location.href);
@@ -25,21 +31,17 @@ const CenterFilterContainer = ({centerInfo, FiterDetail}) => {
         let val = e.target.value;
         e.preventDefault();
         setselectedProgram(val)
+       
+        let language = document.getElementById('language').value
+        let organization = document.getElementById('organization').value
+        let mode = document.getElementById('mode').value
 
-        // let subject = document.getElementById('subject').value
-        // let learning_type = document.getElementById('learning_type').value
-        // let query = document.getElementById('query').value
-        // let school = document.getElementById('school').value
-        // let center = document.getElementById('center').value
-        // let language = document.getElementById('language').value
-
-        // getSearchData(subject, val, learning_type, query, school, center, language)
-
+        getSearchData(val, language, organization, mode)
         // Update Url 
         UpdateURL('program', val)
 
-        // var prg_grp_name =  $("#program_group option:selected").attr("prg-grp-name");
-        // showSelectedFilterText('program_degree_group', prg_grp_name, 'show_program_as_text')
+        var prg_name =  $("#program option:selected").attr("prg-name");
+        showSelectedFilterText('program', prg_name, 'show_program_as_text')
         // onDropdownChange()
 
     }; 
@@ -47,17 +49,16 @@ const CenterFilterContainer = ({centerInfo, FiterDetail}) => {
     const onLanguageChange = (e) => {
         let language = e.target.value;
         setselectedLanguage(language)
-        // let subject = document.getElementById('subject').value
-        // let learning_type = document.getElementById('learning_type').value
-        // let program_group = document.getElementById('program_group').value
-        // let query = document.getElementById('query').value
-        // let school = document.getElementById('school').value
-        // let center = document.getElementById('center').value
-        // getSearchData(subject, program_group, learning_type, query, school, center, language)
+
+        let program = document.getElementById('program').value
+        let organization = document.getElementById('organization').value
+        let mode = document.getElementById('mode').value
+
+        getSearchData(program, language, organization, mode)
        
         UpdateURL('language', language)
-        // var language_name =  $("#language option:selected").attr("language-name");
-        // showSelectedFilterText('language', language_name, 'show_language_as_text')
+        var language_name =  $("#language option:selected").attr("language-name");
+        showSelectedFilterText('language', language_name, 'show_language_as_text')
         // onDropdownChange()
         
       };
@@ -66,21 +67,217 @@ const CenterFilterContainer = ({centerInfo, FiterDetail}) => {
       const onOrgChange = (e) => {
         let val = e.target.value;
         setselectedOrg(val)
-        // let subject = document.getElementById('subject').value
-        // let learning_type = document.getElementById('learning_type').value
-        // let program_group = document.getElementById('program_group').value
-        // let query = document.getElementById('query').value
-        // let school = document.getElementById('school').value
-        // let center = document.getElementById('center').value
-        // getSearchData(subject, program_group, learning_type, query, school, center, language)
+
+        let program = document.getElementById('program').value
+        let language = document.getElementById('language').value
+        let mode = document.getElementById('mode').value
+
+        getSearchData(program, language, val, mode)
        
         UpdateURL('organization', val)
-        // var language_name =  $("#language option:selected").attr("language-name");
-        // showSelectedFilterText('language', language_name, 'show_language_as_text')
+        var org_name =  $("#organization option:selected").attr("org-name");
+        showSelectedFilterText('organization', org_name, 'show_org_as_text')
         // onDropdownChange()
         
       }
       
+
+      const onModeChange = (e) => {
+        let val = e.target.value;
+        setselectedMode(val)
+        let program = document.getElementById('program').value
+        let language = document.getElementById('language').value
+        let organization = document.getElementById('organization').value
+
+        getSearchData(program, language, organization, val)
+       
+        UpdateURL('mode', val)
+        var mode_name =  $("#mode option:selected").attr("mode-name");
+        showSelectedFilterText('mode', mode_name, 'show_mode_as_text')
+        // onDropdownChange()
+        
+      }
+
+
+
+  // Start Show selected filter as text 
+  function showSelectedFilterText(selected_filter_name, selected_filter_value, selected_filter_abbr) {
+
+    // If user change same dropdown filter then remove previous selected text
+    if($("#"+selected_filter_abbr).length > 0) {
+      document.getElementById(selected_filter_abbr).remove();
+    }
+
+    // If clear all btn is showing but no filter is selected then remove the clear all btn
+    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
+      document.getElementById("clear-all-filter").remove();
+     }
+
+    // only update when there is any value in dropdown 
+    if(selected_filter_value && selected_filter_value!== undefined) {
+      var show_text = '<div class="dropdown fi-border selected-filter-text" id="'+selected_filter_abbr+'">'
+                        +'<button class="dropbtn">'+selected_filter_value
+                        +'<span id="clearSelection" selected-filter-name="'+selected_filter_name+'" selected-filter-abbr="'+selected_filter_abbr+'" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                        +'</div>';
+    
+      $("#selected-filter").append(show_text);
+
+      var show_clear_btn = '<div class="clear-all-filter" id="clear-all-filter">clear all</div>';
+
+      $("#show-clear-btn").html(show_clear_btn);
+    }
+  };
+
+  // End Show selected filter as text 
+      
+
+  // Start Show selected filter as text on first time page load 
+  function showSelectedFilterTextonPageLoad() {
+
+    var show_selected_text = "";
+    var has_show_selected_text = false
+
+    // If program is already selected 
+    if(!R.isEmpty(FiterDetail.selected_program)) {
+      has_show_selected_text = true
+      show_selected_text += '<div class="dropdown fi-border selected-filter-text" id="show_program_as_text">'
+                        +'<button class="dropbtn">'+FiterDetail.selected_program["program_name"]
+                        +'<span id="clearSelection" selected-filter-name="program" selected-filter-abbr="show_program_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                        +'</div>';
+    }
+
+     // If language is already selected 
+     if(!R.isEmpty(FiterDetail.selected_language)) {
+        has_show_selected_text = true
+        show_selected_text += '<div class="dropdown fi-border selected-filter-text" id="show_language_as_text">'
+                          +'<button class="dropbtn">'+FiterDetail.selected_language["language_name"]
+                          +'<span id="clearSelection" selected-filter-name="language" selected-filter-abbr="show_language_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                          +'</div>';
+      } 
+
+    // If organization is already selected 
+    if(!R.isEmpty(FiterDetail.selected_organization)) {
+      has_show_selected_text = true
+      show_selected_text += '<div class="dropdown fi-border selected-filter-text" id="show_org_as_text">'
+                        +'<button class="dropbtn">'+FiterDetail.selected_organization['organization_key']
+                        +'<span id="clearSelection" selected-filter-name="organization" selected-filter-abbr="show_org_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                        +'</div>';
+    }
+
+    // If Mode is already selected 
+    if(!R.isEmpty(FiterDetail.selected_mode)) {
+      has_show_selected_text = true
+      show_selected_text += '<div class="dropdown fi-border selected-filter-text" id="show_mode_as_text">'
+                        +'<button class="dropbtn">'+FiterDetail.selected_mode['mode_name']
+                        +'<span id="clearSelection" selected-filter-name="mode" selected-filter-abbr="show_mode_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                        +'</div>';
+    }
+
+    if(has_show_selected_text) {
+        $("#selected-filter").append(show_selected_text);
+        var show_clear_btn = '<div class="clear-all-filter" id="clear-all-filter">clear all</div>';
+        $("#show-clear-btn").html(show_clear_btn);
+    }
+
+  }
+  // End Show selected filter as text on first time page load 
+
+
+   // start clear selected text and filter 
+   $(document).off("click")
+   $(document).on("click", "#clearSelection", function(){
+    var selected_filter_name =  $(this).attr("selected-filter-name");
+    var selected_filter_abbr =  $(this).attr("selected-filter-abbr");
+    document.getElementById(selected_filter_abbr).remove();
+
+    //  Remove clear all button if user one by one remove all selected text 
+    if($("#selected-filter").html()=='') {
+     document.getElementById("clear-all-filter").remove();
+    }
+
+    // Remove Program selected text, reset dropdown, update URLs
+     if(selected_filter_name == 'program')
+     {
+      $("#program").val("");
+      setselectedProgram()
+      UpdateURL('program', '')
+     }
+
+    // Remove Language selected text, reset dropdown, update URLs
+     if(selected_filter_name == 'language')
+     {
+      $("#language").val("");
+      setselectedLanguage()
+      UpdateURL('language', '')
+     }
+
+    // Remove organization selected text, reset dropdown, update URLs
+     if(selected_filter_name == 'organization')
+     {
+      $("#organization").val("");
+      setselectedOrg()
+      UpdateURL('organization', '')
+     }
+   
+
+    // Remove mode selected text, reset dropdown, update URLs
+     if(selected_filter_name == 'mode')
+     {
+      $("#mode").val("");
+      setselectedMode()
+      UpdateURL('mode', '')
+     }
+     
+    // Update the search Results 
+    let program = document.getElementById('program').value
+    let language = document.getElementById('language').value
+    let organization = document.getElementById('organization').value
+    let mode = document.getElementById('mode').value
+    getSearchData(program, language, organization, mode)
+
+    });
+   // End clear selected text and filter 
+
+
+    // start  Clear All
+    $(document).on("click", "#clear-all-filter", function(){
+
+      // Remove all selected text 
+      $(".selected-filter-text").remove();
+      $(".clear-all-filter").remove();
+
+      // Clear All dropdown
+
+      $("#program").val("");
+      $("#language").val("");
+      $("#organization").val("");
+      $("#mode").val("");
+
+      // Clear All states 
+      setselectedProgram('')
+      setselectedLanguage('')
+      setselectedOrg('')
+      setselectedMode('')
+     
+
+      // Clear All URLs 
+      UpdateURL('program', '')
+      UpdateURL('language', '')
+      UpdateURL('organization', '')
+      UpdateURL('mode', '')
+   
+      // Update the search result
+      let program = document.getElementById('program').value
+      let language = document.getElementById('language').value
+      let organization = document.getElementById('organization').value
+      let mode = document.getElementById('mode').value
+      getSearchData(program, language, organization, mode)
+
+    });
+
+    // end  Clear All]
+
+
 
     return (
         <>
@@ -137,7 +334,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail}) => {
                         </select>
                     </div>
                     
-                    
 
                     <div className="custom-select">
                         <select className={Boolean(selectedLanguage)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="language" data-bs-toggle="dropdown"
@@ -153,36 +349,29 @@ const CenterFilterContainer = ({centerInfo, FiterDetail}) => {
 
 
                     <div className="custom-select">
-                        <select className={Boolean(selectedOrg)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="organisation" data-bs-toggle="dropdown"
+                        <select className={Boolean(selectedOrg)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="organization" data-bs-toggle="dropdown"
                         value={selectedOrg}
                         onChange={(e) => onOrgChange(e)}
                         >
                         <option className="ColorLight" value="">Organisation</option>
                         {FiterDetail.organization_list.map((organisation) => (
-                            <option value={organisation['organization_uuid']} >{organisation['organization_key']}</option>
+                            <option org-name={organisation['organization_key']} value={organisation['organization_key_lower']} >{organisation['organization_key']}</option>
                         ))}
                         </select>
                     </div>
 
-
-
-                    
                     <div className="custom-select">
-
-                        <select className= "dropdown-toggle SelectOne" id="mode" data-bs-toggle="dropdown"
-                        // value={selectedSubject}
-                        // onChange={(e) => onSubjectChange(e)}
+                        <select className={Boolean(selectedMode)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="mode" data-bs-toggle="dropdown"
+                        value={selectedMode}
+                        onChange={(e) => onModeChange(e)}
                         >
-                        <option className="ColorLight" sub-slug="" value="">Modes</option>
-                        {/* {FiterDetail.subject_list.map((subjects) => (
-                            <option sub-slug={subjects['subject_slug']} sub-name={subjects['subject_name']} value={subjects['subject_uuid']} >{subjects['subject_name']}</option>
-                        ))} */}
+                        <option className="ColorLight" value="">Modes</option>
+                        {FiterDetail.mode_list.map((mode) => (
+                            <option mode-name={mode['mode_name']} value={mode['mode_slug']} >{mode['mode_name']}</option>
+                        ))}
                         </select>
                     </div>
-
                     
-
-
             
             </div>
             </div>

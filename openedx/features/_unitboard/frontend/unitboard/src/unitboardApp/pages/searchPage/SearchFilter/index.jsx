@@ -538,7 +538,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     
     
     <section className="bglight p-2" id="firstSection">
-        <div className="container listing-container">
+        <div className="container listing-container mx-search-container">
             <h1 className="theading-title">Filter</h1> 
           <div className="row row-cols-6 pb-3">
             
@@ -636,7 +636,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
         </div>
 
         {/* start Selected filter  */}
-        <div className="container listing-container selected-filter-wrap">
+        <div className="container listing-container selected-filter-wrap mx-search-container">
           <div className="selected-filter" id="selected-filter"></div>
 
           <div className="show-clear-btn" id="show-clear-btn">
