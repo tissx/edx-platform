@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const SearchResultsFacultyContainer = ({FacultyResults}) => {
+const SearchResultsFacultyContainer = ({my_discovery_url, FacultyResults}) => {
 
   
     return (
@@ -20,7 +20,7 @@ const SearchResultsFacultyContainer = ({FacultyResults}) => {
                         
                     <div className="col-md-4 col-sm-4 col-lg-4 mb-2">
                         <div className="card service-box center-faculty-card">
-                            <div className="text-center"><img src={faculty['profile_image_url']} className="img-fluid"/></div>
+                            <div className="text-center"><img src={my_discovery_url + faculty['profile_image_url']} className="img-fluid"/></div>
                             <div className="card-title">
                                 <h5 className="text-center faculty-name"><b>{faculty['full_name']}</b></h5>
                                 <p className="text-center para  px-2">{faculty['bio']}</p>

@@ -185,7 +185,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
         {!R.isEmpty(CourseResults) && CourseResults.length !== 0 &&<SearchResultsCourses CourseResults={CourseResults} />}
         
         {!R.isEmpty(ProgramResults) && ProgramResults.length !== 0 && <SearchResultsPrograms ProgramResults={ProgramResults} />} 
-        {!R.isEmpty(FacultyResults) && FacultyResults.length !== 0 && <SearchResultsFaculty FacultyResults={FacultyResults} />} 
+        {!R.isEmpty(FacultyResults) && FacultyResults.length !== 0 && <SearchResultsFaculty my_discovery_url={my_discovery_url} FacultyResults={FacultyResults} />} 
         {/* {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />}  */}
         
     
