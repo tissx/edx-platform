@@ -589,7 +589,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                     value={selectedCenter}
                     onChange={(e) => onCenterChange(e)}
                     >
-                      <option className="ColorLight" value="">centre</option>
+                      <option className="ColorLight" value="">Centre</option>
                       {centerList.map((center) => (
                         <option value={center['center_slug']} center-name={center['center_name']} >{center['center_name']}</option>
                       ))}
