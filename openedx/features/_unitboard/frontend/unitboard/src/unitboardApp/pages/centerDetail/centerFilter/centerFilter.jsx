@@ -318,7 +318,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
 
 
         <section className="bg-light p-2" >
-            <div className="container listing-container">
+            <div className="container listing-container center-filter-wrap mx-search-container">
                 <h1 className="theading-title">Filter</h1> 
                 <div className="row row-cols-6 pb-3">
             
@@ -366,9 +366,11 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
                         onChange={(e) => onModeChange(e)}
                         >
                         <option className="ColorLight" value="">Modes</option>
+
                         {FiterDetail.mode_list.map((mode) => (
-                            <option mode-name={mode['mode_name']} value={mode['mode_slug']} >{mode['mode_name']}</option>
+                            <option value={mode['0']} mode-name={mode['1']} >{mode['1']}</option>
                         ))}
+
                         </select>
                     </div>
                     
@@ -377,7 +379,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
             </div>
 
             {/* start Selected filter  */}
-            <div className="container listing-container selected-filter-wrap">
+            <div className="container listing-container selected-filter-wrap mx-search-container">
             <div className="selected-filter" id="selected-filter"></div>
 
             <div className="show-clear-btn" id="show-clear-btn">

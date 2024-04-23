@@ -80,7 +80,9 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
                                       
                                   </div>
                               <div className="prf_certificate">    
-                                  <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}><span>{program.type}</span></a>
+                                  {/* <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}><span>{program.type}</span></a> */}
+                                  <a className="mx-prog-link"><span>{(program.type.charAt(program.type.length - 1) == "s")?(program.type.slice(0, -1)): program.type}</span></a>
+
                                   <p className="py-1">{program.mx_no_of_courses} Courses</p>
                               </div>
                               </div>

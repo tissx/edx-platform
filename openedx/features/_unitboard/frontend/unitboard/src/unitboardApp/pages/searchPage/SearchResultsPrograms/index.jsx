@@ -22,7 +22,7 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
             <div className="col-md-6">
                 <h1 className="theading-title py-4 search-result-title">{(Querytxt)? '"'+ Querytxt + '" Programs' : 'Programs'}</h1>
             </div>
-            <div className="col-md-6 py-4">
+            <div className="col-md-6">
                 {/* <nav className="pagination-container">
                     <button className="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
                       &lt;
@@ -83,7 +83,9 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
                                       
                                   </div>
                               <div className="prf_certificate">    
-                                  <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}><span>{program.type}</span></a>
+                                  {/* <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}><span>{program.type}</span></a> */}
+                                  <a className="mx-prog-link"><span>{(program.type.charAt(program.type.length - 1) == "s")?(program.type.slice(0, -1)): program.type}</span></a>
+
                                   <p className="py-1">{program.mx_no_of_courses} Courses</p>
                               </div>
                               </div>

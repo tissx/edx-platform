@@ -13,7 +13,7 @@ from openedx.core.djangoapps.content.course_overviews.models import \
     CourseOverview  # lint-amnesty, pylint: disable=unused-import
 from openedx.core.djangoapps.models.course_details import CourseDetails
 from openedx.core.lib.api.fields import AbsoluteURLField
-
+from common.djangoapps.course_modes.models import CourseMode
 
 class _MediaSerializer(serializers.Serializer):  # pylint: disable=abstract-method
     """
@@ -115,7 +115,7 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
     invitation_only = serializers.BooleanField()
     # Manprax 
     language = serializers.CharField()
-
+    mx_course_mode = serializers.SerializerMethodField()
 
 
     # 'course_id' is a deprecated field, please use 'id' instead.
@@ -139,6 +139,14 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
         ])
         return self.context['request'].build_absolute_uri(base_url)
 
+    def get_mx_course_mode(self, course_overview):
+        """
+        Get Course Mode
+        """
+        course_mode = CourseMode.objects.filter(course__id= course_overview.id).first()
+        if course_mode:
+            return course_mode.mode_slug
+        return "audit"
 
 class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-method
     """

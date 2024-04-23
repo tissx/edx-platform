@@ -14,11 +14,11 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
         <>
         
         <section>
-        <div className="container px-0">
+        <div className="container listing-container pt-3">
                 <div className="row" id="cbox-left">
                     <div className="col-md-12 col-sm-12">
                         
-                        <h1 className="text-align-left"><b>Courses</b></h1>
+                        <h1 className="text-align-left center-course-title"><b>Courses</b></h1>
                         <div className="row center-courses" id="iconright">
                        
                         {CourseResults.results.map((course)=> (
@@ -40,7 +40,7 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
                                         <p className="box-short-descp">Starts: {dateFormat( course['course_runs'][0]['start'], "mmmm dd, yyyy")}</p>
                                         
                                         <div className="course_btn">
-                                            <span className="more_learn">Courses</span>
+                                            <span className="more_learn">Course</span>
                                         </div>
 
                                         {/* <div className="service-text position-relativ p-2">

@@ -23,7 +23,7 @@ function handleCoursePageChange(event, value) {
             <div className="col-md-6">
                 <h1 className="theading-title py-4 search-result-title">{(Querytxt)?  '"'+ Querytxt + '" Courses' : 'Courses'}</h1>
             </div>
-            <div className="col-md-6 py-4">
+            <div className="col-md-6">
                
 
           <Pagination className="result-pagination"  count={CourseResults['num_pages']} onChange={handleCoursePageChange} variant="outlined" shape="rounded" />
@@ -55,7 +55,7 @@ function handleCoursePageChange(event, value) {
                               <p className="box-short-descp">Starts: {dateFormat( course['course_runs'][0]['start'], "mmmm dd, yyyy")}</p>
                               
                               <div className="course_btn">
-                                  <span className="more_learn">Courses</span>
+                                  <span className="more_learn">Course</span>
                               </div>
 
 

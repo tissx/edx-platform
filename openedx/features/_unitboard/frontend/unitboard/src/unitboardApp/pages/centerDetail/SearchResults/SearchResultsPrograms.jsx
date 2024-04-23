@@ -56,7 +56,10 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
 
                                   </div>
                               <div className="prf_certificate">    
-                                  <a className="mx-prog-link" href={'../program-detail/' + program_dict[keyName][keyNames]['uuid']}><span>{program_dict[keyName][keyNames]['type']}</span></a>
+                                  {/* <a className="mx-prog-link"><span>{program_dict[keyName][keyNames]['type']}</span></a> */}
+
+                                  <a className="mx-prog-link"><span>{(program_dict[keyName][keyNames]['type'].charAt(program_dict[keyName][keyNames]['type'].length - 1) == "s")?(program_dict[keyName][keyNames]['type'].slice(0, -1)): program_dict[keyName][keyNames]['type'] }</span></a>
+
                                   <p className="py-1">{program_dict[keyName][keyNames]['mx_no_of_courses']} Courses</p>
                               </div>
                               </div>

@@ -83,7 +83,7 @@ const option = {
                                                 <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
 
                                                 <div className="course_btn">
-                                                    <span className="more_learn">Courses</span>
+                                                    <span className="more_learn">Course</span>
                                                 </div>
 
 
@@ -171,7 +171,9 @@ const option = {
                                         <p>{programs_list.short_description}</p>
                                     </div>
                                 <div className="prf_certificate">    
-                                    <a className="mx-prog-link" href={programs_list.program_detail}><span>{programs_list.program_type}</span></a>
+                                    {/* <a className="mx-prog-link" href={programs_list.program_detail}><span>{programs_list.program_type}</span></a> */}
+                                  <a className="mx-prog-link"><span>{(programs_list.program_type.charAt(programs_list.program_type.length - 1) == "s")?(programs_list.program_type.slice(0, -1)): programs_list.program_type}</span></a>
+
                                     <p className="py-1">{programs_list.total_course} Courses</p>
                                 </div>
                                 </div>
@@ -253,7 +255,9 @@ const option = {
                                             <p>{degree_list.short_description}</p>
                                         </div>
                                     <div className="prf_certificate">    
-                                        <a className="mx-prog-link" href={degree_list.degree_detail}><span>{degree_list.degree_type}</span></a>
+                                        {/* <a className="mx-prog-link" href={degree_list.degree_detail}><span>{degree_list.degree_type}</span></a> */}
+                                  <a className="mx-prog-link"><span>{(degree_list.degree_type.charAt(degree_list.degree_type.length - 1) == "s")?(degree_list.degree_type.slice(0, -1)): degree_list.degree_type}</span></a>
+
                                         <p className="py-1">{degree_list.total_course} Courses</p>
                                     </div>
                                     </div>

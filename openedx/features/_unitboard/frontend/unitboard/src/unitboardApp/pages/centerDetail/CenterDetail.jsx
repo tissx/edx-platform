@@ -11,6 +11,7 @@ import SearchResultsPrograms from './SearchResults/SearchResultsPrograms';
 import SearchResultsFaculty from './SearchResults/SearchResultsFaculty';
 import Loader from '../common/loader'; 
 import CenterFilter from './centerFilter/centerFilter';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const CenterDetailContainer = ({my_discovery_url}) => {
 
@@ -118,7 +119,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
   const getSearchResult = (center, program, language, organization, mode) => {
 
     // start Fetch results for courses 
-    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_center=${center}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&mode=${mode}`
+    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_center=${center}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&course_mode=${mode}`
     // var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&mode=${mode}`
     fetch(course_api_url)
     .then((res) => {
@@ -133,7 +134,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
 
     // start Fetch results for program 
-    var program_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=program&program_center=${center}&program_uuid=${program}&program_language=${language}&mx_program_organization=${organization}&mode=${mode}`
+    var program_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=program&program_center=${center}&program_uuid=${program}&program_language=${language}&mx_program_organization=${organization}&program_mode=${mode}`
     fetch(program_api_url)
     .then((res) => {
         return res.json();
@@ -147,7 +148,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
 
     // start Fetch results for Faculty 
-    var faculty_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-people/?center=${center}&mx_program=${program}&mx_instructor_lang=${language}&mx_instructor_org=${organization}&mode=${mode}`
+    var faculty_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-people/?mx_center=${center}&mx_program=${program}&mx_instructor_lang=${language}&mx_instructor_org=${organization}&mx_mode=${mode}`
     fetch(faculty_api_url)
     .then((res) => {
         return res.json();
@@ -182,13 +183,12 @@ const CenterDetailContainer = ({my_discovery_url}) => {
         {!(centerLoader) && !(filterLoader) && <Loader/>}
         {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && !R.isEmpty(fiterDetail) && fiterDetail.length !== 0 && <CenterFilter centerInfo={centerdetail.center_info}  FiterDetail={fiterDetail} getSearchData={getSearchData} />} 
 
+        {!(resultLoader) && <CircularProgress className="mx-loader"/>}
+
         {!R.isEmpty(CourseResults) && CourseResults.length !== 0 &&<SearchResultsCourses CourseResults={CourseResults} />}
-        
         {!R.isEmpty(ProgramResults) && ProgramResults.length !== 0 && <SearchResultsPrograms ProgramResults={ProgramResults} />} 
         {!R.isEmpty(FacultyResults) && FacultyResults.length !== 0 && <SearchResultsFaculty my_discovery_url={my_discovery_url} FacultyResults={FacultyResults} />} 
-        {/* {(centerLoader) && !R.isEmpty(centerdetail) && centerdetail.length !== 0 && <CenterFaculty centerFaculty={centerdetail.faculty} />}  */}
         
-    
        </>
     );
 };

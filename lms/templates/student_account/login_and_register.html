@@ -53,3 +53,74 @@
         </div>
     </main>
 </div>
+
+
+
+
+
+<script>
+    function togbtn() {
+            let x = document.getElementById("navbarCollapse");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+    }
+  
+    // Show drowpdown item on mobile when user click nav item 
+    $(document).ready(function () {
+      if($(window).width() <= 768) {
+        $(".mx-dropdown-toggle").attr({
+          'data-bs-toggle': 'dropdown',
+          'href': '#'
+        });
+      }
+      else {
+        $(".mx-dropdown-toggle").removeAttr('data-bs-toggle');
+      }
+  
+    })
+  
+  
+    function mxdropdowncourse() {
+      let x = document.getElementById("course-dropdown");
+  
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+    }
+  
+    function mxdropdownprogram() {
+      let x = document.getElementById("program-dropdown");
+  
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+    }
+  
+    function mxdropdownschool() {
+      let x = document.getElementById("school-dropdown");
+  
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+    }
+  
+    function userdropdown() {
+            let x = document.getElementById("userdropdownItem");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+    }
+  
+          
+  </script>

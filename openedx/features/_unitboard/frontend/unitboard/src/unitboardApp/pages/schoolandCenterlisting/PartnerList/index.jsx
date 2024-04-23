@@ -14,14 +14,32 @@ const PartnerListContainer = ({partnerlist}) => {
     var url = window.location.href;
     var split_url = url.split('#')[1]
 
-  window.addEventListener('load', function () {
+//   window.addEventListener('load', function () {
+//     console.log("Inside load function")
+//     if(split_url) {
+//         if(split_url == "partner") {
+//             console.log("Redirect to Partner section")
+
+//             document.getElementById("partner").scrollIntoView()
+
+//             }
+//         }
+//   })
+
+  function showPartnerOnLoad(event) {
+    console.log("Inside load function")
     if(split_url) {
         if(split_url == "partner") {
+            console.log("Redirect to Partner section")
+
             document.getElementById("partner").scrollIntoView()
 
             }
         }
-  })
+}
+
+  window.addEventListener('load', showPartnerOnLoad);
+
 
     const option = {
         rtl:false,
@@ -59,7 +77,7 @@ const PartnerListContainer = ({partnerlist}) => {
 
     return (
  
-        <section className="bg-light my-5" id="partner">
+        <section className="bg-light py-5" id="partner">
             <div className="container listing-container">
                 <h1 className="theading-title">Partners</h1>
                 <div className="row">

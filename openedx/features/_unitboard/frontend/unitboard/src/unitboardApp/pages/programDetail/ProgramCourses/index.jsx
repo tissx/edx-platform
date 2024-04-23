@@ -54,7 +54,7 @@ const ProgramCoursesContainer = (program_course) => {
                     {program_course.programcourses.map((course_list) => (
 
                         <div className="item">
-                            <div className="ite mx-prg-detail-course">
+                            <div className="item mx-prg-detail-course">
                                 <div className="service-item body-light tissxoff redirect2course"
                                 onClick={() => RedirectToPage(course_list['course_link'])}
                                 >
@@ -72,7 +72,7 @@ const ProgramCoursesContainer = (program_course) => {
                                         <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
 
                                         <div className="course_btn">
-                                            <span className="more_learn">Courses</span>
+                                            <span className="more_learn">Course</span>
                                         </div>
 
                                         {/* <p className="px-2 box-short-descp">{course_list['course_description']} </p>
