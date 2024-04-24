@@ -2,7 +2,7 @@
  * Patner listing on schhol and center listing  Page
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -26,7 +26,7 @@ const PartnerListContainer = ({partnerlist}) => {
 //         }
 //   })
 
-  function showPartnerOnLoad(event) {
+  function showPartnerOnLoad() {
     console.log("Inside load function")
     if(split_url) {
         if(split_url == "partner") {
@@ -38,7 +38,13 @@ const PartnerListContainer = ({partnerlist}) => {
         }
 }
 
-  window.addEventListener('load', showPartnerOnLoad);
+useEffect(() => {
+    // document.addEventListener('load', showPartnerOnLoad);
+    showPartnerOnLoad()
+  }, []);
+
+  
+
 
 
     const option = {
