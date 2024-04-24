@@ -211,7 +211,7 @@ ScheduleUpgradeReminder = ScheduleUpgradeReminder.task_instance
 
 class ScheduleCourseUpdate(BinnedScheduleMessageBaseTask):  # lint-amnesty, pylint: disable=missing-class-docstring
     num_bins = resolvers.COURSE_UPDATE_NUM_BINS
-    enqueue_config_var = 'enqueue_course_update'
+    enqueue_config_var = 'deliver_course_update'
     log_prefix = COURSE_UPDATE_LOG_PREFIX
     resolver = resolvers.CourseUpdateResolver
     async_send_task = _course_update_schedule_send
@@ -224,7 +224,7 @@ ScheduleCourseUpdate = ScheduleCourseUpdate.task_instance
 
 
 class ScheduleCourseNextSectionUpdate(ScheduleMessageBaseTask):  # lint-amnesty, pylint: disable=missing-class-docstring
-    enqueue_config_var = 'enqueue_course_update'
+    enqueue_config_var = 'deliver_course_update'
     log_prefix = COURSE_NEXT_SECTION_UPDATE_LOG_PREFIX
     resolver = resolvers.CourseNextSectionUpdate
     async_send_task = _course_update_schedule_send
@@ -274,7 +274,6 @@ def _schedule_send(msg_str, site_id, delivery_config_var, log_prefix):  # lint-a
     site = Site.objects.select_related('configuration').get(pk=site_id)
     if _is_delivery_enabled(site, delivery_config_var, log_prefix):
         msg = Message.from_string(msg_str)
-
         user = User.objects.get(id=msg.recipient.lms_user_id)
         with emulate_http_request(site=site, user=user):
             _annonate_send_task_for_monitoring(msg)
