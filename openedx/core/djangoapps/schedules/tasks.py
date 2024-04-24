@@ -211,7 +211,7 @@ ScheduleUpgradeReminder = ScheduleUpgradeReminder.task_instance
 
 class ScheduleCourseUpdate(BinnedScheduleMessageBaseTask):  # lint-amnesty, pylint: disable=missing-class-docstring
     num_bins = resolvers.COURSE_UPDATE_NUM_BINS
-    enqueue_config_var = 'enqueue_course_update'
+    enqueue_config_var = 'deliver_course_update'
     log_prefix = COURSE_UPDATE_LOG_PREFIX
     resolver = resolvers.CourseUpdateResolver
     async_send_task = _course_update_schedule_send
@@ -224,7 +224,7 @@ ScheduleCourseUpdate = ScheduleCourseUpdate.task_instance
 
 
 class ScheduleCourseNextSectionUpdate(ScheduleMessageBaseTask):  # lint-amnesty, pylint: disable=missing-class-docstring
-    enqueue_config_var = 'enqueue_course_update'
+    enqueue_config_var = 'deliver_course_update'
     log_prefix = COURSE_NEXT_SECTION_UPDATE_LOG_PREFIX
     resolver = resolvers.CourseNextSectionUpdate
     async_send_task = _course_update_schedule_send
