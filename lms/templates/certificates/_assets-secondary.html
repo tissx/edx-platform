@@ -1,9 +1,16 @@
 <script type="text/javascript">
 
-    document.getElementById("action-print-view").addEventListener("click", printView);
+    // document.getElementById("action-print-view").addEventListener("click", printView);
 
-    function printView(event) {
-       event.preventDefault();
-       window.print();
+    // function printView(event) {
+    //    event.preventDefault();
+    //    window.print();
+    // }
+
+    function printCertificate() {
+        document.getElementById("action-print-view").style.display = "none";
+        window.print();
+        document.getElementById("action-print-view").style.display = "block";
     }
+
 </script>
