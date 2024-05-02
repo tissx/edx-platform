@@ -420,6 +420,11 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       if($("#show_center_as_text").length > 0) {
         document.getElementById("show_center_as_text").remove();
       }
+      //Remove clear all if there is no selected text
+      if($("#selected-filter").html()=='') {
+        document.getElementById("clear-all-filter").remove();
+       }
+
       UpdateURL('school', '')
       UpdateURL('center', '')
      }
