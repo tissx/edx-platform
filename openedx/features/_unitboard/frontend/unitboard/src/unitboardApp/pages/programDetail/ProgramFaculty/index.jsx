@@ -11,7 +11,7 @@ const ProgramFacultyContainer = ({programfaculty}) => {
                 
         <section className="learn-school program-faculty bg-light">
             <div className="container">
-            <h1 className="theading-title pb-3">Programs Faculty</h1>
+            <h1 className="theading-title pb-3">Program Faculty</h1>
             <div className="row">
 
             {programfaculty.map((faculty) => (
