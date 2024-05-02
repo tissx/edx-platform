@@ -13,7 +13,7 @@ const SearchResultsFacultyContainer = ({my_discovery_url, FacultyResults}) => {
       
         <section className="center-faculty-section">
             <div className="container listing-container pt-3">
-                <h1 className="theading-title pb-3">Centres Faculty</h1>
+                <h1 className="theading-title pb-3">Centre Faculty</h1>
                 <div className="row center-faculty">
 
                     {FacultyResults.results.map((faculty) => (
