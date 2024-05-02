@@ -8,6 +8,7 @@ import { Switch, Route, Routes } from "react-router-dom";
 
 import LandingPageContainer from "./pages/landingPage";
 import ProgramDetailContainer from "./pages/programDetail";
+import DegreeDetailContainer from "./pages/degreeDetail";
 import ProgramDegreelistingContainer from "./pages/programandDegreelisting";
 import SchoolCenterlistingContainer from "./pages/schoolandCenterlisting";
 import SchoolDeatilContainer from "./pages/schoolDetail";
@@ -34,7 +35,10 @@ export const UnitboardApp = () => {
                 </Route>
                 <Route exact path="/program-detail/:slug">
                     {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <ProgramDetailContainer my_discovery_url={my_discovery_url} />}
+                </Route>
 
+                <Route exact path="/degree-detail/:slug">
+                    {!R.isEmpty(my_discovery_url) &&  my_discovery_url !== undefined && <DegreeDetailContainer my_discovery_url={my_discovery_url} />}
                 </Route>
 
                 <Route exact path="/unitboard/program-degree-listing">

@@ -25,6 +25,14 @@ urlpatterns = [
     ),
 
     url(
+    r'^degree-detail/{}'.format(
+        r'(?P<program_uuid>[0-9a-f-]+)',
+    ),
+    UnitboardView.as_view(),
+    name='degree-detail'
+    ),
+
+    url(
     r'^program-degree-listing',
     UnitboardView.as_view(),
     name='program-degree-listing'

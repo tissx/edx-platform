@@ -39,7 +39,7 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
 
 
                     <div className="program_data service-item body-light tissxoff mx-center-program">
-                          <a className="mx-prog-link" href={'../program-detail/' + program_dict[keyName][keyNames]['uuid']}>
+                          <a className="mx-prog-link" href={(program_dict[keyName][keyNames]['program_or_degree'] == "program")? ("../program-detail/" + program_dict[keyName][keyNames]['uuid']) :("../degree-detail/" + program_dict[keyName][keyNames]['uuid']) }>
                               <div className="img-Area">
                                   <img className="img-fluid program_img_data"
                                   

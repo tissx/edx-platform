@@ -9,7 +9,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 
 
-const ProgramCoursesContainer = (program_course) => {
+const DegreeCoursesContainer = (program_course) => {
     const option = {
         rtl:false,
         loop:false,
@@ -46,7 +46,7 @@ const ProgramCoursesContainer = (program_course) => {
                     <h1 className="theading-title">Objectives</h1>
                     <p className="para">{program_course.programinfo['program_description']['objectives']}</p>
                 </div>
-                <h1 className="prg-course-title"><b>Program Courses</b></h1>
+                <h1 className="prg-course-title"><b>Degree Courses</b></h1>
                 <div className="row py-3" id="iconright1">  
 
                     <OwlCarousel className='owl-theme' {...option}>
@@ -106,7 +106,7 @@ const ProgramCoursesContainer = (program_course) => {
     );
 };
 
-ProgramCoursesContainer.propTypes = {}
+DegreeCoursesContainer.propTypes = {}
 
-export default ProgramCoursesContainer
+export default DegreeCoursesContainer
 // 

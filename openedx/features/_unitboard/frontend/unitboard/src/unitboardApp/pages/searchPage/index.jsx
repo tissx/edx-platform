@@ -47,9 +47,9 @@ const SearchPageContainer = ({my_discovery_url}) => {
   
   const getSearchResult = (subject, program_degree_group, learningType, query, school, center, language, size) => {
    
-    if(school == "independent-center") {
-      school = ""
-    }
+    // if(school == "independent-center") {
+    //   school = ""
+    // }
     //start Fetch search results for courses from discovery
     if(learningType &&  learningType !== undefined && (learningType == "course" || learningType == "all")){
       let course_type_query = ""
@@ -63,7 +63,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
     if(subject && subject!== undefined && program_degree_group && program_degree_group !== undefined) {
       course_type_query = '&subject_uuids=' + subject + '&course_program_type_slug=' + program_degree_group
     }
-    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-search/?content_type=course${course_type_query}&q=${query}&course_school=${school}&course_center=${center}&course_language=${language}&size=${size}`
+    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-search/?content_type=course&is_show_course=true${course_type_query}&q=${query}&course_school=${school}&course_center=${center}&course_language=${language}&size=${size}`
     fetch(course_api_url)
     .then((res) => {
         return res.json();
@@ -177,10 +177,11 @@ const SearchPageContainer = ({my_discovery_url}) => {
     const center = query.get('center') || ""
     var language = query.get('language') || ""
     var query_search = query.get('query') || ""
+    var is_search = query.get('is_search') || false
 
 
 
-    if(query_search) {
+    if(is_search && is_search=="true") {
         setshowSectionResults(true)
         size = 4
     }
@@ -224,8 +225,8 @@ const SearchPageContainer = ({my_discovery_url}) => {
           q_school = data.selected_school
         }
 
-        if(data.selected_centter && data.selected_centter !=="null") {
-          q_center = data.select_learning_type
+        if(data.selected_center && data.selected_center !=="null") {
+          q_center = data.selected_center
         }
 
         getSearchResult(q_subject, q_prg_group, q_learningtype, query_search, q_school, q_center, selected_language, size)

@@ -119,7 +119,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
   const getSearchResult = (center, program, language, organization, mode) => {
 
     // start Fetch results for courses 
-    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_center=${center}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&course_mode=${mode}`
+    var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&is_show_course=true&course_center=${center}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&course_mode=${mode}`
     // var course_api_url = `${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&mode=${mode}`
     fetch(course_api_url)
     .then((res) => {

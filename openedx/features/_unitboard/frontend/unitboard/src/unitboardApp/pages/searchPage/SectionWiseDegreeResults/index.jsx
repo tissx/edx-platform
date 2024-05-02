@@ -62,7 +62,7 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                     <li>
 
                         <div className="program_data service-item body-light tissxoff mx-search-results">
-                          <a className="mx-prog-link" href={'../program-detail/' + degree['uuid']}>
+                          <a className="mx-prog-link" href={'../degree-detail/' + degree['uuid']}>
                               <div className="img-Area">
                                   <img className="img-fluid program_img_data"
                                   

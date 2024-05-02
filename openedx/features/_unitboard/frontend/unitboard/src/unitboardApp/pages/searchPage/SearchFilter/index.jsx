@@ -32,6 +32,9 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     setselectedLearningType(mxLearningType)
   }
 
+  const query = new URLSearchParams(window.location.search);
+  var is_search = query.get('is_search') || false
+
 
   const mx_offering = {
     "all": "Offering",
@@ -49,7 +52,10 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
   // Start On Page Load 
   useEffect(() => {
+
     showSelectedFilterTextonPageLoad()
+
+
   }, []);
 
 // End on Page Load 
@@ -80,6 +86,9 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       document.getElementById("clear-all-filter").remove();
      }
 
+    UpdateURL('is_search', true)
+
+
   }; 
   
  
@@ -95,9 +104,13 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
   const onDropdownChange = e => {
 
      // show section wise result if user has remove all dropdown filter one by one and search any text in search box
-      let query = document.getElementById('query').value
+      // let query = document.getElementById('query').value
 
-     if(query && query!== undefined && $("#selected-filter").html()=='') {
+    //  if(query && query!== undefined && $("#selected-filter").html()=='') {
+    //   onFormSearch()
+    // }
+
+    if(is_search && is_search=="true" && $("#selected-filter").html()=='') {
       onFormSearch()
     }
   };
@@ -265,16 +278,18 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       document.getElementById(selected_filter_abbr).remove();
     }
 
-    // If clear all btn is showing but no filter is selected then remove the clear all btn
-    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
-      document.getElementById("clear-all-filter").remove();
-     }
-
     // Remove selected center on school change
     if($("#show_center_as_text").length > 0 && selected_filter_name=="school") {
       document.getElementById("show_center_as_text").remove();
     }
 
+    
+    // If clear all btn is showing but no filter is selected then remove the clear all btn
+    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
+      document.getElementById("clear-all-filter").remove();
+     }
+
+    
     // only update when there is any value in dropdown 
     if(selected_filter_value && selected_filter_value!== undefined) {
       var show_text = '<div class="dropdown fi-border selected-filter-text" id="'+selected_filter_abbr+'">'
@@ -445,7 +460,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     getSearchData(subject, program_group, learning_type, query, school, center, language)
 
     // show section wise result if user has clear all filter one by one and search any text in search box
-    if(query && query!== undefined && $("#selected-filter").html()=='') {
+    if(is_search && is_search=="true" && $("#selected-filter").html()=='') {
       onFormSearch()
     }
 
@@ -500,7 +515,13 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       getSearchData(subject, program_group, learning_type, query, school, center, language)
       
       // show section wise result if user has search any text in search box
-      if(query && query!== undefined) {
+      // if(query && query!== undefined) {
+      //   onFormSearch()
+      // }
+
+      // show section wise result if user has search any text in search box
+
+      if(is_search && is_search=="true") {
         onFormSearch()
       }
 

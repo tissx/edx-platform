@@ -14,6 +14,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
     const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language["language_slug"]);
     const [selectedOrg, setselectedOrg] = useState(FiterDetail.selected_organization['organization_key_lower']);
     const [selectedMode, setselectedMode] = useState(FiterDetail.selected_mode['mode_slug']);
+    const [selectedSubject, setselectedSubject] = useState();
 
     
       // Start On Page Load 
@@ -369,6 +370,21 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
 
                         {FiterDetail.mode_list.map((mode) => (
                             <option value={mode['0']} mode-name={mode['1']} >{mode['1']}</option>
+                        ))}
+
+                        </select>
+                    </div>
+
+
+                    <div className="custom-select">
+                        <select className={Boolean(selectedSubject)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="subject" data-bs-toggle="dropdown"
+                        value={selectedMode}
+                        // onChange={(e) => onModeChange(e)}
+                        >
+                        <option className="ColorLight" value="">Subject</option>
+
+                        {FiterDetail.subject_list.map((subject) => (
+                            <option value={subject['subject_name']} subject-name={subject['subject_uuid']} >{subject['subject_name']}</option>
                         ))}
 
                         </select>

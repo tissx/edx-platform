@@ -10,7 +10,7 @@ const BannerSectionContainer = () => {
 const handleFormsubmit = (e) => {
 
     let query = document.getElementById('query').value
-    window.location.href = '/search-detail/?query=' + query
+    window.location.href = '/search-detail/?is_search=true&query=' + query
 }
 
 //IT triggers by pressing the enter key
