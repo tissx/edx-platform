@@ -17,7 +17,7 @@ const SchoolsCenterListContainer = ({SchoolInfo, CenterList}) => {
             <div className="container">
                     <div className="row px-3" id="cbox-left">
                         <div className="col-md-12 col-sm-12 bg-light">
-                            <h1 className="theading-title">School Offerings</h1> 
+                            <h1 className="theading-title">School Offering</h1> 
                             <p className="para">{SchoolInfo['short_description']}</p>
                             <h1 className="text-align-left"><b>Centres</b></h1>
                             {/* <div className="row mx-box center-at-school" id="iconright"> */}

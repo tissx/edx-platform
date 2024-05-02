@@ -309,7 +309,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
             <div className="container">
                 <div className="row" id="cbox-left">
                     <div className="col-md-12 col-sm-12 bg-light">
-                        <h1 className="theading-title">Centres Offerings</h1> 
+                        <h1 className="theading-title">Centre Offering</h1> 
                         <p className="para">{centerInfo['short_description']}</p>
                     </div>
                 </div>
