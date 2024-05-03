@@ -7,10 +7,20 @@
     //    window.print();
     // }
 
+    // function printCertificate() {
+    //     document.getElementById("action-print-view").style.display = "none";
+    //     window.print();
+    //     document.getElementById("action-print-view").style.display = "block";
+    // }
+
     function printCertificate() {
-        document.getElementById("action-print-view").style.display = "none";
+        alert("Print click platform")
+        // document.getElementById("action-print-view").style.display = "none";
+        let x = document.getElementById("action-print-view");
+        x.style.display = "none";
         window.print();
-        document.getElementById("action-print-view").style.display = "block";
+        // document.getElementById("action-print-view").style.display = "block";
+        x.style.display = "block";
     }
 
 </script>
