@@ -65,7 +65,10 @@ class BadgrBackend(BadgeBackend):
         """
         Get the URL for a course's badge in a given mode.
         """
-        return f"{settings.BADGR_BASE_URL}/v2/badgeclasses/{slug}"
+        if slug is '':
+            return f"{settings.BADGR_BASE_URL}/v2/badgeclasses/None"
+        else:
+            return f"{settings.BADGR_BASE_URL}/v2/badgeclasses/{slug}"
 
     def _assertion_url(self, slug):
         """
