@@ -8,7 +8,7 @@
 	branch = maple_release
 [submodule "lms/djangoapps/mx_problem_response"]
 	path = lms/djangoapps/mx_problem_response
-	url = https://om_kumar:glpat-35qme_uc-tZYkpBEP7k7@gitlab.com/mx_problem_response.git
+	url = https://om_kumar:glpat-35qme_uc-tZYkpBEP7k7@gitlab.com/satorg/mx_problem_response.git
 	branch = mx-dev
 [submodule "lms/djangoapps/mx_utility"]
 	path = lms/djangoapps/mx_utility
