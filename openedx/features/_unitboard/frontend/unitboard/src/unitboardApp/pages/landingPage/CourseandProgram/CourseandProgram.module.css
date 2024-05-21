@@ -1,0 +1,12 @@
+@value variables: "../../../../global.css";
+
+@value primary, secondary from variables;
+
+
+.theading-title {
+    font-size: 60px;
+    color: #2B7652;
+    line-height: 133%;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}

@@ -490,6 +490,11 @@ def student_dashboard(request):  # lint-amnesty, pylint: disable=too-many-statem
         The dashboard response.
 
     """
+    # Manprax
+    # if not request.user:
+    #     return redirect(reverse('mx_landing_page:dashboard'))
+    # return redirect(reverse('mx_landing_page:dashboard'))
+
     user = request.user
     if not UserProfile.objects.filter(user=user).exists():
         return redirect(reverse('account_settings'))

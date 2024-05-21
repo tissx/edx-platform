@@ -97,7 +97,10 @@ notification_prefs_urls = [
 
 
 urlpatterns = [
-    path('', branding_views.index, name='root'),  # Main marketing page, or redirect to courseware
+    # path('', branding_views.index, name='root'),  # Main marketing page, or redirect to courseware
+
+    # Manprax 
+    path('', include('openedx.features._unitboard.urls')),
 
     path('', include('common.djangoapps.student.urls')),
     # TODO: Move lms specific student views out of common code
@@ -213,6 +216,7 @@ urlpatterns = [
     re_path(r'^api/pushnotification/',include(('lms.djangoapps.pushnotification.urls','mx_pushnotification_api'), namespace='mx_pushnotification_api')),
     re_path( r'^mx_utility/api/',include('lms.djangoapps.mx_utility.views.api_urls')),
     re_path(r'^courses/{}/mx_instructor/api/'.format(settings.COURSE_ID_PATTERN,),include('lms.djangoapps.mx_utility.views.api_urls')),
+
 
     path('403', handler403),
     path('404', handler404),

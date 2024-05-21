@@ -1,0 +1,5 @@
+[*.{jsx}]
+indent_size = 2
+
+[*.{module.css}]
+indent_size = 4
