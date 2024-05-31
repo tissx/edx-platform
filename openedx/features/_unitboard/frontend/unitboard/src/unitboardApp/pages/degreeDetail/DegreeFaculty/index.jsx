@@ -4,18 +4,13 @@
 
 
 const DegreeFacultyContainer = ({programfaculty}) => {
- 
-
     return (
     
-                
         <section className="learn-school program-faculty bg-light">
             <div className="container">
             <h1 className="theading-title pb-3">Degree Faculty</h1>
             <div className="row">
-
             {programfaculty.map((faculty) => (
-
                 <div className="col-md-4 col-sm-4 col-lg-4 mb-4">
                     <div className="card service-box program-faculty-card">
                         <div className="text-center"><img src={faculty['image']} className="img-fluid"/></div>
@@ -25,7 +20,6 @@ const DegreeFacultyContainer = ({programfaculty}) => {
                         </div>
                     </div>
                 </div>
-               
             ))}
 
             {/* Start No result Found  */}
@@ -37,12 +31,9 @@ const DegreeFacultyContainer = ({programfaculty}) => {
             )}
             {/* End No result Found  */}
 
-
             </div>
-                
             </div>
         </section>
-
        
     );
 };

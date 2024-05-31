@@ -8,7 +8,6 @@ const ProgramFacultyContainer = ({programfaculty}) => {
 
     return (
     
-                
         <section className="learn-school program-faculty bg-light">
             <div className="container">
             <h1 className="theading-title pb-3">Program Faculty</h1>
@@ -36,7 +35,6 @@ const ProgramFacultyContainer = ({programfaculty}) => {
                 </div>
             )}
             {/* End No result Found  */}
-
 
             </div>
                 

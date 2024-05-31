@@ -2,11 +2,9 @@
  * Schhol and Center listing Banner Page
  */
 
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 
 const SchoolCenterBannerContainer = () => {
-
 
     return (
         
@@ -19,7 +17,6 @@ const SchoolCenterBannerContainer = () => {
                     
                    </div>
                    <div className="offset-md-5">
-                     
                        
                    </div>
                </div>

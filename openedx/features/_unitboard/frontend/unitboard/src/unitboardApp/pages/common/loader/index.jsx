@@ -7,7 +7,6 @@ const Loader = () => {
             <div className="spinner-grow text-primary" role="status"></div>
         </div>
     );
-
 };
 
 Loader.propTypes = {}

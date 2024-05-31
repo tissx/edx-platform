@@ -2,12 +2,10 @@
  * Program Courses Page
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-
-
 
 const DegreeCoursesContainer = (program_course) => {
     const option = {
@@ -75,11 +73,6 @@ const DegreeCoursesContainer = (program_course) => {
                                             <span className="more_learn">Course</span>
                                         </div>
 
-                                        {/* <p className="px-2 box-short-descp">{course_list['course_description']} </p>
-                                        <div className="py-4 border-top">
-                                            <a href={course_list['course_link']}  className="readmorebtn orgclr"><span></span></a>
-                                            <a href={course_list['course_link']}  className="iconbg"></a>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>

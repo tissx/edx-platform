@@ -11,9 +11,9 @@ import ProgramDetailContainer from "./pages/programDetail";
 import DegreeDetailContainer from "./pages/degreeDetail";
 import ProgramDegreelistingContainer from "./pages/programandDegreelisting";
 import SchoolCenterlistingContainer from "./pages/schoolandCenterlisting";
-import SchoolDeatilContainer from "./pages/schoolDetail";
 import SearchPageContainer from "./pages/searchPage";
 import CenterDeatilContainer from "./pages/centerDetail/CenterDetail";
+import SchoolDeatilContainer from "./pages/schoolDetail/SchoolDetail";
 
 import "./unitboardApp.css"
 export const UnitboardApp = () => {

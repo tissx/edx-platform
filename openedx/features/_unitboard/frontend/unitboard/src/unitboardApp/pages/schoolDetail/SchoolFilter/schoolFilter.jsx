@@ -8,7 +8,7 @@ import $ from 'jquery';
 import * as R from "ramda";
 
 
-const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
+const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
     const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program["program_uuid"]);
     const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language["language_slug"]);
     const [selectedOrg, setselectedOrg] = useState(FiterDetail.selected_organization['organization_key_lower']);
@@ -355,7 +355,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
       $(".clear-all-filter").remove();
 
       // Clear All dropdown
-
       $("#program").val("");
       $("#language").val("");
       $("#organization").val("");
@@ -363,8 +362,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
       $("#subject").val("");
       $("#course_recognition").val("");
       $("#course_state").val("");
-
-
 
       // Clear All states 
       setselectedProgram('')
@@ -375,7 +372,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
       setselectedCourseRecog('')
       setselectedCourseState('')
      
-
       // Clear All URLs 
       UpdateURL('program', '')
       UpdateURL('language', '')
@@ -404,21 +400,21 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
     return (
         <>
         <section className="position-relative" id="prg-page1">
-            <img src={centerInfo['banner_image']} className="img-fluid bg-center-school"/>
+            <img src={schoolInfo['banner_image']} className="img-fluid bg-center-school"/>
             <div className="overlay-cap">
             <div className="container">
                     <div className="row">
                         <div className="col-md-4 col-lg-4 col-sm-12">
                             <div className="box-left mobile-hide">
                                 <div className="card-1">
-                                    <img src={centerInfo['center_image']} className="img-fluid"/>
+                                    <img src={schoolInfo['school_image']} className="img-fluid"/>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-12">
                             <div className="pd-leftalign">
-                                <h1 className="theading-title mob-hright text-white">{centerInfo['center_name']}</h1>
-                                <p className="text-white sub-title">{centerInfo['description']}</p>
+                                <h1 className="theading-title mob-hright text-white">{schoolInfo['center_name']}</h1>
+                                <p className="text-white sub-title">{schoolInfo['description']}</p>
                             </div>
                         </div>
                     </div>
@@ -430,28 +426,29 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
             <div className="container">
                 <div className="row" id="cbox-left">
                     <div className="col-md-12 col-sm-12 bg-light">
-                        <h1 className="theading-title">Centre Offering</h1> 
-                        <p className="para">{centerInfo['short_description']}</p>
+                        <h1 className="theading-title">School Offering</h1> 
+                        <p className="para">{schoolInfo['short_description']}</p>
                     </div>
                 </div>
 
-                {centerInfo['address']?(
+                {schoolInfo['address']?(
                      <div className="row address-wrap">
                      <div className="col-md-12 col-sm-12 bg-light">
-                         <h2 className="sub-theading-title">Centre Address</h2> 
-                         <p className="para">{centerInfo['address']}</p>
+                         <h2 className="sub-theading-title">School Address</h2> 
+                         <p className="para">{schoolInfo['address']}</p>
                      </div>
                  </div>
                 ):("")}
-                
+               
             </div>
+
         </section>
 
 
         <section className="bg-light p-2" >
             <div className="container listing-container center-filter-wrap mx-search-container">
                 <h1 className="theading-title">Filter</h1> 
-                <div className="row pb-3" id="center-filter-wrap">
+                <div className="row row-cols-6 pb-3">
             
                     <div className="custom-select">
                         <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program" data-bs-toggle="dropdown"
@@ -573,6 +570,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
     );
 };
 
-CenterFilterContainer.propTypes = {}
+SchoolFilterContainer.propTypes = {}
 
-export default CenterFilterContainer
+export default SchoolFilterContainer

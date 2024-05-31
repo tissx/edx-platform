@@ -13,7 +13,7 @@ const option = {
     loop:false,
     margin:10,
     nav:true,
-    autoplay:true,
+    autoplay:false,
     autoplayTimeout:5000,
     autoplayHoverPause:true,
     slideBy:4,
@@ -42,116 +42,229 @@ const option = {
             <div className="tabstextdark">
             <ul className="nav nav-tabs border-5" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
-                    <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Courses</button>
+                    <button className="nav-link active" id="course-tab" data-bs-toggle="tab" data-bs-target="#course" type="button" role="tab" aria-controls="home" aria-selected="true">Courses</button>
                 </li>
                 <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Programs</button>
+                    <button className="nav-link" id="program-tab" data-bs-toggle="tab" data-bs-target="#program" type="button" role="tab" aria-controls="program" aria-selected="false">Programs</button>
                 </li>
                 <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Degrees</button>
+                    <button className="nav-link" id="degree-tab" data-bs-toggle="tab" data-bs-target="#degree" type="button" role="tab" aria-controls="degree" aria-selected="false">Degrees</button>
                 </li>
                 </ul>
-                <div className="tab-content py-5" id="myTabContent">
+                <div className="tab-content py-3" id="myTabContent">
                     {/* start Course tab data */}
-                <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div className="row" id="iconright1">  
-                        {/* <div className="owl-carousel owl-theme"> */}
-                                {/* start Dynamic Course */}
+                    <div className="tab-pane fade show active" id="course" role="tabpanel" aria-labelledby="course-tab">
+                     
+                     {/* Start sub tab  */}
 
+                     <div className="row" id="inner_Tab">
+                        <ul className="nav nav-tabs px-3" id="myTab1" role="tablist">
+                            <li className="nav-item" role="presentation">
+                                <button className="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="true">Upcoming</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                             <button className="nav-link" id="current-tab" data-bs-toggle="tab" data-bs-target="#current" type="button" role="tab" aria-controls="current" aria-selected="false" tabindex="-1">Current Courses</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                             <button className="nav-link" id="archived-tab" data-bs-toggle="tab" data-bs-target="#archived" type="button" role="tab" aria-controls="archived" aria-selected="false" tabindex="-1">Archived</button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                             <button className="nav-link" id="archived-tab" data-bs-toggle="tab" data-bs-target="#oers" type="button" role="tab" aria-controls="oers" aria-selected="false" tabindex="-1">OERs</button>
+                            </li>
+                        </ul>
+                        <div className="tab-content py-4" id="myTabContent1">
+                            <div className="tab-pane fade active show" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+
+                                <div className="row" id="iconright1">  
+                                {/* start Dynamic Upcoming Course */}
                                 <OwlCarousel className='owl-theme' {...option}>
-
                                 {courseProgramData.courses.map((course_list) => (
-
                                 <div className="item">
                                     <div className="item mx-home-course">
                                         <div className="service-item body-light tissxoff redirect2course"
                                         onClick={() => RedirectToPage(course_list.course_detail)}
                                         >
                                             <div className="img-sec">
-
                                                 <img className="img-fluid" 
                                                 onError={(e) => {
                                                     e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                                 }}
+                                                    }}
                                                 src= {course_list.course_image} alt=""/>
-                                            
                                             </div>
                                             <div className="service-text">
                                                 <p className="">{course_list.course_name}</p>
-
-                                                {/* <p className="px-2 box-short-descp">{course_list.short_description}</p> */}
                                                 <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
-
                                                 <div className="course_btn">
                                                     <span className="more_learn">Course</span>
+                                                    <span className="prog-label">program title description program title description program title description program title description program title description program title description </span>
                                                 </div>
 
-
-                                                {/* <div className="py-4 border-top">
-                                                    <a href={course_list.course_detail}  className="readmorebtn orgclr btn-read-more"><span></span></a>
-                                                    <a href={course_list.course_detail}  className="iconbg"></a>
-                                                </div> */}
                                             </div>
                                         </div>
                                     </div>
                                 </div> 
-                                
                                 ))}  
-
                                 {/*start show view all courses card  */}
-
                                 <a href="/search-detail/?learning_type=course">
                                     <div class="course-view-all">
                                         <div class="text-mid"><h6>View all Courses</h6></div>
-                                
                                     </div>
                                 </a>
-
                                 {/*End show view all courses card  */}
 
                                 </OwlCarousel>
 
+                                {/* END Dynamic Upcoming Course */}
+                                </div>  
+                            </div>
 
-                                {/* END Dynamic Course */}
+                            <div className="tab-pane fade" id="current" role="tabpanel" aria-labelledby="current-tab">
 
-                        {/* </div> */}
+                                <div className="row" id="iconright1">  
+                                    {/* start Dynamic Current Course */}
+                                    <OwlCarousel className='owl-theme' {...option}>
+                                    {courseProgramData.courses.map((course_list) => (
+                                    <div className="item">
+                                        <div className="item mx-home-course">
+                                            <div className="service-item body-light tissxoff redirect2course"
+                                            onClick={() => RedirectToPage(course_list.course_detail)}
+                                            >
+                                                <div className="img-sec">
+                                                    <img className="img-fluid" 
+                                                    onError={(e) => {
+                                                        e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                                        }}
+                                                    src= {course_list.course_image} alt=""/>
+                                                </div>
+                                                <div className="service-text">
+                                                    <p className="">{course_list.course_name}</p>
+                                                    <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
+                                                    <div className="course_btn">
+                                                        <span className="more_learn">Course</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    ))}  
+                                    {/*start show view all courses card  */}
+                                    <a href="/search-detail/?learning_type=course">
+                                        <div class="course-view-all">
+                                            <div class="text-mid"><h6>View all Courses</h6></div>
+                                        </div>
+                                    </a>
+                                    {/*End show view all courses card  */}
+                                    </OwlCarousel>
+                                    {/* END Dynamic Current Course */}
+                                </div>
+
+                            </div>
+                            <div className="tab-pane fade" id="archived" role="tabpanel" aria-labelledby="archived-tab">
+
+                                <div className="row" id="iconright1">  
+                                        {/* start Dynamic Archived Course */}
+                                        <OwlCarousel className='owl-theme' {...option}>
+                                        {courseProgramData.courses.map((course_list) => (
+                                        <div className="item">
+                                            <div className="item mx-home-course">
+                                                <div className="service-item body-light tissxoff redirect2course"
+                                                onClick={() => RedirectToPage(course_list.course_detail)}
+                                                >
+                                                    <div className="img-sec">
+                                                        <img className="img-fluid" 
+                                                        onError={(e) => {
+                                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                                            }}
+                                                        src= {course_list.course_image} alt=""/>
+                                                    </div>
+                                                    <div className="service-text">
+                                                        <p className="">{course_list.course_name}</p>
+                                                        <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
+                                                        <div className="course_btn">
+                                                            <span className="more_learn">Course</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        ))}  
+                                        {/*start show view all courses card  */}
+                                        <a href="/search-detail/?learning_type=course">
+                                            <div class="course-view-all">
+                                                <div class="text-mid"><h6>View all Courses</h6></div>
+                                            </div>
+                                        </a>
+                                        {/*End show view all courses card  */}
+                                        </OwlCarousel>
+                                        {/* END Dynamic Archived Course */}
+                                </div>
+
+                            </div>
+                            <div className="tab-pane fade" id="oers" role="tabpanel" aria-labelledby="oers-tab">
+
+
+                                <div className="row" id="iconright1">  
+                                        {/* start Dynamic OERs Course */}
+                                        <OwlCarousel className='owl-theme' {...option}>
+                                        {courseProgramData.courses.map((course_list) => (
+                                        <div className="item">
+                                            <div className="item mx-home-course">
+                                                <div className="service-item body-light tissxoff redirect2course"
+                                                onClick={() => RedirectToPage(course_list.course_detail)}
+                                                >
+                                                    <div className="img-sec">
+                                                        <img className="img-fluid" 
+                                                        onError={(e) => {
+                                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
+                                                            }}
+                                                        src= {course_list.course_image} alt=""/>
+                                                    </div>
+                                                    <div className="service-text">
+                                                        <p className="">{course_list.course_name}</p>
+                                                        <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
+                                                        <div className="course_btn">
+                                                            <span className="more_learn">Course</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        ))}  
+                                        {/*start show view all courses card  */}
+                                        <a href="/search-detail/?learning_type=course">
+                                            <div class="course-view-all">
+                                                <div class="text-mid"><h6>View all Courses</h6></div>
+                                            </div>
+                                        </a>
+                                        {/*End show view all courses card  */}
+                                        </OwlCarousel>
+                                        {/* END Dynamic OERs Course */}
+                                </div>
+
+
+                            </div>
                         </div>
+                    </div>
+
+                     {/* End sub tab  */}
+
+                   
 
                 </div>
                     {/* END Course tab data */}
 
                     {/* start Program tab data */}
-                <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div className="tab-pane fade" id="program" role="tabpanel" aria-labelledby="program-tab">
 
                     <div className="row" id="iconright1">  
                       {/* start Dynamic Program */}
-
                       <OwlCarousel className='owl-theme' {...option}>
 
                         {courseProgramData.programs.map((programs_list) => (
-
-                
                         <div className="item">
-                            {/* <div className="item mx-home-course">
-                                <div className="service-item body-light tissxoff">
-                                    <div className="img-sec">
-                                        <img className="img-fluid" 
-                                        onError={(e) => {
-                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                        }}
-                                        src={programs_list.program_image} alt=""/>
-                                    </div>
-                                    <div className="service-text">
-                                        <p className="">{programs_list.program_name}</p>
-                                        <p className="px-2 box-short-descp">{programs_list.short_description}</p>
-                                        <div className="py-4 border-top">
-                                            <a href={programs_list.program_detail} className="readmorebtn orgclr btn-read-more"><span></span></a>
-                                            <a href={programs_list.program_detail} className="iconbg"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-
 
                         <div className="item mx-home-program">
                         
@@ -180,8 +293,6 @@ const option = {
                             </a>
                             </div>
 
-
-
                             </div> 
                         </div>
 
@@ -207,7 +318,7 @@ const option = {
 
                     {/* start Degree tab data */}
 
-                <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div className="tab-pane fade" id="degree" role="tabpanel" aria-labelledby="degree-tab">
 
                     <div className="row" id="iconright1">  
                      {/* start Dynamic Degree */}
@@ -217,25 +328,6 @@ const option = {
                         {courseProgramData.degrees.map((degree_list) => (
 
                         <div className="item">
-                            {/* <div className="item">
-                                <div className="service-item body-light tissxoff">
-                                    <div className="img-sec">
-                                        <img className="img-fluid" 
-                                        onError={(e) => {
-                                            e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                                         }}
-                                        src={degree_list.degree_image} alt=""/>
-                                    </div>
-                                    <div className="service-text">
-                                        <p className="">{degree_list.degree_name}</p>
-                                        <p className="px-2 box-short-descp">{degree_list.short_description}</p>
-                                        <div className="py-4 border-top">
-                                            <a href={degree_list.degree_detail} className="readmorebtn orgclr btn-read-more"><span></span></a>
-                                            <a href={degree_list.degree_detail} className="iconbg"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
 
                         <div className="item mx-home-program">
                             

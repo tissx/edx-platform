@@ -2,30 +2,22 @@
  * Program Info Page
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 
 const ProgramInfoContainer = (programinfo) => {
-    // console.log("programInfo", programinfo.programinfo)
     return (
             <>
         <section className="bgreen1" id="prg-page">
-        {/* <section className="program-detail-section" id="prg-page"> */}
-
-        {/* <img className="img-fluid img-hide program-detail-img"  src={programinfo.programinfo['banner_image']} alt="" /> */}
 
             <div className="container listing-container">
                 <div className="row">
                     <div className="col-md-7 col-sm-12 f-cell">
                         <h1 className="theading-title-white">{programinfo.programinfo['program_name']}</h1>
                         <p className="text-white pb-20">{programinfo.programinfo['school_name']}</p>
-                        {/* <form className="example banner-form" >
-                            <input type="text" placeholder="Email me..." name="search2"/>
-                            <button className="greenbg" type="submit"><img src="img/icon-2.png" className="img-fluid banner-form-icon" /></button>
-                        </form> */}
+                     
                     </div>
                     <div className="offset-md-5">
-                        
                     </div>
                 </div>
             </div>

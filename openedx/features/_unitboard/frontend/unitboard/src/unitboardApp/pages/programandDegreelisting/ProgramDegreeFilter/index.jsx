@@ -2,14 +2,12 @@
  * Program and Degree listing Banner Page
  */
 
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import * as R from "ramda";
 
 
 const ProgramDegreeFilterContainer = ({programlist}) => {
 
-// console.log("program degree list", programlist)
     return (
         <section className="bglight py-2">
             <div className="container listing-container">

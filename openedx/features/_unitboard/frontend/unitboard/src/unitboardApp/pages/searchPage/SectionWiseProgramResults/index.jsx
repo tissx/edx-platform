@@ -7,7 +7,7 @@ import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
 
 const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetail}) => {
 
-    function handleShowMore() {
+    const handleShowMore = () => {
         let subject = document.getElementById('subject').value
         let learning_type = "program"
         let learning_type_text = "Programs"
@@ -16,8 +16,9 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
         let school = document.getElementById('school').value
         let center = document.getElementById('center').value
         let language = document.getElementById('language').value
-    
-        showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, language)
+        let course_recog = document.getElementById('course_recognition').value
+        let course_state = document.getElementById('course_state').value
+        showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, course_recog, course_state, language)
     
     }
   

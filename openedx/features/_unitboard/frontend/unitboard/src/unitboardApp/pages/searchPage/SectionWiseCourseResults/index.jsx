@@ -9,7 +9,7 @@ import dateFormat from 'dateformat'
 
 const SectionResultsCoursesContainer = ({CourseResults, Querytxt, showMoreDetail}) => {
 
-function handleShowMore() {
+const handleShowMore = () => {
     let subject = document.getElementById('subject').value
     let learning_type = "course"
     let learning_type_text = "Courses"
@@ -18,8 +18,9 @@ function handleShowMore() {
     let school = document.getElementById('school').value
     let center = document.getElementById('center').value
     let language = document.getElementById('language').value
-
-    showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, language)
+    let course_recog = document.getElementById('course_recognition').value
+    let course_state = document.getElementById('course_state').value
+    showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, course_recog, course_state, language)
 
 }
 

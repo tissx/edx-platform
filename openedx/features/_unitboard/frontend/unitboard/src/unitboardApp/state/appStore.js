@@ -1,5 +1,5 @@
 const default_state = {
-  initialContext: {},
+  // initzialContext: {},
   // CORE:
   messages: [],
   modalWindow: {

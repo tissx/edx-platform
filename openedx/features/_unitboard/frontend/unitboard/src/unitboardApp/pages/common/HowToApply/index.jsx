@@ -1,17 +1,10 @@
 /**
  * How To Apply Page
  */
-
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as R from "ramda";
-
-
 const HowToApplyContainer = () => {
  
     return (
         <>
-            
         <div className="container-fluid learn-school greencard-2">
             <div className="container">
             <h1 className="theading-title-white text-center py-2">How To Apply?</h1>

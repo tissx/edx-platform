@@ -2,26 +2,22 @@
  * Banner Item Page
  */
 
-import React, { useState } from 'react';
-
 
 const BannerSectionContainer = () => {
   
-const handleFormsubmit = (e) => {
-
-    let query = document.getElementById('query').value
-    window.location.href = '/search-detail/?is_search=true&query=' + query
-}
-
-//IT triggers by pressing the enter key
-const handleKeypress = e => {
-    if (e.keyCode === 13) {
-    e.preventDefault();
-
-        handleFormsubmit(e);
-
+    const handleFormsubmit = (e) => {
+        let query = document.getElementById('query').value
+        window.location.href = '/search-detail/?is_search=true&query=' + query
     }
-  };
+
+    //IT triggers by pressing the enter key
+    const handleKeypress = e => {
+        if (e.keyCode === 13) {
+        e.preventDefault();
+            handleFormsubmit(e);
+
+        }
+    };
 
     return (
         <section className="bgreen-home">
@@ -37,7 +33,6 @@ const handleKeypress = e => {
                         className="search-input"
                         required
                         onKeyDown={(e) => handleKeypress(e) }
-                        
                         />
                         <button className="greenbg" type="button"
                         onClick={(e) => handleFormsubmit(e)}
