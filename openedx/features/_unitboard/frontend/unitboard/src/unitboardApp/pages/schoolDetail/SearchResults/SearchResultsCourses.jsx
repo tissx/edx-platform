@@ -24,7 +24,6 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
                         {CourseResults.results.map((course)=> (
 
                             <div className="mx-center-course">
-
                                 <div className="service-item body-light tissxoff">
                                     <a className="center-course-box-link" href={'../courses/' +course['course_runs'][0]['key'] + '/about'}>
                                         <div className="img-sec">
@@ -36,21 +35,15 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
                                         alt=""/>
                                         </div>
 
-                                        <p className="title course-title">{course['title']}</p>
+                                        <p className="title course-title" title={course['title']}>{course['title']}</p>
                                         <p className="box-short-descp">Starts: {dateFormat( course['course_runs'][0]['start'], "mmmm dd, yyyy")}</p>
                                         
                                         <div className="course_btn">
                                             <span className="more_learn">Course</span>
+                                            {(course['mx_course_program_link'])?(<span className="prog-label" title={course['mx_course_program_link'].slice(0, -1)}>{course['mx_course_program_link'].slice(0, -1)}</span>): ("")}
+
                                         </div>
 
-                                        {/* <div className="service-text position-relativ p-2">
-                                            <p className="program-course-title">{course['course_name']} </p>
-                                            <p className="px-2 box-short-descp">{course['course_description']} </p>
-                                            <div className="py-4 border-top">
-                                                <a href={course['course_link']}  className="readmorebtn orgclr center-course-link"><span></span></a>
-                                                <a href={course['course_link']}  className="iconbg"></a>
-                                            </div>
-                                        </div> */}
                                     </a>
                                 </div>
                             </div>

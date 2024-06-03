@@ -39,34 +39,11 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                   
                   {DegreeResults.results.map((degree) => (
 
-                  
-                  // <li>
-                  //   <div className="course-box">
-                  //       <div className="service-item body-light tissxoff">
-                  //           <div className="img-sec">
-                  //               <img className="img-fluid" 
-                  //               src={degree['banner_image']}
-                  //               onError={(e) => {
-                  //                 e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
-                  //              }}
-                  //               alt="" />
-                  //           </div>
-                           
-                  //           <p className="title p-3">{degree['title']}</p>
-                  //           <div className="d-flex p-3 bor-1">
-                  //               <a href={'../program-detail/' + degree['uuid']}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                  //               <a><small><img className="img moreicon" /></small></a>
-                  //           </div> 
-                  //       </div>
-                  //   </div>
-                  // </li>
                     <li>
-
                         <div className="program_data service-item body-light tissxoff mx-search-results">
                           <a className="mx-prog-link" href={'../degree-detail/' + degree['uuid']}>
                               <div className="img-Area">
                                   <img className="img-fluid program_img_data"
-                                  
                                   onError={(e) => {
                                       e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                   }}
@@ -74,14 +51,12 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                               </div>
                               <div className="content_box">
                                   <div className="heading_text">
-                                      <h6>{degree['title']}</h6>
+                                      <h6 title={degree['title']}>{degree['title']}</h6>
                                       <p>{degree.mx_program_descrp}</p>
                                       
                                   </div>
                               <div className="prf_certificate">    
-                                  {/* <a className="mx-prog-link" href={'../program-detail/' + degree['uuid']}><span>{degree.type}</span></a> */}
                                   <a className="mx-prog-link"><span>{(degree.type.charAt(degree.type.length - 1) == "s")?(degree.type.slice(0, -1)): degree.type}</span></a>
-
                                   <p className="py-1">{degree.mx_no_of_courses} Courses</p>
                               </div>
                               </div>

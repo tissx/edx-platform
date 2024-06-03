@@ -65,25 +65,24 @@ const DegreeCoursesContainer = (program_course) => {
                                     alt=""/>
                                     </div>
                                     <div className="service-text position-relativ">
-                                        <p className="program-course-title">{course_list['course_name']} </p>
+                                        <p className="program-course-title" title={course_list['course_name']}>{course_list['course_name']}</p>
 
                                         <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
 
                                         <div className="course_btn">
                                             <span className="more_learn">Course</span>
+                                            {(course_list.linked_program)?(<span className="prog-label" title={course_list.linked_program.slice(0, -1)}>{course_list.linked_program.slice(0, -1)}</span>): ("")}
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                      ))}   
 
                     </OwlCarousel>
 
                 {/* Start No result Found  */}
-                    
                 {program_course.programcourses.length== 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Courses are not available.</div>

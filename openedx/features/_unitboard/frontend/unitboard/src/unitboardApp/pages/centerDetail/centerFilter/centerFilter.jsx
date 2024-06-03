@@ -451,7 +451,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
         <section className="bg-light p-2" >
             <div className="container listing-container center-filter-wrap mx-search-container">
                 <h1 className="theading-title">Filter</h1> 
-                <div className="row pb-3" id="center-filter-wrap">
+                <div className="row pb-3" id="center-search-filter-wrap">
             
                     <div className="custom-select">
                         <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program" data-bs-toggle="dropdown"
