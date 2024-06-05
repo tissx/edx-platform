@@ -13,7 +13,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
   const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program['program_group_slug']);
   const [selectedLearningType, setselectedLearningType] = useState(mxLearningType);
   const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language);
-  const [centerList, setcenterList] = useState(FiterDetail.center_list);
+  // const [centerList, setcenterList] = useState(FiterDetail.center_list);
   const [FormQuerytxt, setFormQuerytxt] = useState(Querytxt);
   const [selectSchool, setselectSchool] = useState(FiterDetail.selected_school);
   const [selectedCenter, setselectedCenter] = useState(FiterDetail.selected_center);
@@ -21,7 +21,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
   const [selectedCourseState, setselectedCourseState] = useState(FiterDetail.selected_course_state);
   
   
-  if(mxLearningType != selectedLearningType){
+  if(mxLearningType !== selectedLearningType){
     setselectedLearningType(mxLearningType)
   }
 
@@ -67,19 +67,10 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 // End on Page Load 
   const onSearchform = (e) => {
     e.preventDefault();
-    // let subject = document.getElementById('subject').value
     let learning_type = "all"
     let query = document.getElementById('query').value
-    // let program_group = document.getElementById('program_group').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
     let size = 4
-    getSearchData(selectedSubject, selectedProgram, learning_type, query, selectSchool, center, selectedCourseRecog, selectedCourseState, selectedLanguage, size)
-
-    // getSearchData(subject, program_group, learning_type, query, school, center, course_recog, course_state, language, size)
+    getSearchData(selectedSubject, selectedProgram, learning_type, query, selectSchool, selectedCenter, selectedCourseRecog, selectedCourseState, selectedLanguage, size)
     onFormSearch()
     setselectedLearningType('all')
     UpdateURL('query', query)
@@ -90,10 +81,9 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       document.getElementById("show_learningtype_as_text").remove();
     }
     // If clear all btn is showing then remove the clear all btn
-    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
+    if($("#selected-filter").html()==='' && $("#clear-all-filter").length > 0) {
       document.getElementById("clear-all-filter").remove();
      }
-
     UpdateURL('is_search', true)
 
   }; 
@@ -109,9 +99,8 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
 
   const onDropdownChange = e => {
-
-     // show section wise result if user has remove all dropdown filter one by one and search any text in search box
-    if(is_search && is_search=="true" && $("#selected-filter").html()=='') {
+    // show section wise result if user has remove all dropdown filter one by one and search any text in search box
+    if(is_search && is_search==="true" && $("#selected-filter").html()==='') {
       onFormSearch()
     }
   };
@@ -121,20 +110,11 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     let val = e.target.value;
     e.preventDefault();
     setselectedSubject(val)
-    // let learning_type = document.getElementById('learning_type').value
-    // let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
-
-    // getSearchData(val, program_group, learning_type, query, school, center, course_recog, course_state, language)
-    getSearchData(val, selectedProgram, selectedLearningType, query, selectSchool, center, selectedCourseRecog, selectedCourseState, selectedLanguage)
+    getSearchData(val, selectedProgram, selectedLearningType, query, selectSchool, selectedCenter, selectedCourseRecog, selectedCourseState, selectedLanguage)
     var sub_slug =  $("#subject option:selected").attr("sub-slug");
     var sub_name =  $("#subject option:selected").attr("sub-name");
-
+    // Update Url 
     UpdateURL('subject', sub_slug)
     showSelectedFilterText('subject', sub_name, 'show_subject_as_text')
     onDropdownChange()
@@ -145,19 +125,8 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     let val = e.target.value;
     e.preventDefault();
     setselectedProgram(val)
-
-    // let subject = document.getElementById('subject').value
-    // let learning_type = document.getElementById('learning_type').value
     let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
-
-    // getSearchData(subject, val, learning_type, query, school, center, course_recog, course_state, language)
-    getSearchData(selectedSubject, val, selectedLearningType, query, selectSchool, center, selectedCourseRecog, selectedCourseState, selectedLanguage)
-    
+    getSearchData(selectedSubject, val, selectedLearningType, query, selectSchool, selectedCenter, selectedCourseRecog, selectedCourseState, selectedLanguage)
     // Update Url 
     UpdateURL('program_degree_group', val)
     var prg_grp_name =  $("#program_group option:selected").attr("prg-grp-name");
@@ -170,17 +139,10 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     let learning_type = e.target.value;
     e.preventDefault();
     setselectedLearningType(learning_type)
-    
     let subject = document.getElementById('subject').value
     let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
-
     // If offering is selected other than all/course then 
-    if(learning_type != "all" && learning_type != "course") {
+    if(learning_type !== "all" && learning_type !== "course") {
       subject = ""
       setselectedSubject('')
       // If subject is already showing as selected text, then remove the selected text.
@@ -193,7 +155,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
     // Show offeringType based on Offering 
      //start Fetch Offering Type List from discovery
-     if(learning_type != "course") {
+     if(learning_type !== "course") {
      var get_offering_type_url = `${my_discovery_url}/api/v1/lms-search/get-offeringtype-from-offering/?offering=${learning_type}`
 
      fetch(get_offering_type_url)
@@ -206,116 +168,57 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
      //End Fetch Offering Type List from discovery
    
     }
-
      setselectedProgram('')
-
      // If OfferingType is already showing as selected text, then remove the selected text.
      if($("#show_program_as_text").length > 0) {
       document.getElementById("show_program_as_text").remove();
       }
-    UpdateURL('program_degree_group', '')
-    let program_group = ""
-
-    getSearchData(subject, program_group, learning_type, query, selectSchool, center, selectedCourseRecog, selectedCourseState, selectedLanguage)
-
-    // getSearchData(subject, program_group, learning_type, query, school, center, course_recog, course_state, language)
-    UpdateURL('learning_type', learning_type)
-    
-    let learning_type_name =  $("#learning_type option:selected").attr("learning-type-name");
-
-   showSelectedFilterText('learning_type', learning_type_name, 'show_learningtype_as_text')
-   onDropdownChange()
-
+      UpdateURL('program_degree_group', '')
+      let program_group = ""
+      getSearchData(subject, program_group, learning_type, query, selectSchool, selectedCenter, selectedCourseRecog, selectedCourseState, selectedLanguage)
+      UpdateURL('learning_type', learning_type)
+      
+      let learning_type_name =  $("#learning_type option:selected").attr("learning-type-name");
+      showSelectedFilterText('learning_type', learning_type_name, 'show_learningtype_as_text')
+      onDropdownChange()
 
   }; 
 
-  const onSchoolChange = (e) => {
+
+  const onSchoolCenterChange = (e) => {
     let val = e.target.value;
-    setselectSchool(val)
-    setcenterList([])
-    setselectedCenter()
-    //start Fetch Center List from discovery
-    var get_center_from_school_url = `${my_discovery_url}/api/v1/lms-search/get-center-from-school/?school=${val}`
-
-     fetch(get_center_from_school_url)
-     .then((res) => {
-         return res.json();
-     })
-     .then((data) => {
-        setcenterList(data);
-     });
-     //End Fetch Center List from discovery
-
-     setselectSchool(val)
-
-    // let subject = document.getElementById('subject').value
-    // let learning_type = document.getElementById('learning_type').value
-    // let program_group = document.getElementById('program_group').value
-    let query = document.getElementById('query').value
+    let school = ""
     let center = ""
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
-    UpdateURL('school', val)
+    let type =  $("#school-center option:selected").attr("type");
+
+    if(type === "school"){
+      setselectSchool(val)
+      setselectedCenter('')
+      school = val
+      let school_name =  $("#school-center option:selected").attr("school-name");
+      showSelectedFilterText('school', school_name, 'show_school_as_text')
+    }
+    else {
+      setselectedCenter(val)
+      setselectSchool('')
+      center = val
+      let center_name =  $("#school-center option:selected").attr("center-name");
+      showSelectedFilterText('center', center_name, 'show_center_as_text')
+    }
+
+    let query = document.getElementById('query').value
+    UpdateURL('school', school)
     UpdateURL('center', center)
-    
-    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, val, center, selectedCourseRecog, selectedCourseState, selectedLanguage)
-
-    // getSearchData(subject, program_group, learning_type, query, val, center, course_recog, course_state, language)
-
-    let school_name =  $("#school option:selected").attr("school-name");
-
-    showSelectedFilterText('school', school_name, 'show_school_as_text')
+    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, school, center, selectedCourseRecog, selectedCourseState, selectedLanguage)
     onDropdownChange()
-
-
   }; 
 
-  const onCenterChange = (e) => {
-    let val = e.target.value;
-
-    $("#center").removeClass('disable-option');
-
-    setselectedCenter(val)
-    // let subject = document.getElementById('subject').value
-    // let learning_type = document.getElementById('learning_type').value
-    // let program_group = document.getElementById('program_group').value
-    let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
-
-    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, val, selectedCourseRecog, selectedCourseState, selectedLanguage)
-
-    // getSearchData(subject, program_group, learning_type, query, school, val, course_recog, course_state, language)
-    UpdateURL('center', val)
-    
-    let center_name =  $("#center option:selected").attr("center-name");
-    
-    showSelectedFilterText('center', center_name, 'show_center_as_text')
-    onDropdownChange()
-
-  };
-  
-  
 
   const onLanguageChange = (e) => {
     let language = e.target.value;
     setselectedLanguage(language)
-    // let subject = document.getElementById('subject').value
-    // let learning_type = document.getElementById('learning_type').value
-    // let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let course_state = document.getElementById('course_state').value
-
-    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, center, selectedCourseRecog, selectedCourseState, language)
-
-    // getSearchData(subject, program_group, learning_type, query, school, center, course_recog, course_state, language)
-   
+    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, selectedCenter, selectedCourseRecog, selectedCourseState, language)
     UpdateURL('language', language)
     var language_name =  $("#language option:selected").attr("language-name");
     showSelectedFilterText('language', language_name, 'show_language_as_text')
@@ -325,24 +228,11 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
   const onCourseRecogChange = (e) => {
     let val = e.target.value;
-
     setselectedCourseRecog(val)
-    // let subject = document.getElementById('subject').value
-    // let learning_type = document.getElementById('learning_type').value
-    // let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_state = document.getElementById('course_state').value
-    // let language = document.getElementById('language').value
-
-    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, center, val, selectedCourseState, selectedLanguage)
-
-    // getSearchData(subject, program_group, learning_type, query, school, center, val, course_state, language)
+    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, selectedCenter, val, selectedCourseState, selectedLanguage)
     UpdateURL('course_recognition', val)
-    
     let recognition_name =  $("#course_recognition option:selected").attr("recognition-name");
-    
     showSelectedFilterText('course_recognition', recognition_name, 'show_course_recog_as_text')
     onDropdownChange()
 
@@ -350,24 +240,11 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
   const onCourseStateChange = (e) => {
     let val = e.target.value;
-
     setselectedCourseState(val)
-    // let subject = document.getElementById('subject').value
-    // let learning_type = document.getElementById('learning_type').value
-    // let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
-    // let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
-    // let course_recog = document.getElementById('course_recognition').value
-    // let language = document.getElementById('language').value
-
-    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, center, selectedCourseRecog, val, selectedLanguage)
-
-    // getSearchData(subject, program_group, learning_type, query, school, center, course_recog, val, language)
+    getSearchData(selectedSubject, selectedProgram, selectedLearningType, query, selectSchool, selectedCenter, selectedCourseRecog, val, selectedLanguage)
     UpdateURL('course_state', val)
-    
     let course_state_name =  $("#course_state option:selected").attr("course-state-name");
-    
     showSelectedFilterText('course_state', course_state_name, 'show_course_state_as_text')
     onDropdownChange()
 
@@ -384,13 +261,17 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     }
 
     // Remove selected center on school change
-    if($("#show_center_as_text").length > 0 && selected_filter_name=="school") {
+    if($("#show_center_as_text").length > 0 && selected_filter_name==="school") {
       document.getElementById("show_center_as_text").remove();
     }
 
+    // Remove selected school on center change
+    if($("#show_school_as_text").length > 0 && selected_filter_name==="center") {
+      document.getElementById("show_school_as_text").remove();
+    }
     
     // If clear all btn is showing but no filter is selected then remove the clear all btn
-    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
+    if($("#selected-filter").html()==='' && $("#clear-all-filter").length > 0) {
       document.getElementById("clear-all-filter").remove();
      }
 
@@ -452,7 +333,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       has_show_selected_text = true
       show_selected_text += '<div class="dropdown fi-border selected-filter-text" id="show_center_as_text">'
                         +'<button class="dropbtn">'+FiterDetail.selected_center_name
-                        +'<span id="clearSelection" selected-filter-name="center" selected-filter-abbr="show_center_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
+                        +'<span id="clearSelection" selected-filter-name="school" selected-filter-abbr="show_center_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
                         +'</div>';
     }
 
@@ -493,7 +374,6 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     } 
 
 
-
     if(has_show_selected_text) {
         $("#selected-filter").append(show_selected_text);
         var show_clear_btn = '<div class="clear-all-filter" id="clear-all-filter">clear all</div>';
@@ -513,12 +393,12 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     document.getElementById(selected_filter_abbr).remove();
 
     //  Remove clear all button if user one by one remove all selected text 
-    if($("#selected-filter").html()=='') {
+    if($("#selected-filter").html()==='') {
      document.getElementById("clear-all-filter").remove();
     }
 
     // Remove subject selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'subject')
+     if(selected_filter_name === 'subject')
      {
       $("#subject").val("");
       setselectedSubject()
@@ -526,7 +406,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
      }
 
     // Remove program group selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'program_degree_group')
+     if(selected_filter_name === 'program_degree_group')
      {
       $("#program_group").val("");
       setselectedProgram()
@@ -534,64 +414,55 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
      }
 
     // Remove school selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'school')
+     if(selected_filter_name === 'school')
      {
-      $("#school").val("");
+      $("#school-center").val("");
       setselectSchool([])
-      setcenterList([])
-      setselectedCenter()
-
-    // Remove center if school remove
-      if($("#show_center_as_text").length > 0) {
-        document.getElementById("show_center_as_text").remove();
-      }
-      //Remove clear all if there is no selected text
-      if($("#selected-filter").html()=='') {
-        document.getElementById("clear-all-filter").remove();
-       }
+      setselectedCenter([])
 
       UpdateURL('school', '')
       UpdateURL('center', '')
      }
 
     // Remove center selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'center')
+     if(selected_filter_name === 'center')
      {
-      $("#center").val("");
-      setselectedCenter()
-      $("#center").addClass('disable-option');
+
+      $("#school-center").val("");
+      setselectSchool([])
+      setselectedCenter([])
+      UpdateURL('school', '')
       UpdateURL('center', '')
      }
 
     // Remove course recogn selected text, reset dropdown, update URLs
-    if(selected_filter_name == 'course_recognition')
+    if(selected_filter_name === 'course_recognition')
       {
         $("#course_recognition").val("");
-        setselectedCourseRecog()
+        setselectedCourseRecog('')
         UpdateURL('course_recognition', '')
       }
 
     // Remove course state selected text, reset dropdown, update URLs
-    if(selected_filter_name == 'course_state')
+    if(selected_filter_name === 'course_state')
       {
         $("#course_state").val("");
-        setselectedCourseState()
+        setselectedCourseState('')
         UpdateURL('course_state', '')
       }
 
     // Remove language selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'language')
+     if(selected_filter_name === 'language')
      {
       $("#language").val("");
-      setselectedLanguage()
+      setselectedLanguage('')
       UpdateURL('language', '')
      }
      
     // Remove learning_type selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'learning_type')
+     if(selected_filter_name === 'learning_type')
      {
       $("#learning_type").val("all");
-      // setselectedLearningType('all')
       UpdateURL('learning_type', '')
      }
 
@@ -600,21 +471,26 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     let learning_type = document.getElementById('learning_type').value
     let program_group = document.getElementById('program_group').value
     let query = document.getElementById('query').value
-    let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
     let language = document.getElementById('language').value
     let course_recog = document.getElementById('course_recognition').value
     let course_state = document.getElementById('course_state').value
 
-
+    let school = ""
+    let center = ""
+    let type =  $("#school-center option:selected").attr("type");
+    if(type === "school"){
+      school =document.getElementById('school-center').value
+    }
+    else {
+      center = document.getElementById('school-center').value
+    }
 
     getSearchData(subject, program_group, learning_type, query, school, center, course_recog, course_state, language)
 
     // show section wise result if user has clear all filter one by one and search any text in search box
-    if(is_search && is_search=="true" && $("#selected-filter").html()=='') {
+    if(is_search && is_search==="true" && $("#selected-filter").html()==='') {
       onFormSearch()
     }
-
 
     });
    // End clear selected text and filter 
@@ -629,22 +505,18 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
 
       // Clear All dropdown
       $("#learning_type").val("all");
-
       $("#subject").val("");
       $("#program_group").val("");
-      $("#school").val("");
-      $("#center").val("");
+      $("#school-center").val("");
       $("#course_recognition").val("");
       $("#course_state").val("");
       $("#language").val("");
-      
 
       // Clear All states 
       setselectedSubject()
       setselectedProgram('')
       setselectSchool([])
-      setcenterList([])
-      setselectedCenter()
+      setselectedCenter([])
       setselectedCourseRecog('')
       setselectedCourseState('')
       setselectedLanguage('')
@@ -658,7 +530,6 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       UpdateURL('course_state', '')
       UpdateURL('language', '')
       UpdateURL('learning_type', '')
-      $("#center").addClass('disable-option');
 
       // Update the search result
       let subject = ""
@@ -671,19 +542,15 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       let course_state = ""
       let language = ""
 
-
       getSearchData(subject, program_group, learning_type, query, school, center, course_recog, course_state, language)
-      
       // show section wise result if user has search any text in search box
-
-      if(is_search && is_search=="true") {
+      if(is_search && is_search==="true") {
         onFormSearch()
       }
 
     });
 
     // end  Clear All
-
 
 
   return(
@@ -716,26 +583,22 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     <section className="bglight p-2" id="firstSection">
         <div className="container listing-container mx-search-container">
             <h1 className="theading-title">Filter</h1> 
-          <div className="row row-cols-6 pb-3">
+          <div className="row pb-3" id="search-filter-wrap">
             
-            {/* First row for filter dropdown start */}
-            {/* <div className="firstROW d-flex pb-2"> */}
-            {/* show subject only when offering is course or no offering selected  */}
-                <div className={(selectedLearningType != "all" && selectedLearningType != "course")? "custom-select disable-dropdown": "custom-select " } >
-                {/* <div className="custom-select" > */}
+              <div className="custom-select ">
+                  <select className={(selectedLearningType !== "all")? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="learning_type" data-bs-toggle="dropdown"
+                  value={selectedLearningType}
+                  onChange={(e) => onLearningTypeChange(e)}
+                  >
+                    <option className="ColorLight" value="all">Offering</option>
+                      <option value="course" learning-type-name="Course">Courses</option>
+                      <option value="program" learning-type-name="Programs">Programs</option>
+                      <option value="degree" learning-type-name="Degrees">Degrees</option>
+                      <option value="program-degree" learning-type-name="Programs & Degrees">Programs & Degrees</option>
+                  </select>
+              </div>
 
-                    {/* <select className="dropdown-toggle SelectOne {selectedSubject}" id="subject" data-bs-toggle="dropdown" */}
-                    <select className={Boolean(selectedSubject)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="subject" data-bs-toggle="dropdown"
-                    value={selectedSubject}
-                    onChange={(e) => onSubjectChange(e)}
-                    >
-                      <option className="ColorLight" sub-slug="" value="">Subject</option>
-                      {FiterDetail.subject_list.map((subjects) => (
-                        <option sub-slug={subjects['subject_slug']} sub-name={subjects['subject_name']} value={subjects['subject_uuid']} >{subjects['subject_name']}</option>
-                      ))}
-                    </select>
-                </div>
-                <div className={(selectedLearningType == "course")? "custom-select disable-dropdown": "custom-select"}>
+              <div className={(selectedLearningType === "course")? "custom-select disable-dropdown": "custom-select"}>
                     <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program_group" data-bs-toggle="dropdown"
                     value={selectedProgram}
                     onChange={(e) => onProgramChange(e)}
@@ -746,65 +609,27 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                       ))}
                     </select>
                 </div>
-                <div className="custom-select ">
-                    <select className={Boolean(selectSchool.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  data-bs-toggle="dropdown"
-                    id="school"
-                    value={selectSchool}
-                    onChange={(e) => onSchoolChange(e)}
-                    >
-                      <option className="ColorLight" value="">School</option>
-                      {FiterDetail.school_list.map((schools) => (
-                        <option value={schools['school_slug']} school-name={schools['school_name']}>{schools['school_name']}</option>
-                      ))}
-                      <option className="ColorLight" value="independent-center" school-name="Independent center" >Independent center</option>
-                    </select>
-                </div>
-                
-                <div className="custom-select ">
-                
-                    <select className={Boolean(centerList.length)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} data-bs-toggle="dropdown"
-                    id="center"
-                    value={selectedCenter}
-                    onChange={(e) => onCenterChange(e)}
-                    >
-                      <option className="ColorLight" value="">Centre</option>
-                      {centerList.map((center) => (
-                        <option value={center['center_slug']} center-name={center['center_name']} >{center['center_name']}</option>
-                      ))}
-                    </select>
-                </div>
-
-            {/* </div>
-            {/* First row for filter dropdown End */}
-
-            {/* 2nd row for filter dropdown Start */}
-            {/* <div className="firstROW d-flex pb-3 py-2"> */} 
-              
-
-                <div className="custom-select">
-                    <select className={Boolean(selectedLanguage)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="language" data-bs-toggle="dropdown"
-                    value={selectedLanguage}
-                    onChange={(e) => onLanguageChange(e)}
-                    >
-                      <option className="ColorLight" value="">Language</option>
-                      {FiterDetail.language_list.map((language) => (
-                        <option value={language['0']} language-name={language['1']} >{language['1']}</option>
-                      ))}
-                    </select>
-                </div>
 
                 <div className="custom-select ">
-                    <select className={(selectedLearningType != "all")? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="learning_type" data-bs-toggle="dropdown"
-                    value={selectedLearningType}
-                    onChange={(e) => onLearningTypeChange(e)}
+                    <select className={(Boolean(selectSchool.length) || Boolean(selectedCenter.length))? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  data-bs-toggle="dropdown"
+                    id="school-center"
+                    // value={selectSchool}
+                    value={Boolean(selectSchool.length)?(selectSchool):(selectedCenter)}
+                    onChange={(e) => onSchoolCenterChange(e)}
                     >
-                      <option className="ColorLight" value="all">Offering</option>
-                        <option value="course" learning-type-name="Course">Courses</option>
-                        <option value="program" learning-type-name="Programs">Programs</option>
-                        <option value="degree" learning-type-name="Degrees">Degrees</option>
-                        <option value="program-degree" learning-type-name="Programs & Degrees">Programs & Degrees</option>
+                      <option className="ColorLight" value="">Schools/Independent Centres</option>
+
+                      {FiterDetail.center_list.sort((a,b) => b.count - a.count).map((center) => (
+                        <option value={center['center_slug']} type="center" center-name={center['center_name']} >{center['center_name']}</option>
+                      ))}
+
+                      {FiterDetail.school_list.sort((a,b) => b.count - a.count).map((schools) => (
+                        <option value={schools['school_slug']} type="school" school-name={schools['school_name']}>{schools['school_name']}</option>
+                      ))}
+                      {/* <option className="ColorLight" value="independent-center" school-name="Independent center" >Independent center</option> */}
                     </select>
                 </div>
+
 
                 <div className="custom-select ">
                     <select className={Boolean(selectedCourseRecog)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="course_recognition" data-bs-toggle="dropdown"
@@ -832,9 +657,32 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                     </select>
                 </div>
 
-            {/* </div> */}
-            {/* 2nd row for filter dropdown Start */}
 
+                {/* show subject only when offering is course or no offering selected  */}
+                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } >
+
+                    <select className={Boolean(selectedSubject)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="subject" data-bs-toggle="dropdown"
+                    value={selectedSubject}
+                    onChange={(e) => onSubjectChange(e)}
+                    >
+                      <option className="ColorLight" sub-slug="" value="">Subject</option>
+                      {FiterDetail.subject_list.map((subjects) => (
+                        <option sub-slug={subjects['subject_slug']} sub-name={subjects['subject_name']} value={subjects['subject_uuid']} >{subjects['subject_name']}</option>
+                      ))}
+                    </select>
+                </div>
+
+                <div className="custom-select">
+                    <select className={Boolean(selectedLanguage)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="language" data-bs-toggle="dropdown"
+                    value={selectedLanguage}
+                    onChange={(e) => onLanguageChange(e)}
+                    >
+                      <option className="ColorLight" value="">Language</option>
+                      {FiterDetail.language_list.map((language) => (
+                        <option value={language['0']} language-name={language['1']} >{language['1']}</option>
+                      ))}
+                    </select>
+                </div>
           
           </div>
         </div>
@@ -842,11 +690,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
         {/* start Selected filter  */}
         <div className="container listing-container selected-filter-wrap mx-search-container">
           <div className="selected-filter" id="selected-filter"></div>
-
-          <div className="show-clear-btn" id="show-clear-btn">
-            
-          </div>
-          
+          <div className="show-clear-btn" id="show-clear-btn"></div>
       </div>
         {/* End Selected filter  */}
 

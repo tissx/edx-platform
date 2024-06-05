@@ -24,7 +24,7 @@ const DegreeFacultyContainer = ({programfaculty}) => {
 
             {/* Start No result Found  */}
                     
-            {programfaculty.length== 0 && (
+            {programfaculty.length=== 0 && (
                 <div className="no-result-found">
                     <div className="no-result-found-msg">Degree Faculty are not available.</div>
                 </div>

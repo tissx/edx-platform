@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import * as R from "ramda";
 
 const ProgramDegreeListContainer = ({programlist}) => {
 

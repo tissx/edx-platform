@@ -64,7 +64,7 @@ function handleCoursePageChange(event, value) {
                 ))}
 
                   {/* start no search results found  */}
-                   {CourseResults.count == 0 && (
+                   {CourseResults.count === 0 && (
                     <div className="no-search-result">
                           No search results found...
                     </div>

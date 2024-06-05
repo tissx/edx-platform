@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 import * as R from "ramda";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProgramInfo from './ProgramInfo';
 import ProgramCourses from './ProgramCourses';
 import ProgramFaculty from './ProgramFaculty';

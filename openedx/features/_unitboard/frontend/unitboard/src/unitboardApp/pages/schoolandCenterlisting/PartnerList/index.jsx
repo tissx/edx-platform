@@ -2,7 +2,7 @@
  * Patner listing on schhol and center listing  Page
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -16,7 +16,7 @@ const PartnerListContainer = ({partnerlist}) => {
 
     function showPartnerOnLoad() {
         if(split_url) {
-            if(split_url == "partner") {
+            if(split_url === "partner") {
                 console.log("Redirect to Partner section")
 
                 document.getElementById("partner").scrollIntoView()
@@ -82,7 +82,7 @@ useEffect(() => {
 
                     {/* Start No result Found  */}
                     
-                    {partnerlist.count== 0 && (
+                    {partnerlist.count=== 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Partners are not available.</div>
                     </div>

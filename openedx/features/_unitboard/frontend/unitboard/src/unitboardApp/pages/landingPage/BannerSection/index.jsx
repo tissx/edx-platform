@@ -43,7 +43,7 @@ const BannerSectionContainer = () => {
                 
                 <div className="col-md-5 col-sm-12 s-cell">
                     <div className="py-5 ">
-                        <img src="../static/tissx-theme/images/landing_page/images/bg.png" className="img-fluid img-hide"/>
+                        <img src="../static/tissx-theme/images/landing_page/images/bg.png" alt="" className="img-fluid img-hide"/>
                     </div>
                     
                 </div>

@@ -57,7 +57,7 @@ const SearchResultsDegreesContainer = ({DegreeResults, Querytxt, getDegreePagina
                               </div>
                           <div className="prf_certificate">    
                               {/* <a className="mx-prog-link" href={'../program-detail/' + degree['uuid']}><span>{degree.type}</span></a> */}
-                              <a className="mx-prog-link"><span>{(degree.type.charAt(degree.type.length - 1) == "s")?(degree.type.slice(0, -1)): degree.type}</span></a>
+                              <a className="mx-prog-link"><span>{(degree.type.charAt(degree.type.length - 1) === "s")?(degree.type.slice(0, -1)): degree.type}</span></a>
 
                               <p className="py-1">{degree.mx_no_of_courses} Courses</p>
                           </div>
@@ -71,7 +71,7 @@ const SearchResultsDegreesContainer = ({DegreeResults, Querytxt, getDegreePagina
 
 
                 {/* start no search results found  */}
-                {DegreeResults.count == 0 && (
+                {DegreeResults.count === 0 && (
                     <div className="no-search-result">
                           No search results found...
                     </div>

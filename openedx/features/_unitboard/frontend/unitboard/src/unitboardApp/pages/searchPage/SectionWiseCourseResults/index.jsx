@@ -6,6 +6,7 @@
 
 import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
 import dateFormat from 'dateformat'
+import $ from 'jquery';
 
 const SectionResultsCoursesContainer = ({CourseResults, Querytxt, showMoreDetail}) => {
 
@@ -15,11 +16,20 @@ const handleShowMore = () => {
     let learning_type_text = "Courses"
     let query = document.getElementById('query').value
     let program_group = document.getElementById('program_group').value
-    let school = document.getElementById('school').value
-    let center = document.getElementById('center').value
     let language = document.getElementById('language').value
     let course_recog = document.getElementById('course_recognition').value
     let course_state = document.getElementById('course_state').value
+
+    let school = ""
+    let center = ""
+    let type =  $("#school-center option:selected").attr("type");
+    if(type === "school"){
+      school =document.getElementById('school-center').value
+    }
+    else {
+      center = document.getElementById('school-center').value
+    }
+
     showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, course_recog, course_state, language)
 
 }
@@ -68,7 +78,7 @@ const handleShowMore = () => {
                 ))}
 
                 {/* start no search results found  */}
-                {CourseResults.count == 0 && (
+                {CourseResults.count === 0 && (
                   <div className="no-search-result">
                         No search results found...
                   </div>

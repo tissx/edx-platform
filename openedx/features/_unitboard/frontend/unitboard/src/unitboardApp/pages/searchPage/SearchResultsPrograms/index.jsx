@@ -49,7 +49,7 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
                                     
                                 </div>
                             <div className="prf_certificate">    
-                                <a className="mx-prog-link"><span>{(program.type.charAt(program.type.length - 1) == "s")?(program.type.slice(0, -1)): program.type}</span></a>
+                                <a className="mx-prog-link"><span>{(program.type.charAt(program.type.length - 1) === "s")?(program.type.slice(0, -1)): program.type}</span></a>
                                 <p className="py-1">{program.mx_no_of_courses} Courses</p>
                             </div>
                             </div>
@@ -61,7 +61,7 @@ const SearchResultsProgramsContainer = ({ProgramResults, Querytxt, getProgramPag
 
 
                   {/* start no search results found  */}
-                  {ProgramResults.count == 0 && (
+                  {ProgramResults.count === 0 && (
                     <div className="no-search-result">
                           No search results found...
                     </div>

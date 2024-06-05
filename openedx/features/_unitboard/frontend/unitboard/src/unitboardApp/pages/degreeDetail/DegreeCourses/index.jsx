@@ -83,7 +83,7 @@ const DegreeCoursesContainer = (program_course) => {
                     </OwlCarousel>
 
                 {/* Start No result Found  */}
-                {program_course.programcourses.length== 0 && (
+                {program_course.programcourses.length=== 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Courses are not available.</div>
                     </div>

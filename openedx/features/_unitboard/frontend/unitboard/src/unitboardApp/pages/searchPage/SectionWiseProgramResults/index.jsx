@@ -4,6 +4,7 @@
  */
 
 import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
+import $ from 'jquery';
 
 const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetail}) => {
 
@@ -13,11 +14,20 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
         let learning_type_text = "Programs"
         let query = document.getElementById('query').value
         let program_group = document.getElementById('program_group').value
-        let school = document.getElementById('school').value
-        let center = document.getElementById('center').value
+     
         let language = document.getElementById('language').value
         let course_recog = document.getElementById('course_recognition').value
         let course_state = document.getElementById('course_state').value
+        let school = ""
+        let center = ""
+        let type =  $("#school-center option:selected").attr("type");
+        if(type === "school"){
+          school =document.getElementById('school-center').value
+        }
+        else {
+          center = document.getElementById('school-center').value
+        }
+
         showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, course_recog, course_state, language)
     
     }
@@ -42,7 +52,6 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
                   {ProgramResults.results.map((program) => (
                   
                   <li>
-
                         <div className="program_data service-item body-light tissxoff mx-search-results">
                           <a className="mx-prog-link" href={'../program-detail/' + program['uuid']}>
                               <div className="img-Area">
@@ -58,7 +67,7 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
                                       <p>{program.mx_program_descrp}</p>
                                   </div>
                               <div className="prf_certificate">    
-                                  <a className="mx-prog-link"><span>{(program.type.charAt(program.type.length - 1) == "s")?(program.type.slice(0, -1)): program.type}</span></a>
+                                  <a className="mx-prog-link"><span>{(program.type.charAt(program.type.length - 1) === "s")?(program.type.slice(0, -1)): program.type}</span></a>
                                   <p className="py-1">{program.mx_no_of_courses} Courses</p>
                               </div>
                               </div>
@@ -69,7 +78,7 @@ const SectionResultsProgramContainer = ({ProgramResults, Querytxt, showMoreDetai
                 ))}
 
                 {/* start no search results found  */}
-                {ProgramResults.count == 0 && (
+                {ProgramResults.count === 0 && (
                   <div className="no-search-result">
                         No search results found...
                   </div>

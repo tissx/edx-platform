@@ -4,6 +4,7 @@
  */
 
 import RightArrowIcon from "unitboardApp/pages/common/Icons/RightArrowIcon";
+import $ from 'jquery';
 
 const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}) => {
 
@@ -13,13 +14,21 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
         let learning_type_text = "Degrees"
         let query = document.getElementById('query').value
         let program_group = document.getElementById('program_group').value
-        let school = document.getElementById('school').value
-        let center = document.getElementById('center').value
         let language = document.getElementById('language').value
         let course_recog = document.getElementById('course_recognition').value
         let course_state = document.getElementById('course_state').value
+        let school = ""
+        let center = ""
+        let type =  $("#school-center option:selected").attr("type");
+        if(type === "school"){
+        school =document.getElementById('school-center').value
+        }
+        else {
+        center = document.getElementById('school-center').value
+        }
         showMoreDetail(subject, program_group, learning_type, learning_type_text, query, school, center, course_recog, course_state, language)
-    
+        
+
     }
 
   return(
@@ -56,7 +65,7 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
                                       
                                   </div>
                               <div className="prf_certificate">    
-                                  <a className="mx-prog-link"><span>{(degree.type.charAt(degree.type.length - 1) == "s")?(degree.type.slice(0, -1)): degree.type}</span></a>
+                                  <a className="mx-prog-link"><span>{(degree.type.charAt(degree.type.length - 1) === "s")?(degree.type.slice(0, -1)): degree.type}</span></a>
                                   <p className="py-1">{degree.mx_no_of_courses} Courses</p>
                               </div>
                               </div>
@@ -68,7 +77,7 @@ const SectionResultsDegreeContainer = ({DegreeResults, Querytxt, showMoreDetail}
 
 
                 {/* start no search results found  */}
-                {DegreeResults.count == 0 && (
+                {DegreeResults.count === 0 && (
                   <div className="no-search-result">
                         No search results found...
                   </div>

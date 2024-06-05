@@ -32,7 +32,7 @@ const SearchResultsFacultyContainer = ({my_discovery_url, FacultyResults}) => {
 
                 {/* Start No result Found  */}
                     
-                {FacultyResults.count== 0 && (
+                {FacultyResults.count=== 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Faculty is not available.</div>
                     </div>

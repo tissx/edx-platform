@@ -13,7 +13,7 @@ const CentersListContainer = ({centerListData}) => {
 
                 <div className="row mx-box p_tb" id="iconright">
                     {/* start Dynamic center  */}
-                    {centerListData.results.map((center) => (
+                    {centerListData.map((center) => (
 
                     <div className="course-box">
                         <a className="mx-link" href={center.center_detail} >
@@ -28,7 +28,7 @@ const CentersListContainer = ({centerListData}) => {
                                 </div>
                                 
                                 <div className="service-text position-relativ">
-                                    <p className="text-school">{center.title}
+                                    <p className="text-school">{center.center_name}
                                     </p>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@ const CentersListContainer = ({centerListData}) => {
 
                     {/* End Dynamic center  */}
 
-                    {/* Start No result Found  */}
+                    Start No result Found 
                     {centerListData.count == 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Centres are not available.</div>

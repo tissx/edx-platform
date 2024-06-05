@@ -2,7 +2,7 @@
  * Course, Program and Degress
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -67,7 +67,7 @@ const option = {
 
                         {(courseProgramData.current_courses.length >0)?(
                             <li className="nav-item" role="presentation">
-                                <button className={(courseProgramData.upcoming_courses.length ==0)?("nav-link active"):("nav-link")} id="current-tab" data-bs-toggle="tab" data-bs-target="#current" type="button" role="tab" aria-controls="current" aria-selected="false" tabindex="-1">Current Courses</button>
+                                <button className={(courseProgramData.upcoming_courses.length ===0)?("nav-link active"):("nav-link")} id="current-tab" data-bs-toggle="tab" data-bs-target="#current" type="button" role="tab" aria-controls="current" aria-selected="false" tabindex="-1">Current Courses</button>
                             </li>
                         ):("")}
                             
@@ -140,7 +140,7 @@ const option = {
 
                             {/* Start Current course  */}
                             {(courseProgramData.current_courses.length >0)?(
-                            <div className={(courseProgramData.upcoming_courses.length ==0)?("tab-pane fade active show"):("tab-pane fade")} id="current" role="tabpanel" aria-labelledby="current-tab">
+                            <div className={(courseProgramData.upcoming_courses.length ===0)?("tab-pane fade active show"):("tab-pane fade")} id="current" role="tabpanel" aria-labelledby="current-tab">
                                 <div className="row" id="iconright1">  
                                     {/* start Dynamic Current Course */}
                                     <OwlCarousel className='owl-theme' {...option}>
@@ -319,7 +319,7 @@ const option = {
                                         <p>{programs_list.short_description}</p>
                                     </div>
                                 <div className="prf_certificate">    
-                                  <a className="mx-prog-link"><span>{(programs_list.program_type.charAt(programs_list.program_type.length - 1) == "s")?(programs_list.program_type.slice(0, -1)): programs_list.program_type}</span></a>
+                                  <a className="mx-prog-link"><span>{(programs_list.program_type.charAt(programs_list.program_type.length - 1) === "s")?(programs_list.program_type.slice(0, -1)): programs_list.program_type}</span></a>
                                     <p className="py-1">{programs_list.total_course} Courses</p>
                                 </div>
                                 </div>
@@ -373,7 +373,7 @@ const option = {
                                             <p>{degree_list.short_description}</p>
                                         </div>
                                     <div className="prf_certificate">    
-                                  <a className="mx-prog-link"><span>{(degree_list.degree_type.charAt(degree_list.degree_type.length - 1) == "s")?(degree_list.degree_type.slice(0, -1)): degree_list.degree_type}</span></a>
+                                  <a className="mx-prog-link"><span>{(degree_list.degree_type.charAt(degree_list.degree_type.length - 1) === "s")?(degree_list.degree_type.slice(0, -1)): degree_list.degree_type}</span></a>
                                         <p className="py-1">{degree_list.total_course} Courses</p>
                                     </div>
                                     </div>

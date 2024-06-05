@@ -8,7 +8,6 @@ import * as R from "ramda";
 import { useParams } from "react-router-dom";
 import SearchResultsCourses from './SearchResults/SearchResultsCourses';
 import SearchResultsPrograms from './SearchResults/SearchResultsPrograms';
-import SearchResultsFaculty from './SearchResults/SearchResultsFaculty';
 import Loader from '../common/loader'; 
 import CenterFilter from './centerFilter/centerFilter';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -21,7 +20,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
   const [resultLoader, setresultLoader] = useState();
   const [CourseResults, setCourseResults] = useState([]);
   const [ProgramResults, setProgramResults] = useState([]);
-  const [FacultyResults, setFacultyResults] = useState([]);
+  // const [FacultyResults, setFacultyResults] = useState([]);
   const { slug } = useParams();
 
 
@@ -137,22 +136,22 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
 
     // start Fetch results for Faculty 
-    fetch(`${my_discovery_url}/api/v1/lms-search/get-center-people/?mx_center=${center}&mx_program=${program}&mx_instructor_lang=${language}&mx_instructor_org=${organization}&mx_mode=${mode}`)
-    .then((res) => {
-        return res.json();
-    })
-    .then((data) => {
-      setFacultyResults(data);
-      setresultLoader(true)
+    // fetch(`${my_discovery_url}/api/v1/lms-search/get-center-people/?mx_center=${center}&mx_program=${program}&mx_instructor_lang=${language}&mx_instructor_org=${organization}&mx_mode=${mode}`)
+    // .then((res) => {
+    //     return res.json();
+    // })
+    // .then((data) => {
+    //   setFacultyResults(data);
+    //   setresultLoader(true)
 
-    });
+    // });
     // End Fetch results for program 
 
   };
   // End fetch search results 
 
   // Start Show search results onChange Dropdown 
-  function getSearchData(program, language, organization, mode, subject, course_recog, course_state) {
+  const getSearchData = (program, language, organization, mode, subject, course_recog, course_state) => {
     setCourseResults('')
     setProgramResults('')
     setresultLoader()
@@ -169,7 +168,6 @@ const CenterDetailContainer = ({my_discovery_url}) => {
         {!(resultLoader) && <CircularProgress className="mx-loader"/>}
         {!R.isEmpty(CourseResults) && CourseResults.length !== 0 &&<SearchResultsCourses CourseResults={CourseResults} />}
         {!R.isEmpty(ProgramResults) && ProgramResults.length !== 0 && <SearchResultsPrograms ProgramResults={ProgramResults} />} 
-        {!R.isEmpty(FacultyResults) && FacultyResults.length !== 0 && <SearchResultsFaculty my_discovery_url={my_discovery_url} FacultyResults={FacultyResults} />} 
        </>
     );
 };

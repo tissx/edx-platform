@@ -41,14 +41,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
         let val = e.target.value;
         e.preventDefault();
         setselectedProgram(val)
-        // let language = document.getElementById('language').value
-        // let organization = document.getElementById('organization').value
-        // let mode = document.getElementById('mode').value
-        // let subject = document.getElementById('subject').value
-        // alert(selectedLanguage)
-
         getSearchData(val, selectedLanguage, selectedOrg, selectedMode, selectedSubject, selectedCourseRecog, selectedCourseState)
-        // getSearchData(val, language, organization, mode, subject)
         // Update Url 
         UpdateURL('program', val)
 
@@ -60,16 +53,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
     const onLanguageChange = (e) => {
         let language = e.target.value;
         setselectedLanguage(language)
-
-        // let program = document.getElementById('program').value
-        // let organization = document.getElementById('organization').value
-        // let mode = document.getElementById('mode').value
-        // let subject = document.getElementById('subject').value
-
         getSearchData(selectedProgram, language, selectedOrg, selectedMode, selectedSubject, selectedCourseRecog, selectedCourseState)
-        
-        // getSearchData(program, language, organization, mode, subject)
-       
         UpdateURL('language', language)
         var language_name =  $("#language option:selected").attr("language-name");
         showSelectedFilterText('language', language_name, 'show_language_as_text')
@@ -80,15 +64,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
       const onOrgChange = (e) => {
         let val = e.target.value;
         setselectedOrg(val)
-
-        // let program = document.getElementById('program').value
-        // let language = document.getElementById('language').value
-        // let mode = document.getElementById('mode').value
-        // let subject = document.getElementById('subject').value
-
         getSearchData(selectedProgram, selectedLanguage, val, selectedMode, selectedSubject, selectedCourseRecog, selectedCourseState)
-        // getSearchData(program, language, val, mode, subject)
-       
         UpdateURL('organization', val)
         var org_name =  $("#organization option:selected").attr("org-name");
         showSelectedFilterText('organization', org_name, 'show_org_as_text')
@@ -99,14 +75,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
       const onModeChange = (e) => {
         let val = e.target.value;
         setselectedMode(val)
-        // let program = document.getElementById('program').value
-        // let language = document.getElementById('language').value
-        // let organization = document.getElementById('organization').value
-        // let subject = document.getElementById('subject').value
-
         getSearchData(selectedProgram, selectedLanguage, selectedOrg, val, selectedSubject, selectedCourseRecog, selectedCourseState)
-        // getSearchData(program, language, organization, val, subject)
-       
         UpdateURL('mode', val)
         var mode_name =  $("#mode option:selected").attr("mode-name");
         showSelectedFilterText('mode', mode_name, 'show_mode_as_text')
@@ -116,14 +85,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
       const onSubjectChange = (e) => {
         let val = e.target.value;
         setselectedSubject(val)
-        // let program = document.getElementById('program').value
-        // let language = document.getElementById('language').value
-        // let organization = document.getElementById('organization').value
-        // let mode = document.getElementById('mode').value
-
         getSearchData(selectedProgram, selectedLanguage, selectedOrg, selectedMode, val, selectedCourseRecog, selectedCourseState)
-        // getSearchData(program, language, organization, mode, val)
-       
         var subject_name =  $("#subject option:selected").attr("subject-name");
         var sub_slug =  $("#subject option:selected").attr("sub-slug");
         UpdateURL('subject', sub_slug)
@@ -154,7 +116,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
 
 
   // Start Show selected filter as text 
-  function showSelectedFilterText(selected_filter_name, selected_filter_value, selected_filter_abbr) {
+  const showSelectedFilterText = (selected_filter_name, selected_filter_value, selected_filter_abbr) => {
 
     // If user change same dropdown filter then remove previous selected text
     if($("#"+selected_filter_abbr).length > 0) {
@@ -162,7 +124,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
     }
 
     // If clear all btn is showing but no filter is selected then remove the clear all btn
-    if($("#selected-filter").html()=='' && $("#clear-all-filter").length > 0) {
+    if($("#selected-filter").html()==='' && $("#clear-all-filter").length > 0) {
       document.getElementById("clear-all-filter").remove();
      }
 
@@ -185,7 +147,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
       
 
   // Start Show selected filter as text on first time page load 
-  function showSelectedFilterTextonPageLoad() {
+  const showSelectedFilterTextonPageLoad = () => {
 
     var show_selected_text = "";
     var has_show_selected_text = false
@@ -272,64 +234,64 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
     document.getElementById(selected_filter_abbr).remove();
 
     //  Remove clear all button if user one by one remove all selected text 
-    if($("#selected-filter").html()=='') {
+    if($("#selected-filter").html()==='') {
      document.getElementById("clear-all-filter").remove();
     }
 
     // Remove Program selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'program')
+     if(selected_filter_name === 'program')
      {
       $("#program").val("");
-      setselectedProgram()
+      setselectedProgram('')
       UpdateURL('program', '')
      }
 
     // Remove Language selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'language')
+     if(selected_filter_name === 'language')
      {
       $("#language").val("");
-      setselectedLanguage()
+      setselectedLanguage('')
       UpdateURL('language', '')
      }
 
     // Remove organization selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'organization')
+     if(selected_filter_name === 'organization')
      {
       $("#organization").val("");
-      setselectedOrg()
+      setselectedOrg('')
       UpdateURL('organization', '')
      }
    
 
     // Remove mode selected text, reset dropdown, update URLs
-     if(selected_filter_name == 'mode')
+     if(selected_filter_name === 'mode')
      {
       $("#mode").val("");
       setselectedMode()
       UpdateURL('mode', '')
      }
 
-    if(selected_filter_name == 'subject')
+    if(selected_filter_name === 'subject')
     {
         $("#subject").val("");
-        setselectedSubject()
+        setselectedSubject('')
         UpdateURL('subject', '')
     }
 
     
     // Remove course recogn selected text, reset dropdown, update URLs
-    if(selected_filter_name == 'course_recognition')
+    if(selected_filter_name === 'course_recognition')
     {
         $("#course_recognition").val("");
-        setselectedCourseRecog()
+        setselectedCourseRecog('')
         UpdateURL('course_recognition', '')
     }
   
      // Remove course state selected text, reset dropdown, update URLs
-    if(selected_filter_name == 'course_state')
+    if(selected_filter_name === 'course_state')
     {
         $("#course_state").val("");
-        setselectedCourseState()
+        setselectedCourseState('')
         UpdateURL('course_state', '')
     }
 

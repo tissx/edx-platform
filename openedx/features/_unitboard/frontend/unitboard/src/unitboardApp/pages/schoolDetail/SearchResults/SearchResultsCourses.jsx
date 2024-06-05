@@ -52,7 +52,7 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
 
                         {/* Start No result Found  */}
                     
-                        {CourseResults.count== 0 && (
+                        {CourseResults.count=== 0 && (
                         <div className="no-result-found">
                             <div className="no-result-found-msg">Courses are not available.</div>
                         </div>

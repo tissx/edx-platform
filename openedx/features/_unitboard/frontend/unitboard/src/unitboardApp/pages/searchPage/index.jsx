@@ -36,7 +36,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
   const getSearchResult = (subject, program_degree_group, learningType, query, school, center, course_recog, course_state, language, size) => {
    
     //start Fetch search results for courses from discovery
-    if(learningType &&  learningType !== undefined && (learningType == "course" || learningType == "all")){
+    if(learningType &&  learningType !== undefined && (learningType === "course" || learningType === "all")){
       let course_type_query = ""
     if(program_degree_group &&  program_degree_group !== undefined ) {
       course_type_query = '&course_program_type_slug=' + program_degree_group
@@ -65,7 +65,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
     //End Fetch search results for courses from discovery
 
   //start Fetch search results for Program from discovery
-  if(learningType &&  learningType !== undefined && (learningType == "program" || learningType == "all" || learningType == "program-degree")){
+  if(learningType &&  learningType !== undefined && (learningType === "program" || learningType === "all" || learningType === "program-degree")){
     let program_type_query = ""
     
     if(program_degree_group &&  program_degree_group !== undefined ) {
@@ -96,7 +96,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
     //End Fetch search results for Program from discovery
 
   //start Fetch search results for Degree from discovery
-  if(learningType && learningType !== undefined && (learningType == "degree" || learningType == "all" || learningType == "program-degree") ){
+  if(learningType && learningType !== undefined && (learningType === "degree" || learningType === "all" || learningType === "program-degree") ){
 
     let degree_type_query = ""
     if(program_degree_group &&  program_degree_group !== undefined ) {
@@ -155,8 +155,8 @@ const getSearchData = (subject, program_group, learning_type, query="", school, 
     var language = query.get('language') || ""
     var query_search = query.get('query') || ""
     var is_search = query.get('is_search') || false
-
-    if(is_search && is_search=="true") {
+    var size = ""
+    if(is_search && is_search==="true") {
         setshowSectionResults(true)
         size = 4
     }

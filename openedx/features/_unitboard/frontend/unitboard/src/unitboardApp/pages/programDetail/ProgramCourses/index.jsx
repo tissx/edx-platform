@@ -2,7 +2,7 @@
  * Program Courses Page
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -84,7 +84,7 @@ const ProgramCoursesContainer = (program_course) => {
 
                 {/* Start No result Found  */}
                     
-                {program_course.programcourses.length== 0 && (
+                {program_course.programcourses.length=== 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Courses are not available.</div>
                     </div>

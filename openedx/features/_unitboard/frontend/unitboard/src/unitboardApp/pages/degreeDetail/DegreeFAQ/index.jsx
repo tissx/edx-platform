@@ -62,7 +62,7 @@ const DegreeFAQContainer = ({programfaq}) => {
              ))} 
 
              {/* Start No result Found  */}
-             {programfaq.length== 0 && (
+             {programfaq.length=== 0 && (
                 <div className="no-result-found">
                     <div className="no-result-found-msg">FAQs are not available.</div>
                 </div>

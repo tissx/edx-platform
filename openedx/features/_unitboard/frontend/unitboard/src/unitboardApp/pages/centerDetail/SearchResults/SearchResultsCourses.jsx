@@ -3,7 +3,7 @@
  * Banner for Center Detail Page
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import dateFormat from 'dateformat'
 
 
@@ -45,7 +45,7 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
 
                         {/* Start No result Found  */}
                     
-                        {CourseResults.count== 0 && (
+                        {CourseResults.count=== 0 && (
                         <div className="no-result-found">
                             <div className="no-result-found-msg">Courses are not available.</div>
                         </div>

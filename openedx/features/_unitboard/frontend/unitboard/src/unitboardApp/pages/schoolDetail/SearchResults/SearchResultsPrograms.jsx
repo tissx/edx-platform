@@ -32,7 +32,7 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
                 <div className="row certificateprg mx-box" id="iconright">
                 {Object.keys(program_dict[keyName]).map((keyNames, j) => (
                     <div className="program_data service-item body-light tissxoff mx-center-program">
-                          <a className="mx-prog-link" href={(program_dict[keyName][keyNames]['program_or_degree'] == "program")? ("../program-detail/" + program_dict[keyName][keyNames]['uuid']) :("../degree-detail/" + program_dict[keyName][keyNames]['uuid']) }>
+                          <a className="mx-prog-link" href={(program_dict[keyName][keyNames]['program_or_degree'] === "program")? ("../program-detail/" + program_dict[keyName][keyNames]['uuid']) :("../degree-detail/" + program_dict[keyName][keyNames]['uuid']) }>
                               <div className="img-Area">
                                   <img className="img-fluid program_img_data"
                                     src={program_dict[keyName][keyNames]['banner_image']}
@@ -47,7 +47,7 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
                                       <p>{program_dict[keyName][keyNames]['mx_program_descrp']}</p>
                                   </div>
                               <div className="prf_certificate">    
-                                  <a className="mx-prog-link"><span>{(program_dict[keyName][keyNames]['type'].charAt(program_dict[keyName][keyNames]['type'].length - 1) == "s")?(program_dict[keyName][keyNames]['type'].slice(0, -1)): program_dict[keyName][keyNames]['type'] }</span></a>
+                                  <a className="mx-prog-link"><span>{(program_dict[keyName][keyNames]['type'].charAt(program_dict[keyName][keyNames]['type'].length - 1) === "s")?(program_dict[keyName][keyNames]['type'].slice(0, -1)): program_dict[keyName][keyNames]['type'] }</span></a>
                                   <p className="py-1">{program_dict[keyName][keyNames]['mx_no_of_courses']} Courses</p>
                               </div>
                               </div>

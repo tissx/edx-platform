@@ -133,30 +133,22 @@ const SchoolDeatilContainer = ({my_discovery_url}) => {
   // End fetch search results 
 
   // Start Show search results onChange Dropdown 
-  function getSearchData(program, language, organization, mode, subject, course_recog, course_state) {
- 
+  const getSearchData = (program, language, organization, mode, subject, course_recog, course_state) => {
     setCourseResults('')
     setProgramResults('')
-    // setDegreeResults('')
     setresultLoader()
-  
     getSearchResult(slug, program, language, organization, mode, subject, course_recog, course_state)
     }
 
   // End Show search results onChange Dropdown 
 
-
     return (
         <>
         {!(schoolLoader) && !(filterLoader) && <Loader/>}
         {!R.isEmpty(schooldetail) && schooldetail.length !== 0 && !R.isEmpty(fiterDetail) && fiterDetail.length !== 0 && <SchoolFilter schoolInfo={schooldetail.school_info}  FiterDetail={fiterDetail} getSearchData={getSearchData} />} 
-
         {!(resultLoader) && <CircularProgress className="mx-loader"/>}
-
         {!R.isEmpty(CourseResults) && CourseResults.length !== 0 &&<SearchResultsCourses CourseResults={CourseResults} />}
         {!R.isEmpty(ProgramResults) && ProgramResults.length !== 0 && <SearchResultsPrograms ProgramResults={ProgramResults} />} 
-        {/* {!R.isEmpty(FacultyResults) && FacultyResults.length !== 0 && <SearchResultsFaculty my_discovery_url={my_discovery_url} FacultyResults={FacultyResults} />}  */}
-        
        </>
     );
 };
