@@ -375,7 +375,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-12">
                             <div className="pd-leftalign">
-                                <h1 className="theading-title mob-hright text-white">{schoolInfo['center_name']}</h1>
+                                <h1 className="theading-title mob-hright text-white">{schoolInfo['school_name']}</h1>
                                 <p className="text-white sub-title">{schoolInfo['description']}</p>
                             </div>
                         </div>
