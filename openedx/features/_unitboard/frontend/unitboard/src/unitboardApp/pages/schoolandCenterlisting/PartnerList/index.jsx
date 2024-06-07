@@ -34,7 +34,7 @@ useEffect(() => {
         loop:false,
         margin:10,
         nav:false,
-        dots:false,
+        dots:true,
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,

@@ -65,7 +65,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
     //End Fetch search results for courses from discovery
 
   //start Fetch search results for Program from discovery
-  if(learningType &&  learningType !== undefined && (learningType === "program" || learningType === "all" || learningType === "program-degree")){
+  if(learningType &&  learningType !== undefined && (learningType === "program" || learningType === "all")){
     let program_type_query = ""
     
     if(program_degree_group &&  program_degree_group !== undefined ) {
@@ -96,7 +96,7 @@ const SearchPageContainer = ({my_discovery_url}) => {
     //End Fetch search results for Program from discovery
 
   //start Fetch search results for Degree from discovery
-  if(learningType && learningType !== undefined && (learningType === "degree" || learningType === "all" || learningType === "program-degree") ){
+  if(learningType && learningType !== undefined && (learningType === "degree" || learningType === "all") ){
 
     let degree_type_query = ""
     if(program_degree_group &&  program_degree_group !== undefined ) {
@@ -154,12 +154,18 @@ const getSearchData = (subject, program_group, learning_type, query="", school, 
     var course_state = query.get('course_state') || ""
     var language = query.get('language') || ""
     var query_search = query.get('query') || ""
-    var is_search = query.get('is_search') || false
+    // var is_search = query.get('is_search') || false
+    var is_section = query.get('is_section') || "true"
     var size = ""
-    if(is_search && is_search==="true") {
-        setshowSectionResults(true)
-        size = 4
-    }
+
+    // if(is_search && is_search==="true") {
+    //     setshowSectionResults(true)
+    //     size = 4
+    // }
+    if(is_section && is_section==="true") {
+      setshowSectionResults(true)
+      size = 4
+  }
 
     //start Fetch filter detail from discovery
     fetch(`${my_discovery_url}/api/v1/lms-discovery-search-filter/?subject=${subject}&program_degree_group=${program_degree_group}&learning_type=${learning_type}&school=${school}&center=${center}&course_recog=${course_recog}&course_state=${course_state}&language=${language}`)
@@ -272,7 +278,6 @@ const getSearchData = (subject, program_group, learning_type, query="", school, 
 
   // When User click on show more detail 
 
-    // function showMoreDetail(subject, program_group, learning_type, learning_type_text, query="", school, center, course_recog, course_state, language) {
   const showMoreDetail = (subject, program_group, learning_type, learning_type_text, query="", school, center, course_recog, course_state, language) => {
  
       setCourseResults('')
@@ -304,6 +309,7 @@ const getSearchData = (subject, program_group, learning_type, query="", school, 
         // Update URL 
         const url = new URL(window.location.href);
         url.searchParams.set("learning_type", learning_type);
+        url.searchParams.set("is_section", false);
         window.history.replaceState(null, null, url);
 
       }
