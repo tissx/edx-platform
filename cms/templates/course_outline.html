@@ -174,6 +174,15 @@ from django.urls import reverse
                         <span class="icon fa fa-plus" aria-hidden="true"></span>${_('New Section')}
                     </a>
                 </li>
+                <!-- Manprax -->
+                % if display_sync_button:
+                    <li class="nav-item">
+                        <a href="#" class="button button-sync" data-url="${notify_rerun_link}" data-course="${str(context_course.location.course_key)}" title="${_('Click here to send email about course rerun')}" ${'disabled="disabled"' if notify_rerun_btn_disabled else ''}>
+                            ${_('Notify for course rerun')}
+                        </a>
+                    </li>
+                % endif
+                <!-- Manprax -->
                 %if reindex_link:
                     <li class="nav-item">
                         <a href="${reindex_link}" class="button button-reindex" data-category="reindex" title="${_('Reindex current course')}">

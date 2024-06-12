@@ -44,6 +44,12 @@ define([
                 this.$('.button.button-reindex').click(function(event) {
                     self.handleReIndexEvent(event);
                 });
+                // Manprax
+                this.$('.button-sync').click(function(event) {
+                    $(this).attr('disabled', 'disabled');
+                    self.handleNotifyEmail(event);
+                });
+                // Manprax
                 this.model.on('change', this.setCollapseExpandVisibility, this);
                 $('.dismiss-button').bind('click', ViewUtils.deleteNotificationHandler(function() {
                     $('.wrapper-alert-announcement').removeClass('is-shown').addClass('is-hidden');
@@ -155,6 +161,28 @@ define([
                     }, this);
                 }
             },
+
+            // Manprax
+            handleNotifyEmail: function(event) {
+                var self = this;
+                event.preventDefault();
+                var $target = $(event.currentTarget);
+                var syncLink = $target.attr('data-url');
+                $.ajax({
+                        url: syncLink,
+                        method: 'GET',
+                        global: false,
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json'
+                }).done(function() {
+                    var msg = new AlertView.Announcement({
+                        title: gettext('Added to queue'),
+                        message: 'Email will be sent shortly'
+                    });
+                    msg.show();
+                });
+            },
+            // Manprax
 
             handleReIndexEvent: function(event) {
                 var self = this;

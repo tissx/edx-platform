@@ -115,6 +115,7 @@ from .library import (
     user_can_create_library,
     should_redirect_to_library_authoring_mfe
 )
+from django.utils import timezone
 
 log = logging.getLogger(__name__)
 User = get_user_model()
@@ -707,6 +708,25 @@ def course_index(request, course_key):
         advanced_dict = CourseMetadata.fetch(course_module)
         proctoring_errors = CourseMetadata.validate_proctoring_settings(course_module, advanced_dict, request.user)
 
+        # Manprax
+
+        # Activate Notify email button during the enrollment period only:
+        notify_rerun_disabled = False
+        display_sync_button = False
+        from lms.djangoapps.automatic_email.models import CourseRerun
+        mx_course_rerun = CourseRerun.objects.filter(course_id=str(course_key)).first()
+        if mx_course_rerun:
+            display_sync_button = True
+            notify_rerun_disabled = (
+                course_module.enrollment_end and timezone.now() >= course_module.enrollment_end or
+                not course_module.enrollment_start or
+                timezone.now() <= course_module.enrollment_start
+            )
+
+        notify_rerun_link = reverse('automatic_email:notify_user_course_rerun', kwargs={'course_id': str(course_key)})
+
+
+        # Manprax
         return render_to_response('course_outline.html', {
             'language_code': request.LANGUAGE_CODE,
             'context_course': course_module,
@@ -730,6 +750,10 @@ def course_index(request, course_key):
             'mfe_proctored_exam_settings_url': get_proctored_exam_settings_url(course_module.id),
             'advance_settings_url': reverse_course_url('advanced_settings_handler', course_module.id),
             'proctoring_errors': proctoring_errors,
+            # Manprax
+            'notify_rerun_btn_disabled': notify_rerun_disabled,
+            'notify_rerun_link': notify_rerun_link,
+            'display_sync_button': display_sync_button
         })
 
 
