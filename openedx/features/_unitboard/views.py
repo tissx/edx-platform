@@ -49,9 +49,7 @@ class SearchView(TemplateView):
             'my_discovery_url': discovery_URL
         }
 
-
         context = super().get_context_data(**kwargs)
         context['context_data'] = context_data
-        # context['api_urls'] = api_urls
         return context
 

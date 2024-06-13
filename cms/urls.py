@@ -49,7 +49,10 @@ LIBRARY_KEY_PATTERN = r'(?P<library_key_string>library-v1:[^/+]+\+[^/+]+)'
 urlpatterns = oauth2_urlpatterns + [
     url(r'', include('openedx.core.djangoapps.user_authn.urls_common')),
     url(r'', include('common.djangoapps.student.urls')),
+    # Manprax
+
     url(r'^mx_programs/', include('cms.djangoapps.mx_programs.urls')),
+    url(r'^automatic_email/', include(('lms.djangoapps.automatic_email.urls', 'lms.djangoapps.automatic_email'), namespace='automatic_email',)),
     url(r'^transcripts/upload$', contentstore_views.upload_transcripts, name='upload_transcripts'),
     url(r'^transcripts/download$', contentstore_views.download_transcripts, name='download_transcripts'),
     url(r'^transcripts/check$', contentstore_views.check_transcripts, name='check_transcripts'),

@@ -3,7 +3,7 @@
  * Banner for Center Detail Page
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import dateFormat from 'dateformat'
 
 
@@ -17,9 +17,12 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
         <div className="container listing-container pt-3">
                 <div className="row" id="cbox-left">
                     <div className="col-md-12 col-sm-12">
+                        
                         <h1 className="text-align-left center-course-title"><b>Courses</b></h1>
                         <div className="row center-courses" id="iconright">
+                       
                         {CourseResults.results.map((course)=> (
+
                             <div className="mx-center-course">
                                 <div className="service-item body-light tissxoff">
                                     <a className="center-course-box-link" href={'../courses/' +course['course_runs'][0]['key'] + '/about'}>
@@ -31,12 +34,16 @@ const SearchResultsCoursesContainer = ({ CourseResults}) => {
                                         }}
                                         alt=""/>
                                         </div>
+
                                         <p className="title course-title" title={course['title']}>{course['title']}</p>
                                         <p className="box-short-descp">Starts: {dateFormat( course['course_runs'][0]['start'], "mmmm dd, yyyy")}</p>
+                                        
                                         <div className="course_btn">
                                             <span className="more_learn">Course</span>
                                             {(course['mx_course_program_link'])?(<span className="prog-label" title={course['mx_course_program_link'].slice(0, -1)}>{course['mx_course_program_link'].slice(0, -1)}</span>): ("")}
+
                                         </div>
+
                                     </a>
                                 </div>
                             </div>

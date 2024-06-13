@@ -8,7 +8,7 @@ import $ from 'jquery';
 import * as R from "ramda";
 
 
-const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
+const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
     const [selectedProgram, setselectedProgram] = useState(FiterDetail.selected_program["program_uuid"]);
     const [selectedLanguage, setselectedLanguage] = useState(FiterDetail.selected_language["language_slug"]);
     const [selectedOrg, setselectedOrg] = useState(FiterDetail.selected_organization['organization_key_lower']);
@@ -31,6 +31,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
     }, []);
     
     const UpdateURL = (query_param, query_value) => {
+    // function UpdateURL(query_param, query_value) {
         const url = new URL(window.location.href);
         url.searchParams.set(query_param, query_value);
         window.history.replaceState(null, null, url);
@@ -43,6 +44,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
         getSearchData(val, selectedLanguage, selectedOrg, selectedMode, selectedSubject, selectedCourseRecog, selectedCourseState)
         // Update Url 
         UpdateURL('program', val)
+
         var prg_name =  $("#program option:selected").attr("prg-name");
         showSelectedFilterText('program', prg_name, 'show_program_as_text')
 
@@ -55,6 +57,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
         UpdateURL('language', language)
         var language_name =  $("#language option:selected").attr("language-name");
         showSelectedFilterText('language', language_name, 'show_language_as_text')
+        
       };
 
 
@@ -65,7 +68,9 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
         UpdateURL('organization', val)
         var org_name =  $("#organization option:selected").attr("org-name");
         showSelectedFilterText('organization', org_name, 'show_org_as_text')
+        
       }
+      
 
       const onModeChange = (e) => {
         let val = e.target.value;
@@ -262,7 +267,7 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
      if(selected_filter_name === 'mode')
      {
       $("#mode").val("");
-      setselectedMode('')
+      setselectedMode()
       UpdateURL('mode', '')
      }
 
@@ -312,7 +317,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
       $(".clear-all-filter").remove();
 
       // Clear All dropdown
-
       $("#program").val("");
       $("#language").val("");
       $("#organization").val("");
@@ -358,21 +362,21 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
     return (
         <>
         <section className="position-relative" id="prg-page1">
-            <img src={centerInfo['banner_image']} className="img-fluid bg-center-school"/>
+            <img src={schoolInfo['banner_image']} className="img-fluid bg-center-school"/>
             <div className="overlay-cap">
             <div className="container">
                     <div className="row">
                         <div className="col-md-4 col-lg-4 col-sm-12">
                             <div className="box-left mobile-hide">
                                 <div className="card-1">
-                                    <img src={centerInfo['center_image']} className="img-fluid"/>
+                                    <img src={schoolInfo['school_image']} className="img-fluid"/>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-12">
                             <div className="pd-leftalign">
-                                <h1 className="theading-title mob-hright text-white">{centerInfo['center_name']}</h1>
-                                <p className="text-white sub-title">{centerInfo['description']}</p>
+                                <h1 className="theading-title mob-hright text-white">{schoolInfo['school_name']}</h1>
+                                <p className="text-white sub-title">{schoolInfo['description']}</p>
                             </div>
                         </div>
                     </div>
@@ -384,28 +388,29 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
             <div className="container">
                 <div className="row" id="cbox-left">
                     <div className="col-md-12 col-sm-12 bg-light">
-                        <h1 className="theading-title">Centre Offering</h1> 
-                        <p className="para">{centerInfo['short_description']}</p>
+                        <h1 className="theading-title">School Offering</h1> 
+                        <p className="para">{schoolInfo['short_description']}</p>
                     </div>
                 </div>
 
-                {centerInfo['address']?(
+                {schoolInfo['address']?(
                      <div className="row address-wrap">
                      <div className="col-md-12 col-sm-12 bg-light">
-                         <h2 className="sub-theading-title">Centre Address</h2> 
-                         <p className="para">{centerInfo['address']}</p>
+                         <h2 className="sub-theading-title">School Address</h2> 
+                         <p className="para">{schoolInfo['address']}</p>
                      </div>
                  </div>
                 ):("")}
-                
+               
             </div>
+
         </section>
 
 
         <section className="bg-light p-2" >
             <div className="container listing-container center-filter-wrap mx-search-container">
                 <h1 className="theading-title">Filter</h1> 
-                <div className="row pb-3" id="center-search-filter-wrap">
+                <div className="row pb-3" id="school-search-filter-wrap">
             
                     <div className="custom-select">
                         <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program" data-bs-toggle="dropdown"
@@ -527,6 +532,6 @@ const CenterFilterContainer = ({centerInfo, FiterDetail, getSearchData}) => {
     );
 };
 
-CenterFilterContainer.propTypes = {}
+SchoolFilterContainer.propTypes = {}
 
-export default CenterFilterContainer
+export default SchoolFilterContainer

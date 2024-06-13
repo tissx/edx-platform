@@ -32,12 +32,9 @@ function handleCoursePageChange(event, value) {
                 <ul id="paginated-list" data-current-page="1" aria-live="polite">
                   
                   {CourseResults.results.map((course) => (
-
-                  
                   <li>
                     <div className="course-box">
                         <div className="service-item body-light tissxoff" 
-                        // onClick={RedirectTo}
                         >
                             <a className="search-course-box-link" href={'../courses/' +course['course_runs'][0]['key'] + '/about'}>
                               <div className="img-sec">
@@ -49,20 +46,16 @@ function handleCoursePageChange(event, value) {
                                   alt="" />
                               </div>
                             
-                              <p className="title course-title">{course['title']}</p>
+                              <p className="title course-title" title={course['title']}>{course['title']}</p>
 
-                              {/* <p className="box-short-descp">Starts: {course['course_runs'][0]['start']}</p> */}
                               <p className="box-short-descp">Starts: {dateFormat( course['course_runs'][0]['start'], "mmmm dd, yyyy")}</p>
-                              
                               <div className="course_btn">
                                   <span className="more_learn">Course</span>
+                                  {/* {(course['mx_course_program_link'])?(<span className="prog-label" title={course['mx_course_program_link']}>{(course['mx_course_program_link'].charAt(course['mx_course_program_link'].length - 1) == ",")?(course['mx_course_program_link'].slice(0, -1)): course['mx_course_program_link']}</span>): ("")} */}
+                                  {(course['mx_course_program_link'])?(<span className="prog-label" title={course['mx_course_program_link'].slice(0, -1)}>{course['mx_course_program_link'].slice(0, -1)}</span>): ("")}
+
                               </div>
 
-
-                              {/* <div className="d-flex p-3 bor-1">
-                                  <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><button type="button" className="btn btn-sm orgclr btn-read-more">Read more</button></a>
-                                  <a href={'../courses/' +course['course_runs'][0]['key'] + '/about'}><small><img className="img moreicon" /></small></a>
-                              </div>  */}
                               </a>
                         </div>
                     </div>
@@ -71,7 +64,7 @@ function handleCoursePageChange(event, value) {
                 ))}
 
                   {/* start no search results found  */}
-                   {CourseResults.count == 0 && (
+                   {CourseResults.count === 0 && (
                     <div className="no-search-result">
                           No search results found...
                     </div>

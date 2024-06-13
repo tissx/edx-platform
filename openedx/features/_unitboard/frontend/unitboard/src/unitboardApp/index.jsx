@@ -1,19 +1,16 @@
-import React, { Fragment, useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import * as R from "ramda";
-
 import { BrowserRouter as Router } from "react-router-dom";
-import { Switch, Route, Routes } from "react-router-dom";
-
+import { Switch, Route } from "react-router-dom";
 import LandingPageContainer from "./pages/landingPage";
 import ProgramDetailContainer from "./pages/programDetail";
 import DegreeDetailContainer from "./pages/degreeDetail";
 import ProgramDegreelistingContainer from "./pages/programandDegreelisting";
 import SchoolCenterlistingContainer from "./pages/schoolandCenterlisting";
-import SchoolDeatilContainer from "./pages/schoolDetail";
 import SearchPageContainer from "./pages/searchPage";
 import CenterDeatilContainer from "./pages/centerDetail/CenterDetail";
+import SchoolDeatilContainer from "./pages/schoolDetail/SchoolDetail";
 
 import "./unitboardApp.css"
 export const UnitboardApp = () => {

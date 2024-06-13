@@ -235,8 +235,11 @@ def perform_delegate_email_batches(entry_id, course_id, task_input, action_name)
     # should be using that instead.
     return progress
 
+# Manprax
+BULK_EMAIL_DEFAULT_RETRY_DELAY = 30
+BULK_EMAIL_MAX_RETRIES = 5
 
-@shared_task(default_retry_delay=settings.BULK_EMAIL_DEFAULT_RETRY_DELAY, max_retries=settings.BULK_EMAIL_MAX_RETRIES)
+@shared_task(default_retry_delay=BULK_EMAIL_DEFAULT_RETRY_DELAY, max_retries=BULK_EMAIL_MAX_RETRIES)
 @set_code_owner_attribute
 def send_course_email(entry_id, email_id, to_list, global_email_context, subtask_status_dict):
     """

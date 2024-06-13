@@ -2,19 +2,14 @@
  * Program FAQ Page
  */
 
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-import classNames from 'classnames';
 import styles from './Faq.module.css';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,10 +40,7 @@ const DegreeFAQContainer = ({programfaq}) => {
         <section>
         <div className="container program-faq">
             <h1 className="theading-title pb-3 faq-title">FAQs</h1>
-           
-
             <div className={classes.root}>
-      
             {programfaq.map((faq) => (
       
               <Accordion  className={styles.accordion} expanded={expanded === faq['id']} onChange={handleChange(faq['id'])}>
@@ -69,10 +61,8 @@ const DegreeFAQContainer = ({programfaq}) => {
 
              ))} 
 
-
              {/* Start No result Found  */}
-                    
-             {programfaq.length== 0 && (
+             {programfaq.length=== 0 && (
                 <div className="no-result-found">
                     <div className="no-result-found-msg">FAQs are not available.</div>
                 </div>
@@ -80,8 +70,6 @@ const DegreeFAQContainer = ({programfaq}) => {
               {/* End No result Found  */}
     
             </div>
-
-
 
         </div>
     </section>

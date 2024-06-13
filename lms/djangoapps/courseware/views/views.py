@@ -974,6 +974,21 @@ def course_about(request, course_id):
 
         if program_course:
             course_price = None
+        
+        # Manprax
+        # Get program name if course is linked with program.
+        COURSE_CATALOG_API_URL = getattr(settings, 'LMS_DISCOVERY_URL', "")
+        from urllib.parse import urljoin
+        linked_program = ""
+        url = urljoin(COURSE_CATALOG_API_URL, '/api/v1/get-program-from-courseid/'+course_id)
+        try:
+            res = requests.get(url)
+            results = res.json()
+            linked_program = results['linked_program']
+        except Exception as exc:
+            log.error('Discovery LMS API connection failure: {}'.format(exc))
+            linked_program = ""
+    
 
         # Used to provide context to message to student if enrollment not allowed
         can_enroll = bool(request.user.has_perm(ENROLL_IN_COURSE, course))
@@ -1024,6 +1039,7 @@ def course_about(request, course_id):
             'course_image_urls': overview.image_urls,
             'sidebar_html_enabled': sidebar_html_enabled,
             'allow_anonymous': allow_anonymous,
+            'linked_program': linked_program,
         }
 
         return render_to_response('courseware/course_about.html', context)

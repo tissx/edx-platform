@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Loader for Page 
 const Loader = () => {
@@ -7,7 +7,6 @@ const Loader = () => {
             <div className="spinner-grow text-primary" role="status"></div>
         </div>
     );
-
 };
 
 Loader.propTypes = {}

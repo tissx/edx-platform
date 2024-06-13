@@ -2,12 +2,10 @@
  * Program Courses Page
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-
-
 
 const DegreeCoursesContainer = (program_course) => {
     const option = {
@@ -67,31 +65,25 @@ const DegreeCoursesContainer = (program_course) => {
                                     alt=""/>
                                     </div>
                                     <div className="service-text position-relativ">
-                                        <p className="program-course-title">{course_list['course_name']} </p>
+                                        <p className="program-course-title" title={course_list['course_name']}>{course_list['course_name']}</p>
 
                                         <p className="box-short-descp">Starts: {course_list.course_start_dt}</p>
 
                                         <div className="course_btn">
                                             <span className="more_learn">Course</span>
+                                            {(course_list.linked_program)?(<span className="prog-label" title={course_list.linked_program.slice(0, -1)}>{course_list.linked_program.slice(0, -1)}</span>): ("")}
                                         </div>
 
-                                        {/* <p className="px-2 box-short-descp">{course_list['course_description']} </p>
-                                        <div className="py-4 border-top">
-                                            <a href={course_list['course_link']}  className="readmorebtn orgclr"><span></span></a>
-                                            <a href={course_list['course_link']}  className="iconbg"></a>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                      ))}   
 
                     </OwlCarousel>
 
                 {/* Start No result Found  */}
-                    
-                {program_course.programcourses.length== 0 && (
+                {program_course.programcourses.length=== 0 && (
                     <div className="no-result-found">
                         <div className="no-result-found-msg">Courses are not available.</div>
                     </div>

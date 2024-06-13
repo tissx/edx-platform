@@ -5,7 +5,6 @@
 
 import React from 'react';
 
-
 const SearchResultsProgramsContainer = ({ProgramResults}) => {
 
     var program_dict = {};
@@ -20,8 +19,6 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
         }
     } 
 
-// console.log("Inside loop", program_dict['certificate-programmes'])
-
     return (
     <>
         {Object.keys(program_dict).map((keyName, i) => (
@@ -31,8 +28,8 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
                 <div>
                     <h1 className="text-align-left"><b> {program_dict[keyName][0]['type']}</b></h1>
                 </div>
-                <div className="row certificateprg mx-box" id="iconright">
 
+                <div className="row certificateprg mx-box" id="iconright">
                 {Object.keys(program_dict[keyName]).map((keyNames, j) => (
                     <div className="program_data service-item body-light tissxoff mx-center-program">
                           <a className="mx-prog-link" href={(program_dict[keyName][keyNames]['program_or_degree'] === "program")? ("../program-detail/" + program_dict[keyName][keyNames]['uuid']) :("../degree-detail/" + program_dict[keyName][keyNames]['uuid']) }>
@@ -54,7 +51,6 @@ const SearchResultsProgramsContainer = ({ProgramResults}) => {
                                   <p className="py-1">{program_dict[keyName][keyNames]['mx_no_of_courses']} Courses</p>
                               </div>
                               </div>
-
 
                           </a>
                         </div>

@@ -9,21 +9,18 @@ import { useParams } from "react-router-dom";
 import SearchResultsCourses from './SearchResults/SearchResultsCourses';
 import SearchResultsPrograms from './SearchResults/SearchResultsPrograms';
 import Loader from '../common/loader'; 
-import CenterFilter from './centerFilter/centerFilter';
+import SchoolFilter from './SchoolFilter/schoolFilter';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const CenterDetailContainer = ({my_discovery_url}) => {
-  const [centerdetail, setcenterdetail] = useState([]);
-  const [centerLoader, setcenterLoader] = useState();
+const SchoolDeatilContainer = ({my_discovery_url}) => {
+  const [schooldetail, setschooldetail] = useState([]);
+  const [schoolLoader, setschoolLoader] = useState();
   const [fiterDetail, setfiterDetail] = useState([]);
   const [filterLoader, setfilterLoader] = useState();
   const [resultLoader, setresultLoader] = useState();
   const [CourseResults, setCourseResults] = useState([]);
   const [ProgramResults, setProgramResults] = useState([]);
-  // const [FacultyResults, setFacultyResults] = useState([]);
   const { slug } = useParams();
-
-
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -35,22 +32,21 @@ const CenterDetailContainer = ({my_discovery_url}) => {
     const course_recog = query.get('course_recognition') || ""
     const course_state = query.get('course_state') || ""
 
-
     //start Fetch center detail from discovery
-    fetch(`${my_discovery_url}/api/v1/get-center-from-slug/?slug=${slug}`)
+    fetch(`${my_discovery_url}/api/v1/get-school-from-slug/?slug=${slug}`)
     .then((res) => {
         return res.json();
     })
     .then((data) => {
         // console.log("center detail",data);
-        setcenterdetail(data);
-        setcenterLoader(true)
+        setschooldetail(data);
+        setschoolLoader(true)
     });
     //End Fetch center detail from discovery
 
 
     //start Fetch filter detail from discovery
-    fetch(`${my_discovery_url}/api/v1/center-detail/search-filter/?center=${slug}&program=${program}&language=${language}&organization=${organization}&mode=${mode}&subject=${subject}&course_recog=${course_recog}&course_state=${course_state}`)
+    fetch(`${my_discovery_url}/api/v1/school-detail/search-filter/?school=${slug}&program=${program}&language=${language}&organization=${organization}&mode=${mode}&subject=${subject}&course_recog=${course_recog}&course_state=${course_state}`)
     .then((res) => {
         return res.json();
     })
@@ -58,7 +54,6 @@ const CenterDetailContainer = ({my_discovery_url}) => {
         setfiterDetail(data);
         setfilterLoader(true)
         setresultLoader()
-
         var q_program = ""
         var q_language= ""
         var q_organization = ""
@@ -66,12 +61,11 @@ const CenterDetailContainer = ({my_discovery_url}) => {
         var q_subject = ""
         var q_course_recog = ""
         var q_course_state = ""
-        var q_center = slug
+        var q_school = slug
 
         if((data.selected_program["program_uuid"])) {
           q_program = data.selected_program["program_uuid"]
         }
-
 
         if((data.selected_organization['organization_key_lower'])) {
           q_organization = data.selected_organization['organization_key_lower']
@@ -98,7 +92,7 @@ const CenterDetailContainer = ({my_discovery_url}) => {
         }
         
         // Fetch results based on selected filter 
-        getSearchResult(q_center, q_program, q_language, q_organization, q_mode, q_subject, q_course_recog, q_course_state)
+        getSearchResult(q_school, q_program, q_language, q_organization, q_mode, q_subject, q_course_recog, q_course_state)
 
     });
       // End Fetch filter detail from discovery
@@ -107,10 +101,10 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
 
   // Start fetch search results 
-  const getSearchResult = (center, program, language, organization, mode, subject, course_recog, course_state) => {
+  const getSearchResult = (school, program, language, organization, mode, subject, course_recog, course_state) => {
 
     // start Fetch results for courses 
-    fetch(`${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=course&course_center=${center}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&course_mode=${mode}&subject_uuids=${subject}&course_recognition=${course_recog}&course_state=${course_state}`)
+    fetch(`${my_discovery_url}/api/v1/lms-search/get-school-search/?content_type=course&course_school=${school}&course_program_uuid=${program}&course_language=${language}&mx_organization=${organization}&course_mode=${mode}&subject_uuids=${subject}&course_recognition=${course_recog}&course_state=${course_state}`)
     .then((res) => {
         return res.json();
     })
@@ -123,29 +117,17 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
 
     // start Fetch results for program 
-    fetch(`${my_discovery_url}/api/v1/lms-search/get-center-search/?content_type=program&program_center=${center}&program_uuid=${program}&program_language=${language}&mx_program_organization=${organization}&program_mode=${mode}&subject_uuids=${subject}&program_course_recog=${course_recog}&program_course_state=${course_state}`)
+    fetch(`${my_discovery_url}/api/v1/lms-search/get-school-search/?content_type=program&program_school=${school}&program_uuid=${program}&program_language=${language}&mx_program_organization=${organization}&program_mode=${mode}&subject_uuids=${subject}&program_course_recog=${course_recog}&program_course_state=${course_state}`)
     .then((res) => {
         return res.json();
     })
     .then((data) => {
       setProgramResults(data);
-      setresultLoader(true)
+        setresultLoader(true)
 
     });
     // End Fetch results for program 
 
-
-    // start Fetch results for Faculty 
-    // fetch(`${my_discovery_url}/api/v1/lms-search/get-center-people/?mx_center=${center}&mx_program=${program}&mx_instructor_lang=${language}&mx_instructor_org=${organization}&mx_mode=${mode}`)
-    // .then((res) => {
-    //     return res.json();
-    // })
-    // .then((data) => {
-    //   setFacultyResults(data);
-    //   setresultLoader(true)
-
-    // });
-    // End Fetch results for program 
 
   };
   // End fetch search results 
@@ -160,11 +142,10 @@ const CenterDetailContainer = ({my_discovery_url}) => {
 
   // End Show search results onChange Dropdown 
 
-
     return (
         <>
-        {!(centerLoader) && !(filterLoader) && <Loader/>}
-        {!R.isEmpty(centerdetail) && centerdetail.length !== 0 && !R.isEmpty(fiterDetail) && fiterDetail.length !== 0 && <CenterFilter centerInfo={centerdetail.center_info}  FiterDetail={fiterDetail} getSearchData={getSearchData} />} 
+        {!(schoolLoader) && !(filterLoader) && <Loader/>}
+        {!R.isEmpty(schooldetail) && schooldetail.length !== 0 && !R.isEmpty(fiterDetail) && fiterDetail.length !== 0 && <SchoolFilter schoolInfo={schooldetail.school_info}  FiterDetail={fiterDetail} getSearchData={getSearchData} />} 
         {!(resultLoader) && <CircularProgress className="mx-loader"/>}
         {!R.isEmpty(CourseResults) && CourseResults.length !== 0 &&<SearchResultsCourses CourseResults={CourseResults} />}
         {!R.isEmpty(ProgramResults) && ProgramResults.length !== 0 && <SearchResultsPrograms ProgramResults={ProgramResults} />} 
@@ -172,6 +153,6 @@ const CenterDetailContainer = ({my_discovery_url}) => {
     );
 };
 
-CenterDetailContainer.propTypes = {}
+SchoolDeatilContainer.propTypes = {}
 
-export default CenterDetailContainer
+export default SchoolDeatilContainer
