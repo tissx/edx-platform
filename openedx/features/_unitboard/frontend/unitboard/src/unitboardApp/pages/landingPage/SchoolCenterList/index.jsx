@@ -4,7 +4,7 @@
 
 
 const SchoolCenterListContainer = ({schoolcenterList}) => {
-  
+  console.log("center detail", schoolcenterList)
     return (
 
         <section className="learn-school">
@@ -23,7 +23,7 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                                 <div className="service-item body-light tissxoff">
                                     <div className="img_area">
                                         <img className="img-fluid sch_card" 
-                                        src={center.image?center.image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
+                                        src={center.center_image?center.center_image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
                                         onError={(e) => {
                                             e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                         }}
@@ -50,7 +50,7 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                             <div className="service-item body-light tissxoff">
                                 <div className="img_area">
                                     <img className="img-fluid sch_card" 
-                                    src={school.image?school.image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
+                                    src={school.school_image?school.school_image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
                                     onError={(e) => {
                                         e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                     }} alt=""/>
