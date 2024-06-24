@@ -29,7 +29,7 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                                         }}
                                         alt=""/>
                                     </div>
-                                    <p className="title p-3">{center.center_name}</p>
+                                    <p className="title p-3" title={center.center_name}>{center.center_name}</p>
                                     <span className="school-center-label">Independent Centre</span>  
                                     {/* <div className="service-text position-relativ">
                                         <p className="text-school">{center.center_name}
@@ -55,7 +55,7 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                                         e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                     }} alt=""/>
                                 </div>
-                                <p className="title p-3">{school.school_name}</p>
+                                <p className="title p-3" title={school.school_name}>{school.school_name}</p>
                                 <span className="school-center-label">School</span>  
                             </div>
                         </a>
