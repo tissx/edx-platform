@@ -4,7 +4,7 @@
 
 
 const SchoolCenterListContainer = ({schoolcenterList}) => {
-  
+  console.log("center detail", schoolcenterList)
     return (
 
         <section className="learn-school">
@@ -23,13 +23,13 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                                 <div className="service-item body-light tissxoff">
                                     <div className="img_area">
                                         <img className="img-fluid sch_card" 
-                                        src={center.image?center.image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
+                                        src={center.center_image?center.center_image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
                                         onError={(e) => {
                                             e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                         }}
                                         alt=""/>
                                     </div>
-                                    <p className="title p-3">{center.center_name}</p>
+                                    <p className="title p-3" title={center.center_name}>{center.center_name}</p>
                                     <span className="school-center-label">Independent Centre</span>  
                                     {/* <div className="service-text position-relativ">
                                         <p className="text-school">{center.center_name}
@@ -50,12 +50,12 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                             <div className="service-item body-light tissxoff">
                                 <div className="img_area">
                                     <img className="img-fluid sch_card" 
-                                    src={school.image?school.image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
+                                    src={school.school_image?school.school_image: '../static/tissx-theme/images/dummy/dummy_course1.png'}
                                     onError={(e) => {
                                         e.target.src ='../static/tissx-theme/images/dummy/dummy_course1.png' 
                                     }} alt=""/>
                                 </div>
-                                <p className="title p-3">{school.school_name}</p>
+                                <p className="title p-3" title={school.school_name}>{school.school_name}</p>
                                 <span className="school-center-label">School</span>  
                             </div>
                         </a>

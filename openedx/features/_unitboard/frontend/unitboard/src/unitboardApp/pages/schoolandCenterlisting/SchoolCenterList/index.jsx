@@ -22,7 +22,7 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                                             }}
                                             alt=""/>
                                         </div>
-                                        <p className="title p-3">{center['center_name']}</p>
+                                        <p className="title p-3" title={center['center_name']}>{center['center_name']}</p>
                                         <span className="school-center-label">Independent Centre</span>  
                                     </div>
                                 </a>
@@ -42,7 +42,7 @@ const SchoolCenterListContainer = ({schoolcenterList}) => {
                                         }}
                                     alt=""/>
                                 </div>
-                                <p className="title p-3">{school['school_name']}</p>
+                                <p className="title p-3" title={school['school_name']}>{school['school_name']}</p>
                                 <span className="school-center-label">School</span>  
                             </div>
                         </a>
