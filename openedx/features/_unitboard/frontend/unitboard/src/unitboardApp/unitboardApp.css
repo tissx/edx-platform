@@ -1,0 +1,22 @@
+
+.schoolAddr {
+    width: 300px;
+    
+}
+.schoolAddr::after {
+    content: "School Address ▶️";
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.centerAddr {
+    width: 300px;
+    
+}
+.centerAddr::after {
+    content: "Center Address ▶️";
+    align-items: center;
+    cursor: pointer;
+    
+}

@@ -162,7 +162,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       setselectedSubject('')
       setselectedCourseRecog('')
       setselectedCourseState('')
-
+      
       // If subject is already showing as selected text, then remove the selected text.
       if($("#show_subject_as_text").length > 0) {
         document.getElementById("show_subject_as_text").remove();
@@ -174,7 +174,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       }
 
       // If subject is already showing as selected text, then remove the selected text.
-      if($("#show_course_state_as_text").length > 0) {
+      if($("#show_course_recog_as_text").length > 0) {
         document.getElementById("show_course_state_as_text").remove();
       }
 
@@ -198,9 +198,10 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       setofferingTypeList(data);
      });
      //End Fetch Offering Type List from discovery
-   
+      
     }
      setselectedProgram('')
+    
      // If OfferingType is already showing as selected text, then remove the selected text.
      if($("#show_program_as_text").length > 0) {
       document.getElementById("show_program_as_text").remove();
@@ -213,6 +214,34 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
       let learning_type_name =  $("#learning_type option:selected").attr("learning-type-name");
       showSelectedFilterText('learning_type', learning_type_name, 'show_learningtype_as_text')
       onDropdownChange()
+
+      if(learning_type == "all") {
+        document.getElementById("courseRecognition").removeAttribute('hidden');
+        document.getElementById("subjct").removeAttribute('hidden');
+        document.getElementById("courseState").removeAttribute('hidden');
+        document.getElementById("prg_deg").removeAttribute('hidden');
+     }
+     if (learning_type == "program" || learning_type == "degree") {
+      if(document.getElementById("courseRecognition").getAttribute('hidden') != 'true') {
+        document.getElementById("courseRecognition").setAttribute('hidden','true');
+        }
+       if(document.getElementById("subjct").getAttribute('hidden') != 'true') {
+        document.getElementById("subjct").setAttribute('hidden','true');
+       }
+       if(document.getElementById("courseState").getAttribute('hidden') != 'true') {
+        document.getElementById("courseState").setAttribute('hidden','true');
+       }
+       document.getElementById("prg_deg").removeAttribute('hidden');
+     }
+
+     if(learning_type == "course") {
+        document.getElementById("courseRecognition").removeAttribute('hidden');
+        document.getElementById("subjct").removeAttribute('hidden');
+        document.getElementById("courseState").removeAttribute('hidden');
+        if(document.getElementById("prg_deg").getAttribute('hidden') != 'true') {
+          document.getElementById("prg_deg").setAttribute('hidden','true');
+         }
+      }
 
   }; 
 
@@ -633,7 +662,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
             <h1 className="theading-title">Filter</h1> 
           <div className="row pb-3" id="search-filter-wrap">
             
-              <div className="custom-select ">
+              <div className="custom-select" id="learningType">
                   <select className={(selectedLearningType !== "all")? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="learning_type" data-bs-toggle="dropdown"
                   value={selectedLearningType}
                   onChange={(e) => onLearningTypeChange(e)}
@@ -646,7 +675,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                   </select>
               </div>
 
-              <div className={(selectedLearningType === "course")? "custom-select disable-dropdown": "custom-select"}>
+              <div className={(selectedLearningType === "course")? "custom-select disable-dropdown": "custom-select"} id="prg_deg">
                     <select className={Boolean(selectedProgram)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="program_group" data-bs-toggle="dropdown"
                     value={selectedProgram}
                     onChange={(e) => onProgramChange(e)}
@@ -658,7 +687,36 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                     </select>
                 </div>
 
-                <div className="custom-select ">
+                {/* show Course by recoginition only when offering is course or no offering selected  */}
+                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } id="courseRecognition">
+                {/* <div className="custom-select "> */}
+                    <select className={Boolean(selectedCourseRecog)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="course_recognition" data-bs-toggle="dropdown"
+                    value={selectedCourseRecog}
+                    onChange={(e) => onCourseRecogChange(e)}
+                    >
+                      <option className="ColorLight" value="">Course Recognition</option>
+                      {FiterDetail.recognition_list.map((recognition) => (
+                        <option value={recognition['recognition_slug']} recognition-name={recognition['recognition_name']} >{recognition['recognition_name']}</option>
+                      ))}
+                    </select>
+                </div>
+                
+                {/* show Course state only when offering is course or no offering selected  */}
+                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } id="courseState" >
+                {/* <div className="custom-select "> */}
+                    <select className={Boolean(selectedCourseState)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="course_state" data-bs-toggle="dropdown"
+                    value={selectedCourseState}
+                    onChange={(e) => onCourseStateChange(e)}
+                    >
+                      <option className="ColorLight" value="">Courses Status</option>
+                        <option value="upcoming" course-state-name="Upcoming Courses">Upcoming Courses</option>
+                        <option value="current" course-state-name="Current Courses">Current Courses</option>
+                        <option value="archived" course-state-name="Archived Courses">Archived Courses</option>
+                        <option value="oer" course-state-name="OERs">OERs</option>
+                    </select>
+                </div>
+                
+                <div className="custom-select" id="school_center">
                     <select className={(Boolean(selectSchool.length) || Boolean(selectedCenter.length))? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  data-bs-toggle="dropdown"
                     id="school-center"
                     // value={selectSchool}
@@ -678,38 +736,8 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                     </select>
                 </div>
 
-                {/* show Course by recoginition only when offering is course or no offering selected  */}
-                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } >
-                {/* <div className="custom-select "> */}
-                    <select className={Boolean(selectedCourseRecog)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="course_recognition" data-bs-toggle="dropdown"
-                    value={selectedCourseRecog}
-                    onChange={(e) => onCourseRecogChange(e)}
-                    >
-                      <option className="ColorLight" value="">Course by Recognition</option>
-                      {FiterDetail.recognition_list.map((recognition) => (
-                        <option value={recognition['recognition_slug']} recognition-name={recognition['recognition_name']} >{recognition['recognition_name']}</option>
-                      ))}
-                    </select>
-                </div>
-                
-                {/* show Course state only when offering is course or no offering selected  */}
-                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } >
-                {/* <div className="custom-select "> */}
-                    <select className={Boolean(selectedCourseState)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="course_state" data-bs-toggle="dropdown"
-                    value={selectedCourseState}
-                    onChange={(e) => onCourseStateChange(e)}
-                    >
-                      <option className="ColorLight" value="">Courses State</option>
-                        <option value="upcoming" course-state-name="Upcoming Courses">Upcoming Courses</option>
-                        <option value="current" course-state-name="Current Courses">Current Courses</option>
-                        <option value="archived" course-state-name="Archived Courses">Archived Courses</option>
-                        <option value="oer" course-state-name="OERs">OERs</option>
-                    </select>
-                </div>
-
-
                 {/* show subject only when offering is course or no offering selected  */}
-                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } >
+                <div className={(selectedLearningType !== "all" && selectedLearningType !== "course")? "custom-select disable-dropdown": "custom-select " } id="subjct">
 
                     <select className={Boolean(selectedSubject)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"} id="subject" data-bs-toggle="dropdown"
                     value={selectedSubject}
@@ -722,7 +750,7 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
                     </select>
                 </div>
 
-                <div className="custom-select">
+                <div className="custom-select" id="lang">
                     <select className={Boolean(selectedLanguage)? "dropdown-toggle SelectOne": "dropdown-toggle SelectOne disable-option"}  id="language" data-bs-toggle="dropdown"
                     value={selectedLanguage}
                     onChange={(e) => onLanguageChange(e)}

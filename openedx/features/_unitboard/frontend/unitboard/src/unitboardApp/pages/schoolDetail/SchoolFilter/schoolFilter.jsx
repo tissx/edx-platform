@@ -6,6 +6,8 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
 import * as R from "ramda";
+import Collapsible from 'react-collapsible';
+
 
 
 const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
@@ -16,7 +18,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
     const [selectedSubject, setselectedSubject] = useState(FiterDetail.selected_subject['subject_uuid']);
     const [selectedCourseRecog, setselectedCourseRecog] = useState(FiterDetail.selected_course_recog);
     const [selectedCourseState, setselectedCourseState] = useState(FiterDetail.selected_course_state);
-
+    const [showMore, setShowMore] = useState(false);
     const mx_course_state = {
         "": "Courses State",
         "upcoming": "Upcoming Courses",
@@ -388,18 +390,20 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
             <div className="container">
                 <div className="row" id="cbox-left">
                     <div className="col-md-12 col-sm-12 bg-light">
-                        <h1 className="theading-title">School Offering</h1> 
-                        <p className="para">{schoolInfo['short_description']}</p>
+                        <h3 className="theading-title">School Offering</h3> 
+                        <p className="para"><span>{showMore ? schoolInfo['short_description'] : `${schoolInfo['short_description'].substring(0, 300)}`}</span>{' '}
+                        <a href='#'  onClick={() => setShowMore(!showMore)}>{showMore ? "Show less" : "Show more"}</a></p>
                     </div>
                 </div>
 
                 {schoolInfo['address']?(
                      <div className="row address-wrap">
-                     <div className="col-md-12 col-sm-12 bg-light">
-                         <h2 className="sub-theading-title">School Address</h2> 
-                         <p className="para">{schoolInfo['address']}</p>
-                     </div>
-                 </div>
+                        <div className="col-md-12 col-sm-12 bg-light">
+                            <Collapsible triggerClassName='schoolAddr' triggerWhenOpen={'School Address ▼'}>{''}
+                                <p className="para">{schoolInfo['address']}</p>
+                            </Collapsible>
+                        </div>
+                    </div>
                 ):("")}
                
             </div>
@@ -485,7 +489,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
                     value={selectedCourseRecog}
                     onChange={(e) => onCourseRecogChange(e)}
                     >
-                      <option className="ColorLight" value="">Course by Recognition</option>
+                      <option className="ColorLight" value="">Course Recognition</option>
                       {FiterDetail.recognition_list.map((recognition) => (
                         <option value={recognition['recognition_slug']} recognition-name={recognition['recognition_name']} >{recognition['recognition_name']}</option>
                       ))}
@@ -498,7 +502,7 @@ const SchoolFilterContainer = ({schoolInfo, FiterDetail, getSearchData}) => {
                         value={selectedCourseState}
                         onChange={(e) => onCourseStateChange(e)}
                         >
-                        <option className="ColorLight" value="">Courses State</option>
+                        <option className="ColorLight" value="">Courses Status</option>
                             <option value="upcoming" course-state-name="Upcoming Courses">Upcoming Courses</option>
                             <option value="current" course-state-name="Current Courses">Current Courses</option>
                             <option value="archived" course-state-name="Archived Courses">Archived Courses</option>
