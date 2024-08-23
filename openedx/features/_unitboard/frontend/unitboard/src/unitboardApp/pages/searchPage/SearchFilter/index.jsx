@@ -426,14 +426,47 @@ const SearchFilterContainer = ({my_discovery_url, FiterDetail, getSearchData, Qu
     } 
 
     // If Learning type is already selected 
+    
     if(!R.isEmpty(FiterDetail.select_learning_type) && FiterDetail.select_learning_type !== "all" && FiterDetail.select_learning_type !== "null" ) {
       has_show_selected_text = true
       show_selected_text += '<div class="dropdown fi-border selected-filter-text" id="show_learningtype_as_text">'
                         +'<button class="dropbtn">'+mx_offering[FiterDetail.select_learning_type]
                         +'<span id="clearSelection" selected-filter-name="learning_type" selected-filter-abbr="show_learningtype_as_text" class="pad-left"><i class="fa fa-close pl-3"></i></span></button>'
                         +'</div>';
-    } 
+    }
+    if(!R.isEmpty(FiterDetail.select_learning_type))
+    {
+      if(FiterDetail.select_learning_type == "all") {
+        document.getElementById("courseRecognition").removeAttribute('hidden');
+        document.getElementById("subjct").removeAttribute('hidden');
+        document.getElementById("courseState").removeAttribute('hidden');
+        document.getElementById("prg_deg").removeAttribute('hidden');
+     }
+      if (FiterDetail.select_learning_type == "program" || FiterDetail.select_learning_type == "degree") {
+        if(document.getElementById("courseRecognition").getAttribute('hidden') != 'true') {
+        document.getElementById("courseRecognition").setAttribute('hidden','true');
+        }
+        if(document.getElementById("subjct").getAttribute('hidden') != 'true') {
+        document.getElementById("subjct").setAttribute('hidden','true');
+        }
+        if(document.getElementById("courseState").getAttribute('hidden') != 'true') {
+        document.getElementById("courseState").setAttribute('hidden','true');
+        }
+        document.getElementById("prg_deg").removeAttribute('hidden');
+    }
+  
+    if(FiterDetail.select_learning_type == "course") {
+        document.getElementById("courseRecognition").removeAttribute('hidden');
+        document.getElementById("subjct").removeAttribute('hidden');
+        document.getElementById("courseState").removeAttribute('hidden');
+        if(document.getElementById("prg_deg").getAttribute('hidden') != 'true') {
+          document.getElementById("prg_deg").setAttribute('hidden','true');
+        }
+      }
+    }
+     
 
+    
 
     if(has_show_selected_text) {
         $("#selected-filter").append(show_selected_text);
