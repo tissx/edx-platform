@@ -1,40 +1,31 @@
-# [submodule "mx_programs"]
-# 	path = mx_programs
-# 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_programs.git
-
 
 [submodule "cms/djangoapps/mx_programs"]
 	path = cms/djangoapps/mx_programs
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_programs.git
-	branch = tissx_redwood
+	branch = redwood_release
 
 [submodule "lms/djangoapps/pushnotification"]
 	path = lms/djangoapps/pushnotification
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_discussion_notification.git
-	branch = tissx_redwood
-
-# [submodule "ms/djangoapps/mx_utility"]
-# 	path = ms/djangoapps/mx_utility
-# 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_utility.git
-# 	branch = maple_release
+	branch = redwood_release
 
 [submodule "lms/djangoapps/mx_problem_response"]
 	path = lms/djangoapps/mx_problem_response
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_problem_response.git
-	branch = tissx_redwood
+	branch = redwood_release
 
 [submodule "lms/djangoapps/automatic_email"]
 	path = lms/djangoapps/automatic_email
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/edx_automatic_email.git
-	branch = tissx_redwood
+	branch = redwood_release
 
 [submodule "lms/djangoapps/mx_archive_courses"]
 	path = lms/djangoapps/mx_archive_courses
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_archive_courses.git
-	branch = tissx_redwood
+	branch = redwood_release
 
 [submodule "lms/djangoapps/mx_utility"]
 	path = lms/djangoapps/mx_utility
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_utility.git
-	branch = tissx_redwood
+	branch = redwood_release
 
