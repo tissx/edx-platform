@@ -1058,6 +1058,15 @@ class CourseFields:  # lint-amnesty, pylint: disable=missing-class-docstring
         ),
         scope=Scope.settings
     )
+    # Manprax
+    issue_badges = Boolean(
+        display_name=_("Issue Open Badges"),
+        help=_(
+            "Issue Open Badges badges for this course. Badges are generated when certificates are created."
+        ),
+        scope=Scope.settings,
+        default=True
+    )
 
 
 class CourseBlock(

@@ -51,6 +51,9 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.djangoapps.user_authn.views.login import redirect_to_lms_login
 from openedx.features.enterprise_support.api import enterprise_enabled
 
+# Manprax
+from lms.djangoapps.branding.views import *
+
 RESET_COURSE_DEADLINES_NAME = 'reset_course_deadlines'
 RENDER_XBLOCK_NAME = 'render_xblock'
 RENDER_VIDEO_XBLOCK_NAME = 'render_public_video_xblock'
@@ -209,11 +212,21 @@ urlpatterns = [
     path('api/discounts/', include(('openedx.features.discounts.urls', 'openedx.features.discounts'),
                                    namespace='api_discounts')),
 
+
     # Provide URLs where we can see the rendered error pages without having to force an error.
     path('403', handler403, name='render_403'),
     path('404', handler404, name='render_404'),
     path('429', handler429, name='render_429'),
     path('500', handler500, name='render_500'),
+
+    # Manprax
+    re_path('automatic_email', include('lms.djangoapps.automatic_email.urls')),
+    re_path('archives/?$', courses, name="archive_courses"),
+    re_path('mx_archives/', include('lms.djangoapps.mx_archive_courses.urls')),
+    re_path('advanced_instructor', include('lms.djangoapps.mx_problem_response.urls')),
+    re_path('api/pushnotification/',include(('lms.djangoapps.pushnotification.urls','mx_pushnotification_api'), namespace='mx_pushnotification_api')),
+    re_path('mx_utility/api/',include('lms.djangoapps.mx_utility.views.api_urls')),
+    re_path('courses/{}/mx_instructor/api/'.format(settings.COURSE_ID_PATTERN,),include('lms.djangoapps.mx_utility.views.api_urls')),
 ]
 
 if settings.FEATURES.get('ENABLE_MOBILE_REST_API'):

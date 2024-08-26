@@ -26,6 +26,8 @@ REFUND_ORDER = Signal()
 
 USER_EMAIL_CHANGED = Signal()
 
+# Manprax
+ENROLLMENT_UPDATED_SESSION = Signal()
 
 def emit_course_access_role_added(user, course_id, org_key, role):
     """

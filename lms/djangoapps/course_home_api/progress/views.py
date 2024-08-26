@@ -230,6 +230,9 @@ class ProgressTabView(RetrieveAPIView):
 
         block = modulestore().get_course(course_key)
         grading_policy = block.grading_policy
+        # Manprax
+        grading_policy['GRADE_CUTOFFS']['Pass']= block.minimum_grade_credit
+
         disable_progress_graph = block.disable_progress_graph
         verification_status = IDVerificationService.user_status(student)
         verification_link = None

@@ -809,8 +809,9 @@ class CourseMode(models.Model):
         If there is no mode found, will return the price of DEFAULT_MODE, which is 0
         """
         modes = cls.modes_for_course(course_id)
+        # Manprax
         return min(
-            (mode.min_price for mode in modes if mode.currency.lower() == currency.lower()),
+            (mode.min_price for mode in modes if mode.currency.lower() == currency.lower()) or [0],
             default=0
         )
 

@@ -50,6 +50,11 @@ class QueueConnectionError(Exception):
         super().__init__(message)
 
 
+# Manprax
+def reserve_task(course_id, task_type, task_key, task_input, requester):
+    return _reserve_task(course_id, task_type, task_key, task_input, requester)
+
+
 def _task_is_running(course_id, task_type, task_key):
     """Checks if a particular task is already running"""
     running_tasks = InstructorTask.objects.filter(

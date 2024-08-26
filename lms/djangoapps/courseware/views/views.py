@@ -829,7 +829,11 @@ def course_about(request, course_id):  # pylint: disable=too-many-statements
                 ecommerce_bulk_checkout_link = ecomm_service.get_checkout_page_url(single_paid_mode.bulk_sku)
 
         registration_price, course_price = get_course_prices(course)  # lint-amnesty, pylint: disable=unused-variable
-
+        # Manprax
+        from cms.djangoapps.mx_programs.models import ProgramsCourse
+        program_course = ProgramsCourse.objects.filter(program__fullname__in= settings.PROGRAM_COURSE_PRICE_LABEL_REMOVED,course_id= course_id)
+        if program_course:
+            course_price = None
         # Used to provide context to message to student if enrollment not allowed
         can_enroll = bool(request.user.has_perm(ENROLL_IN_COURSE, course))
         invitation_only = course_is_invitation_only(course)
@@ -1390,9 +1394,15 @@ def is_course_passed(student, course, course_grade=None):
     Returns:
         returns bool value
     """
+    # if course_grade is None:
+    #     course_grade = CourseGradeFactory().read(student, course)
+    # return course_grade.passed
+    # Manprax
+    success_cutoff = course.minimum_grade_credit if course.minimum_grade_credit else None 
     if course_grade is None:
-        course_grade = CourseGradeFactory().read(student, course)
-    return course_grade.passed
+        course_grade = CourseGradeFactory().update(student, course).summary
+    return course_grade['percent'] if success_cutoff and course_grade['percent'] >= success_cutoff else False
+
 
 
 # Grades can potentially be written - if so, let grading manage the transaction.

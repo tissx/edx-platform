@@ -7,5 +7,7 @@ from common.djangoapps.student.signals.signals import (
     ENROLLMENT_TRACK_UPDATED,
     REFUND_ORDER,
     UNENROLL_DONE,
-    USER_EMAIL_CHANGED
+    USER_EMAIL_CHANGED,
+    # Manprax
+    ENROLLMENT_UPDATED_SESSION,
 )

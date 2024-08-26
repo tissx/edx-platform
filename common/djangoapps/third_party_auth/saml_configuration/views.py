@@ -12,7 +12,7 @@ class SAMLConfigurationMixin:
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = SAMLConfigurationSerializer
 
-
+# Manprax
 class SAMLConfigurationViewSet(SAMLConfigurationMixin, viewsets.ReadOnlyModelViewSet):
     """
     A View to handle SAMLConfiguration GETs

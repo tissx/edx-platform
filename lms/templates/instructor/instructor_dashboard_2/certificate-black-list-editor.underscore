@@ -1,0 +1,15 @@
+<h3 class="hd hd-3"><%- gettext("Individual Blacklists") %></h3>
+<p class="under-heading"> <%- gettext("Enter the username or email address of each learner that you want to add as an blacklist.") %></p>
+<div class='certificate-blacklist-inputs'>
+    <div class="">
+        <label for="certificate-blacklist" class="sr"><%- gettext("Student email or username") %></label>
+        <input class="student-username-or-email" id="certificate-blacklist" type="text" placeholder="<%- gettext('Student email or username') %>">
+        
+        <label for="blacklist-notes" class="sr"><%- gettext('Free text notes') %></label>
+        <textarea class="blacklist-notes-field" id="blacklist-notes" rows="10" placeholder="<%- gettext('Free text notes') %>"></textarea>
+    </div>
+    <div>
+        <button type="button" class="btn-blue" id="add-blacklist"><%- gettext("Add to Blacklist List") %></button>
+    </div>
+    <div class='message hidden'></div>
+</div>

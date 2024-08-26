@@ -8,7 +8,8 @@
         'use strict';
 
         return Backbone.Model.extend({
-            url: '/search/course_discovery/',
+            // Manprax
+            url: '/mx_archives/course_discovery/',
             jqhxr: null,
 
             defaults: {

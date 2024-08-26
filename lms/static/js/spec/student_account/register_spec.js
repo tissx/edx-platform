@@ -166,7 +166,7 @@
                                 {value: 'f', name: 'Female'},
                                 {value: 'o', name: 'Other'}
                             ],
-                            required: false,
+                            required: true, //Manprax
                             exposed: false,
                             instructions: 'Select your gender.',
                             restrictions: {}

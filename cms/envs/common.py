@@ -293,10 +293,11 @@ FEATURES = {
     'LICENSING': False,
 
     # Enable the courseware search functionality
-    'ENABLE_COURSEWARE_INDEX': False,
+    # Manprax
+    'ENABLE_COURSEWARE_INDEX': True,
 
     # Enable content libraries (modulestore) search functionality
-    'ENABLE_LIBRARY_INDEX': False,
+    'ENABLE_LIBRARY_INDEX': True,
 
     # .. toggle_name: FEATURES['ALLOW_COURSE_RERUNS']
     # .. toggle_implementation: DjangoSetting
@@ -309,8 +310,9 @@ FEATURES = {
     # .. toggle_tickets: https://github.com/openedx/edx-platform/pull/6965
     'ALLOW_COURSE_RERUNS': True,
 
+    # Manprax
     # Certificates Web/HTML Views
-    'CERTIFICATES_HTML_VIEW': False,
+    'CERTIFICATES_HTML_VIEW': True,
 
     # Teams feature
     'ENABLE_TEAMS': True,
@@ -1885,6 +1887,8 @@ INSTALLED_APPS = [
     "openedx_learning.core.components",
     "openedx_learning.core.contents",
     "openedx_learning.core.publishing",
+    # Manprax
+    'cms.djangoapps.mx_programs',
 ]
 
 
@@ -2166,7 +2170,8 @@ FILES_AND_UPLOAD_TYPE_FILTERS = {
 }
 
 # Default to no Search Engine
-SEARCH_ENGINE = None
+# Manprax
+SEARCH_ENGINE = "search.elastic.ElasticSearchEngine"
 ELASTIC_FIELD_MAPPINGS = {
     "start_date": {
         "type": "date"

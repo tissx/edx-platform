@@ -1173,41 +1173,36 @@
       padding: $baseline/2;
       margin-bottom: 0;
 
-      .related-programs-preface  {
+      .related-programs-preface {
         @include float(left);
 
         margin: 0 $baseline/2;
         font-weight: bold;
       }
 
-      .related-program-container {
+      ul {
         display: inline;
         padding: 0;
         margin: 0;
       }
 
-      .related-program-element {
-        &.important-element {
-          @include float(left);
-
-          display: inline;
-          padding: 0 0.5em !important;
-
-          .category-icon {
-            @include float(left);
-            @include margin-right($baseline/4);
-
-            margin-top: ($baseline/10);
-            background-color: transparent;
-            background-size: 100%;
-            width: ($baseline*0.7);
-            height: ($baseline*0.7);
-          }
-        }
-      }
-
       li {
+        @include float(left);
+
+        display: inline;
+        padding: 0 0.5em;
         border-right: 1px solid;
+
+        .category-icon {
+          @include float(left);
+          @include margin-right($baseline/4);
+
+          margin-top: ($baseline/10);
+          background-color: transparent;
+          background-size: 100%;
+          width: ($baseline*0.7);
+          height: ($baseline*0.7);
+        }
       }
 
       // Remove separator from last list item.
@@ -1643,26 +1638,10 @@ a.fade-cover {
 #unenroll-modal {
   margin-top: -60px;
 
-  @media (max-width: 640px) {
-    width: 82% !important;
-    margin-left: -41% !important;
-    box-sizing: border-box;
-  }
-
   .modal-form-error {
     background: tint($red, 95%);
     margin-left: $baseline;
     margin-right: $baseline;
-  }
-}
-
-#email-settings-modal {
-  margin-top: -60px;
-
-  @media (max-width: 640px) {
-    width: 82% !important;
-    margin-left: -41% !important;
-    box-sizing: border-box;
   }
 }
 

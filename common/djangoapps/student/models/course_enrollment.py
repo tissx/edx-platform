@@ -34,7 +34,8 @@ from requests.exceptions import HTTPError, RequestException
 from simple_history.models import HistoricalRecords
 
 from common.djangoapps.course_modes.models import CourseMode, get_cosmetic_verified_display_price
-from common.djangoapps.student.signals import ENROLL_STATUS_CHANGE, ENROLLMENT_TRACK_UPDATED, UNENROLL_DONE
+# Manprax
+from common.djangoapps.student.signals import ENROLL_STATUS_CHANGE, ENROLLMENT_TRACK_UPDATED, UNENROLL_DONE, ENROLLMENT_UPDATED_SESSION
 from common.djangoapps.track import contexts, segment
 from common.djangoapps.util.query import use_read_replica_if_available
 from lms.djangoapps.certificates.data import CertificateStatuses
@@ -612,8 +613,9 @@ class CourseEnrollment(models.Model):
                     self.course_id,
                 )
 
+    # Manprax
     @classmethod
-    def enroll(cls, user, course_key, mode=None, check_access=False, can_upgrade=False, enterprise_uuid=None):
+    def enroll(cls, user, course_key, mode=None, check_access=False, can_upgrade=False, enterprise_uuid=None,request=None):
         """
         Enroll a user in a course. This saves immediately.
 
@@ -729,6 +731,12 @@ class CourseEnrollment(models.Model):
                 is_active=enrollment.is_active,
                 creation_date=enrollment.created,
             )
+        )
+        # Manprax
+        ENROLLMENT_UPDATED_SESSION.send_robust(
+            sender=None,
+            request=request,
+            enrollment=enrollment,
         )
 
         return enrollment

@@ -66,6 +66,10 @@
                     page_index: pageIndex
                 };
                 _.extend(data, this.terms);
+                // Manprax
+                if (window.location.href.includes("archives")) {
+                    data['return_archives']=true
+                }
                 return data;
             },
 

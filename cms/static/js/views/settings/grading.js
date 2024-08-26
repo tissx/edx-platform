@@ -165,7 +165,9 @@ function(ValidatingView, _, $, ui, GraderView, StringUtils, HtmlUtils) {
 
         // A does not have a drag bar (cannot change its upper limit)
         // Need to insert new bars in right place.
-        GRADES: ['A', 'B', 'C', 'D'], // defaults for new grade designators
+        // GRADES: ['A', 'B', 'C', 'D'], // defaults for new grade designators
+        // Manprax
+        GRADES: ["O", "A+", "A-", "B+", "B-", "C+", "C-", "D", "E"],
         descendingCutoffs: [], // array of { designation : , cutoff : }
         gradeBarWidth: null, // cache of value since it won't change (more certain)
 
@@ -319,7 +321,9 @@ function(ValidatingView, _, $, ui, GraderView, StringUtils, HtmlUtils) {
         addNewGrade: function(e) {
             e.preventDefault();
             var gradeLength = this.descendingCutoffs.length; // cutoffs doesn't include fail/f so this is only the passing grades
-            if (gradeLength > this.GRADES.length - 1) {
+            // if (gradeLength > this.GRADES.length - 1) {
+            // Manprax 
+            if (gradeLength > 8) {
             // TODO shouldn't we disable the button
                 return;
             }

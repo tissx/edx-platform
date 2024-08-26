@@ -207,6 +207,8 @@ FEATURES['ENABLE_COURSE_DISCOVERY'] = False
 # Setting for overriding default filtering facets for Course discovery
 # COURSE_DISCOVERY_FILTERS = ["org", "language", "modes"]
 FEATURES['COURSES_ARE_BROWSEABLE'] = True
+# Manprax
+FEATURES['LMS_SESSION_ID'] = 'lms_sessionid'
 HOMEPAGE_COURSE_MAX = 9
 
 # Software secure fake page feature flag

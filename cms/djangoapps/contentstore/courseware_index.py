@@ -19,6 +19,9 @@ from xmodule.annotator_mixin import html_to_text  # lint-amnesty, pylint: disabl
 from xmodule.library_tools import normalize_key_for_search  # lint-amnesty, pylint: disable=wrong-import-order
 from xmodule.modulestore import ModuleStoreEnum  # lint-amnesty, pylint: disable=wrong-import-order
 
+# Manprax
+from cms.djangoapps.mx_programs.views import getProgramsFromCourse
+
 # REINDEX_AGE is the default amount of time that we look back for changes
 # that might have happened. If we are provided with a time at which the
 # indexing is triggered, then we know it is safe to only index items
@@ -611,6 +614,8 @@ class CourseAboutSearchIndexer(CoursewareSearchIndexer):
             'course': course_id,
             'content': {},
             'image_url': course_image_url(course),
+            # Manprax
+            'programs':list(map(str,getProgramsFromCourse(course.id)))
         }
 
         # load data for all of the 'about' blocks for this course into a dictionary
