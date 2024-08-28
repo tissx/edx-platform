@@ -30,6 +30,9 @@ def should_redirect_to_authn_microfrontend():
     request = get_current_request()
     if request and request.GET.get('skip_authn_mfe'):
         return False
+    # Manprax
+    return False
+    
     return configuration_helpers.get_value(
         'ENABLE_AUTHN_MICROFRONTEND', settings.FEATURES.get('ENABLE_AUTHN_MICROFRONTEND')
     )

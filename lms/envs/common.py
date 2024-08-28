@@ -3404,7 +3404,7 @@ INSTALLED_APPS = [
     # Manprax 
     'cms.djangoapps.mx_programs',
     'lms.djangoapps.mx_utility',
-    'lms.djangoapps.automatic_email',
+    # 'lms.djangoapps.automatic_email',
     'lms.djangoapps.mx_archive_courses',
     'lms.djangoapps.mx_problem_response',
     'lms.djangoapps.pushnotification',
@@ -3724,6 +3724,7 @@ LOGIN_REDIRECT_WHITELIST = []
 #   When the terms of service are not visible and agreement to the honor code is required (the default), the signup page
 #   includes a paragraph that links to the honor code page (defined my MKTG_URLS["HONOR"]). This page might not be
 #   available for all Open edX platforms. In such cases, the "honor_code" registration field should be "hidden".
+# Manprax
 REGISTRATION_EXTRA_FIELDS = {
     'confirm_email': 'hidden',
     'level_of_education': 'optional',
@@ -3748,11 +3749,11 @@ REGISTRATION_FIELD_ORDER = [
     "city",
     "state",
     "country",
+    "gender",
     "year_of_birth",
     "level_of_education",
-    "gender",
     "specialty",
-    "profession",
+    "profession"
     "company",
     "title",
     "mailing_address",
@@ -3760,6 +3761,7 @@ REGISTRATION_FIELD_ORDER = [
     "honor_code",
     "terms_of_service",
 ]
+
 
 # Optional setting to restrict registration / account creation to only emails
 # that match a regex in this list. Set to None to allow any email (default).
