@@ -70,7 +70,6 @@ class BadgrBackend(BadgeBackend):
         else:
             return f"{settings.BADGR_BASE_URL}/v2/badgeclasses/{slug}"
         # return f"{settings.BADGR_BASE_URL}/v2/badgeclasses/{slug}"
-        
 
     def _assertion_url(self, slug):
         """
@@ -122,14 +121,14 @@ class BadgrBackend(BadgeBackend):
                 "Could not determine content-type of image! Make sure it is a properly named .png file. "
                 "Filename was: {}".format(image.name)
             )
-        with image.storage.open(image.name,'rb') as image_file:
+        with image.storage.open(image.name, 'rb') as image_file:
             files = {'image': (image.name, image_file, content_type)}
             data = {
                 'name': badge_class.display_name,
                 'criteriaUrl': badge_class.criteria,
                 'description': badge_class.description,
                 'criteriaNarrative': badge_class.description,
-                
+
             }
 
             result = requests.post(
@@ -172,8 +171,8 @@ class BadgrBackend(BadgeBackend):
         """
         Register an assertion with the Badgr server for a particular user for a specific class.
         """
-        from lms.djangoapps.mx_utility.utils import get_achievement_details
-        achievment_details = get_achievement_details(badge_class,user)
+        from mx_utility.utils import get_achievement_details
+        achievment_details = get_achievement_details(badge_class, user)
         data = {
             "recipient": {
                 "identity": user.email,

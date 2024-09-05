@@ -58,12 +58,12 @@ from openedx.core.lib.courses import get_course_by_id
 from xmodule.data import CertificatesDisplayBehaviors  # lint-amnesty, pylint: disable=wrong-import-order
 
 # Manprax
-from lms.djangoapps.mx_utility.certficate_context import(
- _update_user_grade_contextV1,
-_update_user_grade_contextV2,
-_update_course_credit_context,
-_update_context_with_course_dates,
-_update_context_with_programmeV2
+from mx_utility.certficate_context import (
+    _update_user_grade_contextV1,
+    _update_user_grade_contextV2,
+    _update_course_credit_context,
+    _update_context_with_course_dates,
+    _update_context_with_programmeV2
 )
 from common.djangoapps.student.models import CourseEnrollment
 
@@ -579,19 +579,19 @@ def render_html_view(request, course_id, certificate=None):  # pylint: disable=t
 
         context['certificate_data'] = active_configuration
         # Manprax
-        context['enrollment_id']= ''
+        context['enrollment_id'] = ''
         if not preview_mode:
-            context['enrollment_id'] = CourseEnrollment.objects.get(user=user_id,course_id=CourseKey.from_string(course_id)).id
+            context['enrollment_id'] = CourseEnrollment.objects.get(user=user_id, course_id=CourseKey.from_string(course_id)).id
 
         # Append/Override the existing view context values with any mode-specific ConfigurationModel values
         context.update(configuration.get(user_certificate.mode, {}))
 
         # Manprax
         # Append context data according Tissx  new certificate design
-        _update_user_grade_contextV2(context, course, user, user_certificate,preview_mode)
+        _update_user_grade_contextV2(context, course, user, user_certificate, preview_mode)
         _update_course_credit_context(context, course_key)
-        _update_context_with_course_dates(context,course)
-        _update_context_with_programmeV2(context,course_key)
+        _update_context_with_course_dates(context, course)
+        _update_context_with_programmeV2(context, course_key)
 
         # Append organization info
         _update_organization_context(context, course)

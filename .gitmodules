@@ -24,8 +24,3 @@
 	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_archive_courses.git
 	branch = redwood_release
 
-[submodule "lms/djangoapps/mx_utility"]
-	path = lms/djangoapps/mx_utility
-	url = https://om_kumar:glpat-xxRYu5Kda6_FRc4c9A4E@gitlab.com/satorg/mx_utility.git
-	branch = redwood_release
-

@@ -66,7 +66,7 @@ from .. import permissions
 from ..toggles import data_download_v2_is_enabled
 from .tools import get_units_with_due_date, title_or_url
 # Manprax
-from lms.djangoapps.mx_utility.models import CertificateBlacklist
+from mx_utility.models import CertificateBlacklist
 
 log = logging.getLogger(__name__)
 
@@ -246,7 +246,7 @@ def instructor_dashboard_2(request, course_id):  # lint-amnesty, pylint: disable
     certificate_invalidations = CertificateInvalidation.get_certificate_invalidations(course_key)
     # Manprax
     certificate_black_list = CertificateBlacklist.get_certificate_black_list(course_key)
-    generate_nonblacklists_certificate_url=reverse(  # pylint: disable=invalid-name
+    generate_nonblacklists_certificate_url = reverse(  # pylint: disable=invalid-name
         'generate_nonblacklists_certificate',
         kwargs={'course_id': str(course_key), 'generate_for': ''}
     )
@@ -273,10 +273,10 @@ def instructor_dashboard_2(request, course_id):  # lint-amnesty, pylint: disable
         'certificate_invalidation_view_url': certificate_invalidation_view_url,
         'xqa_server': settings.FEATURES.get('XQA_SERVER', "http://your_xqa_server.com"),
         # Manprax
-        'certificate_black_list':certificate_black_list,
-        'generate_nonblacklists_certificate_url':generate_nonblacklists_certificate_url,
-        'generate_bulk_certificate_blacklists_url':generate_bulk_certificate_blacklists_url,
-        'certificate_blacklist_view_url':certificate_blacklist_view_url,
+        'certificate_black_list': certificate_black_list,
+        'generate_nonblacklists_certificate_url': generate_nonblacklists_certificate_url,
+        'generate_bulk_certificate_blacklists_url': generate_bulk_certificate_blacklists_url,
+        'certificate_blacklist_view_url': certificate_blacklist_view_url,
 
     }
 
