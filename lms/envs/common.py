@@ -3402,12 +3402,12 @@ INSTALLED_APPS = [
     "openedx_learning.core.publishing",
 
     # Manprax
-    'cms.djangoapps.mx_programs',
+    'mx_programs',
     'mx_utility',
-    'lms.djangoapps.automatic_email',
-    'lms.djangoapps.mx_archive_courses',
-    'lms.djangoapps.mx_problem_response',
-    'lms.djangoapps.pushnotification',
+    'automatic_email',
+    'mx_archive_courses',
+    'mx_problem_response',
+    'pushnotification',
 ]
 
 

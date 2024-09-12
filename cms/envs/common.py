@@ -1888,7 +1888,7 @@ INSTALLED_APPS = [
     "openedx_learning.core.contents",
     "openedx_learning.core.publishing",
     # Manprax
-    'cms.djangoapps.mx_programs',
+    'mx_programs',
 ]
 
 

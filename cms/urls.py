@@ -191,8 +191,8 @@ urlpatterns = oauth2_urlpatterns + [
     path('api/val/v0/', include('edxval.urls')),
     path('api/tasks/v0/', include('user_tasks.urls')),
     path('accessibility', contentstore_views.accessibility, name='accessibility'),
-#Manprax
-   path(r'^mx_programs/', include('cms.djangoapps.mx_programs.urls')),
+    #Manprax
+    path(r'^mx_programs/', include('mx_programs.urls')),
 ]
 
 if not settings.DISABLE_DEPRECATED_SIGNIN_URL:

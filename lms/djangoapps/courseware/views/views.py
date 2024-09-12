@@ -830,8 +830,8 @@ def course_about(request, course_id):  # pylint: disable=too-many-statements
 
         registration_price, course_price = get_course_prices(course)  # lint-amnesty, pylint: disable=unused-variable
         # Manprax
-        from cms.djangoapps.mx_programs.models import ProgramsCourse
-        program_course = ProgramsCourse.objects.filter(program__fullname__in= settings.PROGRAM_COURSE_PRICE_LABEL_REMOVED,course_id= course_id)
+        from mx_programs.models import ProgramsCourse
+        program_course = ProgramsCourse.objects.filter(program__fullname__in=settings.PROGRAM_COURSE_PRICE_LABEL_REMOVED, course_id=course_id)
         if program_course:
             course_price = None
         # Used to provide context to message to student if enrollment not allowed
@@ -1398,11 +1398,10 @@ def is_course_passed(student, course, course_grade=None):
     #     course_grade = CourseGradeFactory().read(student, course)
     # return course_grade.passed
     # Manprax
-    success_cutoff = course.minimum_grade_credit if course.minimum_grade_credit else None 
+    success_cutoff = course.minimum_grade_credit if course.minimum_grade_credit else None
     if course_grade is None:
         course_grade = CourseGradeFactory().update(student, course).summary
     return course_grade['percent'] if success_cutoff and course_grade['percent'] >= success_cutoff else False
-
 
 
 # Grades can potentially be written - if so, let grading manage the transaction.
@@ -1724,6 +1723,7 @@ class XBlockContentInspector:
     this class has the job of detecting certain patterns in XBlock content that
     would imply these dependencies, so we know when to include them or not.
     """
+
     def __init__(self, block, fragment):
         self.block = block
         self.fragment = fragment
@@ -1972,6 +1972,7 @@ class PublicVideoXBlockView(BasePublicVideoXBlockView):
 @method_decorator(transaction.non_atomic_requests, name='dispatch')
 class PublicVideoXBlockEmbedView(BasePublicVideoXBlockView):
     """ View for viewing public videos embedded within Twitter or other social media """
+
     def get_template_and_context(self, course, video_block):
         """ Render the embed view """
         fragment = video_block.render('public_view', context={
