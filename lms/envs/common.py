@@ -694,6 +694,10 @@ FEATURES = {
     # .. toggle_tickets: https://github.com/openedx/edx-platform/pull/9744
     'ENABLE_SPECIAL_EXAMS': False,
 
+
+    #Manprax
+    'ENABLE_OPENBADGES': False,
+
     # .. toggle_name: FEATURES['ENABLE_LTI_PROVIDER']
     # .. toggle_implementation: DjangoSetting
     # .. toggle_default: False
@@ -3773,6 +3777,16 @@ AUTO_GENERATED_USERNAME_RANDOM_STRING_LENGTH = 4
 ########################## CERTIFICATE NAME ########################
 CERT_NAME_SHORT = "Certificate"
 CERT_NAME_LONG = "Certificate of Achievement"
+
+# Manprax
+BADGING_BACKEND = 'lms.djangoapps.badges.backends.badgr.BadgrBackend'
+BADGR_BASE_URL = "http://localhost:8005"
+BADGR_ISSUER_SLUG = "example-issuer"
+BADGR_USERNAME = None
+BADGR_PASSWORD = None
+BADGR_TOKENS_CACHE_KEY = None
+BADGR_TIMEOUT = 10
+
 
 ###################### Grade Downloads ######################
 # These keys are used for all of our asynchronous downloadable files, including
