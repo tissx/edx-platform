@@ -745,7 +745,7 @@ class CourseFields:  # lint-amnesty, pylint: disable=missing-class-docstring
     invitation_only = Boolean(
         display_name=_("Invitation Only"),
         help=_("Whether to restrict enrollment to invitation by the course staff."),
-        default=False,
+        default=True, #Manprax
         scope=Scope.settings
     )
 
@@ -1065,7 +1065,7 @@ class CourseFields:  # lint-amnesty, pylint: disable=missing-class-docstring
             "Issue Open Badges badges for this course. Badges are generated when certificates are created."
         ),
         scope=Scope.settings,
-        default=True
+        default=False
     )
 
 
