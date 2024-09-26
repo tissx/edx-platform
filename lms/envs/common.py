@@ -380,7 +380,7 @@ FEATURES = {
     # .. toggle_creation_date: 2014-10-10
     # .. toggle_tickets: https://github.com/edx/edx-platform/pull/6876
     # .. toggle_warnings: The use case of this feature toggle is uncertain.
-    'ENABLE_COSMETIC_DISPLAY_PRICE': False,
+    'ENABLE_COSMETIC_DISPLAY_PRICE': True,
 
     # Automatically approve student identity verification attempts
     # .. toggle_name: FEATURES['AUTOMATIC_VERIFY_STUDENT_IDENTITY_FOR_TESTING']
