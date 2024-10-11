@@ -64,10 +64,12 @@ def get_default_provider_type() -> str:
     Returns:
         (str) default provider type to use
     """
-    if ENABLE_NEW_STRUCTURE_DISCUSSIONS.is_enabled():
-        return Provider.OPEN_EDX
-    else:
-        return Provider.LEGACY
+    # Manprax
+    # if ENABLE_NEW_STRUCTURE_DISCUSSIONS.is_enabled():
+    #     return Provider.OPEN_EDX
+    # else:
+    #     return Provider.LEGACY
+    return Provider.LEGACY
 
 
 class Features(Enum):
