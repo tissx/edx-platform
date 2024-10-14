@@ -1065,7 +1065,7 @@ class CourseFields:  # lint-amnesty, pylint: disable=missing-class-docstring
             "Issue Open Badges badges for this course. Badges are generated when certificates are created."
         ),
         scope=Scope.settings,
-        default=False
+        default=True
     )
 
 
