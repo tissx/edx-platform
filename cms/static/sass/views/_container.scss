@@ -581,3 +581,13 @@
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+
+
+
+@media (max-width: 768px) {
+
+  .wrapper-unit-id .unit-id .unit-id-value {
+    font-size: 10px !important;
+  }
+  
+}
