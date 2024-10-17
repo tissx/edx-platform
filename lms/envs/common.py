@@ -4184,7 +4184,7 @@ COURSE_CATALOG_VISIBILITY_PERMISSION = 'see_exists'
 # visible. We default this to the legacy permission 'see_exists'.
 COURSE_ABOUT_VISIBILITY_PERMISSION = 'see_exists'
 
-DEFAULT_COURSE_VISIBILITY_IN_CATALOG = "both"
+DEFAULT_COURSE_VISIBILITY_IN_CATALOG = "none"
 
 # .. toggle_name: DEFAULT_MOBILE_AVAILABLE
 # .. toggle_implementation: DjangoSetting
@@ -4195,7 +4195,7 @@ DEFAULT_COURSE_VISIBILITY_IN_CATALOG = "both"
 # .. toggle_use_cases: open_edx
 # .. toggle_creation_date: 2021-01-26
 # .. toggle_tickets: https://openedx.atlassian.net/browse/OSPR-1985
-DEFAULT_MOBILE_AVAILABLE = False
+DEFAULT_MOBILE_AVAILABLE = True
 
 # Enrollment API Cache Timeout
 ENROLLMENT_COURSE_DETAILS_CACHE_TIMEOUT = 60
