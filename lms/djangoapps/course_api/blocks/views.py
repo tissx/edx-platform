@@ -218,6 +218,13 @@ class BlocksView(DeveloperErrorViewMixin, ListAPIView):
 
         # validate request parameters
         requested_params = request.query_params.copy()
+        # Manprax
+        if requested_params.get('student_view_data',[]): 
+          embed_url= requested_params.get('student_view_data',[])+',embedurl' 
+          requested_params['student_view_data'] = embed_url 
+        else: 
+          pass
+        
         requested_params.update({'usage_key': usage_key_string})
         params = BlockListGetForm(requested_params, initial={'requesting_user': request.user})
         if not params.is_valid():

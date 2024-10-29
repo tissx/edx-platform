@@ -324,6 +324,9 @@ class DjangoStorageReportStore(ReportStore):
         Calls the `url` method of the underlying storage backend. Returned
         urls can be plugged straight into an href
         """
+        from datetime import datetime, timezone
+        current_datetime = datetime.now(timezone.utc)
+
         course_dir = self.path_to(course_id)
         try:
             _, filenames = self.storage.listdir(course_dir)
@@ -343,7 +346,8 @@ class DjangoStorageReportStore(ReportStore):
         files.sort(key=lambda f: self.storage.get_modified_time(f[1]), reverse=True)
         return [
             (filename, self.storage.url(full_path))
-            for filename, full_path in files
+            # for filename, full_path in files
+            for filename, full_path in files if (current_datetime - self.storage.get_modified_time(full_path)).days < 30
         ]
 
     def path_to(self, course_id, filename='', parent_dir=''):

@@ -288,16 +288,16 @@ def _footer_navigation_links(language=settings.LANGUAGE_CODE):
             marketing_link("ENTERPRISE"),
             _("{platform_name} for Business").format(platform_name=platform_name)
         )),
-        ("blog", (marketing_link("BLOG"), _("Blog"))),
+        # ("blog", (marketing_link("BLOG"), _("Blog"))),
         ("help-center", (_build_help_center_url(language), _("Help Center"))),
         ("contact", (_build_support_form_url(), _("Contact"))),
         ("careers", (marketing_link("CAREERS"), _("Careers"))),
-        ("donate", (marketing_link("DONATE"), _("Donate"))),
+        # ("donate", (marketing_link("DONATE"), _("Donate"))),
     ]
 
-    if language == settings.LANGUAGE_CODE:
-        position = _find_position_of_link(links, 'blog')
-        links.insert(position, ("news", (marketing_link("NEWS"), _("News"))))
+    # if language == settings.LANGUAGE_CODE:
+    #     position = _find_position_of_link(links, 'blog')
+    #     links.insert(position, ("news", (marketing_link("NEWS"), _("News"))))
 
     return [
         {
