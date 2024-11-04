@@ -3412,6 +3412,7 @@ INSTALLED_APPS = [
     'mx_archive_courses',
     'mx_problem_response',
     'pushnotification',
+    'rangefilter',
 ]
 
 
