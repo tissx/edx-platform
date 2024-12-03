@@ -833,6 +833,7 @@ def get_courses(user, org=None, filter_=None, permissions=None, active_only=Fals
     ).select_related(
         'image_set'
     )
+    courses = courses.filter(catalog_visibility__in=['both'])
 
     permissions = set(permissions or '')
     permission_name = configuration_helpers.get_value(
@@ -875,12 +876,12 @@ def sort_by_start_date(courses):
     """
     Returns a list of courses sorted by their start date, latest first.
     """
+
     courses = sorted(
         courses,
         key=lambda course: (course.has_ended(), course.start is None, course.start),
         reverse=False
     )
-
     return courses
 
 
