@@ -136,9 +136,10 @@
     <% } %>
 
     <% if( form === 'login' && name === 'password' ) { %>
-        <button type="button" class="login-help field-link"><i class="fa fa-caret-right" /><%- gettext("Need help signing in?") %></button>
+        <!-- <button type="button" class="login-help field-link"><i class="fa fa-caret-right" /><%- gettext("Need help signing in?") %></button> -->
+        <button type="button" class="login-help field-link form-toggle" data-type="password-reset"><%- gettext("Forgot my password") %></button>
         <div id="login-help" style="display:none">
-            <button type="button" class="field-link form-toggle" data-type="password-reset"><%- gettext("Forgot my password") %></button>
+            <!--<button type="button" class="field-link form-toggle" data-type="password-reset"><%- gettext("Forgot my password") %></button> -->
             <% if ( loginIssueSupportLink ) { %>
                 <span><a class="field-link" href="<%- loginIssueSupportLink %>"><%- gettext("Other sign-in issues") %></a></span>
             <% } %>
@@ -148,11 +149,12 @@
         <% } %>
     <% } %>
     <% if( (showRegisterLinks || loginIssueSupportLink) && form === 'password-reset' && name === 'email' ) { %>
-        <button type="button" class="reset-help field-link" ><i class="fa fa-caret-right" /><%- gettext("Need other help signing in?") %></button>
+        <!-- <button type="button" class="reset-help field-link" ><i class="fa fa-caret-right" /><%- gettext("Need other help signing in?") %></button> -->
+        <button type="button" class="reset-help field-link form-toggle" data-type="register"><%- gettext("Create an account") %></button>
         <div id="reset-help" style="display:none">
-            <% if ( showRegisterLinks ) { %>
-                <button type="button" class="field-link form-toggle" data-type="register"><%- gettext("Create an account") %></button>
-            <% } %>
+            <% //if ( showRegisterLinks ) { %>
+                <!-- <button type="button" class="field-link form-toggle" data-type="register"><%- gettext("Create an account") %></button>-->
+            <% //} %>
             <% if ( loginIssueSupportLink ) { %>
                 <span><a  class="field-link" href="<%- loginIssueSupportLink %>"><%- gettext("Other sign-in issues") %></a></span>
             <% } %>
