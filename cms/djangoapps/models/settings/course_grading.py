@@ -25,11 +25,12 @@ class CourseGradingModel:
     """
     # Within this class, allow access to protected members of client classes.
     # This comes up when accessing kvs data and caches during kvs saves and modulestore writes.
+
     def __init__(self, course):
         self.graders = [
             CourseGradingModel.jsonize_grader(i, grader) for i, grader in enumerate(course.raw_grader)
         ]  # weights transformed to ints [0..100]
-        self.grade_cutoffs = course.grade_cutoffs
+        self.grade_cutoffs = dict(sorted(course.grade_cutoffs.items(), key=lambda item: item[1], reverse=True))
         self.grace_period = CourseGradingModel.convert_set_grace_period(course)
         self.minimum_grade_credit = course.minimum_grade_credit
 
