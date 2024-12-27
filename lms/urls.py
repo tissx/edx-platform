@@ -53,7 +53,7 @@ from openedx.features.enterprise_support.api import enterprise_enabled
 
 # Manprax
 from lms.djangoapps.branding.views import *
-
+from django.views.static import serve
 RESET_COURSE_DEADLINES_NAME = 'reset_course_deadlines'
 RENDER_XBLOCK_NAME = 'render_xblock'
 RENDER_VIDEO_XBLOCK_NAME = 'render_public_video_xblock'
@@ -940,6 +940,7 @@ if settings.DEBUG:
     )
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns += [re_path(r'^media/profile-images/(?P<path>.*)$', serve, {'document_root': settings.PROFILE_IMAGE_BACKEND['options']['location']})]
 # UX reference templates
 urlpatterns += [
     path('template/<path:template>', openedx_debug_views.show_reference_template),
