@@ -441,10 +441,11 @@ def get_email_params(course, auto_enroll, secure=True, course_key=None, display_
     course_key = course_key or str(course.id)
     display_name = display_name or course.display_name_with_default
 
-    stripped_site_name = configuration_helpers.get_value(
-        'SITE_NAME',
-        settings.SITE_NAME
-    )
+    #stripped_site_name = configuration_helpers.get_value(
+    #    'SITE_NAME',
+    #    settings.SITE_NAME
+    #)
+    stripped_site_name= settings.LMS_BASE
     # TODO: Use request.build_absolute_uri rather than '{proto}://{site}{path}'.format
     # and check with the Services team that this works well with microsites
     registration_url = '{proto}://{site}{path}'.format(
