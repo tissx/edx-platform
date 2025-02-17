@@ -284,6 +284,7 @@ class BadgrBackend(BadgeBackend):
         not yet been cached, create a new one.
         """
         tokens = {}
+        TieredCache.delete_all_tiers(settings.BADGR_TOKENS_CACHE_KEY)
         cached_response = TieredCache.get_cached_response(
             settings.BADGR_TOKENS_CACHE_KEY)
         if cached_response.is_found:
