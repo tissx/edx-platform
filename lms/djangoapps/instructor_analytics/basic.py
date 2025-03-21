@@ -101,6 +101,7 @@ def enrolled_students_features(course_key, features):
     include_enrollment_mode = 'enrollment_mode' in features
     include_verification_status = 'verification_status' in features
     include_program_enrollments = 'external_user_key' in features
+    include_course_enrollment_date = 'course_enrollment_date' in features
     external_user_key_dict = {}
 
     students = User.objects.filter(
@@ -188,6 +189,11 @@ def enrolled_students_features(course_key, features):
         if include_program_enrollments:
             # extra external_user_key
             student_dict['external_user_key'] = external_user_key_dict.get(student.id, '')
+        
+        # Manprax
+        if include_course_enrollment_date:
+            enrollment_date = CourseEnrollment.get_enrollment(student, course_key)
+            student_dict['course_enrollment_date'] = enrollment_date.created
 
         return student_dict
 

@@ -1471,6 +1471,9 @@ def get_students_features(request, course_id, csv=False):  # pylint: disable=red
     query_features_names['city'] = _('City')
     query_features.append('country')
     query_features_names['country'] = _('Country')
+    # Manprax
+    query_features.append('course_enrollment_date')
+    query_features_names['course_enrollment_date'] = _('Course Enrollment Date')
 
     if not csv:
         student_data = instructor_analytics_basic.enrolled_students_features(course_key, query_features)
