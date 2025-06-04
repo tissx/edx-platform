@@ -40,6 +40,13 @@ class AccountActivation(BaseMessageType):
 
         self.options['transactional'] = True
 
+# Manprax
+
+class AccountOtpActivation(BaseMessageType):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.options['transactional'] = True
 
 class ProctoringRequirements(BaseMessageType):
     def __init__(self, *args, **kwargs):

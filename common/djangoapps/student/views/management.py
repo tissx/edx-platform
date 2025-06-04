@@ -42,7 +42,7 @@ from common.djangoapps.student.toggles import should_redirect_to_courseware_afte
 from common.djangoapps.track import views as track_views
 from lms.djangoapps.bulk_email.models import Optout
 from common.djangoapps.course_modes.models import CourseMode
-from lms.djangoapps.courseware.courses import get_courses, sort_by_announcement, sort_by_start_date
+from lms.djangoapps.courseware.courses import get_courses, sort_by_announcement, sort_by_start_date, cpd_get_courses
 from common.djangoapps.edxmako.shortcuts import marketing_link, render_to_response, render_to_string  # lint-amnesty, pylint: disable=unused-import
 from common.djangoapps.entitlements.models import CourseEntitlement
 from common.djangoapps.student.helpers import get_next_url_for_login_page, get_redirect_url_with_host
@@ -61,7 +61,7 @@ from openedx.core.lib.api.authentication import BearerAuthenticationAllowInactiv
 from openedx.features.enterprise_support.utils import is_enterprise_learner
 from common.djangoapps.student.email_helpers import generate_activation_email_context
 from common.djangoapps.student.helpers import DISABLE_UNENROLL_CERT_STATES, cert_info
-from common.djangoapps.student.message_types import AccountActivation, EmailChange, EmailChangeConfirmation, RecoveryEmailCreate  # lint-amnesty, pylint: disable=line-too-long
+from common.djangoapps.student.message_types import AccountActivation, EmailChange, EmailChangeConfirmation, RecoveryEmailCreate, AccountOtpActivation  # lint-amnesty, pylint: disable=line-too-long
 from common.djangoapps.student.models import (  # lint-amnesty, pylint: disable=unused-import
     AccountRecovery,
     CourseEnrollment,
@@ -125,9 +125,9 @@ def index(request, extra_context=None, user=AnonymousUser()):
 
     extra_context is used to allow immediate display of certain modal windows, eg signup.
     """
+    
     if extra_context is None:
         extra_context = {}
-
     courses = get_courses(user)
 
     if configuration_helpers.get_value(
@@ -172,6 +172,62 @@ def index(request, extra_context=None, user=AnonymousUser()):
     return render_to_response('index.html', context)
 
 
+
+# Manprax
+
+def cpd_index(request, extra_context=None, user=AnonymousUser()):
+    """
+    Render the edX main page.
+
+    extra_context is used to allow immediate display of certain modal windows, eg signup.
+    """
+    if extra_context is None:
+        extra_context = {}
+
+    courses = cpd_get_courses(user)
+
+    if configuration_helpers.get_value(
+        "ENABLE_COURSE_SORTING_BY_START_DATE",
+        settings.FEATURES["ENABLE_COURSE_SORTING_BY_START_DATE"],
+    ):
+        courses = sort_by_start_date(courses)
+    else:
+        courses = sort_by_announcement(courses)
+
+    context = {'courses': courses}
+
+    context['homepage_overlay_html'] = configuration_helpers.get_value('homepage_overlay_html')
+
+    # This appears to be an unused context parameter, at least for the master templates...
+    context['show_partners'] = configuration_helpers.get_value('show_partners', True)
+
+    # TO DISPLAY A YOUTUBE WELCOME VIDEO
+    # 1) Change False to True
+    context['show_homepage_promo_video'] = configuration_helpers.get_value('show_homepage_promo_video', False)
+
+    # Maximum number of courses to display on the homepage.
+    context['homepage_course_max'] = configuration_helpers.get_value(
+        'HOMEPAGE_COURSE_MAX', settings.HOMEPAGE_COURSE_MAX
+    )
+
+    # 2) Add your video's YouTube ID (11 chars, eg "123456789xX"), or specify via site configuration
+    # Note: This value should be moved into a configuration setting and plumbed-through to the
+    # context via the site configuration workflow, versus living here
+    youtube_video_id = configuration_helpers.get_value('homepage_promo_video_youtube_id', "your-youtube-id")
+    context['homepage_promo_video_youtube_id'] = youtube_video_id
+
+    # allow for theme override of the courses list
+    context['cpd_courses_list'] = theming_helpers.get_template_path('cpd_courses_list.html')
+
+    # Insert additional context for use in the template
+    context.update(extra_context)
+
+    # Add marketable programs to the context.
+    context['programs_list'] = get_programs_with_type(request.site, include_hidden=False)
+
+    return render_to_response('cpd_index.html', context)
+
+
 def compose_activation_email(
     user, user_registration=None, route_enabled=False, profile_name='', redirect_url=None, registration_flow=False
 ):
@@ -206,6 +262,41 @@ def compose_activation_email(
 
     return msg
 
+# Manprax
+def compose_activation_otp_email(
+    user, user_registration=None, route_enabled=False, profile_name='', otp='', redirect_url=None, registration_flow=False
+):
+    """
+    Construct all the required params for the activation email
+    through celery task
+    """
+    if user_registration is None:
+        user_registration = Registration.objects.get(user=user)
+
+    message_context = generate_activation_email_context(user, user_registration)
+    message_context.update({
+        # 'confirm_activation_link': _get_activation_confirmation_link(message_context['key'], redirect_url),
+        'user_otp': otp,
+        'route_enabled': route_enabled,
+        'routed_user': user.username,
+        'routed_user_email': user.email,
+        'routed_profile_name': profile_name,
+        'registration_flow': registration_flow,
+        'is_enterprise_learner': is_enterprise_learner(user),
+    })
+
+    if route_enabled:
+        dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
+    else:
+        dest_addr = user.email
+
+    msg = AccountOtpActivation().personalize(
+        recipient=Recipient(user.id, dest_addr),
+        language=preferences_api.get_user_preference(user, LANGUAGE_KEY),
+        user_context=message_context,
+    )
+
+    return msg
 
 def _get_activation_confirmation_link(activation_key, redirect_url=None):
     """
@@ -254,6 +345,35 @@ def compose_and_send_activation_email(
     except Exception:  # pylint: disable=broad-except
         log.exception(f'Activation email task failed for user {user.id}.')
 
+
+# Manprax
+def compose_and_send_activation_otp_email(
+    user, profile, otp, user_registration=None, redirect_url=None, registration_flow=False,
+):
+    """
+    Construct all the required params and send the activation email
+    through celery task
+
+    Arguments:
+        user: current logged-in user
+        profile: profile object of the current logged-in user
+        user_registration: registration of the current logged-in user
+        redirect_url: The URL to redirect to after successful activation
+        registration_flow: Is the request coming from registration workflow
+    """
+    route_enabled = settings.FEATURES.get('REROUTE_ACTIVATION_EMAIL')
+
+    msg = compose_activation_otp_email(
+        user, user_registration, route_enabled, profile.name, otp, redirect_url, registration_flow
+    )
+    from_address = configuration_helpers.get_value('ACTIVATION_EMAIL_FROM_ADDRESS') or (
+        configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
+    )
+
+    try:
+        send_activation_email.delay(str(msg), from_address)
+    except Exception:  # pylint: disable=broad-except
+        log.exception(f'Activation email task failed for user {user.id}.')
 
 @login_required
 def course_run_refund_status(request, course_id):

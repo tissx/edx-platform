@@ -3,6 +3,76 @@
 from django.utils.translation import gettext as _
 from openedx.core.djangolib.markup import HTML, Text
 %>
+
+<style>
+  /* Basic styling for OTP input and submit button */
+
+  #activate-otp-btn {
+    background: #fff;
+    color: #db6b1f;
+    border: 1px solid #db6b1f;
+    box-shadow: none;
+    text-shadow: none;
+    width: 100%;
+  }
+
+  #activate-otp-btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .activate-otp-wrap .activate-otp p{
+    padding: 8px 0;
+    text-align: center;
+  }
+
+  .otp-input {
+    padding: 8px;
+    margin-right: 10px;
+    width: 120px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #submit-otp-btn {
+    padding: 8px 16px;
+    background-color: #0079bc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: auto;
+  }
+
+  #otp-input {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  /* .submit-otp-btn:hover {
+    background-color: #0056b3;
+  } */
+
+  #resend-otp-btn {
+    display: block;
+    background: #fff;
+    color: #db6b1f;
+    border: 1px solid #db6b1f;
+    box-shadow: none;
+    text-shadow: none;
+    width: 100%;
+    padding: 8px 16px;
+    margin-top: 5px;
+  }
+  
+  #timer-display {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+    display: none;
+  }
+
+  </style>
+
 <div class="profile-sidebar" role="region" aria-labelledby="account-activation-title">
   <header class="profile">
     <h2 id="account-activation-title" class="account-activation-title sr">${_("Account Activation Info")}: </h2>
@@ -19,7 +89,187 @@ from openedx.core.djangolib.markup import HTML, Text
         ## TODO: Add resend activation email functionality.
         ## TODO: Implementation of this is part of ENT-353.
         ## <button class="btn btn-neutral"><i class="fa fa-envelope-o"></i> Resend Activation Email </button>
+
+        ##Manprax
+        
+        <div class="activate-otp-wrap">
+          <div class="activate-otp">
+            <p>OR</p>
+            <button class="btn btn-activate-otp" id="activate-otp-btn"><i class="fa fa-envelope-o"></i> Activate using code</button>
+            <div id="otp-input-container" style="display: none; margin-top: 10px;">
+              <input type="text" id="otp-input" class="otp-input" placeholder="Enter OTP" maxlength="6" aria-label="Enter OTP code">
+              <button class="btn btnOtp" id="submit-otp-btn">Submit OTP</button>
+              <p id="timer-display">Resend OTP in <span id="timer">90</span> seconds</p>
+              <button class="btn" id="resend-otp-btn">Resend OTP</button>
+            </div>
+            <p id="otp-error" style="color: red; display: none; margin-top: 5px;">Invalid OTP. Please try again.</p>
+          </div>
+        </div>
+
+
+
       </li>
     </ul>
   </div>
 </div>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const activateBtn = document.getElementById('activate-otp-btn');
+    const otpInputContainer = document.getElementById('otp-input-container');
+    const submitOtpBtn = document.getElementById('submit-otp-btn');
+    const otpInput = document.getElementById('otp-input');
+    const otpError = document.getElementById('otp-error');
+    const resendOtpBtn = document.getElementById('resend-otp-btn');
+    const timerDisplay = document.getElementById('timer-display');
+    const timerSpan = document.getElementById('timer');
+    var csrf_token = document.cookie
+      .split(";")
+      .filter(e => e.includes("csrf"))[0]
+      .split("=")[1];
+  
+    let timerInterval;
+  
+    // Function to start the 90-second timer
+    function startTimer() {
+      let timeLeft = 10;
+      timerDisplay.style.display = 'block';
+      resendOtpBtn.style.display = 'none';
+      
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerSpan.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          timerDisplay.style.display = 'none';
+          resendOtpBtn.style.display = 'block';
+        }
+      }, 1000);
+    }
+  
+    // Handle "Activate using code" button click
+    activateBtn.addEventListener('click', function() {
+      // Disable the activate button
+      activateBtn.disabled = true;
+      activateBtn.classList.add('disabled');
+  
+     
+  
+      // Placeholder for API call to send OTP
+      fetch('/mx_utility/api/send-email-otp/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'csrf_token': csrf_token,
+        },
+        body: JSON.stringify({})
+      })
+      .then(response => response.json())
+      .then(data => {
+
+
+        if (data.success) {
+          alert(data.message)
+        // Show OTP input field and submit button
+        otpInputContainer.style.display = 'block';
+        // Start the timer
+        startTimer();
+      } else {
+        // Handle error
+        otpError.textContent = data.error || 'Failed to send OTP. Please try again.';
+        otpError.style.display = 'block';
+        // Only re-enable button if not max attempts error
+        if (data.error !== 'Maximum OTP attempts (3) reached for today. Please try again tomorrow.') {
+          activateBtn.disabled = false;
+          activateBtn.classList.remove('disabled');
+        }
+        otpInputContainer.style.display = 'none';
+        clearInterval(timerInterval);
+        timerDisplay.style.display = 'none';
+        resendOtpBtn.style.display = 'none';
+      }
+    })
+    .catch(error => {
+      console.error('Error sending OTP:', error);
+      otpError.textContent = 'An error occurred. Please try again.';
+      otpError.style.display = 'block';
+      // Only re-enable button if not max attempts error
+      activateBtn.disabled = false;
+      activateBtn.classList.remove('disabled');
+      otpInputContainer.style.display = 'none';
+      clearInterval(timerInterval);
+      timerDisplay.style.display = 'none';
+      resendOtpBtn.style.display = 'none';
+    });
+
+      
+
+      
+    });
+  
+    // Handle "Resend OTP" button click
+    resendOtpBtn.addEventListener('click', function() {
+      // Re-enable the activate button
+      activateBtn.disabled = false;
+      activateBtn.classList.remove('disabled');
+      
+      // Hide OTP input container
+      otpInputContainer.style.display = 'none';
+      resendOtpBtn.style.display = 'none';
+      otpInput.value = ''; // Clear OTP input
+      otpError.style.display = 'none'; // Clear any error messages
+  
+      // Optionally, trigger OTP resend immediately
+      activateBtn.click(); // Simulate click to resend OTP
+    });
+  
+    // Handle OTP submission
+    submitOtpBtn.addEventListener('click', function() {
+      const otp = otpInput.value.trim();
+  
+      if (!otp || otp.length !== 6) {
+        otpError.textContent = 'Please enter a valid 6-digit OTP.';
+        otpError.style.display = 'block';
+        return;
+      }
+  
+      // Placeholder for API call to verify OTP
+      fetch('/mx_utility/api/verify-otp/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'csrf_token': csrf_token,
+        },
+        body: JSON.stringify({ otp: otp })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Handle successful OTP verification
+          otpError.style.display = 'none';
+          otpInputContainer.style.display = 'none';
+          clearInterval(timerInterval);
+          timerDisplay.style.display = 'none';
+          resendOtpBtn.style.display = 'none';
+          alert('Account activated successfully!');
+          window.location.reload();
+        } else {
+          otpError.textContent = 'Invalid OTP. Please try again.';
+          otpError.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        console.error('Error verifying OTP:', error);
+        otpError.textContent = 'An error occurred. Please try again.';
+        otpError.style.display = 'block';
+      });
+    });
+  
+    // Clear error message when user types in OTP field
+    otpInput.addEventListener('input', function() {
+      otpError.style.display = 'none';
+    });
+  });
+  </script>

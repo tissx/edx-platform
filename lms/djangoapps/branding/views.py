@@ -78,6 +78,58 @@ def index(request):
         )
         raise
 
+# Manprax
+
+@ensure_csrf_cookie
+@transaction.non_atomic_requests
+@cache_if_anonymous()
+def mx_cpd(request):
+    """
+    Redirects to main page -- info page if user authenticated, or marketing if not
+    """
+    # if request.user.is_authenticated:
+    #     # Only redirect to dashboard if user has
+    #     # courses in their dashboard. Otherwise UX is a bit cryptic.
+    #     # In this case, we want to have the user stay on a course catalog
+    #     # page to make it easier to browse for courses (and register)
+    #     if configuration_helpers.get_value(
+    #             'ALWAYS_REDIRECT_HOMEPAGE_TO_DASHBOARD_FOR_AUTHENTICATED_USER',
+    #             settings.FEATURES.get('ALWAYS_REDIRECT_HOMEPAGE_TO_DASHBOARD_FOR_AUTHENTICATED_USER', True)):
+    #         return redirect('dashboard')
+
+    # enable_mktg_site = configuration_helpers.get_value(
+    #     'ENABLE_MKTG_SITE',
+    #     settings.FEATURES.get('ENABLE_MKTG_SITE', False)
+    # )
+
+    # if enable_mktg_site:
+    #     marketing_urls = configuration_helpers.get_value(
+    #         'MKTG_URLS',
+    #         settings.MKTG_URLS
+    #     )
+    #     return redirect(marketing_urls.get('ROOT'))
+
+    domain = request.headers.get('Host')
+
+    # keep specialized logic for Edge until we can migrate over Edge to fully use
+    # configuration.
+    if domain and 'edge.edx.org' in domain:
+        return redirect("signin_user")
+
+    #  we do not expect this case to be reached in cases where
+    #  marketing and edge are enabled
+
+    try:
+        return student_views.cpd_index(request, user=request.user)
+    except NoReverseMatch:
+        log.error(
+            f'https is not a registered namespace Request from {domain}',
+            f'request_site= {request.site.__dict__}',
+            # f'enable_mktg_site= {enable_mktg_site}',
+            f'Auth Status= {request.user.is_authenticated}',
+            f'Request Meta= {request.META}'
+        )
+        raise
 
 @ensure_csrf_cookie
 @cache_if_anonymous()
@@ -99,6 +151,28 @@ def courses(request):
     #  we do not expect this case to be reached in cases where
     #  marketing is enabled or the courses are not browsable
     return courseware_views.courses(request)
+
+# Manprax
+@ensure_csrf_cookie
+@cache_if_anonymous()
+def cpd_courses(request):
+    """
+    Render the "find courses" page. If the marketing site is enabled, redirect
+    to that. Otherwise, if subdomain branding is on, this is the university
+    profile page. Otherwise, it's the edX courseware.views.views.courses page
+    """
+    enable_mktg_site = configuration_helpers.get_value(
+        'ENABLE_MKTG_SITE',
+        settings.FEATURES.get('ENABLE_MKTG_SITE', False)
+    )
+    if enable_mktg_site:
+        return redirect(marketing_link('COURSES'), permanent=True)
+    if not settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
+        raise Http404
+
+    #  we do not expect this case to be reached in cases where
+    #  marketing is enabled or the courses are not browsable
+    return courseware_views.cpd_courses(request)
 
 
 def _footer_static_url(request, name):
