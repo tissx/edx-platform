@@ -96,3 +96,53 @@ def send_activation_email(self, msg_string, from_address=None, site_id=None):
             dest_addr,
         )
         raise Exception  # lint-amnesty, pylint: disable=raise-missing-from
+
+
+
+@shared_task(bind=True, default_retry_delay=30, max_retries=2)
+@set_code_owner_attribute
+def send_activation_otp_email(self, msg_string, from_address=None, site_id=None):
+    """
+    Sending an activation email to the user.
+    """
+    msg = Message.from_string(msg_string)
+
+    max_retries = settings.RETRY_ACTIVATION_EMAIL_MAX_ATTEMPTS
+    retries = self.request.retries
+
+    if from_address is None:
+        from_address = configuration_helpers.get_value('ACTIVATION_EMAIL_FROM_ADDRESS') or (
+            configuration_helpers.get_value('email_from_address', settings.DEFAULT_FROM_EMAIL)
+        )
+    msg.options['from_address'] = from_address
+
+    dest_addr = msg.recipient.email_address
+
+    site = Site.objects.get(id=site_id) if site_id else Site.objects.get_current()
+    user = User.objects.get(id=msg.recipient.lms_user_id)
+
+    try:
+        with emulate_http_request(site=site, user=user):
+            ace.send(msg)
+    except RecoverableChannelDeliveryError:
+        log.info('Retrying sending email to user {dest_addr}, attempt # {attempt} of {max_attempts}'.format(
+            dest_addr=dest_addr,
+            attempt=retries,
+            max_attempts=max_retries
+        ))
+        try:
+            self.retry(countdown=settings.RETRY_ACTIVATION_EMAIL_TIMEOUT, max_retries=max_retries)
+        except MaxRetriesExceededError:
+            log.error(
+                'Unable to send activation email to user from "%s" to "%s"',
+                from_address,
+                dest_addr,
+                exc_info=True
+            )
+    except Exception:
+        log.exception(
+            'Unable to send activation email to user from "%s" to "%s"',
+            from_address,
+            dest_addr,
+        )
+        raise Exception  # lint-amnesty, pylint: disable=raise-missing-from
