@@ -302,6 +302,9 @@ class SubmissionFetchView(StaffGraderBaseView):
             ).data
 
             log.info(response_data)
+            response_ = [d for d in response_data['response']['files'] if d['downloadUrl'] != '']
+            response_data['response']['files'] = response_
+            log.info("post removing the blank urls",response_data)
             return Response(response_data)
 
         # Issues with the XBlock handlers
