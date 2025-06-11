@@ -868,11 +868,15 @@ def cpd_get_courses(user, org=None, filter_=None, permissions=None, active_only=
 
     
     courses = courses.filter(catalog_visibility__in=['both'])
+    try:
+        from mx_programs.models import Program, ProgramsCourse
+        cpd_program = Program.objects.get(acronym='cpd')
 
-    from mx_programs.models import Program, ProgramsCourse
-    cpd_program = Program.objects.get(acronym='cpd')
-    cpd_course_ids = ProgramsCourse.objects.filter(program=cpd_program).values_list('course_id', flat=True)
-    courses = courses.filter(id__in=cpd_course_ids)
+        cpd_course_ids = ProgramsCourse.objects.filter(program=cpd_program).values_list('course_id', flat=True)
+        courses = courses.filter(id__in=cpd_course_ids)
+    except Exception as err:
+        log.info("something went wrong {}".format(err))
+        courses = courses.none()
 
     permissions = set(permissions or '')
     permission_name = configuration_helpers.get_value(
