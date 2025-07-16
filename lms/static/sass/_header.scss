@@ -120,12 +120,13 @@
             &.active,
             &:hover {
               border-bottom-style: solid;
-              border-bottom-color: theme-color("primary");
+              border-bottom-color: #db6b1f;
             }
 
             &:hover {
               cursor: pointer;
-              border-bottom-color: theme-color("primary");
+              border-bottom-color: #db6b1f;
+              border: none;
             }
           }
         }

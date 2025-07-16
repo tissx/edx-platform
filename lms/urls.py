@@ -99,10 +99,7 @@ notification_prefs_urls = [
 urlpatterns = [
     path('', branding_views.index, name='root'),  # Main marketing page, or redirect to courseware
     # Manprax
-    re_path(r'^cpd-courses/?$', branding_views.mx_cpd, name='cpd_courses'),
-
-    # path('cpd-courses/?$', cpd_courses, name="archive_courses"),
-
+    re_path(r'^cpd@tiss/?$', branding_views.mx_cpd, name='cpd_courses'),
     path('', include('common.djangoapps.student.urls')),
     # TODO: Move lms specific student views out of common code
     re_path(r'^dashboard/?$', student_views.student_dashboard, name='dashboard'),
