@@ -1068,6 +1068,13 @@ class CourseFields:  # lint-amnesty, pylint: disable=missing-class-docstring
         default=False
     )
 
+    target_audiences = String(
+        display_name=_("Target audiences"),
+        help=_("Enter the target audiences of course."),
+        scope=Scope.settings,
+        default=""
+    )
+
 
 class CourseBlock(
     CourseFields,

@@ -855,6 +855,8 @@ def cpd_get_courses(user, org=None, filter_=None, permissions=None, active_only=
     (case-insensitive) or a set of permissions to be satisfied for the specified
     user.
     """
+    from common.djangoapps.course_modes.models import CourseMode, get_course_prices
+
     courses = branding.get_visible_cpd_courses(
         org=org,
         filter_=filter_,
@@ -870,10 +872,41 @@ def cpd_get_courses(user, org=None, filter_=None, permissions=None, active_only=
     courses = courses.filter(catalog_visibility__in=['both'])
     try:
         from mx_programs.models import Program, ProgramsCourse
-        cpd_program = Program.objects.get(acronym='cpd')
+        cpd_program = Program.objects.get(acronym='CPD@TISS')
 
         cpd_course_ids = ProgramsCourse.objects.filter(program=cpd_program).values_list('course_id', flat=True)
         courses = courses.filter(id__in=cpd_course_ids)
+        # Add course instructor
+        for course in courses:
+            module_store = modulestore()
+            course_block = module_store.get_course(course.id)
+            try:
+                if course_block:
+                    course_instructors = getattr(course_block, 'instructor_info', {})
+                    instructors = course_instructors.get('instructors', [])
+                    # Add instructors as a new attribute to the course object
+                    course.instructors = instructors[0]  # Add instructors list to course object
+            except:
+                course.instructors = ""
+            try:
+                # Add course price 
+                registration_price, course_price = get_course_prices(course_block)  # lint-amnesty, pylint: disable=unused-variable
+                program_course = ProgramsCourse.objects.filter(program__fullname__in=settings.PROGRAM_COURSE_PRICE_LABEL_REMOVED, course_id=course.id)
+                if program_course:
+                    course_price = None
+                course.course_price = course_price
+            except:
+                course.course_price = ""
+
+
+
+            try:
+                target_audiences = getattr(course_block, 'target_audiences', "")
+                # Add target_audiences as a new attribute to the course object
+                course.target_audiences = target_audiences  # Add target_audiences to course object
+            except:
+                course.target_audiences = ""
+            
     except Exception as err:
         log.info("something went wrong {}".format(err))
         courses = courses.none()
