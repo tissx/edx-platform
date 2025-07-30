@@ -884,8 +884,9 @@ def cpd_get_courses(user, org=None, filter_=None, permissions=None, active_only=
                 if course_block:
                     course_instructors = getattr(course_block, 'instructor_info', {})
                     instructors = course_instructors.get('instructors', [])
-                    # Add instructors as a new attribute to the course object
-                    course.instructors = instructors[0]  # Add instructors list to course object
+                    # Extract names and join into a comma-separated string
+                    instructor_names = [instructor.get('name', '') for instructor in instructors if isinstance(instructor, dict)]
+                    course.instructors = ', '.join(instructor_names) if instructor_names else ''
             except:
                 course.instructors = ""
             try:
