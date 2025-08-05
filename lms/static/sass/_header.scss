@@ -393,7 +393,7 @@
 .hidden-mobile {
   @include media-breakpoint-down(md) {
     &:not(.mobile-nav-link) {
-      display: none;
+      display: none !important;
     }
   }
 }
