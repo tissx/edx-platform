@@ -359,6 +359,8 @@ def _update_context_with_user_info(context, user, user_certificate):
         fullname=user_fullname
     )
 
+    context['accomplishment_user_empno'] = user.profile.bio
+
 
 def _get_user_certificate(request, user, course_key, course_overview, preview_mode=None):
     """
